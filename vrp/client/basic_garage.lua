@@ -1,10 +1,6 @@
 
 local vehicles = {}
 
-AddEventHandler('vrp_garages:setVehicle', function(vtype, vehicle)
-	vehicles[vtype] = vehicle
-end)
-
 function tvRP.spawnGarageVehicle(vtype,name) -- vtype is the vehicle type (one vehicle per type allowed at the same time)
 
   local vehicle = vehicles[vtype]

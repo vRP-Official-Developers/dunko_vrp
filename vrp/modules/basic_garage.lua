@@ -64,7 +64,7 @@ for group,vehicles in pairs(vehicle_groups) do
           local vehicle = vehicles[vname]
           if vehicle then
             vRP.closeMenu(player)
-            TriggerEvent('ply_garages:CheckForSpawnBasicVeh', user_id, vname)
+            vRPclient.spawnGarageVehicle(player,{veh_type,vname})
           end
         end
       end
@@ -108,7 +108,9 @@ for group,vehicles in pairs(vehicle_groups) do
           -- buy vehicle
           local vehicle = vehicles[vname]
           if vehicle and vRP.tryPayment(user_id,vehicle[2]) then
-			TriggerEvent('veh_SR:CheckMoneyForBasicVeh', user_id, vname, vehicle[2] ,veh_type)
+			MySQL.execute("vRP/add_vehicle", {user_id = user_id, vehicle = vname})
+
+		    vRPclient.notify(player,{lang.money.paid({vehicle[2]})})
             vRP.closeMenu(player)
           else
             vRPclient.notify(player,{lang.money.not_enough()})
