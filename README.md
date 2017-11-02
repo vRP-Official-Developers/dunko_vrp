@@ -1,4 +1,4 @@
-# dunko_vrp
+# Dunko vRP
 
 Welcome to Dunko vRP.
 
