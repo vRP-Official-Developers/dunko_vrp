@@ -4,13 +4,13 @@ Welcome to Dunko vRP.
 
 Current: V6
 
-Installation
+# Installation
 
 Go to vrp/cfg/base.lua and enter your database details, you can also select your language here.
 
 Go to server.cfg and enter your database details.
 
-Changelog: 
+# What's new
 
 - Added three additional languages, Russian, Danish & Lithuanian (8 in total) - set this is vrp/cfg/base.lua
 - Added Fishing job - Thanks @Velns 
