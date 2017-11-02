@@ -4,21 +4,23 @@ Welcome to Dunko vRP.
 
 Current: V6
 
+# Donate/Patreon
+
+PayPal: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=APB93LKHVULFS
+
+Patreon: https://www.patreon.com/dunko
+
 # Discord
 
 If you need help, head over to my Discord: https://discord.gg/CyJEVaT
 
 # Installation
 
-1) Copy the folders inside MASTER to your FXServer/Resource folder. DO NOT COPY THE MASTER FOLDER ITSELF.
+Go to vrp/cfg/base.lua and enter your database details, you can also select your language here.
 
-2) Copy server.cfg & start_server.cmd to your main FXServer folder.
+Go to server.cfg and enter your database details.
 
-3) Go to vrp/cfg/base.lua and enter your database details, you can also select your language here.
-
-4) Go to server.cfg and enter your database details.
-
-5) Open Start_Server.cmd with Notepad++ and put in the directory you have your server in.
+Open Start_Server.cmd with Notepad++ and put in the directory you have your server in.
 
 # What's new
 
