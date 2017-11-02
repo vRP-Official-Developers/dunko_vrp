@@ -16,11 +16,15 @@ If you need help, head over to my Discord: https://discord.gg/CyJEVaT
 
 # Installation
 
-Go to vrp/cfg/base.lua and enter your database details, you can also select your language here.
+1) Copy the folders inside MASTER to your FXServer/Resources folder. DO NOT COPY THE MASTER FOLDER ITSELF.
 
-Go to server.cfg and enter your database details.
+2) Copy server.cfg & Start_Server.cmd to your main FXServer folder.
 
-Open Start_Server.cmd with Notepad++ and put in the directory you have your server in.
+3) Go to vrp/cfg/base.lua and enter your database details, you can also select your language here.
+
+4) Go to server.cfg and enter your database details.
+
+5) Open Start_Server.cmd with Notepad++ and put in the directory you have your server in.
 
 # My Server
 
