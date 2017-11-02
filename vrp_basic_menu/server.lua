@@ -119,7 +119,7 @@ end}
 -- freeze (stops players moving)
 local choice_freeze = {function(player,choice)
   vRPclient.getNearestPlayer(player,{10},function(nplayer)
-    local nuser_id = vRP.getUserId(nplayer)
+    local nuser_id = vRP.getUserId({nplayer})
     if nuser_id ~= nil then
       vRPclient.toggleFreeze(nplayer,{})
     else
