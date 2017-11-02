@@ -12,7 +12,6 @@ client_scripts{
   "runcode/client.lua",
   "tptowaypoint/client.lua",
   "drag/client.lua",
-  "freeze/client.lua",
   "spikes/client.lua"
 }
 

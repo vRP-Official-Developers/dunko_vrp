@@ -116,18 +116,6 @@ police_weapons["Equip"] = {function(player,choice)
 	BMclient.setArmour(player,{100,true})
 end}
 
--- freeze (stops players moving)
-local choice_freeze = {function(player,choice)
-  vRPclient.getNearestPlayer(player,{10},function(nplayer)
-    local nuser_id = vRP.getUserId({nplayer})
-    if nuser_id ~= nil then
-      vRPclient.toggleFreeze(nplayer,{})
-    else
-      vRPclient.notify(player,{lang.common.no_player_near()})
-    end
-  end)
-end, "Freeze a player in position."}
-
 --store money
 local choice_store_money = {function(player, choice)
   local user_id = vRP.getUserId({player})
