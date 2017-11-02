@@ -14,6 +14,8 @@ Go to vrp/cfg/base.lua and enter your database details, you can also select your
 
 Go to server.cfg and enter your database details.
 
+Open Start_Server.bat with Notepad++ and put in the directory you have your server in.
+
 # What's new
 
 - Added three additional languages, Russian, Danish & Lithuanian (8 in total) - set this is vrp/cfg/base.lua
