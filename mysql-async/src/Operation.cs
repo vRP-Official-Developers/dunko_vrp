@@ -1,5 +1,4 @@
-﻿using CitizenFX.Core;
-using CitizenFX.Core.Native;
+using CitizenFX.Core;
 using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
@@ -26,24 +25,25 @@ namespace MySQLAsync
 
             try
             {
-                if (debug)
-                {
-                    stopwatch.Start();
-                }
+                stopwatch.Start();
 
                 using (var connection = new MySqlConnection(ConnectionString))
                 {
                     connection.Open();
+                    var ConnectionTime = stopwatch.ElapsedMilliseconds;
+                    stopwatch.Restart();
 
                     using (var command = CreateCommand(query, parameters, connection))
                     {
+                        var QueryTime = stopwatch.ElapsedMilliseconds;
+                        stopwatch.Restart();
+
                         result = Reader(command);
+                        stopwatch.Stop();
 
                         if (debug)
                         {
-                            stopwatch.Stop();
-                            // @TODO Function.Call<string>(Hash.GET_INVOKING_RESOURCE)
-                            Console.WriteLine(string.Format("[{0}] [{1}ms] {2}", "", stopwatch.ElapsedMilliseconds, QueryToString(query, parameters)));
+                            Console.WriteLine(string.Format("[{0}] [C: {1}ms, Q: {2}ms, R: {3}ms] {4}", "MySQL", ConnectionTime, QueryTime, stopwatch.ElapsedMilliseconds, QueryToString(query, parameters)));
                         }
                     }
                 }
@@ -57,18 +57,15 @@ namespace MySQLAsync
                     throw;
                 }
 
-                // @TODO Function.Call<string>(Hash.GET_INVOKING_RESOURCE)
-                CitizenFX.Core.Debug.Write(string.Format("[ERROR] [{0}] An error happens on MySQL for query \"{1}\": {2}\n", "", QueryToString(query, parameters), firstException.Message));
+                CitizenFX.Core.Debug.Write(string.Format("[ERROR] [{0}] An error happens on MySQL for query \"{1}\": {2}\n", "MySQL", QueryToString(query, parameters), firstException.Message));
             }
             catch (MySqlException mysqlException)
             {
-                // @TODO Function.Call<string>(Hash.GET_INVOKING_RESOURCE)
-                CitizenFX.Core.Debug.Write(string.Format("[ERROR] [{0}] An error happens on MySQL for query \"{1}\": {2}\n", "", QueryToString(query, parameters), mysqlException.Message));
+                CitizenFX.Core.Debug.Write(string.Format("[ERROR] [{0}] An error happens on MySQL for query \"{1}\": {2}\n", "MySQL", QueryToString(query, parameters), mysqlException.Message));
             }
             catch (Exception exception)
             {
-                // @TODO Function.Call<string>(Hash.GET_INVOKING_RESOURCE)
-                CitizenFX.Core.Debug.Write(string.Format("[ERROR] [{0}] An critical error happens on MySQL for query \"{1}\": {2} {3}\n", "", QueryToString(query, parameters), exception.Message, exception.StackTrace));
+                CitizenFX.Core.Debug.Write(string.Format("[ERROR] [{0}] An critical error happens on MySQL for query \"{1}\": {2} {3}\n", "MySQL", QueryToString(query, parameters), exception.Message, exception.StackTrace));
             }
 
             return result;
@@ -76,34 +73,33 @@ namespace MySQLAsync
 
         public async void ExecuteAsync(string query, IDictionary<string, object> parameters, CallbackDelegate callback, bool debug = false)
         {
+            TResult result = default(TResult);
             Stopwatch stopwatch = new Stopwatch();
 
             try
             {
-                if (debug)
-                {
-                    stopwatch.Start();
-                }
+                stopwatch.Start();
 
                 using (var connection = new MySqlConnection(ConnectionString))
                 {
                     await connection.OpenAsync();
+                    var ConnectionTime = stopwatch.ElapsedMilliseconds;
+                    stopwatch.Restart();
 
                     using (var command = CreateCommand(query, parameters, connection))
                     {
-                        var result = await ReaderAsync(command);
+                        var QueryTime = stopwatch.ElapsedMilliseconds;
+                        stopwatch.Restart();
+
+                        result = await ReaderAsync(command);
+                        stopwatch.Stop();
 
                         if (debug)
                         {
-                            stopwatch.Stop();
-                            // @TODO Function.Call<string>(Hash.GET_INVOKING_RESOURCE)
-                            Console.WriteLine(string.Format("[{0}] [{1}ms] {2}", "", stopwatch.ElapsedMilliseconds, QueryToString(query, parameters)));
+                            Console.WriteLine(string.Format("[{0}] [C: {1}ms, Q: {2}ms, R: {3}ms] {4}", "MySQL", ConnectionTime, QueryTime, stopwatch.ElapsedMilliseconds, QueryToString(query, parameters)));
                         }
 
-                        if (result != null)
-                        {
-                            callback.Invoke(result);
-                        }
+                        callback.Invoke(result);
                     }
                 }
             }
@@ -116,23 +112,19 @@ namespace MySQLAsync
                     throw aggregateException;
                 }
 
-                // @TODO Function.Call<string>(Hash.GET_INVOKING_RESOURCE)
-                CitizenFX.Core.Debug.Write(string.Format("[ERROR] [{0}] An error happens on MySQL for query \"{1}\": {2}\n", "", QueryToString(query, parameters), firstException.Message));
+                CitizenFX.Core.Debug.Write(string.Format("[ERROR] [{0}] An error happens on MySQL for query \"{1}\": {2}\n", "MySQL", QueryToString(query, parameters), firstException.Message));
             }
             catch (MySqlException mysqlException)
             {
-                // @TODO Function.Call<string>(Hash.GET_INVOKING_RESOURCE)
-                CitizenFX.Core.Debug.Write(string.Format("[ERROR] [{0}] An error happens on MySQL for query \"{1}\": {2}\n", "", QueryToString(query, parameters), mysqlException.Message));
+                CitizenFX.Core.Debug.Write(string.Format("[ERROR] [{0}] An error happens on MySQL for query \"{1}\": {2}\n", "MySQL", QueryToString(query, parameters), mysqlException.Message));
             }
             catch (ArgumentNullException)
             {
-                // @TODO Function.Call<string>(Hash.GET_INVOKING_RESOURCE)
-                CitizenFX.Core.Debug.Write(string.Format("[ERROR] [{0}] Check the error above, an error happens when executing the callback from the query : \"{1}\"\n", "", QueryToString(query, parameters)));
+                CitizenFX.Core.Debug.Write(string.Format("[ERROR] [{0}] Check the error above, an error happens when executing the callback from the query : \"{1}\"\n", "MySQL", QueryToString(query, parameters)));
             }
             catch (Exception exception)
             {
-                // @TODO Function.Call<string>(Hash.GET_INVOKING_RESOURCE)
-                CitizenFX.Core.Debug.Write(string.Format("[ERROR] [{0}] An critical error happens on MySQL for query \"{1}\": {2} {3}\n", "", QueryToString(query, parameters), exception.Message, exception.StackTrace));
+                CitizenFX.Core.Debug.Write(string.Format("[ERROR] [{0}] An critical error happens on MySQL for query \"{1}\": {2} {3}\n", "MySQL", QueryToString(query, parameters), exception.Message, exception.StackTrace));
             }
         }
 

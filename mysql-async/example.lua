@@ -27,7 +27,7 @@
 --    Loop()
 --end)
 
-AddEventHandler('onMySQLReady', function ()
+MySQL.ready(function ()
     print(MySQL.Sync.fetchScalar('SELECT @parameters', {
         ['@parameters'] =  1
     }))
@@ -56,6 +56,12 @@ AddEventHandler('onMySQLReady', function ()
         print("5")
     end)
 
+    print(MySQL.Sync.fetchScalar("SELECT money FROM users WHERE id = 'yolo' "))
+
+    MySQL.Async.fetchAll("SELECT money FROM users WHERE id = 'yolo' ", {}, function (result)
+        print(#result)
+    end)
+
     print(MySQL.Sync.fetchAll('SELECT "hello1" as world', {})[1].world)
 
     MySQL.Async.fetchAll('SELECT "hello2" as world', {}, function(result)
@@ -65,6 +71,12 @@ AddEventHandler('onMySQLReady', function ()
     print(MySQL.Sync.fetchScalar('SELECT "hello3" as world', {}))
 
     MySQL.Async.fetchScalar('SELECT "hello4" as world', {}, function(result)
+        print(result)
+    end)
+
+    print(json.encode(MySQL.Sync.fetchScalar('SELECT null', {})))
+
+    MySQL.Async.fetchScalar('SELECT null', {}, function(result)
         print(result)
     end)
 

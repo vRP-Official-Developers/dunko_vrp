@@ -1,9 +1,7 @@
-MySQL = setmetatable({}, MySQL)
-MySQL.__index = MySQL
-MySQL.Utils = setmetatable({}, MySQL)
-MySQL.Async = setmetatable({}, MySQL)
-MySQL.Sync = setmetatable({}, MySQL)
-MySQL.Config = setmetatable({}, MySQL)
+MySQL = {
+    Async = {},
+    Sync = {}
+}
 
 local function safeParameters(params)
     if nil == params then
@@ -28,13 +26,6 @@ local function safeCallback(callback)
     assert(type(callback) == "function", "A callback is expected")
 
     return callback
-end
-
----
--- Init mysql
---
-function MySQL.init()
-    exports['mysql-async']:mysql_configure()
 end
 
 ---
@@ -86,7 +77,7 @@ end
 -- @param query
 -- @param params
 --
--- @return mixed Value of the first column in the first row
+-- @return mixed Value of the last insert id
 --
 function MySQL.Sync.insert(query, params)
     assert(type(query) == "string", "The SQL Query must be a string")
@@ -145,4 +136,20 @@ function MySQL.Async.insert(query, params, func)
     assert(type(query) == "string", "The SQL Query must be a string")
 
     exports['mysql-async']:mysql_insert(query, safeParameters(params), safeCallback(func))
+end
+
+local isReady = false
+
+AddEventHandler('onMySQLReady', function ()
+    isReady = true
+end)
+
+function MySQL.ready(callback)
+    if isReady then
+        callback()
+
+        return
+    end
+
+    AddEventHandler('onMySQLReady', callback)
 end

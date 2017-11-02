@@ -2,10 +2,6 @@
 
 This library intends to provide function to connect to a MySQL library in a Sync and Async Way.
 
-## Legacy version
-
-This is the **fxserver** version, for legacy server look at the 1.0 branch
-
 ## Disclaimer
 
 This mod does not replace EssentialMode, it offers instead a new way of connecting to MySQL, but
@@ -27,17 +23,18 @@ server_script '@mysql-async/lib/MySQL.lua'
 ## Configuration
 
 Add this convar to your server configuration and change the values according to your MySQL installation:
+
 `set mysql_connection_string "server=127.0.0.01;database=gta5_gamemode_essential;userid=root;password=1202"`
 
 ## Usage
 
 ### Waiting for MySQL to be ready
 
-You need to encapsulate your code into the `onMySQLReady` to be sure that the mod will be available and initialized
+You need to encapsulate your code into `MySQL.ready` to be sure that the mod will be available and initialized
 before your first request.
 
 ```lua
-AddEventHandler('onMySQLReady', function ()
+MySQL.ready(function ()
     print(MySQL.Sync.fetchScalar('SELECT @parameters', {
         ['@parameters'] =  'string'
     }))
@@ -108,7 +105,6 @@ MySQL.Async.fetchScalar("SELECT COUNT(1) FROM players", function(countPlayer)
 end
 ```
 
-
 ## Features
 
  * Async / Sync
@@ -117,17 +113,7 @@ end
  * Create and close a connection for each query, the underlying library use a connection pool so only the 
 mysql auth is done each time, old tcp connections are keeped in memory for performance reasons
 
-## FXServer
-
-Plan of this library will also to have a compatible layer with the MySQL library of FXServer, so you will not need to rewrite everything when it will be released.
-
-## Things that may be added in the future
-
- * New configuration options for the connection (pool connections, life time, ...) (Make an issue if you need 
-a specific configuration)
- * Migration Tool for your Schemas
-
 ## Credits
 
-Some parts of this library, and also my understaning were directly inspired by "Essential Mode", thanks to 
+Some parts of this library, and also my understanding were directly inspired by "Essential Mode", thanks to
 them to have begin to work on this, which allows guy like me to not start from scratch every time...

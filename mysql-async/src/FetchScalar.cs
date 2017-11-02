@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,12 +15,26 @@ namespace MySQLAsync
 
         protected override object Reader(MySqlCommand command)
         {
-            return command.ExecuteScalar();
+            var result = command.ExecuteScalar();
+
+            if (result != null && result.GetType() == typeof(DBNull))
+            {
+                result = null;
+            }
+
+            return result;
         }
 
-        protected override Task<object> ReaderAsync(MySqlCommand command)
+        protected override async Task<object> ReaderAsync(MySqlCommand command)
         {
-            return command.ExecuteScalarAsync();
+            var result = await command.ExecuteScalarAsync();
+
+            if (result != null && result.GetType() == typeof(DBNull))
+            {
+                result = null;
+            }
+
+            return result;
         }
     }
 }
