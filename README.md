@@ -14,7 +14,7 @@ Go to vrp/cfg/base.lua and enter your database details, you can also select your
 
 Go to server.cfg and enter your database details.
 
-Open Start_Server.bat with Notepad++ and put in the directory you have your server in.
+Open Start_Server.cmd with Notepad++ and put in the directory you have your server in.
 
 # What's new
 
