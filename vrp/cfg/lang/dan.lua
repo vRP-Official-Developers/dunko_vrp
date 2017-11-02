@@ -3,7 +3,7 @@
 
 local lang = {
   common = {
-    welcome = "Velkommen.~n~Sidste Login: {1}",
+    welcome = "Velkommen. Tryk på K for at bruge menuen",
     no_player_near = "~r~Ingen spiller nær dig.",
     invalid_value = "~r~Ugyldig Værdi.",
     invalid_name = "~r~Ugyldigt Navn.",
@@ -20,8 +20,8 @@ local lang = {
     thirsty = "Tørstig"
   },
   money = {
-    display = "<span class=\"symbol\">$</span> {1}",
-	bdisplay = "<span class=\"symbol\">$</span> {1}",
+    display = "<span class=\"symbol\">€</span> {1}",
+	bdisplay = "<span class=\"symbol\">€</span> {1}",
     given = "Givet ~r~{1},- kr.",
     received = "Modtaget ~g~{1},- kr.",
     not_enough = "~r~Ikke nok penge.",
@@ -103,18 +103,18 @@ local lang = {
       title = "Læg et kapital ind",
       description = "Add capital to your business.",
       prompt = "Amount to add to the business capital:",
-      added = "~r~{1}$ ~s~added to the business capital."
+      added = "~r~{1}€ ~s~added to the business capital."
     },
     launder = {
       title = "Hvidvaskning",
       description = "Use your business to launder dirty money.",
-      prompt = "Amount of dirty money to launder (max {1} $): ",
-      laundered = "~g~{1}$ ~s~laundered.",
+      prompt = "Amount of dirty money to launder (max {1} €): ",
+      laundered = "~g~{1}€ ~s~laundered.",
       not_enough = "~r~Not enough dirty money."
     },
     open = {
       title = "Åbn virksomhed",
-      description = "Åben Firma, minimum kapitalapital er {1} $.",
+      description = "Åben Firma, minimum kapitalapital er {1} €.",
       prompt_name = "Business name (can't change after, max {1} chars):",
       prompt_capital = "Initial capital (min {1})",
       created = "~g~CVR nummer oprettet."
@@ -234,7 +234,7 @@ local lang = {
         description = "",
         fined = "~b~Bøde ~s~{2} ,- kr for ~b~{1}.",
         notify_fined = "~b~Du modtog en bøde ~s~ {2} ,- kr for ~b~{1}.",
-        record = "[Fine] {2} $ for {1}"
+        record = "[Fine] {2} € for {1}"
       },
       store_weapons = {
         title = "Læg våben i tasken",
@@ -297,7 +297,7 @@ local lang = {
     announce = {
       title = "Reklamer",
       description = "Post en Reklame som bliver vist i et par sekunder for andre.",
-      item_desc = "{1} $<br /><br/>{2}",
+      item_desc = "{1} €<br /><br/>{2}",
       prompt = "Reklame beskrivelse (10-1000 tegn): "
     }
   },
@@ -354,7 +354,7 @@ local lang = {
         title = "Start bet",
         description = "Start a bet with players near you, the winner will be randomly selected.",
         prompt = "Bet amount:",
-        request = "[BET] Do you want to bet {1} $ ?",
+        request = "[BET] Do you want to bet {1} € ?",
         started = "~g~Bet started."
       }
     }
@@ -368,7 +368,7 @@ local lang = {
     buy = {
       title = "Køb et køretøj",
       description = "",
-      info = "{1} $<br /><br />{2}"
+      info = "{1} €<br /><br />{2}"
     },
     sell = {
       title = "Sælg dit køretøj",
@@ -432,7 +432,7 @@ local lang = {
   market = {
     title = "Butik ({1})",
     prompt = "Antal af {1} du ønsker at købe",
-    info = "{1} $<br /><br />{2}"
+    info = "{1} €<br /><br />{2}"
   },
   skinshop = {
     title = "Tøj forretning"
@@ -446,7 +446,7 @@ local lang = {
   itemtr = {
     informer = {
       title = "Illegal informer",
-      description = "{1} $",
+      description = "{1} €",
       bought = "~g~Position send til din GPS."
     }
   },

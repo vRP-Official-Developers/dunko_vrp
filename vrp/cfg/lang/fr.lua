@@ -2,7 +2,7 @@
 
 local lang = {
   common = {
-    welcome = "Bienvenue. Utilise les touches du téléphone pour les menus.",
+    welcome = "Bienvenue. Appuyez sur K pour les menus.",
     no_player_near = "~r~Pas de joueur à proximité.",
     invalid_value = "~r~Valeur incorrecte.",
     invalid_name = "~r~Nom incorrect.",
@@ -14,12 +14,12 @@ local lang = {
     thirsty = "Assoiffé"
   },
   money = {
-    display = "<span class=\"symbol\">$</span> {1}",
-    bdisplay = "<span class=\"symbol\">$</span> {1}",
-    given = "Vous avez donné ~r~{1}$.",
-    received = "Vous avez reçu ~g~{1}$.",
+    display = "<span class=\"symbol\">€</span> {1}",
+    bdisplay = "<span class=\"symbol\">€</span> {1}",
+    given = "Vous avez donné ~r~{1}€.",
+    received = "Vous avez reçu ~g~{1}€.",
     not_enough = "~r~Pas assez d'argent.",
-    paid = "Payé ~r~{1}$.",
+    paid = "Payé ~r~{1}€.",
     give = {
       title = "Donner de l'argent",
       description = "Donner de l'argent au joueur le plus proche.",
@@ -64,19 +64,19 @@ local lang = {
     title = "Distributeur de billets",
     info = {
       title = "Info",
-      bank = "Banque: {1} $"
+      bank = "Banque: {1} €"
     },
     deposit = {
       title = "Dépot",
       description = "Déposez de l'argent sur votre compte",
       prompt = "Entrez le montant à déposer:",
-      deposited = "Vous avez déposé ~r~{1}$~s~."
+      deposited = "Vous avez déposé ~r~{1}€~s~."
     },
     withdraw = {
       title = "Retirer",
       description = "Retirez de l'argent de votre compte",
       prompt = "Entrez le montant à retirer:",
-      withdrawn = "Vous avez retiré ~g~{1}$ ~s~.",
+      withdrawn = "Vous avez retiré ~g~{1}€ ~s~.",
       not_enough = "~r~Vous n'avez pas assez d'argent sur votre compte."
     }
   },
@@ -87,28 +87,28 @@ local lang = {
       description = "Annuaire des entreprises",
       dprev = "> Précédent",
       dnext = "> Suivant",
-      info = "<em>Capital: </em>{1} $<br /><em>Propriétaire: </em>{2} {3}<br /><em>Immatriculation: </em>{4}<br /><em>Téléphone: </em>{5}"
+      info = "<em>Capital: </em>{1} €<br /><em>Propriétaire: </em>{2} {3}<br /><em>Immatriculation: </em>{4}<br /><em>Téléphone: </em>{5}"
     },
     info = {
       title = "Information sur l'entreprise",
-      info = "<em>Nom: </em>{1}<br /><em>Capital: </em>{2} $<br /><em>Capital de transfert: </em>{3} $<br /><br/>Le capital de transfert représente la quantité d'argent transférée pour une période. Le maximum ne peut pas dépasser le capital de l'entreprise."
+      info = "<em>Nom: </em>{1}<br /><em>Capital: </em>{2} €<br /><em>Capital de transfert: </em>{3} €<br /><br/>Le capital de transfert représente la quantité d'argent transférée pour une période. Le maximum ne peut pas dépasser le capital de l'entreprise."
     },
     addcapital = {
       title = "Ajout de capital",
       description = "Augmentez le capital de votre entreprise.",
       prompt = "Montant à ajouter à votre capital:",
-      added = "~r~{1}$ ~s~ ajoutés au capital de votre entreprise."
+      added = "~r~{1}€ ~s~ ajoutés au capital de votre entreprise."
     },
     launder = {
       title = "Blanchiment d'argent",
       description = "Utilisez votre entreprise pour blanchir de l'argent.",
-      prompt = "Montant d'argent sale à blanchir (max {1} $): ",
-      laundered = "~g~{1}$ ~s~ blanchis.",
+      prompt = "Montant d'argent sale à blanchir (max {1} €): ",
+      laundered = "~g~{1}€ ~s~ blanchis.",
       not_enough = "~r~Pas assez d'argent sale."
     },
     open = {
       title = "Ouvrir une entreprise",
-      description = "Ouvrez votre entreprise, le capital minimum est de {1} $.",
+      description = "Ouvrez votre entreprise, le capital minimum est de {1} €.",
       prompt_name = "Nom de l'entreprise (ne peut pas être modifié ultérieurement, maximum {1} chars):",
       prompt_capital = "Capital initial (min {1})",
       created = "~g~Entreprise créée."
@@ -119,7 +119,7 @@ local lang = {
     title = "Hôtel de ville",
     identity = {
       title = "Nouvelle identité",
-      description = "Creez une nouvelle identité, frais de création = {1} $.",
+      description = "Creez une nouvelle identité, frais de création = {1} €.",
       prompt_firstname = "Entrez votre prénom:",
       prompt_name = "Entrez votre nom de famille:",
       prompt_age = "Entrez votre âge:"
@@ -181,12 +181,12 @@ local lang = {
         title = "Fouiller le joueur",
         description = "Fouiller l'argent, les objets et les armes du joueur le plus proche.",
         request_hide = "Fermer le rapport de fouille.",
-        info = "<em>Argent: </em>{1} $<br /><br /><em>Inventaire: </em>{2}<br /><br /><em>Armes: </em>{3}",
+        info = "<em>Argent: </em>{1} €<br /><br /><em>Inventaire: </em>{2}<br /><br /><em>Armes: </em>{3}",
         checked = "Vous avez été fouillé."
       }
     },
     identity = {
-      info = "<em>Nom: </em>{1}<br /><em>Prénom: </em>{2}<br /><em>Age: </em>{3}<br /><em>N° d'immatriculation: </em>{4}<br /><em>Téléphone: </em>{5}<br /><em>Entreprise: </em>{6}<br /><em>Capital de l'entreprise: </em>{7} $<br /><em>Adresse: </em>{9}, {8}"
+      info = "<em>Nom: </em>{1}<br /><em>Prénom: </em>{2}<br /><em>Age: </em>{3}<br /><em>N° d'immatriculation: </em>{4}<br /><em>Téléphone: </em>{5}<br /><em>Entreprise: </em>{6}<br /><em>Capital de l'entreprise: </em>{7} €<br /><em>Adresse: </em>{9}, {8}"
     }
   },
   emergency = {
@@ -249,14 +249,14 @@ local lang = {
   home = {
     buy = {
       title = "Acheter",
-      description = "Acheter un logement ici, le prix est {1} $.",
+      description = "Acheter un logement ici, le prix est {1} €.",
       bought = "~g~Acheté.",
       full = "~r~Plus de place.",
       have_home = "~r~Vous avez déjà un logement."
     },
     sell = {
       title = "Vendre",
-      description = "Vendre son logement pour {1} $",
+      description = "Vendre son logement pour {1} €",
       sold = "~g~vendu.",
       no_home = "~r~Vous n'avez pas de logement ici."
     },
@@ -289,7 +289,7 @@ local lang = {
     buy = {
       title = "Acheter",
       description = "Acheter des véhicules.",
-      info = "{1} $<br /><br />{2}"
+      info = "{1} €<br /><br />{2}"
     },
     store = {
       title = "Rentrer au garage",
@@ -311,12 +311,12 @@ local lang = {
   gunshop = {
     title = "Magasin d'armes ({1})",
     prompt_ammo = "Quantité de munition à acheter pour {1}:",
-    info = "<em>Arme: </em> {1} $<br /><em>Munition: </em> {2} $/u<br /><br />{3}"
+    info = "<em>Arme: </em> {1} €<br /><em>Munition: </em> {2} €/u<br /><br />{3}"
   },
   market = {
     title = "Supérette ({1})",
     prompt = "Quantité de {1} à acheter:",
-    info = "{1} $<br /><br />{2}"
+    info = "{1} €<br /><br />{2}"
   },
   skinshop = {
     title = "Magasin de vêtements"
@@ -324,7 +324,7 @@ local lang = {
   itemtr = {
     informer = {
       title = "Informateur illégal",
-      description = "{1} $",
+      description = "{1} €",
       bought = "~g~Position envoyée au GPS."
     }
   },

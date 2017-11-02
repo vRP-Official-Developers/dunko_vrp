@@ -3,7 +3,7 @@
 
 local lang = {
   common = {
-    welcome = "Willkommen auf dem Server",
+    welcome = "Willkommen auf dem Server. Menu = K",
     no_player_near = "~r~Kein Spieler in der Nähe.",
     invalid_value = "~r~Ungültiger Wert.",
     invalid_name = "~r~Ungültiger Name.",
@@ -18,6 +18,7 @@ local lang = {
   },
   money = {
     display = "{1} <span class=\"symbol\">€</span>",
+    bdisplay = "<span class=\"symbol\">€</span> {1}",
     given = "gegeben ~r~{1}€.",
     received = "bekommen ~g~{1}€.",
     not_enough = "~r~Nicht genug Geld.",

@@ -20,12 +20,12 @@ local lang = {
     thirsty = "com sede"
   },
   money = {
-    display = "<span class=\"symbol\">$</span> {1}",
-    bdisplay = "<span class=\"symbol\">$</span> {1}",
-    given = "Enviado ~r~{1}$.",
-    received = "Recebido ~g~{1}$.",
+    display = "<span class=\"symbol\">€</span> {1}",
+    bdisplay = "<span class=\"symbol\">€</span> {1}",
+    given = "Enviado ~r~{1}€.",
+    received = "Recebido ~g~{1}€.",
     not_enough = "~r~Dinheiro insuficiente.",
-    paid = "Pago ~r~{1}$.",
+    paid = "Pago ~r~{1}€.",
     give = {
       title = "enviar dinheiro",
       description = "Enviar dinheiro para o jogador mais proxímo.",
@@ -70,19 +70,19 @@ local lang = {
     title = "Caíxa eletrônico",
     info = {
       title = "Informação",
-      bank = "banco: {1} $"
+      bank = "banco: {1} €"
     },
     deposit = {
       title = "Depositar",
       description = "enviar dinheiro da carteira para o banco",
       prompt = "Coloque a quantidade que deseja depositar:",
-      deposited = "~r~{1}$~s~ depositado."
+      deposited = "~r~{1}€~s~ depositado."
     },
     withdraw = {
       title = "Carteira",
       description = "enviar dinheiro da banco para o carteira",
       prompt = "Coloque a quantidade que deseja retirar:",
-      withdrawn = "~g~{1}$ ~s~retirado.",
+      withdrawn = "~g~{1}€ ~s~retirado.",
       not_enough = "~r~Você não tem dinheiro no banco."
     }
   },
@@ -93,28 +93,28 @@ local lang = {
       description = "Diretório de negócios.",
       dprev = "> Voltar",
       dnext = "> Proxímo",
-      info = "<em>capital: </em>{1} $<br /><em>dono: </em>{2} {3}<br /><em>N° de registro: </em>{4}<br /><em>telefone: </em>{5}"
+      info = "<em>capital: </em>{1} €<br /><em>dono: </em>{2} {3}<br /><em>N° de registro: </em>{4}<br /><em>telefone: </em>{5}"
     },
     info = {
       title = "Informações comerciais",
-      info = "<em>nome: </em>{1}<br /><em>capital: </em>{2} $<br /><em>capital transferido: </em>{3} $<br /><br/>A transferência de capital é a quantia de dinheiro transferida para um período econômico comercial, o máximo é o capital da empresa."
+      info = "<em>nome: </em>{1}<br /><em>capital: </em>{2} €<br /><em>capital transferido: </em>{3} €<br /><br/>A transferência de capital é a quantia de dinheiro transferida para um período econômico comercial, o máximo é o capital da empresa."
     },
     addcapital = {
       title = "Adicionar capital",
       description = "Adicionar capital para sua empresa.",
       prompt = "Quantidade que deseja adicionar de capital na sua empresa:",
-      added = "~r~{1}$ ~s~Adicionado capital a sua empresa."
+      added = "~r~{1}€ ~s~Adicionado capital a sua empresa."
     },
     launder = {
       title = "Lavagem de dinheiro",
       description = "Usar sua empresa para lavar dinheiro sujo.",
-      prompt = "Quantidade que deseja lavar de dinheiro (max {1} $): ",
-      laundered = "~g~{1}$ ~s~lavado.",
+      prompt = "Quantidade que deseja lavar de dinheiro (max {1} €): ",
+      laundered = "~g~{1}€ ~s~lavado.",
       not_enough = "~r~Não dinheiro sujo para lavar."
     },
     open = {
       title = "Abrir empresa",
-      description = "Abra seu negócio, o capital mínimo é {1} $.",
+      description = "Abra seu negócio, o capital mínimo é {1} €.",
       prompt_name = "Nome da empresa (Não é possível mudar depois, max {1} chars):",
       prompt_capital = "Capital Inicial (min {1})",
       created = "~g~Negócios criados."
@@ -125,7 +125,7 @@ local lang = {
     title = "Prefeitura",
     identity = {
       title = "Nova identidade",
-      description = "Criar nova identiadde, custo = {1} $.",
+      description = "Criar nova identiadde, custo = {1} €.",
       prompt_firstname = "Coloque seu primeiro nome:",
       prompt_name = "Coloque seu último nome:",
       prompt_age = "Coloque sua idade:",
@@ -204,7 +204,7 @@ local lang = {
         title = "Verifique o jogador",
         description = "Verifique dinheiro, estoque e armas do jogador mais próximo.",
         request_hide = "Ocultar o relatório de cheques.",
-        info = "<em>dinheiro: </em>{1} $<br /><br /><em>inventario: </em>{2}<br /><br /><em>armas: </em>{3}",
+        info = "<em>dinheiro: </em>{1} €<br /><br /><em>inventario: </em>{2}<br /><br /><em>armas: </em>{3}",
         checked = "Você está sendo verificado."
       },
       seize = {
@@ -232,9 +232,9 @@ local lang = {
       fine = {
         title = "Multar",
         description = "Multar jogador maís proxímo.",
-        fined = "~b~Multar ~s~{2} $ por ~b~{1}.",
-        notify_fined = "~b~Você está sendo multado ~s~ {2} $ por ~b~{1}.",
-        record = "[Multa] {2} $ por {1}"
+        fined = "~b~Multar ~s~{2} € por ~b~{1}.",
+        notify_fined = "~b~Você está sendo multado ~s~ {2} € por ~b~{1}.",
+        record = "[Multa] {2} € por {1}"
       },
       store_weapons = {
         title = "Guardar armas",
@@ -242,7 +242,7 @@ local lang = {
       }
     },
     identity = {
-      info = "<em>Nome: </em>{1}<br /><em>Primeiro nome: </em>{2}<br /><em>Idade: </em>{3}<br /><em>N° de registro: </em>{4}<br /><em>Telefone: </em>{5}<br /><em>Empresa: </em>{6}<br /><em>Capital da empresa: </em>{7} $<br /><em>Endereço: </em>{9}, {8}"
+      info = "<em>Nome: </em>{1}<br /><em>Primeiro nome: </em>{2}<br /><em>Idade: </em>{3}<br /><em>N° de registro: </em>{4}<br /><em>Telefone: </em>{5}<br /><em>Empresa: </em>{6}<br /><em>Capital da empresa: </em>{7} €<br /><em>Endereço: </em>{9}, {8}"
     }
   },
   emergency = {
@@ -297,7 +297,7 @@ local lang = {
     announce = {
       title = "Anunciar",
       description = "Publique um anúncio visível a todos por alguns segundos.",
-      item_desc = "{1} $<br /><br/>{2}",
+      item_desc = "{1} €<br /><br/>{2}",
       prompt = "Anuncie conteúdo (10-1000 chars): "
     }
   },
@@ -311,14 +311,14 @@ local lang = {
   home = {
     buy = {
       title = "Comprar",
-      description = "Compre uma casa aqui, o preço é {1} $.",
+      description = "Compre uma casa aqui, o preço é {1} €.",
       bought = "~g~Comprou.",
       full = "~r~O lugar está cheio.",
       have_home = "~r~Você já tem uma casa."
     },
     sell = {
       title = "Vender",
-      description = "Vender sua casa para {1} $",
+      description = "Vender sua casa para {1} €",
       sold = "~g~Vendido.",
       no_home = "~r~Você não tem uma casa aqui."
     },
@@ -354,7 +354,7 @@ local lang = {
         title = "Aposta inicial",
         description = "Comece uma aposta com os jogadores perto de você, o vencedor será selecionado aleatoriamente.",
         prompt = "Valor da aposta:",
-        request = "[BET] Você quer apostar {1} $ ?",
+        request = "[BET] Você quer apostar {1} € ?",
         started = "~g~Aposta iniciada."
       }
     }
@@ -368,7 +368,7 @@ local lang = {
     buy = {
       title = "Comprar",
       description = "Comprar veículos.",
-      info = "{1} $<br /><br />{2}"
+      info = "{1} €<br /><br />{2}"
     },
     sell = {
       title = "Vender",
@@ -427,12 +427,12 @@ local lang = {
   gunshop = {
     title = "Loja de armas ({1})",
     prompt_ammo = "Quantidade de munição a comprar para o {1}:",
-    info = "<em>corpo da arma: </em> {1} $<br /><em>munição: </em> {2} $/u<br /><br />{3}"
+    info = "<em>corpo da arma: </em> {1} €<br /><em>munição: </em> {2} €/u<br /><br />{3}"
   },
   market = {
     title = "Mercado ({1})",
     prompt = "Quantidade de {1} para comprar:",
-    info = "{1} $<br /><br />{2}"
+    info = "{1} €<br /><br />{2}"
   },
   skinshop = {
     title = "Loja de roupas"
@@ -446,7 +446,7 @@ local lang = {
   itemtr = {
     informer = {
       title = "Informante ilegal",
-      description = "{1} $",
+      description = "{1} €",
       bought = "~g~Posição enviada ao seu GPS."
     }
   },
