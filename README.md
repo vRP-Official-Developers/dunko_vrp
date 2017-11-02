@@ -22,6 +22,12 @@ Go to server.cfg and enter your database details.
 
 Open Start_Server.cmd with Notepad++ and put in the directory you have your server in.
 
+# My Server
+
+Name: [Official] Dunko's Server | vRP V6 | Sponsored by ServerDeals.com
+
+Direct Connect: 96.9.246.30:30130
+
 # What's new
 
 - Added three additional languages, Russian, Danish & Lithuanian (8 in total) - set this is vrp/cfg/base.lua
