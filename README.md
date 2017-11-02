@@ -30,6 +30,8 @@ Direct Connect: 96.9.246.30:30130
 
 # What's new
 
+- Updated server.cfg to have everything you need in it.
+
 - Added three additional languages, Russian, Danish & Lithuanian (8 in total) - set this is vrp/cfg/base.lua
 - Added Fishing job - Thanks @Velns 
 - Added Fishing mission
@@ -61,5 +63,3 @@ Direct Connect: 96.9.246.30:30130
 - Removed EssentialMode as it's no longer needed
 - Removed "names-client.lua" from CustomScripts __resource.lua
 - Removed vrp_court as it's no longer needed
-
-Updated server.cfg to have everything you need in it.
