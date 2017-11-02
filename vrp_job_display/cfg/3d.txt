@@ -1,0 +1,1 @@
+ text-shadow: 0px 0px 0 rgb(-51,107,199),1px 1px 0 rgb(-92,66,158),2px 2px  0 rgb(-133,25,117),3px 3px 2px rgba(0,0,0,1),3px 3px 1px rgba(0,0,0,0.5),0px 0px 2px rgba(0,0,0,.2);

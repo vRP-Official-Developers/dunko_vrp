@@ -1,0 +1,23 @@
+function AddTextEntry(key, value)
+	Citizen.InvokeNative(GetHashKey("ADD_TEXT_ENTRY"), key, value)
+end
+
+Citizen.CreateThread(function()
+AddTextEntry('0x082650D6', 'Carbon Sport Skirts')
+AddTextEntry('0x0E6AA8E8', 'Exhaust Variant 3')
+AddTextEntry('0x1C71E76F', 'Ferrari')
+AddTextEntry('0x2AE061D3', 'Exhaust Variant 1')
+AddTextEntry('0x2B2816D9', 'Carbon Small Skirts')
+AddTextEntry('0x2D53FEB5', 'Rollcage')
+AddTextEntry('0x3B6F8E6F', 'Sport Painted Spoiler')
+AddTextEntry('0x19D0F42B', 'Painted Sport Skirts')
+AddTextEntry('0x5955BEC1', 'Exhaust Variant 2')
+AddTextEntry('0x45694B5B', 'Painted Small Skirts')
+AddTextEntry('0x809298B4', 'Race Carbon Spoiler')
+AddTextEntry('0xA4FD6189', 'Sport Carbon Spoiler')
+AddTextEntry('0xA6D5E897', '430 Scuderia')
+AddTextEntry('0xAB340696', 'Carbon Splitter')
+AddTextEntry('0xBD752B18', 'Painted Bumper Extension')
+AddTextEntry('0xCFBFCFAD', 'Carbon Bumper Extension')
+	
+end)

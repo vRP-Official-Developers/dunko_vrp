@@ -1,0 +1,123 @@
+		.hsdivinit {
+			display: inline-block;
+			position: fixed;
+			/*margin: 0 auto;*/
+			padding: 10px 15px;
+			transition: all 1s cubic-bezier(.25, .8, .25, 1);
+			background: #34495e;
+			left: 50%;
+			bottom: -200px;
+			transform: translate(-50%, -50%);
+			color: #fff;
+			/*opacity: 0;*/
+			border-radius: 3px;
+			font-family: 'Jaldi', sans-serif;
+
+		}
+
+		.hsdivshow {
+			-webkit-animation: hsshowpulse .5s ease both;
+		}
+
+		@-webkit-keyframes hsshowpulse {
+			0% {
+				opacity: 1;
+				bottom: -100px;
+			}
+			100% {
+				opacity: 1;
+				bottom: 20px;
+			}
+		}
+
+		.hsdivhide {
+			-webkit-animation: hshidepulse .3s ease both;
+		}
+
+		@-webkit-keyframes hshidepulse {
+			0% {
+				opacity: 1;
+				bottom: 20px;
+			}
+			100% {
+				opacity: 0;
+				bottom: -100px;
+			}
+		}
+
+		.hsdone {
+			font-size: 15px;
+			padding: 10px;
+			background:#2ecc71;
+			color: #FFF;
+			display: inline-block;
+			width: 20px;
+			height: 20px;
+			/* color: #444; */
+			text-align: center;
+			border-radius: 50%;
+			box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+		}
+
+		.hswarning {
+			font-size: 15px;
+			padding: 10px;
+			background: #f1c40f;
+			color: #fff;
+			display: inline-block;
+			width: 20px;
+			height: 20px;
+			/* color: #444; */
+			text-align: center;
+			border-radius: 50%;
+			box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+		}
+
+		.hserror {
+			font-size: 15px;
+			padding: 10px;
+			background: #e74c3c;
+			color: #fff;
+			display: inline-block;
+			width: 20px;
+			height: 20px;
+			/* color: #444; */
+			text-align: center;
+			border-radius: 50%;
+			box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+		}		
+		.hsheart {
+			font-size: 15px;
+			padding: 10px;
+			background: #fff;
+			color: #e74c3c;
+			display: inline-block;
+			width: 20px;
+			height: 20px;
+			/* color: #444; */
+			text-align: center;
+			border-radius: 50%;
+			box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+		}
+		.hssad {
+			font-size: 15px;
+			padding: 10px;
+			background: #ecf0f1;
+			color: #d35400;
+			display: inline-block;
+			width: 20px;
+			height: 20px;
+			/* color: #444; */
+			text-align: center;
+			font-weight: 600;
+			border-radius: 50%;
+			box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+		}
+		.hstext{
+			padding: 0 10px;
+			font-size: 20px;
+			line-height: 20px;
+		}
+		button{
+			margin: 20px;
+		}

@@ -1,0 +1,200 @@
+@font-face {
+font-family: "Pricedown";
+src: url("fonts/Pricedown.woff") format('woff');
+
+font-family: "Pricedown" !important;
+
+}
+*{
+  margin: 0;
+  padding: 0;
+}
+
+/* make body full page */
+html, body {
+  margin: 0;
+  height: 100%;
+  overflow: hidden;
+}
+
+.console{
+  background-color: white;
+  color: green;
+  font-weight: bold;
+}
+
+/* menu */
+
+.menu{
+  background-color: rgba(46, 138, 211, 0.4);
+  font-family: 'Roboto', sans-serif;
+  color: #ffffff;
+  width: 220px;
+  height: 70%;
+  position: static;
+  float: left;
+  font-weight: bold;
+  border-radius: 7px 7px 7px 7px;
+ -moz-border-radius: 7px 7px 7px 7px;
+ -webkit-border-radius: 7px 7px 7px 7px;
+  border: 0px solid #000000;
+}
+
+.menu_description{
+  background-color: rgba(46, 138, 211, 0.4);
+  border-radius: 0px 10px 10px 0px;
+ -moz-border-radius: 0px 10px 10px 0px;
+ -webkit-border-radius: 0px 10px 10px 0px;
+  border: 0px solid #000000;
+  font-family: 'Roboto', sans-serif;
+  color: #ffffff;
+  position: absolute;
+  font-weight: bold;
+  padding: 9px;
+  font-size: 1.0em;
+  max-width: 500px;
+}
+
+.menu h1{
+  background-color: rgba(255,0,0,0.75);
+  font-family:'Roboto', sans-serif;
+  color: white;
+  text-align: center;
+  font-size: 1.6em;
+  padding: 6px;
+  font-weight: bold;
+}
+
+.choices{
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
+.choices::-webkit-scrollbar{ 
+  display: none; 
+}
+
+.choices div{
+  padding: 6px;
+  font-size: 1.3em;
+}
+
+.choices .selected{
+  background-color: rgba(255,255,255,0.90);
+  color: black;
+}
+
+/* progress bar */
+.progressbar{
+  position: absolute;
+}
+
+.progressbar .inner{
+}
+
+.progressbar .label{
+  position: absolute;
+  color: white;
+  font-weight: bold;
+  text-align: center;
+  text-shadow: 2px 2px black;
+}
+
+/* wprompt */
+.wprompt{
+  position: absolute;
+  background-color: rgba(46, 138, 211, 0.4);
+  color: white;
+  width: 500px;
+  height: 200px;
+  display: flex;
+  flex-direction: column;
+  padding: 5px;
+   border-radius: 7px 7px 7px 7px;
+ -moz-border-radius: 7px 7px 7px 7px;
+ -webkit-border-radius: 7px 7px 7px 7px;
+  border: 0px solid #000000;
+}
+
+.wprompt h1{
+  font-size: 1.2em;
+  font-family: 'Roboto', sans-serif;
+  color: #FFFFFF;
+  font-family: Roboto;
+ }
+
+.wprompt textarea{
+  outline: none !important;
+  background-color: rgba(46, 138, 211, 0.4);
+  font-family: 'Roboto', sans-serif;
+  flex: 1;
+  color: white;
+  width: 100%;
+  resize: none;
+  border-radius: 7px 7px 7px 7px;
+ -moz-border-radius: 7px 7px 7px 7px;
+ -webkit-border-radius: 7px 7px 7px 7px;
+  border: 0px solid #000000;
+}
+
+.wprompt textarea:focus{
+  outline: none !important;
+}
+
+.wprompt .help{
+  font-size: 1.2em;
+  font-family: 'Roboto', sans-serif;
+  color: #FFFFFF;
+  font-family: Roboto;
+ }
+
+/* request manager */
+.request_manager{
+  position: absolute;
+  top: 20px;
+  right: 150px;
+  text-align: right;
+}
+
+.request_manager div{
+  margin-top: 10px;
+}
+
+.request_manager div > span{
+  font-size: 1.2em;
+  color: white;
+  font-weight: bold;
+  background-color: rgba(0,0,0,0.50);
+  padding: 4px;
+}
+
+.request_manager .yes{
+  padding-left: 15px;
+  color: rgb(0,255,0);
+  font-size: 1em;
+}
+
+.request_manager .no{
+  color: rgb(255,0,0);
+  font-size: 1em;
+}
+
+/* announce */
+
+.announce{
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 780px;
+  height: 130px;
+  padding: 10px;
+  margin-left: -400px;
+  font-weight: bold;
+  font-family: 'Roboto', sans-serif;
+  font-size: 25px;
+  text-shadow: 2px 2px black;
+  color: white;
+  display: none;
+  opacity: 0.90;
+}
+
