@@ -4,6 +4,10 @@ Welcome to Dunko vRP.
 
 Current: V6
 
+# Discord
+
+If you need help, head over to my Discord: https://discord.gg/CyJEVaT
+
 # Installation
 
 Go to vrp/cfg/base.lua and enter your database details, you can also select your language here.
