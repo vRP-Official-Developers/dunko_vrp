@@ -22,7 +22,7 @@ body{
 -- static menus are menu with choices defined by vRP.addStaticMenuChoices(name, choices)
 cfg.static_menu_types = {
   ["missions"] = { -- example of a mission menu that can be filled by other resources
-    title = "Missions",
+    title = "Missioni",
     blipid = 205, 
     blipcolor = 5
   }

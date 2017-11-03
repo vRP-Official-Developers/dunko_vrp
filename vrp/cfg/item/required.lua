@@ -1,13 +1,13 @@
 
 local items = {}
 
-items["medkit"] = {"Medical Kit","Used to reanimate unconscious people.",nil,0.5}
-items["dirty_money"] = {"Dirty money","Illegally earned money.",nil,0}
-items["repairkit"] = {"Repair Kit","Used to repair vehicles.",nil,0.5}
+items["medkit"] = {"Kit Medico","Usato per rianimare persone in coma.",nil,0.5}
+items["dirty_money"] = {"Soldi Sporchi","Soldi ottenuti illegalmente.",nil,0}
+items["repairkit"] = {"Kit Riparazione","Usato pert riparare auto.",nil,0.5}
 
 
 -- money
-items["money"] = {"Money","Packed money.",function(args)
+items["money"] = {"Soldi","Pacchetto di soldi.",function(args)
   local choices = {}
   local idname = args[1]
 
@@ -29,7 +29,7 @@ items["money"] = {"Money","Packed money.",function(args)
 end,0}
 
 -- money binder
-items["money_binder"] = {"Money binder","Used to bind 1000$ of money.",function(args)
+items["money_binder"] = {"Portafoglio","Utilizzato per tenere 1000$ di soldi.",function(args)
   local choices = {}
   local idname = args[1]
 

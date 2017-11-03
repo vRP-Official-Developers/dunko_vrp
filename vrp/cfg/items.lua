@@ -6,11 +6,11 @@ local cfg = {}
 -- a good practice is to create your own item pack file instead of adding items here
 cfg.items = {
   ["benzoilmetilecgonina"] = {"Benzoilmetilecgonina", "Some Benzoic acid ester.", nil, 0.01}, -- no choices
-  ["seeds"] = {"Seeds", "Some Weed seeds.", nil, 0.01}, -- no choices
+  ["seeds"] = {"Semi", "Alcuni semi di marjuana.", nil, 0.01}, -- no choices
   ["harness"] = {"Harness", "Some Harness Lysergsäurediethylamid.", nil, 0.01}, -- no choices
-  ["credit"] = {"Credit Card", "Credit card.", nil, 0.01}, -- no choices
-  ["driver"] = {"Driver license Card", "license card.", nil, 0.01}, -- no choices
-  ["bank_money"] = {"Money of bank", "$.", nil, 0} -- no choices
+  ["credit"] = {"Carta di Credito", "Carta di credito.", nil, 0.01}, -- no choices
+  ["driver"] = {"Patente", "Patente.", nil, 0.01}, -- no choices
+  ["bank_money"] = {"Soldi della banca", "$.", nil, 0} -- no choices
 }
 
 -- load more items function

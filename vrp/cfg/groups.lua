@@ -80,7 +80,7 @@ cfg.groups = {
   },
   ["Fisher"] = {
     _config = { gtype = "job",
-	onspawn = function(player) vRPclient.notify(player,{"You are a Fisherman."}) end
+	onspawn = function(player) vRPclient.notify(player,{"Sei pescatore."}) end
 	},
 	"mission.delivery.fish",
     "fisher.service",
@@ -88,7 +88,7 @@ cfg.groups = {
     },
   ["Medical Transport"] = {
     _config = { gtype = "job",
-	onspawn = function(player) vRPclient.notify(player,{"You now transport Medical weed."}) end
+	onspawn = function(player) vRPclient.notify(player,{"Sei un corriere di droga medica."}) end
 	},
 	"mission.delivery.medical",
     "medical.service",
@@ -96,7 +96,7 @@ cfg.groups = {
     },
   ["Weapons Smuggler"] = {
     _config = { gtype = "job",
-	onspawn = function(player) vRPclient.notify(player,{"You are a Weapons Smuggler."}) end
+	onspawn = function(player) vRPclient.notify(player,{"Sei un trafficante d'armi."}) end
 	},
 	"mission.weapons.smuggler",
     "smuggler.service"
@@ -185,7 +185,7 @@ cfg.groups = {
   },
   ["EMS"] = {
     _config = { gtype = "job",
-	onspawn = function(player) vRPclient.notify(player,{"You are a medic, salary : $1500."}) end
+	onspawn = function(player) vRPclient.notify(player,{"Sei medico, stipendio : $1500."}) end
 	},
     "emergency.revive",
 	"police.pc",
@@ -202,7 +202,7 @@ cfg.groups = {
   },
   ["Mechanic"] = {
     _config = { gtype = "job",
-	onspawn = function(player) vRPclient.notify(player,{"You are Mechanic, salary : $900."}) end
+	onspawn = function(player) vRPclient.notify(player,{"Sei meccanico, stipendio : $900."}) end
 	},
     "vehicle.repair",
     "vehicle.replace",
@@ -215,7 +215,7 @@ cfg.groups = {
   },
   ["UBER"] = {
     _config = { gtype = "job",
-	onspawn = function(player) vRPclient.notify(player,{"You are UBER, salary : $600."}) end
+	onspawn = function(player) vRPclient.notify(player,{"Sei un UBER, stipendio : $600."}) end
 	},
     "uber.service",
 	"uber.vehicle",
@@ -228,13 +228,13 @@ cfg.groups = {
 --},
   ["Unemployed"] = {
     _config = { gtype = "job",
-	onspawn = function(player) vRPclient.notify(player,{"You are Unemployed, go to Department of Jobs."}) end
+	onspawn = function(player) vRPclient.notify(player,{"Sei disoccupato, go to Department of Jobs."}) end
 	},
 	"citizen.paycheck"
   },
   ["Delivery"] = {
     _config = { gtype = "job",
-	onspawn = function(player) vRPclient.notify(player,{"You are Delivery Driver, Salary : $500."}) end
+	onspawn = function(player) vRPclient.notify(player,{"Sei un corriere, Stipendio : $500."}) end
 	},
 	"mission.delivery.food",
 	"delivery.vehicle",
@@ -242,7 +242,7 @@ cfg.groups = {
   },
   ["Lawyer"] = {
     _config = { gtype = "job",
-	onspawn = function(player) vRPclient.notify(player,{"You are a Lawyer, Salary : $2000."}) end
+	onspawn = function(player) vRPclient.notify(player,{"Sei avvocato, Stipendio : $2000."}) end
 	},
 	"Lawyer.vehicle",
 	"Lawyer.whitelisted",
@@ -251,7 +251,7 @@ cfg.groups = {
   },
   ["Drug Dealer"] = {
     _config = { gtype = "job",
-	    onspawn = function(player) vRPclient.notify(player,{"You are a Drug Dealer."}) end
+	    onspawn = function(player) vRPclient.notify(player,{"Sei uno spacciatore."}) end
 	  },
     "mission.drugseller.weed",
     "drugseller.market",
@@ -259,7 +259,7 @@ cfg.groups = {
   },
   ["Hacker"] = {
     _config = { gtype = "job",
-	onspawn = function(player) vRPclient.notify(player,{"You are a Hacker."}) end
+	onspawn = function(player) vRPclient.notify(player,{"Sei un Hacker."}) end
 	},
 	"mission.hacker.information",
 	"hacker.hack",
@@ -267,7 +267,7 @@ cfg.groups = {
   },
   ["Bankdriver"] = {
     _config = { gtype = "job",
-	onspawn = function(player) vRPclient.notify(player,{"You are a Bank Driver."}) end
+	onspawn = function(player) vRPclient.notify(player,{"Sei un porta valori."}) end
 	},
 	"mission.bankdriver.moneybank",
 	"mission.bankdriver.moneybank2",
@@ -740,7 +740,7 @@ cfg.groups = {
   },
   ["Exotic Car Dealer"] = {
    	_config = { gtype = "job",
-	  onspawn = function(player) vRPclient.notify(player,{"You are an Exotic Car Dealer"}) end
+	  onspawn = function(player) vRPclient.notify(player,{"Sei un concessionario d'auto Car"}) end
 	},
 	"exotic.whitelisted",
     "exotic.vehicle",
