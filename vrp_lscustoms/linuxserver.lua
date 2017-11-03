@@ -5,52 +5,6 @@ local Proxy = module("vrp", "lib/Proxy")
 vRP = Proxy.getInterface("vRP")
 vRPclient = Tunnel.getInterface("vRP","vRP_lscustoms")
 
--- vehicle db
-MySQL.createCommand("vRP/lscustoms_columns", [[
-ALTER TABLE vrp_user_vehicles ADD veh_type varchar(255) NOT NULL DEFAULT 'default' ;
-ALTER TABLE vrp_user_vehicles ADD vehicle_plate varchar(255) NOT NULL;
-ALTER TABLE vrp_user_vehicles ADD vehicle_colorprimary varchar(255) DEFAULT NULL;
-ALTER TABLE vrp_user_vehicles ADD vehicle_colorsecondary varchar(255) DEFAULT NULL;
-ALTER TABLE vrp_user_vehicles ADD vehicle_pearlescentcolor varchar(255) DEFAULT NULL;
-ALTER TABLE vrp_user_vehicles ADD vehicle_wheelcolor varchar(255) DEFAULT NULL;
-ALTER TABLE vrp_user_vehicles ADD vehicle_plateindex varchar(255) DEFAULT NULL;
-ALTER TABLE vrp_user_vehicles ADD vehicle_neoncolor1 varchar(255) DEFAULT NULL;
-ALTER TABLE vrp_user_vehicles ADD vehicle_neoncolor2 varchar(255) DEFAULT NULL;
-ALTER TABLE vrp_user_vehicles ADD vehicle_neoncolor3 varchar(255) DEFAULT NULL;
-ALTER TABLE vrp_user_vehicles ADD vehicle_windowtint varchar(255) DEFAULT NULL;
-ALTER TABLE vrp_user_vehicles ADD vehicle_wheeltype varchar(255) DEFAULT NULL;
-ALTER TABLE vrp_user_vehicles ADD vehicle_mods0 varchar(255) DEFAULT NULL;
-ALTER TABLE vrp_user_vehicles ADD vehicle_mods1 varchar(255) DEFAULT NULL;
-ALTER TABLE vrp_user_vehicles ADD vehicle_mods2 varchar(255) DEFAULT NULL;
-ALTER TABLE vrp_user_vehicles ADD vehicle_mods3 varchar(255) DEFAULT NULL;
-ALTER TABLE vrp_user_vehicles ADD vehicle_mods4 varchar(255) DEFAULT NULL;
-ALTER TABLE vrp_user_vehicles ADD vehicle_mods5 varchar(255) DEFAULT NULL;
-ALTER TABLE vrp_user_vehicles ADD vehicle_mods6 varchar(255) DEFAULT NULL;
-ALTER TABLE vrp_user_vehicles ADD vehicle_mods7 varchar(255) DEFAULT NULL;
-ALTER TABLE vrp_user_vehicles ADD vehicle_mods8 varchar(255) DEFAULT NULL;
-ALTER TABLE vrp_user_vehicles ADD vehicle_mods9 varchar(255) DEFAULT NULL;
-ALTER TABLE vrp_user_vehicles ADD vehicle_mods10 varchar(255) DEFAULT NULL;
-ALTER TABLE vrp_user_vehicles ADD vehicle_mods11 varchar(255) DEFAULT NULL;
-ALTER TABLE vrp_user_vehicles ADD vehicle_mods12 varchar(255) DEFAULT NULL;
-ALTER TABLE vrp_user_vehicles ADD vehicle_mods13 varchar(255) DEFAULT NULL;
-ALTER TABLE vrp_user_vehicles ADD vehicle_mods14 varchar(255) DEFAULT NULL;
-ALTER TABLE vrp_user_vehicles ADD vehicle_mods15 varchar(255) DEFAULT NULL;
-ALTER TABLE vrp_user_vehicles ADD vehicle_mods16 varchar(255) DEFAULT NULL;
-ALTER TABLE vrp_user_vehicles ADD vehicle_turbo varchar(255) NOT NULL DEFAULT 'off';
-ALTER TABLE vrp_user_vehicles ADD vehicle_tiresmoke varchar(255) NOT NULL DEFAULT 'off';
-ALTER TABLE vrp_user_vehicles ADD vehicle_xenon varchar(255) NOT NULL DEFAULT 'off';
-ALTER TABLE vrp_user_vehicles ADD vehicle_mods23 varchar(255) DEFAULT NULL;
-ALTER TABLE vrp_user_vehicles ADD vehicle_mods24 varchar(255) DEFAULT NULL;
-ALTER TABLE vrp_user_vehicles ADD vehicle_neon0 varchar(255) DEFAULT NULL;
-ALTER TABLE vrp_user_vehicles ADD vehicle_neon1 varchar(255) DEFAULT NULL;
-ALTER TABLE vrp_user_vehicles ADD vehicle_neon2 varchar(255) DEFAULT NULL;
-ALTER TABLE vrp_user_vehicles ADD vehicle_neon3 varchar(255) DEFAULT NULL;
-ALTER TABLE vrp_user_vehicles ADD vehicle_bulletproof varchar(255) DEFAULT NULL;
-ALTER TABLE vrp_user_vehicles ADD vehicle_smokecolor1 varchar(255) DEFAULT NULL;
-ALTER TABLE vrp_user_vehicles ADD vehicle_smokecolor2 varchar(255) DEFAULT NULL;
-ALTER TABLE vrp_user_vehicles ADD  vehicle_smokecolor3 varchar(255) DEFAULT NULL;
-ALTER TABLE vrp_user_vehicles ADD  vehicle_modvariation varchar(255) NOT NULL DEFAULT 'off';
-]])
 
 MySQL.createCommand("vRP/ls_customs", "SELECT * FROM vrp_user_vehicles WHERE user_id = @user_id AND vehicle = @vehicle") -- added for lscustoms
 MySQL.createCommand("vRP/lsc_get_vehicle","SELECT vehicle FROM vrp_user_vehicles WHERE user_id = @user_id AND vehicle = @vehicle AND vehicle_plate = @plate") -- lscustoms and plygarages
