@@ -15,7 +15,7 @@ local pills_choices = {}
 pills_choices["Take"] = {function(player,choice)
   local user_id = vRP.getUserId(player)
   if user_id ~= nil then
-    if vRP.tryGetInventoryItem(user_id,"pillole",1) then
+    if vRP.tryGetInventoryItem(user_id,"pills",1) then
       vRPclient.varyHealth(player,{25})
       vRPclient.notify(player,{"~g~ Prendi pillole."})
       play_drink(player)
@@ -38,7 +38,7 @@ local smoke_choices = {}
 smoke_choices["Take"] = {function(player,choice)
   local user_id = vRP.getUserId(player)
   if user_id ~= nil then
-    if vRP.tryGetInventoryItem(user_id,"marijuna",1) then
+    if vRP.tryGetInventoryItem(user_id,"weed",1) then
 	  vRP.varyHunger(user_id,(20))
       vRPclient.notify(player,{"~g~ fuma marijuana."})
       play_smoke(player)
@@ -61,7 +61,7 @@ local smell_choices = {}
 smell_choices["Take"] = {function(player,choice)
   local user_id = vRP.getUserId(player)
   if user_id ~= nil then
-    if vRP.tryGetInventoryItem(user_id,"cocaina",1) then
+    if vRP.tryGetInventoryItem(user_id,"cocaine",1) then
 	  vRP.varyThirst(user_id,(20))
       vRPclient.notify(player,{"~g~ sniffa cocaina."})
       play_smell(player)
