@@ -67,7 +67,7 @@ cfg.groups = {
     "player.calladmin",
 	"player.fix_haircut",
 	"player.check",
-	"mugger.mug",
+	--"mugger.mug",
     "police.askid",
     "police.store_weapons",
 	"player.store_money",

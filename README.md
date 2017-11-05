@@ -2,7 +2,7 @@
 
 Welcome to Dunko vRP.
 
-Current: V6
+Current: V6.1
 
 # Donate/Patreon
 
@@ -28,14 +28,24 @@ If you need help, head over to my Discord: https://discord.gg/CyJEVaT
 
 # My Server
 
-Name: [Official] Dunko's Server | vRP V6 | Sponsored by ServerDeals.com
+Name: [Official] Dunko's Server | vRP V6.1 | Sponsored by ServerDeals.com
 
 Direct Connect: 96.9.246.30:30130
 
 # What's new
+# V6.1
+- Removed vrp_lscustoms untill it's fixed
+- Removed mugging due to people being people I suppose, took the fun out of the game
+- Removed freeze
+- Updated vrp_mysql
+- Added two missing folder [managers] and [system]
+- Added standard lscustoms
+- Fixed basic_garage.lua's in both client & modules
+- Updated server.cfg
 
+
+# V6
 - Updated server.cfg to have everything you need in it.
-
 - Added three additional languages, Russian, Danish & Lithuanian (8 in total) - set this is vrp/cfg/base.lua
 - Added Fishing job - Thanks @Velns 
 - Added Fishing mission
