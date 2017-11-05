@@ -11,7 +11,7 @@ local itemtr_study = {
   radius=1.1, height=1.5, -- area
   recipes = {
     ["Chemicals book"] = { -- action name
-      description="Read a chemicals book", -- action description
+      description="Leggi un libro di chimica", -- action description
       in_money=0, -- money taken per unit
       out_money=0, -- money earned per unit
       reagents={}, -- items taken per unit
@@ -21,7 +21,7 @@ local itemtr_study = {
       }
     },
     ["Mathematics book"] = { -- action name
-      description="Read a mathematics book", -- action description
+      description="Leggi un libro di matematica", -- action description
       in_money=0, -- money taken per unit
       out_money=0, -- money earned per unit
       reagents={}, -- items taken per unit
@@ -44,7 +44,7 @@ local itemtr_laboratory = {
   radius=1.1, height=1.5, -- area
   recipes = {
     ["cocaine"] = { -- action name
-      description="make cocaine", -- action description
+      description="produci cocaine", -- action description
       in_money=500, -- money taken per unit
       out_money=0, -- money earned per unit
       reagents={ -- items taken per unit
@@ -59,7 +59,7 @@ local itemtr_laboratory = {
       }
     },
 	["weed"] = { -- action name
-      description="make weed", -- action description
+      description="produci marjuana", -- action description
       in_money=500, -- money taken per unit
       out_money=0, -- money earned per unit
       reagents={ -- items taken per unit
@@ -75,7 +75,7 @@ local itemtr_laboratory = {
     },
 -----------------
 	["lsd"] = { -- action name
-      description="make lsd", -- action description
+      description="produci lsd", -- action description
       in_money=500, -- money taken per unit
       out_money=0, -- money earned per unit
       reagents={ -- items taken per unit

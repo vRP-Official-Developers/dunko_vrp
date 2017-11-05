@@ -16,7 +16,7 @@ cfg.item_transformers = {
     radius=3, height=1.5, -- area
     recipes = {
       ["Catch some Catfish"] = { -- action name
-        description="Trying to catch some Catfish", -- action description
+        description="Prova a pescare un Pescegatto", -- action description
         in_money=0, -- money taken per unit
         out_money=0, -- money earned per unit
         reagents={}, -- items taken per unit
@@ -25,7 +25,7 @@ cfg.item_transformers = {
         }
       },
       ["Catch some Bass"] = { -- action name
-        description="Trying to catch some Bass", -- action description
+        description="Prova a pescare un spigola", -- action description
         in_money=0, -- money taken per unit
         out_money=0, -- money earned per unit
         reagents={}, -- items taken per unit
@@ -36,7 +36,7 @@ cfg.item_transformers = {
     }
   },
       {
-    name="Weapons Smuggler", -- menu name
+    name="Trafficante d'armi", -- menu name
     permissions = {"mission.weapons.smuggler"}, -- you can add permissions
     r=0,g=125,b=255, -- color
     max_units=100000,
@@ -45,7 +45,7 @@ cfg.item_transformers = {
     radius=3, height=1.5, -- area
     recipes = {
       ["Gather AK's"] = { -- action name
-        description="Grabbing AK's", -- action description
+        description="Afferrare AK's", -- action description
         in_money=0, -- money taken per unit
         out_money=0, -- money earned per unit
         reagents={}, -- items taken per unit
@@ -54,7 +54,7 @@ cfg.item_transformers = {
         }
       },
       ["Gather M4A1"] = { -- action name
-        description="Grabbing M4's", -- action description
+        description="Afferrare M4's", -- action description
         in_money=0, -- money taken per unit
         out_money=0, -- money earned per unit
         reagents={}, -- items taken per unit
@@ -65,7 +65,7 @@ cfg.item_transformers = {
     }
   },
       {
-    name="Medical Transport", -- menu name
+    name="Trasporto Medico", -- menu name
     permissions = {"mission.delivery.medical"}, -- you can add permissions
     r=0,g=125,b=255, -- color
     max_units=100000,
@@ -74,7 +74,7 @@ cfg.item_transformers = {
     radius=3, height=1.5, -- area
     recipes = {
       ["Gather Medical Weed"] = { -- action name
-        description="Gathering Medical Weed", -- action description
+        description="Raccogliere la Marjuna medica", -- action description
         in_money=0, -- money taken per unit
         out_money=0, -- money earned per unit
         reagents={}, -- items taken per unit
@@ -94,7 +94,7 @@ cfg.item_transformers = {
     radius=5, height=1.5, -- area
     recipes = {
       ["Harvest water"] = { -- action name
-        description="Harvest some water bottles.", -- action description
+        description="Raccogliere delle bottiglie d'acqua.", -- action description
         in_money=0, -- money taken per unit
         out_money=0, -- money earned per unit
         reagents={}, -- items taken per unit
@@ -103,7 +103,7 @@ cfg.item_transformers = {
         }
       },
       ["Harvest tacos"] = { -- action name
-        description="Harvest some tacos.", -- action description
+        description="RAccogli dei tacos.", -- action description
         in_money=0, -- money taken per unit
         out_money=0, -- money earned per unit
         reagents={}, -- items taken per unit
@@ -125,7 +125,7 @@ cfg.item_transformers = {
     radius=7.5, height=1.5, -- area
     recipes = {
       ["Strength"] = { -- action name
-        description="Increase your strength.", -- action description
+        description="Incrementa la tua forza.", -- action description
         in_money=0, -- money taken per unit
         out_money=0, -- money earned per unit
         reagents={}, -- items taken per unit
@@ -146,7 +146,7 @@ cfg.item_transformers = {
     radius=2, height=1.0, -- area
     recipes = {
       ["hacking"] = { -- action name
-        description="Hacking credit cards.", -- action description
+        description="Hacking carta di credito.", -- action description
         in_money=0, -- money taken per unit
         out_money=0, -- money earned per unit
         reagents={}, -- items taken per unit
@@ -161,7 +161,7 @@ cfg.item_transformers = {
     }
   },
   {
-    name="Driver License", -- menu name
+    name="Patente", -- menu name
     r=255,g=125,b=0, -- color
     max_units=1,
     units_per_minute=1,
@@ -169,7 +169,7 @@ cfg.item_transformers = {
     radius=2, height=1.0, -- area
     recipes = {
       ["Driver"] = { -- action name
-       description="Buy a Driver License.", -- action description`
+       description="Compra Patente.", -- action description`
         in_money=150, -- money taken per unit
         out_money=0, -- money earned per unit
         reagents={}, -- items taken per unit
@@ -181,7 +181,7 @@ cfg.item_transformers = {
     }
   },
   {
-    name="Bank Driver Mission", -- menu name
+    name="Trasporto Valori", -- menu name
 	permissions = {"bankdriver.money"}, -- you can add permissions
     r=255,g=125,b=0, -- color
     max_units=1,
@@ -190,7 +190,7 @@ cfg.item_transformers = {
     radius=2, height=1.0, -- area
     recipes = {
       ["Bank Money"] = { -- action name
-       description="Get a money bank for mission.", -- action description
+       description="Prendi i soldi per la missione.", -- action description
         in_money=0, -- money taken per unit
         out_money=0, -- money earned per unit
         reagents={}, -- items taken per unit
@@ -222,7 +222,7 @@ cfg.item_transformers = {
    -- }
  -- },
   {
-    name="Drug Lab", -- menu name
+    name="Labortatori di droga", -- menu name
 	permissions = {"harvest.weed"}, -- job drug dealer required to use
     r=0,g=255,b=0, -- color
     max_units=100000,
@@ -231,7 +231,7 @@ cfg.item_transformers = {
     radius=1.1, height=1.5, -- area
     recipes = {
       ["cocaine"] = { -- action name
-        description="make cocaine", -- action description
+        description="prepara cocaine", -- action description
         in_money=500, -- money taken per unit
         out_money=0, -- money earned per unit
         reagents={ -- items taken per unit
@@ -246,7 +246,7 @@ cfg.item_transformers = {
         }
       },
       ["weed"] = { -- action name
-        description="make weed", -- action description
+        description="prepara marjuana", -- action description
         in_money=500, -- money taken per unit
         out_money=0, -- money earned per unit
         reagents={ -- items taken per unit
@@ -261,7 +261,7 @@ cfg.item_transformers = {
         }
       },
       ["lsd"] = { -- action name
-          description="make lsd", -- action description
+          description="prepara lsd", -- action description
           in_money=500, -- money taken per unit
           out_money=0, -- money earned per unit
           reagents={ -- items taken per unit
@@ -292,7 +292,7 @@ cfg.hidden_transformers = {
       radius=5, height=1.5, -- area
       recipes = {
         ["Harvest"] = { -- action name
-          description="Harvest some drugs.", -- action description
+          description="Raccogli le droghe.", -- action description
           in_money=0, -- money taken per unit
           out_money=0, -- money earned per unit
           reagents={}, -- items taken per unit
@@ -317,7 +317,7 @@ cfg.hidden_transformers = {
       radius=5, height=1.5, -- area
       recipes = {
         ["Harvest"] = { -- action name
-          description="Harvest some drugs.", -- action description
+          description="Raccogli le droghe.", -- action description
           in_money=0, -- money taken per unit
           out_money=0, -- money earned per unit
           reagents={}, -- items taken per unit
@@ -342,7 +342,7 @@ cfg.hidden_transformers = {
       radius=5, height=1.5, -- area
       recipes = {
         ["Harvest"] = { -- action name
-          description="Harvest some drugs.", -- action description
+          description="Raccogli le droghe.", -- action description
           in_money=0, -- money taken per unit
           out_money=0, -- money earned per unit
           reagents={}, -- items taken per unit

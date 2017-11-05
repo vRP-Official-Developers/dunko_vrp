@@ -14,7 +14,7 @@ cfg.sell_factor = 0.75 -- sell for 75% of the original price
 cfg.garage_types = {
   ["Fisher's Boat"] = {
     _config = {vtype="boat",blipid=427,blipcolor=28,permissions={"fisher.vehicle"}},
-    ["suntrap"] = {"Fisher's boat",0, "Your favorite boat!"}
+    ["suntrap"] = {"Barca da pescatore",0, "Barca preferita!"}
   },
   
   ["High End"]  = {  -- 150k price cap
