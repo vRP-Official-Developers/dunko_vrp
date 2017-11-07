@@ -85,6 +85,10 @@ function vRP.setBankMoney(user_id,value)
   if tmp then
     tmp.bank = value
   end
+  local source = vRP.getUserSource(user_id)
+  if source ~= nil then
+    vRPclient.setDivContent(source,{"bmoney",lang.money.bdisplay({value})})
+  end
 end
 
 -- give bank money
@@ -173,6 +177,7 @@ AddEventHandler("vRP:playerSpawn",function(user_id, source, first_spawn)
   if first_spawn then
     -- add money display
     vRPclient.setDiv(source,{"money",cfg.display_css,lang.money.display({vRP.getMoney(user_id)})})
+	vRPclient.setDiv(source,{"bmoney",cfg.display_css,lang.money.bdisplay({vRP.getBankMoney(user_id)})})
   end
 end)
 
