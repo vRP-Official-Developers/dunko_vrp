@@ -51,19 +51,6 @@ function vRP.setMoney(user_id,value)
   end
 end
 
--- force a payment
--- if not enought money, will have negitive balance
-function vRP.forcePayment(user_id,amount)
-  local money = vRP.getMoney(user_id)
-  --if money >= amount then
-    vRP.setMoney(user_id,money-amount)
-    return true
-  --else
-    --return false
-  --end
-end
-
-
 -- try a payment
 -- return true or false (debited if true)
 function vRP.tryPayment(user_id,amount)
@@ -97,10 +84,6 @@ function vRP.setBankMoney(user_id,value)
   local tmp = vRP.getUserTmpTable(user_id)
   if tmp then
     tmp.bank = value
-  end
-  local source = vRP.getUserSource(user_id)
-  if source ~= nil then
-    vRPclient.setDivContent(source,{"bmoney",lang.money.bdisplay({value})})
   end
 end
 
@@ -190,7 +173,6 @@ AddEventHandler("vRP:playerSpawn",function(user_id, source, first_spawn)
   if first_spawn then
     -- add money display
     vRPclient.setDiv(source,{"money",cfg.display_css,lang.money.display({vRP.getMoney(user_id)})})
-    vRPclient.setDiv(source,{"bmoney",cfg.display_css,lang.money.bdisplay({vRP.getBankMoney(user_id)})})
   end
 end)
 

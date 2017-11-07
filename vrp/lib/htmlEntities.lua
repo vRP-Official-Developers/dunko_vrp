@@ -2355,7 +2355,6 @@ function htmlEntities.decode (input)
 	return output
 end
 
-
 function htmlEntities.encode (input)
   if not input then
     if error_msg_htmlEntities then error('htmlEntities[encode] >> ERROR: input is value nil') end

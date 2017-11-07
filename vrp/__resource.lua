@@ -5,10 +5,6 @@ dependency "vrp_mysql"
 
 ui_page "gui/index.html"
 
--- Loading Font Files
-files{
-"gui/fonts/Pricedown.woff"
-}
 -- server scripts
 server_scripts{ 
   "lib/utils.lua",
@@ -57,16 +53,14 @@ client_scripts{
   "client/identity.lua",
   "client/basic_garage.lua",
   "client/police.lua",
-  "client/admin.lua",
-  "client/paycheck.lua"
+  "client/paycheck.lua",
+  "client/admin.lua"
 }
-
 
 -- client files
 files{
   "cfg/client.lua",
   "gui/index.html",
-  "gui/pdown.tff",
   "gui/design.css",
   "gui/main.js",
   "gui/Menu.js",
@@ -74,5 +68,6 @@ files{
   "gui/WPrompt.js",
   "gui/RequestManager.js",
   "gui/AnnounceManager.js",
-  "gui/Div.js"
+  "gui/Div.js",
+  "gui/dynamic_classes.js"
 }

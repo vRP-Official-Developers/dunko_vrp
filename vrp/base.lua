@@ -97,10 +97,9 @@ MySQL.createCommand("vRP/set_whitelisted","UPDATE vrp_users SET whitelisted = @w
 MySQL.createCommand("vRP/set_last_login","UPDATE vrp_users SET last_login = @last_login WHERE id = @user_id")
 MySQL.createCommand("vRP/get_last_login","SELECT last_login FROM vrp_users WHERE id = @user_id")
 
-
 -- init tables
 print("[vRP] init base tables")
-MySQL.query("vRP/base_tables")
+MySQL.execute("vRP/base_tables")
 
 -- identification system
 
@@ -116,20 +115,26 @@ function vRP.getUserIdByIdentifiers(ids, cbr)
     local function search()
       i = i+1
       if i <= #ids then
-        MySQL.query("vRP/userid_byidentifier", {identifier = ids[i]}, function(rows, affected)
-          if #rows > 0 then  -- found
-            task({rows[1].user_id})
-          else -- not found
-            search()
-          end
-        end)
+        if not config.ignore_ip_identifier or (string.find(ids[i], "ip:") == nil) then  -- ignore ip identifier
+          MySQL.query("vRP/userid_byidentifier", {identifier = ids[i]}, function(rows, affected)
+            if #rows > 0 then  -- found
+              task({rows[1].user_id})
+            else -- not found
+              search()
+            end
+          end)
+        else
+          search()
+        end
       else -- no ids found, create user
         MySQL.query("vRP/create_user", {}, function(rows, affected)
           if #rows > 0 then
             local user_id = rows[1].id
             -- add identifiers
             for l,w in pairs(ids) do
-              MySQL.query("vRP/add_identifier", {user_id = user_id, identifier = w})
+              if not config.ignore_ip_identifier or (string.find(w, "ip:") == nil) then  -- ignore ip identifier
+                MySQL.execute("vRP/add_identifier", {user_id = user_id, identifier = w})
+              end
             end
 
             task({user_id})
@@ -180,7 +185,7 @@ end
 
 --- sql
 function vRP.setBanned(user_id,banned)
-  MySQL.query("vRP/set_banned", {user_id = user_id, banned = banned})
+  MySQL.execute("vRP/set_banned", {user_id = user_id, banned = banned})
 end
 
 --- sql
@@ -198,7 +203,7 @@ end
 
 --- sql
 function vRP.setWhitelisted(user_id,whitelisted)
-  MySQL.query("vRP/set_whitelisted", {user_id = user_id, whitelisted = whitelisted})
+  MySQL.execute("vRP/set_whitelisted", {user_id = user_id, whitelisted = whitelisted})
 end
 
 --- sql
@@ -214,7 +219,7 @@ function vRP.getLastLogin(user_id, cbr)
 end
 
 function vRP.setUData(user_id,key,value)
-  MySQL.query("vRP/set_userdata", {user_id = user_id, key = key, value = value})
+  MySQL.execute("vRP/set_userdata", {user_id = user_id, key = key, value = value})
 end
 
 function vRP.getUData(user_id,key,cbr)
@@ -230,7 +235,7 @@ function vRP.getUData(user_id,key,cbr)
 end
 
 function vRP.setSData(key,value)
-  MySQL.query("vRP/set_srvdata", {key = key, value = value})
+  MySQL.execute("vRP/set_srvdata", {key = key, value = value})
 end
 
 function vRP.getSData(key, cbr)
@@ -346,25 +351,22 @@ end
 
 -- handlers
 
-local rejects = {}
+AddEventHandler("playerConnecting",function(name,setMessage, deferrals)
+  deferrals.defer()
 
-AddEventHandler("playerConnecting",function(name,setMessage)
   local source = source
   Debug.pbegin("playerConnecting")
   local ids = GetPlayerIdentifiers(source)
 
-  local idk = vRP.getSourceIdKey(source)
-  -- reject someone
-  local function reject(reason)
-    rejects[idk] = reason
-  end
-
   if ids ~= nil and #ids > 0 then
+    deferrals.update("[vRP] Checking identifiers...")
     vRP.getUserIdByIdentifiers(ids, function(user_id)
       -- if user_id ~= nil and vRP.rusers[user_id] == nil then -- check user validity and if not already connected (old way, disabled until playerDropped is sure to be called)
       if user_id ~= nil then -- check user validity 
+        deferrals.update("[vRP] Checking banned...")
         vRP.isBanned(user_id, function(banned)
           if not banned then
+            deferrals.update("[vRP] Checking whitelisted...")
             vRP.isWhitelisted(user_id, function(whitelisted)
               if not config.whitelist or whitelisted then
                 Debug.pbegin("playerConnecting_delayed")
@@ -377,6 +379,7 @@ AddEventHandler("playerConnecting",function(name,setMessage)
                   vRP.user_sources[user_id] = source
 
                   -- load user data table
+                  deferrals.update("[vRP] Loading datatable...")
                   vRP.getUData(user_id, "vRP:datatable", function(sdata)
                     local data = json.decode(sdata)
                     if type(data) == "table" then vRP.user_tables[user_id] = data end
@@ -384,6 +387,7 @@ AddEventHandler("playerConnecting",function(name,setMessage)
                     -- init user tmp table
                     local tmpdata = vRP.getUserTmpTable(user_id)
 
+                    deferrals.update("[vRP] Getting last login...")
                     vRP.getLastLogin(user_id, function(last_login)
                       tmpdata.last_login = last_login or ""
                       tmpdata.spawns = 0
@@ -391,16 +395,18 @@ AddEventHandler("playerConnecting",function(name,setMessage)
                       -- set last login
                       local ep = vRP.getPlayerEndpoint(source)
                       local last_login_stamp = ep.." "..os.date("%H:%M:%S %d/%m/%Y")
-                      MySQL.query("vRP/set_last_login", {user_id = user_id, last_login = last_login_stamp})
+                      MySQL.execute("vRP/set_last_login", {user_id = user_id, last_login = last_login_stamp})
 
                       -- trigger join
                       print("[vRP] "..name.." ("..vRP.getPlayerEndpoint(source)..") joined (user_id = "..user_id..")")
                       TriggerEvent("vRP:playerJoin", user_id, source, name, tmpdata.last_login)
+                      deferrals.done()
                     end)
                   end)
                 else -- already connected
                   print("[vRP] "..name.." ("..vRP.getPlayerEndpoint(source)..") re-joined (user_id = "..user_id..")")
                   TriggerEvent("vRP:playerRejoin", user_id, source, name)
+                  deferrals.done()
 
                   -- reset first spawn
                   local tmpdata = vRP.getUserTmpTable(user_id)
@@ -410,23 +416,22 @@ AddEventHandler("playerConnecting",function(name,setMessage)
                 Debug.pend()
               else
                 print("[vRP] "..name.." ("..vRP.getPlayerEndpoint(source)..") rejected: not whitelisted (user_id = "..user_id..")")
-                reject("[vRP] Not whitelisted (user_id = "..user_id..").")
+                deferrals.done("[vRP] Not whitelisted (user_id = "..user_id..").")
               end
             end)
           else
             print("[vRP] "..name.." ("..vRP.getPlayerEndpoint(source)..") rejected: banned (user_id = "..user_id..")")
-            reject("[vRP] Banned (user_id = "..user_id..").")
+            deferrals.done("[vRP] Banned (user_id = "..user_id..").")
           end
         end)
       else
         print("[vRP] "..name.." ("..vRP.getPlayerEndpoint(source)..") rejected: identification error")
-        reject("[vRP] Identification error.")
+        deferrals.done("[vRP] Identification error.")
       end
     end)
   else
     print("[vRP] "..name.." ("..vRP.getPlayerEndpoint(source)..") rejected: missing identifiers")
-    setMessage("[vRP] Missing identifiers.")
-    CancelEvent()
+    deferrals.done("[vRP] Missing identifiers.")
   end
   Debug.pend()
 end)
@@ -435,7 +440,6 @@ AddEventHandler("playerDropped",function(reason)
   local source = source
   Debug.pbegin("playerDropped")
 
-  rejects[source] = nil
   -- remove player from connected clients
   vRPclient.removePlayer(-1,{source})
 
@@ -448,7 +452,7 @@ AddEventHandler("playerDropped",function(reason)
     -- save user data table
     vRP.setUData(user_id,"vRP:datatable",json.encode(vRP.getUserDataTable(user_id)))
 
-    print("[vRP] "..GetPlayerEP(source).." disconnected (user_id = "..user_id..")")
+    print("[vRP] "..vRP.getPlayerEndpoint(source).." disconnected (user_id = "..user_id..")")
     vRP.users[vRP.rusers[user_id]] = nil
     vRP.rusers[user_id] = nil
     vRP.user_tables[user_id] = nil
@@ -484,7 +488,7 @@ AddEventHandler("vRPcli:playerSpawned", function()
     Tunnel.setDestDelay(player, config.load_delay)
 
     -- show loading
-    vRPclient.setProgressBar(player,{"vRP:loading", "botright", "Loading your character", 0,0,0, 100})
+    vRPclient.setProgressBar(player,{"vRP:loading", "botright", "Loading...", 0,0,0, 100})
 
     SetTimeout(2000, function() -- trigger spawn event
       TriggerEvent("vRP:playerSpawn",user_id,player,first_spawn)
@@ -494,14 +498,6 @@ AddEventHandler("vRPcli:playerSpawned", function()
         vRPclient.removeProgressBar(player,{"vRP:loading"})
       end)
     end)
-  end
-
-  -- reject
-  local idk = vRP.getSourceIdKey(player)
-  local reason = rejects[idk]
-  if reason then
-    vRP.kick(player, reason)
-    rejects[idk] = nil
   end
 
   Debug.pend()

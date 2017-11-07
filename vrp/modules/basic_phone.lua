@@ -96,6 +96,8 @@ end
 -- send an smspos from an user to a phone number
 -- cbreturn true on success
 function vRP.sendSMSPos(user_id, phone, x,y,z, cbr)
+  local task = Task(cbr)
+
   vRP.getUserIdentity(user_id, function(identity)
     vRP.getUserByPhone(phone, function(dest_id)
       if identity and dest_id then
@@ -359,6 +361,15 @@ phone_menu[lang.phone.directory.title()] = {ch_directory,lang.phone.directory.de
 phone_menu[lang.phone.sms.title()] = {ch_sms,lang.phone.sms.description()}
 phone_menu[lang.phone.service.title()] = {ch_service,lang.phone.service.description()}
 phone_menu[lang.phone.announce.title()] = {ch_announce,lang.phone.announce.description()}
+
+-- phone menu static builder after 10 seconds
+SetTimeout(10000, function()
+  vRP.buildMenu("phone", {}, function(menu)
+    for k,v in pairs(menu) do
+      phone_menu[k] = v
+    end
+  end)
+end)
 
 -- add phone menu to main menu
 

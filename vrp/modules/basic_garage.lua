@@ -16,7 +16,7 @@ MySQL.createCommand("vRP/get_vehicles","SELECT vehicle FROM vrp_user_vehicles WH
 MySQL.createCommand("vRP/get_vehicle","SELECT vehicle FROM vrp_user_vehicles WHERE user_id = @user_id AND vehicle = @vehicle")
 
 -- init
-MySQL.query("vRP/vehicles_table")
+MySQL.execute("vRP/vehicles_table")
 
 -- load config
 
@@ -52,7 +52,7 @@ for group,vehicles in pairs(vehicle_groups) do
 
       -- build nested menu
       local kitems = {}
-      local submenu = {name=lang.garage.title({lang.garage.owned.title()}), css={top="75px",header_color="rgba(1, 82, 233, 0.69)"}}
+      local submenu = {name=lang.garage.title({lang.garage.owned.title()}), css={top="75px",header_color="rgba(255,125,0,0.75)"}}
       submenu.onclose = function()
         vRP.openMenu(player,menu)
       end
@@ -97,7 +97,7 @@ for group,vehicles in pairs(vehicle_groups) do
 
       -- build nested menu
       local kitems = {}
-      local submenu = {name=lang.garage.title({lang.garage.buy.title()}), css={top="75px",header_color="rgba(1, 82, 233, 0.69)"}}
+      local submenu = {name=lang.garage.title({lang.garage.buy.title()}), css={top="75px",header_color="rgba(255,125,0,0.75)"}}
       submenu.onclose = function()
         vRP.openMenu(player,menu)
       end
@@ -108,9 +108,9 @@ for group,vehicles in pairs(vehicle_groups) do
           -- buy vehicle
           local vehicle = vehicles[vname]
           if vehicle and vRP.tryPayment(user_id,vehicle[2]) then
-			MySQL.execute("vRP/add_vehicle", {user_id = user_id, vehicle = vname})
+            MySQL.execute("vRP/add_vehicle", {user_id = user_id, vehicle = vname})
 
-		    vRPclient.notify(player,{lang.money.paid({vehicle[2]})})
+            vRPclient.notify(player,{lang.money.paid({vehicle[2]})})
             vRP.closeMenu(player)
           else
             vRPclient.notify(player,{lang.money.not_enough()})
@@ -144,7 +144,7 @@ for group,vehicles in pairs(vehicle_groups) do
 
       -- build nested menu
       local kitems = {}
-      local submenu = {name=lang.garage.title({lang.garage.sell.title()}), css={top="75px",header_color="rgba(1, 82, 233, 0.69)"}}
+      local submenu = {name=lang.garage.title({lang.garage.sell.title()}), css={top="75px",header_color="rgba(255,125,0,0.75)"}}
       submenu.onclose = function()
         vRP.openMenu(player,menu)
       end
@@ -160,7 +160,7 @@ for group,vehicles in pairs(vehicle_groups) do
             MySQL.query("vRP/get_vehicle", {user_id = user_id, vehicle = vname}, function(rows, affected)
               if #rows > 0 then -- has vehicle
                 vRP.giveMoney(user_id,price)
-                MySQL.query("vRP/remove_vehicle", {user_id = user_id, vehicle = vname})
+                MySQL.execute("vRP/remove_vehicle", {user_id = user_id, vehicle = vname})
 
                 vRPclient.notify(player,{lang.money.received({price})})
                 vRP.closeMenu(player)
@@ -205,7 +205,7 @@ for group,vehicles in pairs(vehicle_groups) do
 
       -- build nested menu
       local kitems = {}
-      local submenu = {name=lang.garage.title({lang.garage.rent.title()}), css={top="75px",header_color="rgba(1, 82, 233, 0.69)"}}
+      local submenu = {name=lang.garage.title({lang.garage.rent.title()}), css={top="75px",header_color="rgba(255,125,0,0.75)"}}
       submenu.onclose = function()
         vRP.openMenu(player,menu)
       end
@@ -353,15 +353,15 @@ local function ch_vehicle(player,choice)
       if ok then
         -- build vehicle menu
         vRP.buildMenu("vehicle", {user_id = user_id, player = player, vtype = vtype, vname = name}, function(menu)
-         menu.name=lang.vehicle.title()
-         menu.css={top="75px",header_color="rgba(255,125,0,0.75)"}
+          menu.name=lang.vehicle.title()
+          menu.css={top="75px",header_color="rgba(255,125,0,0.75)"}
 
-        for k,v in pairs(veh_actions) do 
-          menu[k] = {function(player,choice) v[1](user_id,player,vtype,name) end, v[2]}
-        end
+          for k,v in pairs(veh_actions) do
+            menu[k] = {function(player,choice) v[1](user_id,player,vtype,name) end, v[2]}
+          end
 
-        vRP.openMenu(player,menu)
-		end)
+          vRP.openMenu(player,menu)
+        end)
       else
         vRPclient.notify(player,{lang.vehicle.no_owned_near()})
       end

@@ -553,18 +553,19 @@ vRP.registerMenuBuilder("main", function(add, data)
             menu[lang.police.menu.fine.title()] = choice_fine
           end
 
-          if vRP.hasPermission(user_id,"police.askid") then
-            menu[lang.police.menu.askid.title()] = choice_askid
-          end
-
-          if vRP.hasPermission(user_id, "police.store_weapons") then
-            menu[lang.police.menu.store_weapons.title()] = choice_store_weapons
-          end
-
           vRP.openMenu(player,menu)
         end)
       end}
     end
+
+    if vRP.hasPermission(user_id,"police.askid") then
+      choices[lang.police.menu.askid.title()] = choice_askid
+    end
+
+    if vRP.hasPermission(user_id, "police.store_weapons") then
+      choices[lang.police.menu.store_weapons.title()] = choice_store_weapons
+    end
+
     add(choices)
   end
 end)
