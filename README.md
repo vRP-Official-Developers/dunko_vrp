@@ -36,9 +36,10 @@ Direct Connect: 96.9.246.30:30130
 
 # V6.2
 - Updated core code
-This will hopefully stop people getting the "Identification Error" whist the server has been up for a while
+This will hopefully stop people getting the "Identification Error" whist the server has been up for a while, as well as many more things including database calls. It also adds a phone fuction back into the game
 - Fixed vrp_basic_mission
 - Added more admin menu features from vrp_basic_menu
+- Added Pay by Phone from the vrp_basic_menu
 
 # V6.1
 - Removed vrp_lscustoms untill it's fixed
