@@ -310,7 +310,7 @@ function task_mission()
                   vRP.giveMoney({user_id,reward})
                   vRPclient.notify(player,{glang.money.received({reward})})
                   todo = todo-1
-                  drugseller_items[idname] = 0
+                  medical_driver_items[idname] = 0
                   if todo == 0 then -- all received, finish mission
                     vRP.nextMissionStep({player})
                   end
@@ -369,7 +369,7 @@ function task_mission()
                   vRP.giveMoney({user_id,reward})
                   vRPclient.notify(player,{glang.money.received({reward})})
                   todo = todo-1
-                  drugseller_items[idname] = 0
+                  weapons_smuggler_items[idname] = 0
                   if todo == 0 then -- all received, finish mission
                     vRP.nextMissionStep({player})
                   end
