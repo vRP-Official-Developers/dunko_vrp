@@ -333,61 +333,61 @@ vRP.registerMenuBuilder("main", function(add, data)
         menu.onclose = function(player) vRP.openMainMenu(player) end -- nest menu
 
         if vRP.hasPermission(user_id,"player.list") then
-          menu["@User list"] = {ch_list,"Show/hide user list."}
+          menu["User list"] = {ch_list,"Show/hide user list."}
         end
         if vRP.hasPermission(user_id,"player.whitelist") then
-          menu["@Whitelist user"] = {ch_whitelist}
+          menu["Whitelist user"] = {ch_whitelist}
         end
         if vRP.hasPermission(user_id,"player.group.add") then
-          menu["@Add group"] = {ch_addgroup}
+          menu["Add group"] = {ch_addgroup}
         end
         if vRP.hasPermission(user_id,"player.group.remove") then
-          menu["@Remove group"] = {ch_removegroup}
+          menu["Remove group"] = {ch_removegroup}
         end
         if vRP.hasPermission(user_id,"player.unwhitelist") then
-          menu["@Un-whitelist user"] = {ch_unwhitelist}
+          menu["Un-whitelist user"] = {ch_unwhitelist}
         end
         if vRP.hasPermission(user_id,"player.kick") then
-          menu["@Kick"] = {ch_kick}
+          menu["Kick"] = {ch_kick}
         end
         if vRP.hasPermission(user_id,"player.ban") then
-          menu["@Ban"] = {ch_ban}
+          menu["Ban"] = {ch_ban}
         end
         if vRP.hasPermission(user_id,"player.unban") then
-          menu["@Unban"] = {ch_unban}
+          menu["Unban"] = {ch_unban}
         end
         if vRP.hasPermission(user_id,"player.noclip") then
-          menu["@Noclip"] = {ch_noclip}
+          menu["Noclip"] = {ch_noclip}
         end
         if vRP.hasPermission(user_id,"player.custom_emote") then
-          menu["@Custom emote"] = {ch_emote}
+          menu["Custom emote"] = {ch_emote}
         end
         if vRP.hasPermission(user_id,"player.custom_sound") then
-          menu["@Custom sound"] = {ch_sound}
+          menu["Custom sound"] = {ch_sound}
         end
         if vRP.hasPermission(user_id,"player.coords") then
-          menu["@Coords"] = {ch_coords}
+          menu["Coords"] = {ch_coords}
         end
         if vRP.hasPermission(user_id,"player.tptome") then
-          menu["@TpToMe"] = {ch_tptome}
+          menu["TpToMe"] = {ch_tptome}
         end
         if vRP.hasPermission(user_id,"player.tpto") then
-          menu["@TpTo"] = {ch_tpto}
+          menu["TpTo"] = {ch_tpto}
         end
         if vRP.hasPermission(user_id,"player.tpto") then
-          menu["@TpToCoords"] = {ch_tptocoords}
+          menu["TpToCoords"] = {ch_tptocoords}
         end
         if vRP.hasPermission(user_id,"player.givemoney") then
-          menu["@Give money"] = {ch_givemoney}
+          menu["Give money"] = {ch_givemoney}
         end
         if vRP.hasPermission(user_id,"player.giveitem") then
-          menu["@Give item"] = {ch_giveitem}
+          menu["Give item"] = {ch_giveitem}
         end
         if vRP.hasPermission(user_id,"player.display_custom") then
-          menu["@Display customization"] = {ch_display_custom}
+          menu["Display customization"] = {ch_display_custom}
         end
         if vRP.hasPermission(user_id,"player.calladmin") then
-          menu["@Call admin"] = {ch_calladmin}
+          menu["Call admin"] = {ch_calladmin}
         end
 
         vRP.openMenu(player,menu)
