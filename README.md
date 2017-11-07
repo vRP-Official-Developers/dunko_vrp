@@ -2,7 +2,7 @@
 
 Welcome to Dunko vRP.
 
-Current: V6.1
+Current: V6.2
 
 # Donate/Patreon
 
@@ -28,11 +28,18 @@ If you need help, head over to my Discord: https://discord.gg/CyJEVaT
 
 # My Server
 
-Name: [Official] Dunko's Server | vRP V6.1 | Sponsored by ServerDeals.com
+Name: [Official] Dunko's Server | vRP V6.2 | Sponsored by ServerDeals.com
 
 Direct Connect: 96.9.246.30:30130
 
 # What's new
+
+# V6.2
+- Updated core code
+This will hopefully stop people getting the "Identification Error" whist the server has been up for a while
+- Fixed vrp_basic_mission
+- Added more admin menu features from vrp_basic_menu
+
 # V6.1
 - Removed vrp_lscustoms untill it's fixed
 - Removed mugging due to people being people I suppose, took the fun out of the game
