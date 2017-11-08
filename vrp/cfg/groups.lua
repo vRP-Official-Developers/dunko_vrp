@@ -63,7 +63,6 @@ cfg.groups = {
   -- the group user is auto added to all logged players
   ["user"] = {
     "player.phone",
-    "player.list",
     "player.calladmin",
 	"player.fix_haircut",
 	"player.check",
@@ -74,6 +73,7 @@ cfg.groups = {
 	"player.check",
 	"player.loot",
 	"player.player_menu",
+	"player.userlist",
     "police.seizable",	-- can be seized
 	"user.paycheck"
   },
