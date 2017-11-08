@@ -74,7 +74,6 @@ cfg.groups = {
 	"player.check",
 	"player.loot",
 	"player.player_menu",
-	"player.userlist",
     "police.seizable",	-- can be seized
 	"user.paycheck"
   },
