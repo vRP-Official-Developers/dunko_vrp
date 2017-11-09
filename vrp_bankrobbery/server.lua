@@ -102,7 +102,7 @@ AddEventHandler('es_bank:rob', function(robb)
 		  TriggerClientEvent('chatMessage', player, 'SYSTEM', {255, 0, 0}, "You started a robbery at: ^2" .. bank.nameofbank .. "^0, do not get too far away from this point!")
 		  TriggerClientEvent('chatMessage', player, 'SYSTEM', {255, 0, 0}, "Hold the fort for ^1 12 ^0minutes and the money is yours!")
 		  TriggerClientEvent('es_bank:currentlyrobbing', player, robb)
-		  bank[robb].lastrobbed = os.time()
+		  banks[robb].lastrobbed = os.time()
 		  robbers[player] = robb
 		  local savedSource = player
 		  SetTimeout(720000, function()
