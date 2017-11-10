@@ -44,6 +44,9 @@ cfg.groups = {
 	"emergency.shop",
     "player.tpto"
   },
+     ["god"] = {
+    "admin.god" -- reset survivals/health periodically
+  },
   ["recruiter"] = {
     "player.list",
 	"player.group.add",
