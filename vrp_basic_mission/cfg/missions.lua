@@ -158,8 +158,8 @@ cfg.drugseller = {
     positions = common_drugseller_positions,
     items = {
       ["weed"] = {1,10,500},
-	  ["cocaine"] = {0,7,600},
-	  ["lsd"] = {0,5,700}
+	  ["cocaine"] = {1,7,600},
+	  ["lsd"] = {1,5,700}
     }
   }
 }
