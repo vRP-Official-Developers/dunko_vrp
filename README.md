@@ -40,6 +40,7 @@ This will hopefully stop people getting the "Identification Error" whist the ser
 - Fixed vrp_basic_mission
 - Added more admin menu features from vrp_basic_menu
 - Added Pay by Phone from the vrp_basic_menu
+- Added Polish, Spanish & Arabic translations
 
 # V6.1
 - Removed vrp_lscustoms untill it's fixed
