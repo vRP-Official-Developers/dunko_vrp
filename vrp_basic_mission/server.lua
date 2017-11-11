@@ -45,7 +45,7 @@ function task_mission()
                   end)
                 end
               end,
-              position = v.positions[math.random(1,#v.positions+1)]
+              position = v.positions[math.random(1,#v.positions)]
             }
 
             table.insert(mdata.steps, step)
