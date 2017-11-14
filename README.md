@@ -24,7 +24,9 @@ If you need help, head over to my Discord: https://discord.gg/CyJEVaT
 
 4) Go to server.cfg and enter your database details.
 
-5) Open Start_Server.cmd with Notepad++ and put in the directory you have your server in.
+5) Whilst in server.cfg go to line 111 and set your server name, make sure it’s inside the quotations.
+
+6) Open Start_Server.cmd with Notepad++ and put in the directory you have your server in.
 
 # My Server
 
