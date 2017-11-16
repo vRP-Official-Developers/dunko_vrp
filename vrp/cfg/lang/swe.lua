@@ -370,7 +370,7 @@ local lang = {
       info = "{1} $<br /><br />{2}"
     },
     sell = {
-      title = "Sell",
+      title = "Sälj",
       description = "Sälj Fordon."
     },
     rent = {
@@ -378,8 +378,8 @@ local lang = {
       description = "Hyr ett fordon för sessionen (tills du loggar ut)."
     },
     store = {
-      title = "Förvara",
-      description = "Förvara ditt fordon i garaget."
+      title = "Spara",
+      description = "Spara ditt fordon i garaget."
     }
   },
   vehicle = {
