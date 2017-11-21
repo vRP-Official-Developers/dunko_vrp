@@ -26,7 +26,9 @@ If you need help, head over to my Discord: https://discord.gg/CyJEVaT
 
 5) Whilst in server.cfg go to line 111 and set your server name, make sure it’s inside the quotations.
 
-6) Open Start_Server.cmd with Notepad++ and put in the directory you have your server in.
+6) Whilst in server.cfg go to line 141 and enter your server key, you can get one from here.
+
+7) Open Start_Server.cmd with Notepad++ and put in the directory you have your server in.
 
 # My Server
 
