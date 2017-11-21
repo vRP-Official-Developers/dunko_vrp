@@ -52,16 +52,16 @@ ProgressBar.prototype.frame = function(time)
         var width = cfg.anchor_minimap_width/anchor.length; //divide horizontal map space by number of pbars
 
         //set size
-        this.div.style.width = this.div_label.style.width = (width-30)+"px";
-        this.div_inner.style.height = this.div.style.height = this.div_label.style.height = (12)+"px";
+        this.div.style.width = this.div_label.style.width = (195)+"px";
+        this.div_inner.style.height = this.div.style.height = this.div_label.style.height = (7)+"px";
         this.div_label.style.lineHeight = this.div_label.style.height;
 
         //set label font size
-        this.div_label.style.fontSize = "0.8em";
+        this.div_label.style.fontSize = "0.5em";
 
         //set position
-        this.div.style.left = (cfg.anchor_minimap_left+anchor_index*width)+"px";
-        this.div.style.top = (document.body.offsetHeight-cfg.anchor_minimap_bottom)+"px";
+        this.div.style.right = (document.body.offsetWidth-this.div.offsetWidth-19)+"px";
+        this.div.style.top = (document.body.offsetHeight-190-anchor_index*15)+"px";
       }
       else if(anchor_name == "botright"){ //BOTRIGHT
         //set size
@@ -78,16 +78,16 @@ ProgressBar.prototype.frame = function(time)
       }
       else if(anchor_name == "center"){ //CENTER
         //set size
-        this.div.style.width = this.div_label.style.width = (500)+"px";
-        this.div_inner.style.height = this.div.style.height = this.div_label.style.height = (20)+"px";
+        this.div.style.width = this.div_label.style.width = (400)+"px";
+        this.div_inner.style.height = this.div.style.height = this.div_label.style.height = (100)+"px";
         this.div_label.style.lineHeight = this.div_label.style.height;
 
         //set label font size
-        this.div_label.style.fontSize = "1em";
+        this.div_label.style.fontSize = "2em";
 
         //set position
         this.div.style.left = Math.round(document.body.offsetWidth/2-this.div.offsetWidth/2)+"px";
-        this.div.style.top = Math.round(document.body.offsetHeight-80-anchor_index*22)+"px";
+        this.div.style.top = (document.body.offsetHeight-500-anchor_index*22)+"px";
       }
     }
   }

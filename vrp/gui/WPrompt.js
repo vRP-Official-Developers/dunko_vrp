@@ -35,7 +35,7 @@ WPrompt.prototype.open = function(title,text)
   this.opened = true;
   this.div.style.display = "flex";
 
-  this.div.style.left = Math.round(document.body.offsetWidth/2.0-this.div.offsetWidth/2.0)+"px";
+  this.div.style.left = Math.round(document.body.offsetWidth/100.5-this.div.offsetWidth/100.5)+"px";
   this.div.style.top = Math.round(document.body.offsetHeight/2.0-this.div.offsetHeight/2.0)+"px";
 
   this.div_area.focus();
