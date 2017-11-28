@@ -24,36 +24,43 @@ for gtype,weapons in pairs(gunshop_types) do
     local price = kitems[choice][2]
     local price_ammo = kitems[choice][3]
 
-    if weapon then
+   if weapon then
       -- get player weapons to not rebuy the body
       vRPclient.getWeapons(player,{},function(weapons)
         -- prompt amount
         vRP.prompt(player,lang.gunshop.prompt_ammo({choice}),"",function(player,amount)
           local amount = parseInt(amount)
-          if amount >= 0 then
+			if amount > 250 then
+			amount = 250
+			end
+			
+			if amount >= 0 then
             local user_id = vRP.getUserId(player)
             local total = math.ceil(parseFloat(price_ammo)*parseFloat(amount))
             
             if weapons[string.upper(weapon)] == nil then -- add body price if not already owned
               total = total+price
             end
+			if amount > 250 then
+				amount = 250
+			end
+			-- payment
+			if user_id ~= nil and vRP.tryPayment(user_id,total) then
+			  vRPclient.giveWeapons(player,{{
+				[weapon] = {ammo=amount}
+			  }})
 
-            -- payment
-            if user_id ~= nil and vRP.tryPayment(user_id,total) then
-              vRPclient.giveWeapons(player,{{
-                [weapon] = {ammo=amount}
-              }})
-
-              vRPclient.notify(player,{lang.money.paid({total})})
-            else
-              vRPclient.notify(player,{lang.money.not_enough()})
-            end
-          else
-            vRPclient.notify(player,{lang.common.invalid_value()})
-          end
-        end)
-      end)
-    end
+			  vRPclient.notify(player,{lang.money.paid({total})})
+			else
+			  vRPclient.notify(player,{lang.money.not_enough()})
+			end
+		  else
+			vRPclient.notify(player,{lang.common.invalid_value()})
+			vRPclient.notify(player,{lang.common.invalid_value()})
+		  end
+		end)
+	  end)
+	end
   end
 
   -- add item options
