@@ -11,6 +11,7 @@ cfg.db = {
 
 cfg.save_interval = 30 -- seconds
 cfg.whitelist = false -- enable/disable whitelist
+cfg.ignore_ip_identifier = true -- This will allow multiple same IP connections (for families etc)
 
 -- delay the tunnel at loading (for weak connections)
 cfg.load_duration = 5 -- seconds, player duration in loading mode at the first spawn
