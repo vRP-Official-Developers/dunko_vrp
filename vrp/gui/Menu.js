@@ -30,6 +30,12 @@ function Menu()
   this.div_desc.style.display = "none";
 }
 
+function createMouseOverFunction(menu, i) {
+  return function() {
+     menu.setSelected(i);
+  }
+}
+
 Menu.prototype.open = function(name,choices) //menu name and choices as [name,desc] array
 {
   this.close();
@@ -44,6 +50,11 @@ Menu.prototype.open = function(name,choices) //menu name and choices as [name,de
   this.el_choices = [];
   for(var i = 0; i < this.choices.length; i++){
     var el = document.createElement("div");
+    el.onmouseover = createMouseOverFunction(this, i);
+    var menu = this;
+    el.onclick = function() {
+      menu.valid(0);
+    }
     el.innerHTML = this.choices[i][0];
 
     this.el_choices.push(el);
