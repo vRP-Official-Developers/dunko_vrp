@@ -7,6 +7,7 @@ end)
 -- MENU
 
 function tvRP.openMenuData(menudata)
+  SetNuiFocus(true, true)
   SendNUIMessage({act="open_menu", menudata = menudata})
 end
 
@@ -34,6 +35,8 @@ RegisterNUICallback("menu",function(data,cb)
     vRPserver.closeMenu({data.id})
   elseif data.act == "valid" then
     vRPserver.validMenuChoice({data.id,data.choice,data.mod})
+  elseif data.act == "backspace" then
+	SetNuiFocus(false)
   end
 end)
 
