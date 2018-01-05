@@ -2,7 +2,7 @@
 
 Welcome to Dunko vRP.
 
-Current: V6.2
+Current: V6.5
 
 # Donate/Patreon
 
@@ -32,11 +32,35 @@ If you need help, head over to my Discord: https://discord.gg/CyJEVaT
 
 # My Server
 
-Name: [Official] Dunko's Server | vRP V6.2 | Sponsored by ServerDeals.com
+Name: [Official] Dunko's Server | vRP V6.5 | Sponsored by ServerDeals.com
 
 Direct Connect: 96.9.246.30:30130
 
 # What's new
+
+# V6.5
+
+- Changed Menu Layout - Thanks @Levy
+- Added lock car back, press U to lock/unlock your car
+- Fixed Ammo "Money Glitch"
+- Fixed Driving Licence & Medical Weed blips
+- General improvements (this covers things I've added and forgot to list :P)
+- Removed Trucker Job
+- Added Santa mission
+- Added Santa cloakroom & vehicle
+- Added Santa job role - This is admin only and has to be given by adding the role "Santa"
+- Added further mission translation
+- Added vrp_truckerjob - Thanks @D.Shukla
+- Added Cargo Pilot job & mission - Thanks @Levy
+- Added Airline Pilot job - Thanks @Levy
+- Added Mouse for the menu - Thanks @Derps
+- Added additional blips for Cargo, Nite Club, Bank Driver, Club, Beach Bar & Blue Airlines
+- Added vrp_slotmachine - Thanks @@c 0 d e i n a#2243
+- Added Hacker & lawyer job blips
+- Added vrp_barrier - Thanks @Shadow
+- Added BrockALPR (numpad 5 to activate) - Credit @Brock70
+- Added Realistic Vehicle Failure (last minute addition, needs further testing) - Credit @jens_s
+- Temp removed Thirst & Hunger, trying to revamp this
 
 # V6.2
 - Updated core code
