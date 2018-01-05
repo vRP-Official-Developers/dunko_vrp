@@ -876,6 +876,36 @@ function(args)
 end,
 5.00})
 
+-- dynamic freeze
+local ch_freeze = {function(player,choice) 
+	local user_id = vRP.getUserId({player})
+	if vRP.hasPermission({user_id,"admin.bm_freeze"}) then
+	  vRP.prompt({player,"Player ID:","",function(player,target_id) 
+	    if target_id ~= nil and target_id ~= "" then 
+	      local target = vRP.getUserSource({tonumber(target_id)})
+		  if target ~= nil then
+		    vRPclient.notify(player,{"~g~You un/froze that player."})
+		    BMclient.loadFreeze(target,{true,true,true})
+		  else
+		    vRPclient.notify(player,{"~r~That ID seems invalid."})
+		  end
+        else
+          vRPclient.notify(player,{"~r~No player ID selected."})
+        end 
+	  end})
+	else
+	  vRPclient.getNearestPlayer(player,{10},function(nplayer)
+        local nuser_id = vRP.getUserId({nplayer})
+        if nuser_id ~= nil then
+		  vRPclient.notify(player,{"~g~You un/froze that player."})
+		  BMclient.loadFreeze(nplayer,{true,false,false})
+        else
+          vRPclient.notify(player,{lang.common.no_player_near()})
+        end
+      end)
+	end
+end,"Freezes a player."}
+
 -- ADD STATIC MENU CHOICES // STATIC MENUS NEED TO BE ADDED AT vRP/cfg/gui.lua
 vRP.addStaticMenuChoices({"police_weapons", police_weapons}) -- police gear
 vRP.addStaticMenuChoices({"emergency_medkit", emergency_medkit}) -- pills and medkits
