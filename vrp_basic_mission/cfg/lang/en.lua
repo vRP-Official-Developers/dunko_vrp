@@ -31,6 +31,10 @@ local lang = {
   santa = {
 	title = "Deliver the Christmas Presents",
 	item = "- {2} {1}"
+    },
+  pilot = {
+	title = "Deliver the cargo!",
+	item = "- {2} {1}"
     }
 }
 
