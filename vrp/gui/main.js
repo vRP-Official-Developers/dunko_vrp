@@ -21,14 +21,6 @@ window.addEventListener("load",function(){
   dynamic_menu.onClose = function(){ $.post("http://vrp/menu",JSON.stringify({act: "close", id: dynamic_menu.id})); }
   dynamic_menu.onValid = function(choice,mod){ $.post("http://vrp/menu",JSON.stringify({act: "valid", id: dynamic_menu.id, choice: choice, mod: mod})); }
 
-  // Hijack the backspace key to close the menu
-  document.onkeyup = function(event)  {
-    if (event.keyCode == 8) {
-      dynamic_menu.close();
-      $.post("http://vrp/menu",JSON.stringify({act: "backspace", id: dynamic_menu.id}));
-    }
-    return true;
-  }
 
  //request config
  $.post("http://vrp/cfg",""); 
