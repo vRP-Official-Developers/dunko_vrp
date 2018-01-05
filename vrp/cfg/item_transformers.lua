@@ -84,6 +84,26 @@ cfg.item_transformers = {
       }
 	 }
   },
+ {
+    name="Santa's Workshop", -- menu name
+    permissions = {"harvest.presents"}, -- you can add permissions
+    r=0,g=125,b=255, -- color
+    max_units=100000,
+    units_per_minute=2,
+    x=2213.0520019531,y=5577.5981445313,z=53.795757293701, -- UPDATE THIS
+    radius=3, height=1.5, -- area
+    recipes = {
+      ["Gather Presents"] = { -- action name
+        description="Gathering Presents", -- action description
+        in_money=0, -- money taken per unit
+        out_money=0, -- money earned per unit
+        reagents={}, -- items taken per unit
+        products={ -- items given per unit
+          ["Presents"] = 1
+        }
+      }
+	 }
+  },
   {
     name="Water bottles/tacos tree", -- menu name
     -- permissions = {"harvest.water_bottle_tacos"}, -- you can add permissions

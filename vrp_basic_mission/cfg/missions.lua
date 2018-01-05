@@ -213,6 +213,35 @@ cfg.medical_driver = {
   }
 }
 
+local common_santa_positions = {
+  {2543.1989746094,-453.29135131836,93.009101867676}
+}
+
+cfg.santa = {
+  ["mission.santa"] = {
+	title = "Santa",
+    positions = common_santa_positions,
+    items = {
+      ["Presents"] = {1,10,350}
+    }
+  }
+}
+
+local common_pilot_positions = {
+  {2143.0698242188,4811.3764648438,41.179256439209},
+  {1702.8529052734,3251.9147949219,40.986331939697}
+ }
+
+cfg.pilot = {
+  ["mission.pilot.cargo"] = {
+	title = "Airline Cargo",
+    positions = common_pilot_positions,
+    items = {
+      ["cargo"] = {1,10,350}
+    }
+  }
+}
+
 local common_hacker_positions = {
   {-1087.20959472656,479.4970703125,81.5277786254883},
   {-1215.48083496094,457.809478759766,91.9756546020508},

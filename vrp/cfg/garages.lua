@@ -471,6 +471,22 @@ cfg.garage_types = {
     _config = {vtype="car",blipid=43,blipcolor=1,radius=5.1,permissions={"emergency.vehicle"}},
     ["supervolito2"] = {"EMS",0, "emergency"}
   },
+  ["Pilotla"] = {
+    _config = {vtype="plane",blipid=16,blipcolor=30,permissions={"pilot.vehicle"}},
+    ["jet"] = {"Boeing 747",0, "jet"}
+  },
+  ["Pilotsa"] = {
+    _config = {vtype="plane",blipid=16,blipcolor=30,permissions={"pilot.vehicle"}},
+     ["mammatus"] = {"Small Cargo",0, "jet"}
+  },
+    ["airP"] = {
+    _config = {vtype="plane",blipid=16,blipcolor=30,permissions={"air.vehicle"}},
+    ["vestra"] = {"Plane",0, "vestra"}
+  },
+  ["airH"] = {
+    _config = {vtype="plane",blipid=43,blipcolor=30,permissions={"air.vehicle"}},
+     ["volatus"] = {"Helicopter",0, "volatus"}
+  }, 
   ["uber"] = {
     _config = {vtype="car",blipid=50,blipcolor=81,permissions={"uber.vehicle"}},
     ["surge"] = {"Surge",0, ""},
@@ -483,6 +499,10 @@ cfg.garage_types = {
     _config = {vtype="bike",blipid=85,blipcolor=31,permissions={"delivery.vehicle"}},
     ["faggio3"] = {"faggio3",0, "faggio3"}
   },
+  ["santa"] = {
+    _config = {vtype="bike",blipid=85,blipcolor=31,permissions={"santa.vehicle"}},
+    ["hydra"] = {"Santa's Sled",0, "hydra"}
+  },  
   ["repair"] = {
     _config = {vtype="car",blipid=50,blipcolor=31,permissions={"repair.vehicle"}},
     ["towtruck2"] = {"towtruck2",0, "towtruck2"},
@@ -552,7 +572,15 @@ cfg.garages = {
   {"EMS Helicopters",1770.2171630859,3239.5561523438,42.13171005249}, -- Sandy Shores
   {"EMS Helicopters",-475.24264526367,5988.7353515625,31.336685180664}, -- Paleto Bay  
   {"Fisher's Boat",1508.8854980469,3908.5732421875,30.031631469727},
-  {"Medical Driver",-319.82263183594,-942.8408203125,31.080617904663}
+  {"Medical Driver",-319.82263183594,-942.8408203125,31.080617904663},
+  {"Pilotsa",-901.70129394531,-3293.984375,13.944430351257},
+  {"Pilotsa",2128.9069824219,4806.134765625,41.168750762939},
+  {"Pilotsa",1734.9053955078,3297.9689941406,41.223503112793},
+  {"airP",2128.9069824219,4806.134765625,41.168750762939},
+  {"airH",-745.14343261719,-1468.5361328125,5.0005240440369},
+  {"airP",2128.9069824219,4806.134765625,41.168750762939},
+  {"airP",1734.9053955078,3297.9689941406,41.223503112793},
+  {"Santa",-1345.333984375,-2692.7885742188,13.944937705994}  
   
  
   

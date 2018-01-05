@@ -88,6 +88,22 @@ cfg.groups = {
     "fisher.service",
 	"fisher.vehicle"
     },
+  ["Cargo Pilot"] = {
+    _config = { gtype = "job",
+	onspawn = function(player) vRPclient.notify(player,{"You are a Cargo Pilot."}) end
+	},
+	"mission.pilot.cargo",
+	"pilot.vehicle",
+	"pilot.paycheck"
+    },
+  ["Airline Pilot"] = {
+    _config = { gtype = "job",
+	onspawn = function(player) vRPclient.notify(player,{"You are Pilot, salary : $6000."}) end
+	},
+    "airlines.service",
+	"air.vehicle",
+	"air.paycheck"
+  },
   ["Medical Transport"] = {
     _config = { gtype = "job",
 	onspawn = function(player) vRPclient.notify(player,{"You now transport Medical weed."}) end
@@ -258,6 +274,16 @@ cfg.groups = {
     "mission.drugseller.weed",
     "drugseller.market",
     "harvest.weed"
+  },
+  ["Santa"] = {
+    _config = { gtype = "job",
+	    onspawn = function(player) vRPclient.notify(player,{"You are Santa, ho ho ho."}) end
+	  },
+    "mission.santa", -- What mission Santa has
+    "santa.vehicle", -- Access to his garage
+	"santa.paycheck", -- How much santa gets paid per 15 mins
+	"santa.cloakroom", -- Santa's cloakroom
+    "harvest.presents" -- What he gathers (item transformers.lua)
   },
   ["Hacker"] = {
     _config = { gtype = "job",
@@ -846,6 +872,16 @@ cfg.selectors = {
   ["Smuggler job"] = {
     _config = {x = 283.10546875, y = 6788.7104492188, z = 15.695198059082, blipid =  150, blipcolor = 4},
     "Weapons Smuggler",
+    "Unemployed"
+  },
+  ["Airline Pilot"] = {
+    _config = {x = -759.6591796875, y = -1515.3978271484, z = 4.9768991470337},
+	"Airline Pilot",
+    "Unemployed"
+  },
+    ["Cargo Pilot"] = {
+    _config = {x = -928.89624023438, y = -2937.396484375, z = 13.945074081421,blipid = 472, blipcolor = 4},
+	"Cargo Pilot",
     "Unemployed"
   },
   ["Hacker job"] = {

@@ -27,6 +27,10 @@ local lang = {
   medical = {
 	title = "Deliver the Medical Weed",
 	item = "- {2} {1}"
+    },
+  santa = {
+	title = "Deliver the Christmas Presents",
+	item = "- {2} {1}"
     }
 }
 

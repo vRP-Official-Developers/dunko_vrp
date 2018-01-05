@@ -71,7 +71,15 @@ AddEventHandler('paycheck:salary', function()
 		vRP.giveMoney(user_id,1500)
 		vRPclient.notify(source,{"Payday: $1500"})
 	end
+	if vRP.hasPermission(user_id,"santa.paycheck") then
+		vRP.giveMoney(user_id,2000)
+		vRPclient.notify(source,{"Payday: $2000"})
+	end
 	if vRP.hasPermission(user_id,"bankdriver.paycheck") then
+		vRP.giveMoney(user_id,2000)
+		vRPclient.notify(source,{"Payday: $2000"})
+	end
+	if vRP.hasPermission(user_id,"pilot.paycheck") then
 		vRP.giveMoney(user_id,2000)
 		vRPclient.notify(source,{"Payday: $2000"})
 	end
@@ -85,7 +93,7 @@ AddEventHandler('paycheck:bonus', function()
 		vRPclient.notify(source,{"Gift for play: $100"})
 	end
 	if vRP.hasPermission(user_id,"user.paycheck") then
-		vRP.getMoney(user_id,0)
-		vRPclient.notify(source,{"taxatation: R$-0"})
+		vRP.getMoney(user_id,150)
+		vRPclient.notify(source,{"Tax: R$-150"})
 	end
 end)
