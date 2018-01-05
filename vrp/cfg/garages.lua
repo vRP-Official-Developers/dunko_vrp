@@ -451,11 +451,11 @@ cfg.garage_types = {
   },
   ["Cadet"] = {
     _config = {vtype="car",blipid=56,blipcolor=38,permissions={"Cadet.vehicle"}},
-    ["police7"] = {"police",0, "police"},
+    ["police7"] = {"police",0, "police"}
   },
   ["Bounty"] = {
     _config = {vtype="car",blipid=56,blipcolor=38,permissions={"Bounty.vehicle"}},
-    ["fbi"] = {"Unmarked",0, "police"},
+    ["fbi"] = {"Unmarked",0, "police"}
   },
   ["emergency"] = {
     _config = {vtype="car",blipid=50,blipcolor=3,permissions={"emergency.vehicle"}},
@@ -477,9 +477,9 @@ cfg.garage_types = {
   },
   ["Pilotsa"] = {
     _config = {vtype="plane",blipid=16,blipcolor=30,permissions={"pilot.vehicle"}},
-     ["mammatus"] = {"Small Cargo",0, "jet"}
+     ["mammatus"] = {"Small Cargo",0, "mammatus"}
   },
-    ["airP"] = {
+  ["airP"] = {
     _config = {vtype="plane",blipid=16,blipcolor=30,permissions={"air.vehicle"}},
     ["vestra"] = {"Plane",0, "vestra"}
   },
@@ -489,11 +489,11 @@ cfg.garage_types = {
   }, 
   ["uber"] = {
     _config = {vtype="car",blipid=50,blipcolor=81,permissions={"uber.vehicle"}},
-    ["surge"] = {"Surge",0, ""},
+    ["surge"] = {"Surge",0, "surge"}
   },
   ["Lawyer"] = {
     _config = {vtype="car",blipid=50,blipcolor=7,permissions={"Lawyer.vehicle"}},
-    ["panto"] = {"Panto", 0, ""},
+    ["panto"] = {"Panto", 0, "panto"}
   },
   ["delivery"] = {
     _config = {vtype="bike",blipid=85,blipcolor=31,permissions={"delivery.vehicle"}},
