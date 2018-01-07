@@ -13,9 +13,9 @@ local blips = {
 	{title="Beach Bar", colour=47, id=102, x=1374.25, y=-2711.89, z=2.31},
 	{title="Blue Airlines", colour=30, id=43, x = -759.6591796875, y = -1515.3978271484, z = 4.9768991470337},
 	{title="Hacker", colour=30, id=150, x = 705.67150878906, y = -966.78765869141, z = 30.395341873169},
-	{title="Lawyer", colour=30, id=140, x = -1911.9273681641, y = -569.71649169922, z = 19.097215652466},
-	{title="Santa's Sleigh", colour=30, id=140, x = -1345.333984375, y = -2692.7885742188, z = 13.944937705994},
-	{title="Santa's Cloakroom", colour=30, id=140, x = -1373.0778808594, y = -2677.6694335938, z = 13.944942474365}
+	{title="Lawyer", colour=30, id=102, x = -1911.9273681641, y = -569.71649169922, z = 19.097215652466},
+	{title="Santa's Sleigh", colour=30, id=102, x = -1345.333984375, y = -2692.7885742188, z = 13.944937705994},
+	{title="Santa's Cloakroom", colour=30, id=102, x = -1373.0778808594, y = -2677.6694335938, z = 13.944942474365}
   }
 
 Citizen.CreateThread(function()
