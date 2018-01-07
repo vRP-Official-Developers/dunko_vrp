@@ -23,5 +23,6 @@ client_scripts{
   "deletevehicle-client.lua",
   "weathersync-client.lua",
   "fix-client.lua",
-  "missiontext-client.lua"
+  "missiontext-client.lua",
+  "noweapondrops-client.lua"
  }
