@@ -185,7 +185,7 @@ cfg.item_transformers = {
     r=255,g=125,b=0, -- color
     max_units=1,
     units_per_minute=1,
-    x=-261.40533447266,y=-965.15747070313,z=31.224115371704,        
+    x=-261.40533447266,y=-965.15747070313,z=30.224115371704,        
     radius=2, height=1.0, -- area
     recipes = {
       ["Driver"] = { -- action name
