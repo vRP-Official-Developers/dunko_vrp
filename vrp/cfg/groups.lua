@@ -158,6 +158,7 @@ cfg.groups = {
 	"emergency.revive",
 	"emergency.shop",
 	"player.list",
+	"police.menu_interaction",
 	"police.paycheck"
   },
   ["Police Detective"] = {  
@@ -199,6 +200,7 @@ cfg.groups = {
 	"emergency.revive",
 	"emergency.shop",
 	"player.list",
+	"police.menu_interaction",
 	"Detective.paycheck"
   },
   ["EMS"] = {
@@ -216,6 +218,7 @@ cfg.groups = {
 	"ems.whitelisted",
 	"ems.loadshop",
 	"player.list",
+	"police.menu_interaction",
 	"emergency.paycheck"
   },
   ["Mechanic"] = {
@@ -330,6 +333,7 @@ cfg.groups = {
 	"Cadet.vehicle",
 	"police.loadshop",
 	"cop.whitelisted",
+	"police.menu_interaction",
 	"Cadet.paycheck"
   },
   ["SWAT"] = {
@@ -367,6 +371,7 @@ cfg.groups = {
 	"emergency.revive",
 	"emergency.shop",
 	"cop.whitelisted",
+	"police.menu_interaction",
 	"SWAT.paycheck"
   },
   ["Chief of Police"] = {
@@ -405,6 +410,7 @@ cfg.groups = {
 	"emergency.revive",
 	"emergency.shop",
 	"cop.whitelisted",
+	"police.menu_interaction",
 	"Chief.paycheck"
   },
   ["Bounty Hunter"] = {
@@ -472,6 +478,7 @@ cfg.groups = {
 	"emergency.revive",
 	"emergency.shop",
 	"cop.whitelisted",
+	"police.menu_interaction",
 	"sheriff.paycheck"
   },
   ["State Trooper"] = {
@@ -510,6 +517,7 @@ cfg.groups = {
 	"emergency.revive",
 	"emergency.shop",
 	"cop.whitelisted",
+	"police.menu_interaction",
 	"Commander.paycheck"
   },
     ["Deputy Sheriff"] = {
@@ -548,6 +556,7 @@ cfg.groups = {
 	"emergency.revive",
 	"emergency.shop",
 	"cop.whitelisted",
+	"police.menu_interaction",
 	"Deputy.paycheck"
   },
       ["Police Captain"] = {
@@ -586,6 +595,7 @@ cfg.groups = {
 	"emergency.revive",
 	"emergency.shop",
 	"cop.whitelisted",
+	"police.menu_interaction",
 	"Captain.paycheck"
   },
     ["Police Lieutenant"] = {
@@ -624,6 +634,7 @@ cfg.groups = {
 	"emergency.revive",
 	"emergency.shop",
 	"cop.whitelisted",
+	"police.menu_interaction",
 	"Lieutenant.paycheck"
   },
       ["Police Detective"] = {
@@ -662,6 +673,7 @@ cfg.groups = {
 	"emergency.revive",
 	"emergency.shop",
 	"cop.whitelisted",
+	"police.menu_interaction",
 	"Detective.paycheck"
   },
     ["Police Sergeant"] = {
@@ -700,6 +712,7 @@ cfg.groups = {
 	"emergency.revive",
 	"emergency.shop",
 	"cop.whitelisted",
+	"police.menu_interaction",
 	"Sergeant.paycheck"
   },
       ["Dispatcher"] = {
@@ -729,6 +742,7 @@ cfg.groups = {
 	"emergency.revive",
 	"emergency.shop",
 	"cop.whitelisted",
+	"police.menu_interaction",
 	"Dispatch.paycheck"
   },
 
