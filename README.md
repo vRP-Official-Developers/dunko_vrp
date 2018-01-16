@@ -16,6 +16,12 @@ If you need help, head over to my Discord: https://discord.gg/CyJEVaT
 
 # Installation
 
+**GET A SERVER THROUGH ZAP HOSTING WITH 10% DISCOUNT CODE: ***Dunko*** --- Click the banner below! They offer a 1 click install of my pack, no messing about with databases or manually installing the files, 1 click and you're ready to go!**
+
+<a href='https://zap-hosting.com/dunko'><img src="https://zap-hosting.com/interface/media/banner/aab6f8cb2c76fbef0dfea463e0bb67af4c5cf7de.jpg"></a></img>
+
+**GET A SERVER THROUGH ZAP HOSTING WITH 10% DISCOUNT CODE: ***Dunko*** --- Click the banner above! They offer a 1 click install of my pack, no messing about with databases or manually installing the files, 1 click and you're ready to go!**
+
 1) Copy the folders inside MASTER to your FXServer/Resources folder. DO NOT COPY THE MASTER FOLDER ITSELF.
 
 2) Copy server.cfg & Start_Server.cmd to your main FXServer folder.
