@@ -194,7 +194,7 @@ local lang = {
         description = "Saca al jugador esposado mas cercano del vehículo."
       },
       askid = {
-        title = "Perdir DNI",
+        title = "Pedir DNI",
         description = "Pedir DNI al jugador mas cercano.",
         request = "¿Quieres enseñar tu DNI?",
         request_hide = "Ocultar DNI..",
@@ -392,15 +392,15 @@ local lang = {
     },
     detach_trailer = {
       title = "Soltar trailer.",
-      description = "Detach trailer."
+      description = "Soltar trailer."
     },
     detach_towtruck = {
       title = "Soltar grua.",
-      description = "Detach tow truck."
+      description = "Soltar grua."
     },
     detach_cargobob = {
       title = "Soltar cargobob",
-      description = "Detach cargobob."
+      description = "Soltar cargobob"
     },
     lock = {
       title = "Bloquea / Desbloquea",
@@ -445,9 +445,9 @@ local lang = {
   },
   itemtr = {
     informer = {
-      title = "Illegal Informer",
+      title = "Informador ilegal",
       description = "{1} $",
-      bought = "~g~Position sent to your GPS."
+      bought = "~g~Se ha enviado la posición a tu GPS."
     }
   },
   mission = {
@@ -463,10 +463,10 @@ local lang = {
     lose_exp = "Habilidad ~b~{1}/{2} ~r~-{3} ~s~exp.",
     earn_exp = "Habilidad ~b~{1}/{2} ~g~+{3} ~s~exp.",
     level_down = "Habilidad ~b~{1}/{2} ~r~perdida level ({3}).",
-    level_up = "Habilidad ~b~{1}/{2} ~g~level up ({3}).",
+    level_up = "Habilidad ~b~{1}/{2} ~g~ganado level ({3}).",
     display = {
       group = "{1}: ",
-      aptitude = "--- {1} | exp {2} | lvl {3} | progress {4}%"
+      aptitude = "--- {1} | exp {2} | lvl {3} | progreso {4}%"
     }
   }
 }
