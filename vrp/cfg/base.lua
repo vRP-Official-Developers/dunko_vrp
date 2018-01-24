@@ -20,7 +20,10 @@ cfg.global_delay = 0 -- milliseconds, delay the tunnel communication when not in
 
 cfg.ping_timeout = 5 -- number of minutes after a client should be kicked if not sending pings
 
-cfg.lang = "en" -- en / fr / it / ger / pt / ru / lith / dan / ar / pl / es / swe / fin / cn (English/Français/Italiano/Deutsche/Português/Pусский/Lietuvių/Dansk/العربية/Polskie/Español/Svenska/Suomalainen/中文)
+
+				-- SET YOUR LANGUAGE HERE - MAKE SURE IT'S INSIDE THE ""
+cfg.lang = "en" -- en / fr / it / ger / pt / ru / lith / dan / ar / pl / es / swe / fin / cn / ro 
+				-- English/Français/Italiano/Deutsche/Português/Pусский/Lietuvių/Dansk/العربية/Polskie/Español/Svenska/Suomalainen/中文/Română
 cfg.debug = false
 
 
