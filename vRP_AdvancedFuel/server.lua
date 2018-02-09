@@ -70,7 +70,7 @@ AddEventHandler("essence:buy", function(amount, index,e)
 	local toPay = round(amount*price,2)
 	local user_id = vRP.getUserId({_source})
 	if(vRP.tryPayment({user_id,toPay})) then
-		TriggerClientEvent("essence:hasBuying", _source, amount)
+		TriggerClientEvent("essence:buyCan", _source, amount)
 	else
 		TriggerClientEvent("showNotif", _source, "~r~You don't have enought money.")
 	end
