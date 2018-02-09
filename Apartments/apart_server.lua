@@ -20,7 +20,7 @@ local txt = {
 
     ['en'] = {
         ['welcome'] = 'Welcome to home!',
-        ['nocash'] = 'You d\'ont have enough cash!',
+        ['nocash'] = 'You don\'t have enough cash!',
         ['estVendu'] = 'Apartment sold!',
         ['depositcash'] = 'You deposited ',
         ['withdraw'] = 'You withdrew ',
