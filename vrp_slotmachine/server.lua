@@ -17,7 +17,7 @@ AddEventHandler('vrp_slotmachine:server:1', function(amount,a,b,c)
         	-- vRP.tryGetInventoryItem({user_id,"dirty_money",amount})
 		TriggerClientEvent("vrp_slotmachine:1",source,tonumber(amount),tostring(a),tostring(b),tostring(c))
 	else
-		TriggerClientEvent('chatMessage', source, "", {0, 0, 200}, "^1No tienes dinero suficiente en la cartera!") -- this is the message u get when u got no money
+		TriggerClientEvent('chatMessage', source, "", {0, 0, 200}, "^1You don't have enough money") -- this is the message u get when u got no money
 	end
 end)
 
@@ -26,5 +26,5 @@ AddEventHandler('vrp_slotmachine:server:2', function(amount)
 	local source = source
 	local user_id = vRP.getUserId({source})
 	    vRP.giveMoney({user_id,amount})
-	    TriggerClientEvent('chatMessage', source, "", {0, 200, 60}, "Has ganado:  " .. amount .. "$.") -- this is what u get if u win, u already get another one but this shows amount
+	    TriggerClientEvent('chatMessage', source, "", {0, 200, 60}, "You won:  $" .. amount .. ".") -- this is what u get if u win, u already get another one but this shows amount
 	end)
