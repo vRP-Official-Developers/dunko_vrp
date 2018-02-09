@@ -184,11 +184,11 @@ function MenuCallFunction(fnc, arg)
 end
 --------------------------------------------------------------------------------------------------------------------
 -- _Darkz
-local money = 100
+local money = 50
 function SlotMenu()
   ClearMenu()
   Menu.addTitle("Slots")
-  Menu.addButton("~h~Gira","Spin",nil)
+  Menu.addButton("~h~Spin","Spin",nil)
   Menu.addButton("+","Plus",nil) 
   Menu.addButton("-","Minus",nil) 
 end
@@ -233,9 +233,9 @@ AddEventHandler("vrp_slotmachine:1", function(MoneyRecive,a,b,c)
 		else
 			TriggerServerEvent('vrp_slotmachine:server:2',MoneyRecive*price.line2.other)
 		end
-		Chat('^2Ganado:^0 '..a..' '..b..' '..c)
+		Chat('^2Winner:^0 '..a..' '..b..' '..c)
 	else
-		Chat('^1Perdido^0: '..a..' '..b..' '..c)
+		Chat('^1Lost^0: '..a..' '..b..' '..c)
 	end
 end)
 
@@ -256,7 +256,7 @@ Citizen.CreateThread(function()
     SetBlipDisplay(blip, 4)
     SetBlipAsShortRange(blip, true)
     BeginTextCommandSetBlipName("STRING")
-    AddTextComponentString("Tragaperas")
+    AddTextComponentString("Slot Machine")
     EndTextCommandSetBlipName(blip)
   end
 end)
@@ -270,7 +270,7 @@ Citizen.CreateThread(function()
 			if(Vdist(v.x, v.y, v.z, pos.x, pos.y, pos.z) < 20.0)then
 				DrawMarker(1, v.x, v.y, v.z - 1, 0, 0, 0, 0, 0, 0, 1.0001, 1.0001, 1.5001, 0, 25, 165, 165, 0,0, 0,0)
 				if(Vdist(v.x, v.y, v.z, pos.x, pos.y, pos.z) < 1.0)then
-					DisplayHelpText("Pulsa ~INPUT_CONTEXT~   ~y~para jugar.")
+					DisplayHelpText("Press ~INPUT_CONTEXT~   ~y~to play.")
 						if IsControlJustPressed(1,input["E"]) then
                          SlotMenu()
                          Menu.hidden = not Menu.hidden
