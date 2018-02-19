@@ -1,0 +1,82 @@
+<html>
+    <head>
+        <title>X. Cross's K9 Script</title>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.2.13/dist/semantic.min.css"></link>
+        <link rel="stylesheet" href="index.css"></link>
+    </head>
+
+    <body>
+
+        <div id = "k9_base" :hidden="!k9.menu">
+            <!-- MENU HEADER -->
+            <div id = "k9_title">
+                <img id="icon_left" class="icon_style" src="images/test.png">
+                {{dogname}}
+                <img id="icon_right" class="icon_style" src="images/test2.png">
+            </div>
+
+            <!-- MENUS -->
+            <div id = "k9_base_buttons" :hidden="!k9.base">
+                <button class="button_style" @click="ToggleOptions()">Options</button> <!-- OPENS OPTIONS -->
+                <br>
+                <button class="button_style" @click="ToggleActions()">Actions</button> <!-- OPENS ACTIONS -->
+                <br>
+                <button class="button_style" @click="ToggleAnimations()">Animations</button> <!-- OPENS ANIMATIONS -->
+                <br>
+                <button class="button_style" style="margin-bottom: 5px;" @click="ToggleK9Menu()">Close Menu</button> <!-- CLOSES MENU -->
+            </div>
+
+            <!-- K9 OPTIONS -->
+            <div id = "k9_option_buttons" :hidden="!k9.options">
+                <button class="button_style" onclick="ToggleK9Spawn()">Toggle K9</button> <!-- SPAWNS K9 -->
+                <br>
+                <button class="button_style" @click="ShowK9NameMenu()">K9 Name</button> <!-- SETS K9 NAME -->
+                <br>
+                <button class="button_style" @click="ResetMenu()">Back</button> <!-- GOES BACK TO MAIN MENU -->
+                <br>
+                <button class="button_style" style="margin-bottom: 5px;" @click="ToggleK9Menu()">Close Menu</button> <!-- CLOSES MENU -->
+            </div>
+
+            <!-- K9 ACTIONS -->
+            <div id = "k9_action_buttons" :hidden="!k9.actions">
+                    <button class="button_style" onclick="ToggleK9Vehicle()">Vehicle</button> <!-- TELLS DOG TO GET IN / OUT OF CAR -->
+                    <br>
+                    <button class="button_style" onclick="TriggerK9Search()">Search</button> <!-- TELLS DOG TO SEARCH A CAR -->
+                    <br>
+                    <button class="button_style" @click="ResetMenu()">Back</button> <!-- GOES BACK TO MAIN MENU -->
+                    <br>
+                    <button class="button_style" style="margin-bottom: 5px;" @click="ToggleK9Menu()">Close Menu</button> <!-- CLOSES MENU -->
+            </div>
+
+            <!-- K9 ANIMATIONS -->
+            <div id = "k9_animation_buttons" :hidden="!k9.animations">
+                    <button class="button_style" onclick="PlayK9Animaton('sit')">Sit</button> <!-- PLAYS K9 SIT ANIMATION -->
+                    <button class="button_style" onclick="PlayK9Animaton('laydown')">Laydown</button> <!-- PLAYS K9 LAYDOWN ANIMATION -->
+                    <br>
+                    <button class="button_style" @click="ResetMenu()">Back</button> <!-- GOES BACK TO MAIN MENU -->
+                    <br>
+                    <button class="button_style" style="margin-bottom: 5px;" @click="ToggleK9Menu()">Close Menu</button> <!-- CLOSES MENU -->
+            </div>
+
+            <!-- K9 NAME MODAL -->
+            <div class="ui mini modal">
+                <div class="header">Name Your K9</div>
+                <div class="content">
+                    <input id="k9namebox" type="text" placeholder="K9 Name" maxlength="15" minlength="1"><br>
+                </div>
+                <div class="actions">
+                    <div id="cancel_button" class="ui cancel button">Cancel</div>
+                    <div id="accept_button" class="ui approve button" @click="ChangeK9Name()">Accept</div>
+                </div>
+            </div>
+
+            <!-- CREDITS -->
+            <div id = "k9_footer">Scripted By: <font color="red">Xander1998</font></div>
+        </div>
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.2.13/dist/semantic.min.js"></script>
+        <script src="https://unpkg.com/vue"></script>
+        <script src="index.js"></script>
+    </body>
+</html>
