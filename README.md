@@ -42,9 +42,9 @@ If you need help, head over to my Discord:  https://discord.gg/kAfBuJG384
 
 # My Server
 
-Name: [Official] Dunko's Server | vRP V6.6 | Sponsored by ServerDeals.com
+Name: Dunko vRP V6.6 - Preview/Test Server - discord.gg/kAfBuJG156 - Sponsored by Zap-Hosting.com
 
-Direct Connect: 96.9.246.30:30130
+Direct Connect: 134.255.216.169:30120
 
 # What's new
 
