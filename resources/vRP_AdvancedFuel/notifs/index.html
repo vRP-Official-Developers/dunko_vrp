@@ -1,0 +1,52 @@
+
+<head>
+	<title></title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link href="hotsnackbar.css" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Jaldi" rel="stylesheet">
+
+	<script type="text/javascript" src="hotsnackbar.js"></script>
+	<script src="nui://game/ui/jquery.js" type="text/javascript"></script>
+	<script>
+		window.onload = function(e){
+			// NUI Callback
+			window.addEventListener('message', function(event){
+				var item = event.data;
+
+				if(item.showDone == true) {
+					var text = item.text
+
+					hotsnackbar('hsdone', text);
+				}
+
+				if(item.showWarn == true) {
+					var text = item.text
+
+					hotsnackbar('hswarning', text);
+				}
+
+				if(item.showError == true) {
+					var text = item.text
+
+					hotsnackbar('hserror', text);
+				}
+
+				if(item.showNone == true) {
+					var text = item.text
+
+					hotsnackbar(false, text);
+				}
+			});
+
+		};
+	</script>
+
+</head>
+
+	
+
+<body>
+
+</body>
+</html>

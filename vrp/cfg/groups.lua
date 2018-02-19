@@ -23,7 +23,7 @@ cfg.groups = {
 	"admin.menu",
 	"admin.easy_unjail",
 	"admin.spikes",
-	"admin.godmode",
+	-- "admin.godmode",
 	"admin.spawnveh",
 	"admin.deleteveh",
 	"player.blips",
@@ -44,13 +44,13 @@ cfg.groups = {
 	"emergency.shop",
     "player.tpto"
   },
-     ["god"] = {
-    "admin.god" -- reset survivals/health periodically
-  },
+     -- ["god"] = {
+    -- "admin.god" -- reset survivals/health periodically
+  -- },
   ["recruiter"] = {
     "player.list",
 	"player.group.add",
-    "player.group.remove"
+    "player.group.remove",
     },
   ["mod"] = {
 	"admin.tickets",
@@ -90,7 +90,7 @@ cfg.groups = {
     },
   ["Cargo Pilot"] = {
     _config = { gtype = "job",
-	onspawn = function(player) vRPclient.notify(player,{"You are a Cargo Pilot."}) end
+	onspawn = function(player) vRPclient.notify(player,{"You are a Cargo Pilot. Salary: $2000."}) end
 	},
 	"mission.pilot.cargo",
 	"pilot.vehicle",
@@ -98,7 +98,7 @@ cfg.groups = {
     },
   ["Airline Pilot"] = {
     _config = { gtype = "job",
-	onspawn = function(player) vRPclient.notify(player,{"You are Pilot, salary : $6000."}) end
+	onspawn = function(player) vRPclient.notify(player,{"You are Pilot, salary : $2000."}) end
 	},
     "airlines.service",
 	"air.vehicle",
@@ -158,8 +158,10 @@ cfg.groups = {
 	"emergency.revive",
 	"emergency.shop",
 	"player.list",
-	"police.menu_interaction",
-	"police.paycheck"
+	"police.paycheck",
+	"police.mission",
+	"player.blips",
+	"police.menu_interaction"
   },
   ["Police Detective"] = {  
     _config = { 
@@ -200,12 +202,14 @@ cfg.groups = {
 	"emergency.revive",
 	"emergency.shop",
 	"player.list",
+	"Detective.paycheck",
 	"police.menu_interaction",
-	"Detective.paycheck"
+	"player.blips",
+	"police.mission"
   },
-  ["EMS"] = {
+  ["EMS Chief"] = {
     _config = { gtype = "job",
-	onspawn = function(player) vRPclient.notify(player,{"You are a medic, salary : $1500."}) end
+	onspawn = function(player) vRPclient.notify(player,{"You are a EMS Chief, salary : $5000."}) end
 	},
     "emergency.revive",
 	"police.pc",
@@ -219,11 +223,73 @@ cfg.groups = {
 	"ems.loadshop",
 	"player.list",
 	"police.menu_interaction",
-	"emergency.paycheck"
+	"emsChief.paycheck",
+	"player.blips",
+	"ems.mission"
+  },
+  ["EMS Paramedic"] = {
+    _config = { gtype = "job",
+	onspawn = function(player) vRPclient.notify(player,{"You are a EMS Paramedic, salary : $2000."}) end
+	},
+    "emergency.revive",
+	"police.pc",
+	--"police.wanted",
+    "emergency.shop",
+    "emergency.service",
+	"emergency.cloakroom",
+	"emergency.vehicle",
+	"emergency.market",
+	"ems.whitelisted",
+	"ems.loadshop",
+	"player.list",
+	"police.menu_interaction",
+	"emsMedic.paycheck",
+	"player.blips",
+	"ems.mission"
+  },
+  ["EMS Lieutenant"] = {
+    _config = { gtype = "job",
+	onspawn = function(player) vRPclient.notify(player,{"You are a EMS Lieutenant, salary : $3000."}) end
+	},
+    "emergency.revive",
+	"police.pc",
+	--"police.wanted",
+    "emergency.shop",
+    "emergency.service",
+	"emergency.cloakroom",
+	"emergency.vehicle",
+	"emergency.market",
+	"ems.whitelisted",
+	"ems.loadshop",
+	"player.list",
+	"police.menu_interaction",
+	"emsLieutenant.paycheck",
+	"player.blips",
+	"ems.mission"
+  },
+  ["EMS Search and Rescue"] = {
+    _config = { gtype = "job",
+	onspawn = function(player) vRPclient.notify(player,{"You are a EMS Search and Rescue, salary : $2500."}) end
+	},
+    "emergency.revive",
+	"police.pc",
+	--"police.wanted",
+    "emergency.shop",
+    "emergency.service",
+	"emergency.cloakroom",
+	"emergency.vehicle",
+	"emergency.market",
+	"ems.whitelisted",
+	"ems.loadshop",
+	"player.list",
+	"police.menu_interaction",
+	"emsSearchRescue.paycheck",
+	"player.blips",
+	"ems.mission"
   },
   ["Mechanic"] = {
     _config = { gtype = "job",
-	onspawn = function(player) vRPclient.notify(player,{"You are Mechanic, salary : $900."}) end
+	onspawn = function(player) vRPclient.notify(player,{"You are Mechanic, salary : $2000."}) end
 	},
     "vehicle.repair",
     "vehicle.replace",
@@ -234,12 +300,20 @@ cfg.groups = {
 	"repair.market",
 	"repair.paycheck"
   },
+  ["Forger"] = {
+    _config = { gtype = "job",
+	onspawn = function(player) vRPclient.notify(player,{"You are Forger, go get some credit cards from hackers."}) end
+	},
+    "fraud.credit_cards",
+	"forger.mission"
+  },
   ["UBER"] = {
     _config = { gtype = "job",
-	onspawn = function(player) vRPclient.notify(player,{"You are UBER, salary : $600."}) end
+	onspawn = function(player) vRPclient.notify(player,{"You are UBER, PRESS DEL TO START MISSIONS. Salary : $2000."}) end
 	},
     "uber.service",
 	"uber.vehicle",
+	"uber.mission",
 	"uber.paycheck"
   },
  -- ["Gunrunning"] = {
@@ -255,11 +329,19 @@ cfg.groups = {
   },
   ["Delivery"] = {
     _config = { gtype = "job",
-	onspawn = function(player) vRPclient.notify(player,{"You are Delivery Driver, Salary : $500."}) end
+	onspawn = function(player) vRPclient.notify(player,{"You are Delivery Driver, Salary : $2000."}) end
 	},
 	"mission.delivery.food",
 	"delivery.vehicle",
 	"delivery.paycheck"
+  },
+  ["Trash Collector"] = {
+    _config = { gtype = "job",
+	onspawn = function(player) vRPclient.notify(player,{"You are Trash Collector, Salary : $2000."}) end
+	},
+	"mission.collect.trash", -- mission permission
+	"trash.vehicle", -- garage permission
+	"trash.paycheck" -- paycheck permission
   },
   ["Lawyer"] = {
     _config = { gtype = "job",
@@ -278,16 +360,16 @@ cfg.groups = {
     "drugseller.market",
     "harvest.weed"
   },
-  ["Santa"] = {
-    _config = { gtype = "job",
-	    onspawn = function(player) vRPclient.notify(player,{"You are Santa, ho ho ho."}) end
-	  },
-    "mission.santa", -- What mission Santa has
-    "santa.vehicle", -- Access to his garage
-	"santa.paycheck", -- How much santa gets paid per 15 mins
-	"santa.cloakroom", -- Santa's cloakroom
-    "harvest.presents" -- What he gathers (item transformers.lua)
-  },
+  -- ["Santa"] = {
+    -- _config = { gtype = "job",
+	    -- onspawn = function(player) vRPclient.notify(player,{"You are Santa, ho ho ho."}) end
+	  -- },
+    -- "mission.santa", -- What mission Santa has
+    -- "santa.vehicle", -- Access to his garage
+	-- "santa.paycheck", -- How much santa gets paid per 15 mins
+	-- "santa.cloakroom", -- Santa's cloakroom
+    -- "harvest.presents" -- What he gathers (item transformers.lua)
+  -- },
   ["Hacker"] = {
     _config = { gtype = "job",
 	onspawn = function(player) vRPclient.notify(player,{"You are a Hacker."}) end
@@ -298,13 +380,20 @@ cfg.groups = {
   },
   ["Bankdriver"] = {
     _config = { gtype = "job",
-	onspawn = function(player) vRPclient.notify(player,{"You are a Bank Driver."}) end
+	onspawn = function(player) vRPclient.notify(player,{"You are a Bank Driver. Salary: $2000."}) end
 	},
 	"mission.bankdriver.moneybank",
 	"mission.bankdriver.moneybank2",
 	"bankdriver.vehicle",
 	"bankdriver.paycheck",
 	"bankdriver.money"
+  },
+  ["Judge"] = {
+    _config = { gtype = "job",
+	onspawn = function(player) vRPclient.notify(player,{"You are a Judge. Salary : $5000"}) end
+	},
+	"judge.paycheck",
+	"Judge.whitelisted"
   },
   ["Cadet"] = {
     _config = { gtype = "job",
@@ -333,8 +422,9 @@ cfg.groups = {
 	"Cadet.vehicle",
 	"police.loadshop",
 	"cop.whitelisted",
+	"Cadet.paycheck",
 	"police.menu_interaction",
-	"Cadet.paycheck"
+	"police.mission"
   },
   ["SWAT"] = {
     _config = { gtype = "job",
@@ -371,8 +461,9 @@ cfg.groups = {
 	"emergency.revive",
 	"emergency.shop",
 	"cop.whitelisted",
+	"SWAT.paycheck",
 	"police.menu_interaction",
-	"SWAT.paycheck"
+	"police.mission"
   },
   ["Chief of Police"] = {
     _config = { gtype = "job",
@@ -410,8 +501,9 @@ cfg.groups = {
 	"emergency.revive",
 	"emergency.shop",
 	"cop.whitelisted",
+	"Chief.paycheck",
 	"police.menu_interaction",
-	"Chief.paycheck"
+	"police.mission"
   },
   ["Bounty Hunter"] = {
     _config = { gtype = "job",
@@ -440,7 +532,8 @@ cfg.groups = {
     "-police.seizable",	-- negative permission, police can't seize itself, even if another group add the permission
 	"Bounty.vehicle",
 	"Bounty.loadshop",
-	"cop.whitelisted",
+	"police.menu_interaction",
+	"cop.whitelisted"
   },
   ["Sheriff"] = {
     _config = { gtype = "job",
@@ -478,8 +571,9 @@ cfg.groups = {
 	"emergency.revive",
 	"emergency.shop",
 	"cop.whitelisted",
+	"sheriff.paycheck",
 	"police.menu_interaction",
-	"sheriff.paycheck"
+	"police.mission"
   },
   ["State Trooper"] = {
     _config = { gtype = "job",
@@ -517,8 +611,9 @@ cfg.groups = {
 	"emergency.revive",
 	"emergency.shop",
 	"cop.whitelisted",
+	"Commander.paycheck",
 	"police.menu_interaction",
-	"Commander.paycheck"
+	"police.mission"
   },
     ["Deputy Sheriff"] = {
     _config = { gtype = "job",
@@ -556,8 +651,9 @@ cfg.groups = {
 	"emergency.revive",
 	"emergency.shop",
 	"cop.whitelisted",
+	"Deputy.paycheck",
 	"police.menu_interaction",
-	"Deputy.paycheck"
+	"police.mission"
   },
       ["Police Captain"] = {
     _config = { gtype = "job",
@@ -595,8 +691,9 @@ cfg.groups = {
 	"emergency.revive",
 	"emergency.shop",
 	"cop.whitelisted",
+	"Captain.paycheck",
 	"police.menu_interaction",
-	"Captain.paycheck"
+	"police.mission"
   },
     ["Police Lieutenant"] = {
     _config = { gtype = "job",
@@ -634,8 +731,9 @@ cfg.groups = {
 	"emergency.revive",
 	"emergency.shop",
 	"cop.whitelisted",
+	"Lieutenant.paycheck",
 	"police.menu_interaction",
-	"Lieutenant.paycheck"
+	"police.mission"
   },
       ["Police Detective"] = {
     _config = { gtype = "job",
@@ -673,8 +771,9 @@ cfg.groups = {
 	"emergency.revive",
 	"emergency.shop",
 	"cop.whitelisted",
+	"Detective.paycheck",
 	"police.menu_interaction",
-	"Detective.paycheck"
+	"police.mission"
   },
     ["Police Sergeant"] = {
     _config = { gtype = "job",
@@ -712,8 +811,9 @@ cfg.groups = {
 	"emergency.revive",
 	"emergency.shop",
 	"cop.whitelisted",
+	"Sergeant.paycheck",
 	"police.menu_interaction",
-	"Sergeant.paycheck"
+	"police.mission"
   },
       ["Dispatcher"] = {
     _config = { gtype = "job",
@@ -742,8 +842,9 @@ cfg.groups = {
 	"emergency.revive",
 	"emergency.shop",
 	"cop.whitelisted",
+	"Dispatch.paycheck",
 	"police.menu_interaction",
-	"Dispatch.paycheck"
+	"police.mission"
   },
 
 
@@ -872,11 +973,16 @@ cfg.selectors = {
     },
   ["Emergency job"] = { -- Spawn Hospital
     _config = {x =  249.50639343262, y = -1375.0694580078, z = 39.534378051758, blipid = 351, blipcolor = 3, permissions = {"ems.whitelisted"} },
-	"EMS"
+    "EMS Chief",
+    "EMS Lieutenant",
+    "EMS Search and Rescue",
+	"EMS Paramedic",
+	"Unemployed"
   },
   ["Lawyer"] = {
     _config = {x = -1911.9273681641, y = -569.71649169922, z = 19.097215652466, blipid = 351, blipcolor = 7, permissions = {"Lawyer.whitelisted"} },
-    "Lawyer"
+    "Lawyer",
+	"Unemployed"
   },
   ["drugseller job"] = {
     _config = {x = 1865.1586914063, y = 3749.4343261719, z = 33.046268463135, blipid = 277, blipcolor = 4},
@@ -889,14 +995,29 @@ cfg.selectors = {
     "Unemployed"
   },
   ["Airline Pilot"] = {
-    _config = {x = -759.6591796875, y = -1515.3978271484, z = 4.9768991470337},
+    _config = {x = -759.6591796875, y = -1515.3978271484, z = 4.9768991470337, blipid =  307, blipcolor = 4},
 	"Airline Pilot",
     "Unemployed"
   },
-    ["Cargo Pilot"] = {
+  ["Cargo Pilot"] = {
     _config = {x = -928.89624023438, y = -2937.396484375, z = 13.945074081421,blipid = 472, blipcolor = 4},
 	"Cargo Pilot",
     "Unemployed"
+  },
+  ["Trash Collector"] = {
+    _config = {x = 750.05029296875, y = -1402.9224853516, z = 26.549806594849,blipid = 318, blipcolor = 2}, -- Job starts here
+	"Trash Collector",
+    "Unemployed"
+  },
+  ["Judge"] = {
+    _config = {x = -59.127178192139, y = 359.25082397461, z = 113.05643463135, blipid = 351, blipcolor = 7, permissions = {"Judge.whitelisted"} },
+    "Judge",
+	"Unemployed"
+  },
+  ["Forger"] = {
+    _config = {x = 388.61703491211, y = 3587.1179199219, z = 33.292263031006, blipid = 472, blipcolor = 4},
+    "Forger",
+	"Unemployed"
   },
   ["Hacker job"] = {
     _config = {x = 705.682189941406, y = -966.919067382813, z = 30.3953418731689, blipid = 472, blipcolor = 4},

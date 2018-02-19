@@ -16,6 +16,34 @@ function vRP.insertPoliceRecord(user_id, line)
   end
 end
 
+-- Hotkey Open Police PC 1/2
+function vRP.openPolicePC(source)
+  vRP.buildMenu("police_pc", {player = source}, function(menudata)
+    menudata.name = "Police PC"
+    menudata.css = {top="75px",header_color="rgba(0,125,255,0.75)"}
+    vRP.openMenu(source,menudata)
+  end)
+end
+
+-- Hotkey Open Police PC 2/2
+function tvRP.openPolicePC()
+  vRP.openPolicePC(source)
+end
+
+-- Hotkey Open Police Menu 1/2
+function vRP.openPoliceMenu(source)
+  vRP.buildMenu("police", {player = source}, function(menudata)
+    menudata.name = "Police"
+    menudata.css = {top="75px",header_color="rgba(0,125,255,0.75)"}
+    vRP.openMenu(source,menudata)
+  end)
+end
+
+-- Hotkey Open Police Menu 2/2
+function tvRP.openPoliceMenu()
+  vRP.openPoliceMenu(source)
+end
+
 -- police PC
 
 local menu_pc = {name=lang.police.pc.title(),css={top="75px",header_color="rgba(0,125,255,0.75)"}}

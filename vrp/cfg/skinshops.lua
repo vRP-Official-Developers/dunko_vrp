@@ -13,7 +13,9 @@ local parts = {
   ["Hats"] = "p0",
   ["Glasses"] = "p1",
   ["Ears"] = "p2",
-  ["Watches"] = "p6"
+  ["Watches"] = "p6",
+  ["Extras 1"] = 9,
+  ["Extras2"] = 10
 }
 
 -- changes prices (any change to the character parts add amount to the total price)

@@ -319,6 +319,19 @@ local function ch_noclip(player, choice)
   vRPclient.toggleNoclip(player, {})
 end
 
+-- Hotkey Open Admin Menu 1/2
+function vRP.openAdminMenu(source)
+  vRP.buildMenu("admin", {player = source}, function(menudata)
+    menudata.name = "Admin"
+    menudata.css = {top="75px",header_color="rgba(0,125,255,0.75)"}
+    vRP.openMenu(source,menudata)
+  end)
+end
+
+-- Hotkey Open Admin Menu 2/2
+function tvRP.openAdminMenu()
+  vRP.openAdminMenu(source)
+end
 
 vRP.registerMenuBuilder("main", function(add, data)
   local user_id = vRP.getUserId(data.player)
@@ -395,7 +408,7 @@ vRP.registerMenuBuilder("main", function(add, data)
     end}
 
     add(choices)
-  end
+	end
 end)
 
 -- admin god mode

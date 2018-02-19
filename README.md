@@ -2,7 +2,7 @@
 
 Welcome to Dunko vRP.
 
-Current: V6.5
+Current: V6.6
 
 # Donate/Patreon
 
@@ -12,7 +12,7 @@ Patreon: https://www.patreon.com/dunko
 
 # Discord
 
-If you need help, head over to my Discord: https://discord.gg/CyJEVaT
+If you need help, head over to my Discord:  https://discord.gg/kAfBuJG384
 
 # Installation
 
@@ -26,23 +26,84 @@ If you need help, head over to my Discord: https://discord.gg/CyJEVaT
 
 2) Copy server.cfg & Start_Server.cmd to your main FXServer folder.
 
-3) Go to vrp/cfg/base.lua and enter your database details, you can also select your language here.
+3) Go to vrp/cfg/base.lua and enter your database details
 
-4) Go to server.cfg and enter your database details.
+4) (Optional) Whilst in vrp/cfg/base.lua go to line 25 and change "en" to your language
 
-5) Whilst in server.cfg go to line 118 and set your server name, make sure it’s inside the quotations.
+5) (Optional) Go to vrp_basic_mission/cfg/missions.lua line 4 change "en" to your language
 
-6) Whilst in server.cfg go to line 148 and enter your server key, you can get one from here.
+6) Go to server.cfg and enter your database details.
 
-7) Open Start_Server.cmd with Notepad++ and put in the directory you have your server in.
+7) Whilst in server.cfg go to line 118 and set your server name, make sure it’s inside the quotations.
+
+8) Whilst in server.cfg go to line 148 and enter your server key, you can get one from here.
+
+9) Open Start_Server.cmd with Notepad++ and put in the directory you have your server in.
 
 # My Server
 
-Name: [Official] Dunko's Server | vRP V6.5 | Sponsored by ServerDeals.com
+Name: [Official] Dunko's Server | vRP V6.6 | Sponsored by ServerDeals.com
 
 Direct Connect: 96.9.246.30:30130
 
 # What's new
+
+# V6.6
+
+- Added Finnish translation - Thanks @Baavoz
+- Added vrp_barrier cop/ems permissions
+- Added Chinese translation
+- Added vrp_chopshop
+- Added Trash Collection job - server owners need to add their own trash locations in vrp/cfg/item_transformers.lua
+- Added Judge role - this is an admin selected role only
+- Added Forger job
+- Added K9 script (Left ALT + Z to open menu) - Credit xander1998
+- Added death spawn location, change in cfg/player_state.lua - Thanks @OriginalGamers
+- Added more EMS roles, similar to the way PD is ran - Thanks @OriginalGamers
+- Added driving licence as a seizable item for Police
+- Added Police mission
+- Added EMS mission
+- Added vrp_ubermission - Press DEL to start
+- Added ability to walk whilst hands are up - Thanks @Sil3nx
+- Added warmenu
+- Added vrp_dvcar - Thanks @.P4NDAzz
+- Added vrp_carfix - Thanks @.P4NDAzz
+- Added more houses/garages up north - Thanks @Baker
+- Added mission translations - Thanks to @Yeeellow (Ger), @GamerRO (Ro), @Leo SHK (Pt), @ThaNightHawk (Dan), @[31-4690] Emil Holmstedt (Swe), @Lysy (Pl), @ZORK (Ar), @AlfieThePuggle (Es), @Naifen_Luna (Ru, Fr & It)
+- Added Extras 1 and 2 to the clothes shop - this is for belts to change (i.e. cops) - Thanks @D. Owens
+- Added modified version of vrp_hotkeys - Thanks @jackazzking69
+- Added F1 = Open Admin Menu (WIP) - This will show empty to those who don't have admin perms
+- Added F2 = Opens Police Menu (WIP) - This will show empty to those who don't have police perms
+- Added Drag / Cuff / Fine / Jail / Spikes to F2 menu for quick access
+- Added Blips permission to cops/ems (F1 > Blips) - this will show all users on your minimap
+- Changed Credit Cards to Stolen Credit Cards - this is to avoid people trying to say the cards are thiers
+- Changed the style menu, reverted from the tron style and made it look better
+- Changed the menu to be inside a phone - Thanks @.P4NDAzz
+- Changed lock car hotkey to F3
+- Changed it now allow menu use whilst in a coma due to the fact you can now call an ambulance/revive without it
+- Set correct paycheck amount in groups
+- Set correct death notification as you can now revive by pressing E if no EMS are online
+- Fixed max length issue with some MySQL setups - this should stop @registration errors
+- Fixed map blips for jobs, Drug Dealer etc
+- Fixed Cargo Pilot job - you can now collect Cargo
+- Fixed Plane & Helicopter garages (for Cargo/Airline pilot) map blips
+- Fixed gathering, it should no longer ever be empty
+- Disabled FiveM userlist
+- Disabled Santa job
+- Disabled Admin God Mode due to bugs
+- Updated the mission texts for all jobs which have them, it now tells them exactly what to do and how
+- Updated F5 & F6 keys to Num+ and Num- so they work in police cars - Thanks @OriginalGamers
+- Updated Advanced Fuel and enabled petrol cans, it also no longer uses cents - Thanks @OriginalGamers
+- Updated the installation instructions on how to change mission text language
+- Modified Luxvehcontrol so backspace and UP don't interfere with menus - Thanks @OriginalGamers
+
+- Hot Keys Added: - Change keys via vrp/client/hotkeys.lua or vrp_hotkeys
+- F1 = Open Admin Menu (WIP*)
+- F2 = Open Police Menu (WIP*)
+- F3 = Lock/Unlock Car
+- Numpad + = Show User List
+
+* WIP = Work in Progress
 
 # V6.5
 

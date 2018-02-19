@@ -1,25 +1,25 @@
 petrolCanPrice = 1
 
 lang = "en"
--- lang = "en"
+-- lang = "fr"
 
 settings = {}
 settings["en"] = {
 	openMenu = "Press ~g~E~w~ to open the menu.",
 	electricError = "~r~You have an electric vehicle.",
-	fuelError = "~r~You're not in the good place.",
+	fuelError = "~r~You are not in an electric vehicle.",
 	buyFuel = "buy fuel",
-	liters = "liters",
+	liters = "gallons",
 	percent = "percent",
 	confirm = "Confirm",
 	fuelStation = "Fuel station",
 	boatFuelStation = "Fuel station | Boat",
 	avionFuelStation = "Fuel station | Plane ",
 	heliFuelStation = "Fuel station | Helicopter",
-	getJerryCan = "Press ~g~E~w~ to buy a Petrol can ("..petrolCanPrice.."$)",
-	refeel = "Press ~g~E~w~ to refeel the car.",
+	getJerryCan = "Press ~g~E~w~ to buy a Petrol can ($"..petrolCanPrice..")",
+	refeel = "Press ~g~E~w~ to refuel the car.",
 	YouHaveBought = "You have bought ",
-	fuel = " liters of fuel",
+	fuel = " gallons of fuel",
 	price = "price"
 }
 
@@ -44,7 +44,7 @@ settings["fr"] = {
 
 
 showBar = false
-showText = false
+showText = true
 
 
 hud_form = 1 -- 1 : Vertical | 2 = Horizontal
@@ -55,7 +55,7 @@ text_x = 0.2575
 text_y = 0.975
 
 
-electricityPrice = 1 -- NOT RANOMED !!
-
-randomPrice = true --Random the price of each stations
-price = 1 --If random price is on False, set the price here for 1 liter
+electricityPrice = 3 -- NOT RANOMED !!
+petrolCanPrice = 20
+randomPrice = false --Random the price of each stations
+price = 2 --If random price is on False, set the price here for 1 liter

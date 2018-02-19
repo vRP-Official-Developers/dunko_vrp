@@ -11,10 +11,10 @@ local sanitizes = module("cfg/sanitizes")
 MySQL.createCommand("vRP/identity_tables", [[
 CREATE TABLE IF NOT EXISTS vrp_user_identities(
   user_id INTEGER,
-  registration VARCHAR(20),
-  phone VARCHAR(20),
-  firstname VARCHAR(50),
-  name VARCHAR(50),
+  registration VARCHAR(100),
+  phone VARCHAR(100),
+  firstname VARCHAR(100),
+  name VARCHAR(100),
   age INTEGER,
   CONSTRAINT pk_user_identities PRIMARY KEY(user_id),
   CONSTRAINT fk_user_identities_users FOREIGN KEY(user_id) REFERENCES vrp_users(id) ON DELETE CASCADE,

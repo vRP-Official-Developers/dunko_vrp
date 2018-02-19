@@ -28,8 +28,8 @@ cfg.controls = {
     open = {3,311}, -- K to open the menu
   },
   request = {
-    yes = {1,166}, -- Michael, F5
-    no = {1,167} -- Franklin, F6
+    yes = {1,96}, -- Numbpad+
+    no = {1,97} -- Numbpad-
   }
 }
 
@@ -44,7 +44,7 @@ cfg.coma_threshold = 120
 cfg.coma_duration = 5
 
 -- if true, a player in coma will not be able to open the main menu
-cfg.coma_disable_menu = false
+cfg.coma_disable_menu = true
 
 -- see https://wiki.fivem.net/wiki/Screen_Effects
 cfg.coma_effect = "DeathFailMPIn"

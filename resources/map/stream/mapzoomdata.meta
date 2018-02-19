@@ -1,0 +1,59 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<sMapZoomData>
+  <zoomLevels>
+	  <Item> <!-- ZOOM_LEVEL_0 -->
+		<fZoomScale value="2.73" />
+      <fZoomSpeed value="0.9" />
+      <fScrollSpeed value="0.08" />
+		  <vTiles x="0.0" y="0.0" />	
+	  </Item>
+	  <Item> <!-- ZOOM_LEVEL_1 -->
+      <fZoomScale value="2.8" />
+      <fZoomSpeed value="0.9" />
+      <fScrollSpeed value="0.08" />
+		  <vTiles x="0.0" y="0.0" />
+	  </Item>
+	  <Item> <!-- ZOOM_LEVEL_2 -->
+      <fZoomScale value="8.0" />
+      <fZoomSpeed value="0.9" />
+      <fScrollSpeed value="0.08" />
+		  <vTiles x="0.0" y="0.0" />
+	  </Item>
+	  <Item> <!-- ZOOM_LEVEL_3 -->
+      <fZoomScale value="11.0" />
+      <fZoomSpeed value="0.9" />
+      <fScrollSpeed value="0.08" />
+		  <vTiles x="0.0" y="0.0" />
+	  </Item>
+	  <Item> <!-- ZOOM_LEVEL_4 -->
+      <fZoomScale value="16.0" />
+      <fZoomSpeed value="0.9" />
+      <fScrollSpeed value="0.08" />	
+		  <vTiles x="0.0" y="0.0" />
+	  </Item>
+	  <Item> <!-- ZOOM_LEVEL_GOLF_COURSE -->
+      <fZoomScale value="55.0" />
+      <fZoomSpeed value="0.0" />
+      <fScrollSpeed value="0.1" />
+		  <vTiles x="2.0" y="1.0" />
+	  </Item>
+	  <Item> <!-- ZOOM_LEVEL_INTERIOR -->
+      <fZoomScale value="450.0" /> <!-- Reduced size by 20% as per request 1119370 -->
+      <fZoomSpeed value="0.0" />
+      <fScrollSpeed value="0.1" />
+		  <vTiles x="1.0" y="1.0" />
+	  </Item>
+	  <Item> <!-- ZOOM_LEVEL_GALLERY -->
+      <fZoomScale value="4.5" />
+      <fZoomSpeed value="0.0" />
+      <fScrollSpeed value="0.0" />
+		  <vTiles x="0.0" y="0.0" />
+	  </Item>
+	  <Item> <!-- ZOOM_LEVEL_GALLERY_MAXIMIZE -->
+      <fZoomScale value="11.0" />
+      <fZoomSpeed value="0.0" />
+      <fScrollSpeed value="0.0" />
+		  <vTiles x="2.0" y="3.0" />
+	  </Item>
+  </zoomLevels>
+</sMapZoomData>

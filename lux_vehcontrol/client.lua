@@ -393,7 +393,7 @@ Citizen.CreateThread(function()
 						local actv_horn = false
 						
 						DisableControlAction(0, 86, true) -- INPUT_VEH_HORN	
-						DisableControlAction(0, 172, true) -- INPUT_CELLPHONE_UP 
+						--DisableControlAction(0, 172, true) -- INPUT_CELLPHONE_UP 
 						--DisableControlAction(0, 173, true) -- INPUT_CELLPHONE_DOWN
 						--DisableControlAction(0, 174, true) -- INPUT_CELLPHONE_LEFT 
 						--DisableControlAction(0, 175, true) -- INPUT_CELLPHONE_RIGHT 
@@ -464,9 +464,10 @@ Citizen.CreateThread(function()
 									count_bcast_timer = delay_bcast_timer
 								end
 								
-							-- POWERCALL
+							-- POWERCALL 
+
 							elseif IsDisabledControlJustReleased(0, 172) then
-								if state_pwrcall[veh] == true then
+								--[[if state_pwrcall[veh] == true then
 									PlaySoundFrontend(-1, "NAV_UP_DOWN", "HUD_FRONTEND_DEFAULT_SOUNDSET", 1)
 									TogPowercallStateForVeh(veh, false)
 									count_bcast_timer = delay_bcast_timer
@@ -476,9 +477,10 @@ Citizen.CreateThread(function()
 										TogPowercallStateForVeh(veh, true)
 										count_bcast_timer = delay_bcast_timer
 									end
-								end
+								end--]]
 								
 							end
+
 							
 							-- BROWSE LX SRN TONES
 							if state_lxsiren[veh] > 0 then
@@ -589,7 +591,7 @@ Citizen.CreateThread(function()
 								count_ind_timer = 0
 								count_bcast_timer = delay_bcast_timer
 							-- IND H
-							elseif IsControlJustReleased(0, 202) then -- INPUT_FRONTEND_CANCEL / Backspace
+							--[[elseif IsControlJustReleased(0, 202) then -- INPUT_FRONTEND_CANCEL / Backspace
 								if GetLastInputMethod(0) then -- last input was with kb
 									local cstate = state_indic[veh]
 									if cstate == ind_state_h then
@@ -603,7 +605,7 @@ Citizen.CreateThread(function()
 									actv_ind_timer = false
 									count_ind_timer = 0
 									count_bcast_timer = delay_bcast_timer
-								end
+								end --]]
 							end
 						
 						end
