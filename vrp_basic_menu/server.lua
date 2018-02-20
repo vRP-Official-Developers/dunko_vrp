@@ -431,7 +431,6 @@ local ch_jail = {function(player,choice)
 					  BMclient.loadFreeze(target,{false})
 					end)
 				    vRPclient.teleport(target,{1641.5477294922,2570.4819335938,45.564788818359}) -- teleport to inside jail
-					vRPclient.toggleHandcuff(nplayer,{})
 				    vRPclient.notify(target,{"~r~You have been sent to jail."})
 				    vRPclient.notify(player,{"~b~You sent a player to jail."})
 				    vRP.setHunger({tonumber(target_id),0})
