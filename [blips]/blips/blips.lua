@@ -38,7 +38,8 @@ local blips = {
 	{title="Garage (Cargo)", colour=30, id=16, x = 1734.9053955078, y = 3297.9689941406, z = 41.22350311279}, -- Cargo Garage Sa
 	{title="Garage (Airline)", colour=30, id=16, x = 2128.9069824219, y = 4806.134765625, z = 41.168750762939}, -- Airline Garage
 	{title="Garage (Airline)", colour=30, id=16, x = 1734.9053955078, y = 3297.9689941406, z = 41.223503112793}, -- Airline Garage
-	{title="Garage (Helicopter Airline)", colour=30, id=43, x = -745.14343261719, y = -1468.5361328125, z = 5.0005240440369} -- Helicopter Garage for Airline Job
+	{title="Garage (Helicopter Airline)", colour=30, id=43, x = -745.14343261719, y = -1468.5361328125, z = 5.0005240440369}, -- Helicopter Garage for Airline Job
+	{title="Trash", colour=30, id=43, x = 807.07354736328, y = -1077.0104980469, z = 28.621067047119} -- Trash for Trash Collector
   }
 
 Citizen.CreateThread(function()
