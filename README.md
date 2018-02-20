@@ -12,7 +12,7 @@ Patreon: https://www.patreon.com/dunko
 
 # Discord
 
-If you need help, head over to my Discord:  https://discord.gg/kAfBuJG384
+If you need help, head over to my Discord:  https://discord.gg/kAfBuJG
 
 # Installation
 
@@ -42,7 +42,7 @@ If you need help, head over to my Discord:  https://discord.gg/kAfBuJG384
 
 # My Server
 
-Name: Dunko vRP V6.6 - Preview/Test Server - discord.gg/kAfBuJG156 - Sponsored by Zap-Hosting.com
+Name: Dunko vRP V6.6 - Preview/Test Server - discord.gg/kAfBuJG - Sponsored by Zap-Hosting.com
 
 Direct Connect: 134.255.216.169:30120
 
