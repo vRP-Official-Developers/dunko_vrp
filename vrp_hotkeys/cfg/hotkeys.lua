@@ -42,8 +42,8 @@ cfg.hotkeys = {
 	  -- Do nothing on release because it's toggle.
 	end,
   },
-    [96] = {
-    -- + on numberpad toggle User List
+    [213] = {
+    --home on numberpad toggle User List
     group = 0, 
 	pressed = function() 
 	  HKserver.openUserList({})
