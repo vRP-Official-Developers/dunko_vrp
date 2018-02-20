@@ -101,7 +101,8 @@ Direct Connect: 134.255.216.169:30120
 - F1 = Open Admin Menu (WIP*)
 - F2 = Open Police Menu (WIP*)
 - F3 = Lock/Unlock Car
-- Numpad + = Show User List
+- HOME = Show User List
+- LEFT ALT + Z = Open K9 Menu
 
 * WIP = Work in Progress
 
