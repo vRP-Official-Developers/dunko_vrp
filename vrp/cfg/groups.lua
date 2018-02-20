@@ -72,6 +72,7 @@ cfg.groups = {
 	--"mugger.mug",
     "police.askid",
     "police.store_weapons",
+	"player.skip_coma",
 	"player.store_money",
 	"player.check",
 	"player.loot",
@@ -217,6 +218,7 @@ cfg.groups = {
     "emergency.shop",
     "emergency.service",
 	"emergency.cloakroom",
+	"emscheck.revive",
 	"emergency.vehicle",
 	"emergency.market",
 	"ems.whitelisted",
@@ -236,6 +238,7 @@ cfg.groups = {
 	--"police.wanted",
     "emergency.shop",
     "emergency.service",
+	"emscheck.revive",
 	"emergency.cloakroom",
 	"emergency.vehicle",
 	"emergency.market",
@@ -259,6 +262,7 @@ cfg.groups = {
 	"emergency.cloakroom",
 	"emergency.vehicle",
 	"emergency.market",
+	"emscheck.revive",
 	"ems.whitelisted",
 	"ems.loadshop",
 	"player.list",
@@ -277,6 +281,7 @@ cfg.groups = {
     "emergency.shop",
     "emergency.service",
 	"emergency.cloakroom",
+	"emscheck.revive",
 	"emergency.vehicle",
 	"emergency.market",
 	"ems.whitelisted",
@@ -1028,4 +1033,3 @@ cfg.selectors = {
 }
 
 return cfg
-
