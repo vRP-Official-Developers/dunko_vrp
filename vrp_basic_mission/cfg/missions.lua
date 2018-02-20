@@ -328,7 +328,7 @@ cfg.ems = {
   ["ems.mission"] = {
     positions = common_ems_positions,
     items = {
-      ["medical_report"] = {1,1,600}
+      ["ems_report"] = {1,1,600}
     }
   }
 }
