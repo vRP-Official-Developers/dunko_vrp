@@ -50,7 +50,7 @@ cfg.groups = {
   ["recruiter"] = {
     "player.list",
 	"player.group.add",
-    "player.group.remove",
+    "player.group.remove"
     },
   ["mod"] = {
 	"admin.tickets",
@@ -158,7 +158,7 @@ cfg.groups = {
 	"emergency.market",
 	"emergency.revive",
 	"emergency.shop",
-	"player.list",
+	--"player.list",
 	"police.paycheck",
 	"police.mission",
 	"player.blips",
@@ -202,7 +202,7 @@ cfg.groups = {
 	"emergency.market",
 	"emergency.revive",
 	"emergency.shop",
-	"player.list",
+	--"player.list",
 	"Detective.paycheck",
 	"police.menu_interaction",
 	"player.blips",
@@ -223,7 +223,7 @@ cfg.groups = {
 	"emergency.market",
 	"ems.whitelisted",
 	"ems.loadshop",
-	"player.list",
+	--"player.list",
 	"police.menu_interaction",
 	"emsChief.paycheck",
 	"player.blips",
@@ -244,7 +244,7 @@ cfg.groups = {
 	"emergency.market",
 	"ems.whitelisted",
 	"ems.loadshop",
-	"player.list",
+	--"player.list",
 	"police.menu_interaction",
 	"emsMedic.paycheck",
 	"player.blips",
@@ -265,7 +265,7 @@ cfg.groups = {
 	"emscheck.revive",
 	"ems.whitelisted",
 	"ems.loadshop",
-	"player.list",
+	--"player.list",
 	"police.menu_interaction",
 	"emsLieutenant.paycheck",
 	"player.blips",
@@ -286,7 +286,7 @@ cfg.groups = {
 	"emergency.market",
 	"ems.whitelisted",
 	"ems.loadshop",
-	"player.list",
+	--"player.list",
 	"police.menu_interaction",
 	"emsSearchRescue.paycheck",
 	"player.blips",
@@ -893,8 +893,8 @@ cfg.groups = {
 	"exotic.whitelisted",
     "exotic.vehicle",
     "player.group.add",
-    "player.group.remove",
-    "player.list"
+    "player.group.remove"
+    --"player.list"
   },
   ["buyer"] = {  
     "exotic.vehicle"
