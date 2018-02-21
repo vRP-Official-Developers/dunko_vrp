@@ -50,7 +50,7 @@ cfg.groups = {
   ["recruiter"] = {
     "player.list",
 	"player.group.add",
-    "player.group.remove",
+    "player.group.remove"
     },
   ["mod"] = {
 	"admin.tickets",
