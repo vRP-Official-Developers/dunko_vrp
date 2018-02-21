@@ -101,6 +101,10 @@ AddEventHandler('paycheck:salary', function()
 		vRP.giveMoney(user_id,2000)
 		vRPclient.notify(source,{"Payday: $2000"})
 	end
+	if vRP.hasPermission(user_id,"trash.paycheck") then
+		vRP.giveMoney(user_id,2000)
+		vRPclient.notify(source,{"Payday: $2000"})
+	end
 end)
 
 RegisterServerEvent('paycheck:bonus')
