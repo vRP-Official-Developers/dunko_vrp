@@ -319,6 +319,10 @@ local function ch_noclip(player, choice)
   vRPclient.toggleNoclip(player, {})
 end
 
+local function ch_invisible(player, choice)
+  vRPclient.toggleInvisible(player, {})
+end
+
 -- Hotkey Open Admin Menu 1/2
 function vRP.openAdminMenu(source)
   vRP.buildMenu("admin", {player = source}, function(menudata)
@@ -372,6 +376,9 @@ vRP.registerMenuBuilder("main", function(add, data)
         if vRP.hasPermission(user_id,"player.noclip") then
           menu["Noclip"] = {ch_noclip}
         end
+		if vRP.hasPermission(user_id,"player.invisible") then
+          menu["Invisibility"] = {ch_invisible}
+        end
         if vRP.hasPermission(user_id,"player.custom_emote") then
           menu["Custom emote"] = {ch_emote}
         end
@@ -412,18 +419,18 @@ vRP.registerMenuBuilder("main", function(add, data)
 end)
 
 -- admin god mode
--- function task_god()
-  -- SetTimeout(10000, task_god)
+function task_god()
+  SetTimeout(10000, task_god)
 
-  -- for k,v in pairs(vRP.getUsersByPermission("admin.god")) do
-    -- vRP.setHunger(v, 0)
-    -- vRP.setThirst(v, 0)
+  for k,v in pairs(vRP.getUsersByPermission("admin.god")) do
+    vRP.setHunger(v, 0)
+    vRP.setThirst(v, 0)
 
-    -- local player = vRP.getUserSource(v)
-    -- if player ~= nil then
-      -- vRPclient.setHealth(player, {200})
-    -- end
-  -- end
--- end
+    local player = vRP.getUserSource(v)
+    if player ~= nil then
+      vRPclient.setHealth(player, {200})
+    end
+  end
+end
 
--- task_god()
+task_god()
