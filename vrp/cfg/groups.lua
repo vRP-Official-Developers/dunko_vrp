@@ -208,6 +208,25 @@ cfg.groups = {
 	"player.blips",
 	"police.mission"
   },
+ ["Fire"] = {
+    _config = { gtype = "job",
+	onspawn = function(player) vRPclient.notify(player,{"You are a Firefighter, salary : $2000."}) end
+ "emergency.revive",
+	"police.pc",
+	--"police.wanted",
+    "emergency.shop",
+    "emergency.service",
+	"emergency.cloakroom",
+	"emergency.vehicle",
+	"emergency.market",
+	"ems.whitelisted",
+	"ems.loadshop",
+	"player.list",
+	"police.menu_interaction",
+	"emsMedic.paycheck",
+	"player.blips",
+	"emsMedic.paycheck"
+  },	
   ["EMS Chief"] = {
     _config = { gtype = "job",
 	onspawn = function(player) vRPclient.notify(player,{"You are a EMS Chief, salary : $5000."}) end
@@ -982,6 +1001,7 @@ cfg.selectors = {
     "EMS Lieutenant",
     "EMS Search and Rescue",
 	"EMS Paramedic",
+	"Fire",		
 	"Unemployed"
   },
   ["Lawyer"] = {
