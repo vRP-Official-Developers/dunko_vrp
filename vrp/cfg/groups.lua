@@ -74,7 +74,6 @@ cfg.groups = {
     "police.store_weapons",
 	"player.skip_coma",
 	"player.store_money",
-	"player.check",
 	"player.loot",
 	"player.player_menu",
 	"player.userlist",
