@@ -1,5 +1,6 @@
 
 local noclip = false
+local invisible = false
 local noclip_speed = 5.0
 
 function tvRP.toggleNoclip()
@@ -18,7 +19,24 @@ function tvRP.isNoclip()
   return noclip
 end
 
--- noclip/invisibility
+--invisibility
+function tvRP.toggleInvisible()
+  invisible = not invisible
+  local ped = GetPlayerPed(-1)
+  if invisible then -- set
+    SetEntityInvincible(ped, true)
+    SetEntityVisible(ped, false, false)
+  else -- unset
+    SetEntityInvincible(ped, false)
+    SetEntityVisible(ped, true, false)
+  end
+end
+
+function tvRP.isInvisible()
+  return invisible
+end
+
+-- noclip
 Citizen.CreateThread(function()
   while true do
     Citizen.Wait(0)
