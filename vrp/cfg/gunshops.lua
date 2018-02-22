@@ -188,7 +188,8 @@ cfg.gunshop_types = {
 	["WEAPON_FLASHLIGHT"] = {"Flashlight",0,0,""},
     ["WEAPON_FLARE"] = {"Flare",0,0,""},
     ["WEAPON_NIGHTSTICK"] = {"Nighstick",0,0,""},
-	["WEAPON_STUNGUN"] = {"Tazer",0,0,""}
+	["WEAPON_STUNGUN"] = {"Tazer",0,0,""},
+	["WEAPON_FIREEXTINGUISHER"] = {"Fire Extinguisher",0,0,""}
    },
   ["bombsticky"] = {
     _config = {blipid=110,blipcolor=1},
@@ -199,8 +200,12 @@ cfg.gunshop_types = {
 
 cfg.gunshops = {
   {"emsloadout", 232.89363098145,-1368.3338623047,39.534381866455}, -- spawn hospital
+  {"emsloadout", 1195.1107177734,-1476.1491699218,34.859512329102},
   {"emsloadout", 1837.8341064453,3671.3837890625,34.276763916016}, -- sandy shores
   {"emsloadout", -246.91954040527,6330.349609375,32.42618560791}, -- paleto
+  {"emsloadout", 199.5677947998,-1649.4925537109,29.803211212158},  -- mcdonald st fd
+  {"emsloadout", 1698.7575683594,3589.072265625,35.620960235596},
+  {"emsloadout", -634.39562988281,-126.30344390869,39.013778686523}, -- rockfird dr fd
   {"eastlossantos1", 844.299, -1033.26, 28.1949},
   {"SWAT", 461.33551025391,-981.11071777344,30.689584732056},
   {"Cadet", 461.33551025391,-981.11071777344,30.689584732056},
