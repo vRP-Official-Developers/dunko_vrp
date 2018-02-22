@@ -12,13 +12,14 @@ Citizen.CreateThread( function()
             if ( not IsPauseMenuActive() ) then 
                 if ( IsDisabledControlJustPressed( 0, 36 ) ) then 
                     RequestAnimSet( "move_ped_crouched" )
+					RequestAnimSet( "move_m@casual@d" )
 
-                    while ( not HasAnimSetLoaded( "move_ped_crouched" ) ) do 
+                    while ( not HasAnimSetLoaded( "move_ped_crouched" ) and not HasAnimSetLoaded( "move_m@casual@d" ) ) do 
                         Citizen.Wait( 100 )
                     end 
 
                     if ( crouched == true ) then 
-                        ResetPedMovementClipset( ped, 0 )
+                        SetPedMovementClipset( ped, "move_m@casual@d", 0.25 )
                         crouched = false 
                     elseif ( crouched == false ) then
                         SetPedMovementClipset( ped, "move_ped_crouched", 0.25 )
