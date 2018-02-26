@@ -18,7 +18,7 @@ Citizen.CreateThread(function()
         if drag and other ~= nil then
             local ped = GetPlayerPed(GetPlayerFromServerId(other))
             local myped = GetPlayerPed(-1)
-            AttachEntityToEntity(myped, ped, 4103, 11816, 0.54, 0.54, 0.0, 0.0, 0.0, 0.0, false, false, false, false, 2, true)
+            AttachEntityToEntity(myped, ped, 4103, 11816, 0.54, 0.0, 0.0, 0.0, 0.0, 0.0, false, false, false, false, 2, true)
             playerStillDragged = true
         else
             if(playerStillDragged) then
