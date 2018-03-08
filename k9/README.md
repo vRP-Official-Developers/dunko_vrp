@@ -1,24 +1,31 @@
-# K9 Script
-This is a K9 script that uses the AI to handles the k9 functions.
+# Xander1998's K9 Script
 
-## Installing Instructions (Make sure that WarMenu is installed before the K9)
-1. Download K9 Script From my github page.
-2. Drag the k9-master folder into your resources.
-3. Rename resource to "k9"
-4. Add your k9 resource name to your server.cfg (start k9).
+## IMPORTANT
+ANY player that has an option turned on in their trainers for (All peds ignore) the attack function will break!
 
-## Configuration
+## Installation
+1. Drag K9 into resources folder.
+2. Add resource name to K9 config.
+3. Modify config to your liking
+4. Start server.
 
-### K9_Config.PedRestricted = true or false
-Sets if the script is restricted to certain ped models
+## Config
+1. K9Config.OpenMenuIdentifierRestriction | true / false
+2. K9Config.OpenMenuPedRestriction | true / false
+3. K9Config.LicenseIdentifiers | License Keys Only
+4. K9Config.SteamIdentifiers | Steam Keys Only
+5. K9Config.VehicleRestriction | true / false
+6. K9Config.VehiclesList | Vehicle Model Names
+7. K9Config.SearchType | "random"
+8. K9Config.Items | table of items for the "random" searching
+9. K9Config.LanguageChoice | Prefered Language
+10. K9Config.Languages | Languages Available
 
-### K9_Config.VehicleRestricted = true or false
-Sets if the k9 is restricted to only enter certain vehicles.
-
-### K9_Config.GodmodeDog = true or false
-Sets the dog in godmode to give him the upper hand in chasing your suspects.
+## TODO LIST
+1. Vehicle Searching
+2. Vehicle Toggling (Getting in and out)
 
 ## Controls
-1. [G] - Toggles the dog to follow or stay.
-2. [AIM + G] - Tells the dog to attack the ped you are aiming at(must use a lethal weapon at longer distances).
-3. [LeftALT + Z] - Opens the K9 options menu. (Handles K9 animations, K9 Spawning / Deleting, And the vehicle toggle)
+1. OPEN MENU | LeftALT + HOME
+2. FOLLOW / STOP | G
+3. ATTACK | Point + G
