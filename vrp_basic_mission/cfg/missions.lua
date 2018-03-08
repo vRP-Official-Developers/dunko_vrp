@@ -1,7 +1,8 @@
 
 local cfg = {}
-
-cfg.lang = "en"
+					-- SET YOUR LANGUAGE HERE - MAKE SURE IT'S INSIDE THE ""
+cfg.lang = "en"		-- en / fr / it / ger / pt / ru / lith / dan / ar / pl / es / swe / fin / cn / ro 
+					-- English/Français/Italiano/Deutsche/Português/Pусский/Lietuvių/Dansk/العربية/Polskie/Español/Svenska/Suomalainen/中文/Română
 
 -- REPAIR
 
@@ -132,6 +133,9 @@ local common_delivery_positions = {
 --- items: map of idname => {min_amount,max_amount,reward_per_item}
 --- positions
 -- only one delivery permission can be used per player (no permission selection, only one will work)
+
+
+-- Delivery Driver
 cfg.delivery = {
   ["mission.delivery.food"] = {
     positions = common_delivery_positions,
@@ -142,6 +146,7 @@ cfg.delivery = {
   }
 }
 
+-- Drug Dealer
 local common_drugseller_positions = {
   {-1087.20959472656,479.4970703125,81.5277786254883},
   {-1215.48083496094,457.809478759766,91.9756546020508},
@@ -164,6 +169,7 @@ cfg.drugseller = {
   }
 }
 
+-- Fisherman
 local common_fisher_positions = {
   {1397.0802001953,3606.7141113281,34.980922698975},
   {1966.0919189453,3746.009765625,32.343746185303},
@@ -182,6 +188,7 @@ cfg.fisherman = {
   }
 }
 
+-- Weapons Smuggler
 local common_smuggler_positions = {
   {-569.02294921875,5253.2524414063,70.487228393555},
   {-1144.0905761719,4938.1181640625,222.26870727539},
@@ -199,6 +206,7 @@ cfg.weapons_smuggler = {
   }
 }
 
+-- Medical Weed
 local common_medical_positions = {
   {326.83486938477,-1473.7293701172,29.795280456543}
 }
@@ -213,20 +221,22 @@ cfg.medical_driver = {
   }
 }
 
-local common_santa_positions = {
-  {2543.1989746094,-453.29135131836,93.009101867676}
-}
+-- Santa (Disabled)
+-- local common_santa_positions = {
+  -- {2543.1989746094,-453.29135131836,93.009101867676}
+-- }
 
-cfg.santa = {
-  ["mission.santa"] = {
-	title = "Santa",
-    positions = common_santa_positions,
-    items = {
-      ["Presents"] = {1,10,350}
-    }
-  }
-}
+-- cfg.santa = {
+  -- ["mission.santa"] = {
+	-- title = "Santa",
+    -- positions = common_santa_positions,
+    -- items = {
+      -- ["Presents"] = {1,10,350}
+    -- }
+  -- }
+-- }
 
+-- Cargo Pilot
 local common_pilot_positions = {
   {2143.0698242188,4811.3764648438,41.179256439209},
   {1702.8529052734,3251.9147949219,40.986331939697}
@@ -242,6 +252,7 @@ cfg.pilot = {
   }
 }
 
+-- Hacker
 local common_hacker_positions = {
   {-1087.20959472656,479.4970703125,81.5277786254883},
   {-1215.48083496094,457.809478759766,91.9756546020508},
@@ -257,6 +268,67 @@ cfg.hacker = {
     positions = common_hacker_positions,
     items = {
       ["credit"] = {1,5,500}
+    }
+  }
+}
+
+-- Trash Collector
+local common_trash_positions = {
+  {711.07678222656,-1408.1213378906,26.35417175293} -- Add more positions
+}
+
+cfg.trash = {
+  ["mission.collect.trash"] = {
+    positions = common_trash_positions,
+    items = {
+      ["trash"] = {1,10,400}
+    }
+  }
+}
+
+-- Forger
+local common_forger_positions = {
+  {-1061.9360351563,-243.80813598633,44.021057128906}
+}
+
+cfg.forger = {
+  ["forger.mission"] = {
+    positions = common_forger_positions,
+    items = {
+      ["fake_id"] = {1,10,600}
+    }
+  }
+}
+
+-- Police
+local common_police_positions = {
+  {145.04643249512,-1044.4276123047,29.367944717407}, -- Vespucci
+  {-2957.4338378906,479.3232421875,15.696963310242}, -- Highway
+  {-104.5299987793,6470.8251953125,31.626712799072} -- Blaine County
+}
+
+cfg.police = {
+  ["police.mission"] = {
+    positions = common_police_positions,
+    items = {
+      ["police_report"] = {1,1,600}
+    }
+  }
+}
+
+-- EMS
+local common_ems_positions = {
+  {341.70108032227,-1396.8901367188,32.509250640869}, -- Central
+  {356.31234741211,-597.83703613281,28.779567718506}, -- Pillbox Hill
+  {1839.1788330078,3672.5698242188,34.276737213135}, -- Sandy Shores
+  {-244.23054504395,6328.3413085938,32.426177978516} -- Paleto
+}
+
+cfg.ems = {
+  ["ems.mission"] = {
+    positions = common_ems_positions,
+    items = {
+      ["ems_report"] = {1,1,600}
     }
   }
 }

@@ -130,7 +130,9 @@ local lang = {
     }
   },
   police = {
+    title = "Police",
     wanted = "Recherché rang {1}",
+    not_handcuffed = "~r~n'est pas menotter",
     cloakroom = {
       title = "Vestiaire",
       uniform = {
@@ -159,6 +161,17 @@ local lang = {
         tracking = "~b~Localisation commencée.",
         track_failed = "~b~Recherche de {1}~s~ ({2}) ~n~~r~Echouée.",
         tracked = "{1} ({2}) localisé."
+		},
+      records = {
+        show = {
+          title = "Voir Dossier",
+          description = "Montre le dossier de police par l'immatriculation."
+        },
+        delete = {
+          title = "Néttoyez Dossier",
+          description = "Néttoie le dossier de police par l'immatriculation.",
+          deleted = "~b~Dossier Néttoyez, plus aucune trâce du dossier."
+        }
       }
     },
     menu = {
@@ -169,6 +182,10 @@ local lang = {
       putinveh = {
         title = "Mettre dans le véhicule",
         description = "Mettre le joueur le plus proche dans le véhicule le plus proche."
+      },
+	  getoutveh = {
+        title = "Sortir du véhicule",
+        description = "Fait sortir le joueur de votre vehicule."
       },
       askid = {
         title = "Demander les papiers",
@@ -183,6 +200,39 @@ local lang = {
         request_hide = "Fermer le rapport de fouille.",
         info = "<em>Argent: </em>{1} €<br /><br /><em>Inventaire: </em>{2}<br /><br /><em>Armes: </em>{3}",
         checked = "Vous avez été fouillé."
+		},
+      seize = {
+        seized = "Saisie {2} ~r~{1}",
+        weapons = {
+          title = "Saisir Armes",
+          description = "Saisie les armes du joueur le plus proche",
+          seized = "~b~Vos arme ont été saisie."
+        },
+        items = {
+          title = "Saisir Illegals",
+          description = "Saisir les substences illegals",
+          seized = "~b~vos substences illegal ont été saisie."
+        }
+      },
+      jail = {
+        title = "Emprisonner",
+        description = "Emprisone/Libère le joueur le plus proche.",
+        not_found = "~r~Aucune prison trouvez.",
+        jailed = "~b~emprisonez.",
+        unjailed = "~b~libèré.",
+        notify_jailed = "~b~Vous avez été emprisonnez.",
+        notify_unjailed = "~b~Vous avez été libèré."
+      },
+      fine = {
+        title = "Amende",
+        description = "Donne un amende au joueur le plus prêt.",
+        fined = "~b~amende ~s~{2} $ pour ~b~{1}.",
+        notify_fined = "~b~Vous avez recu un amende de ~s~ {2} $ pour ~b~{1}.",
+        record = "[Amende] {2} $ de {1}"
+      },
+      store_weapons = {
+        title = "Rangez Armes",
+        description = "Range les armes dans votre inventaire. (Peux causez un inventaire plein)"
       }
     },
     identity = {
@@ -237,6 +287,12 @@ local lang = {
       prompt = "Si besoin, entrez un message pour le service:",
       ask_call = "Reception d'un appel ({1}), voulez vous le prendre ? <em>{2}</em>",
       taken = "~r~Cet appel est déjà pris."
+	  },
+    announce = {
+      title = "Publicité",
+      description = "Envoie un annonce a tous les joueurs.",
+      item_desc = "{1} $<br /><br/>{2}",
+      prompt = "Contenu de l'annonce (10-1000 chars): "
     }
   },
   emotes = {
@@ -283,20 +339,28 @@ local lang = {
   garage = {
     title = "Garage ({1})",
     owned = {
-      title = "Mes véhicules",
-      description = "Véhicules m'appartenant"
+      title = "Mes Vehicules",
+      description = "Les vehicule m'appartenant."
     },
     buy = {
       title = "Acheter",
-      description = "Acheter des véhicules.",
-      info = "{1} €<br /><br />{2}"
+      description = "Achetez un vehicule.",
+      info = "{1} $<br /><br />{2}"
+    },
+    sell = {
+      title = "Vendre",
+      description = "Vendre le vehicule."
+    },
+    rent = {
+      title = "Louer",
+      description = "Louer le vehicule jusqu'a la fin de la connections."
     },
     store = {
-      title = "Rentrer au garage",
-      description = "Rentrez votre véhicule au garage."
+      title = "Ranger Vehicule",
+      description = "Ranger le vehicule dans le garage."
     }
   },
-  vehicle = {
+vehicle = {
     title = "Véhicule",
     no_owned_near = "~r~Pas de véhicule vous appartenant à proximité.",
     trunk = {
@@ -306,6 +370,35 @@ local lang = {
     detach_trailer = {
       title = "Détacher remorque",
       description = "Détacher la remorque."
+	  },
+    detach_towtruck = {
+      title = "Detacher le vehicule",
+      description = "Detache le vehicule."
+    },
+    detach_cargobob = {
+      title = "Detacher le cargo",
+      description = "Detach le cargo."
+    },
+    lock = {
+      title = "Vérouille/Déverouille",
+      description = "Vérouille ou Déverouille votre vehicule."
+    },
+    engine = {
+      title = "Moteur On/Off",
+      description = "Démarre ou arrête votre moteur."
+    },
+    asktrunk = {
+      title = "Demandez d'ouvrir le coffre",
+      asked = "~g~Demande...",
+      request = "Voulez-vous ouvrir le coffre ?"
+    },
+    replace = {
+      title = "Déplacé vehicule(Usage de manière RP)",
+      description = "Replace le vehicule au sol."
+    },
+    repair = {
+      title = "Réparé vehicule",
+      description = "Répare le vehicule"
     }
   },
   gunshop = {
@@ -336,6 +429,25 @@ local lang = {
     medkit = {
       title = "Kit Médical",
       description = "Utilisé pour réanimer des personnes inconscientes."
+	  }
+  },
+    mission = {
+    blip = "Mission ({1}) {2}/{3}",
+    display = "<span class=\"name\">{1}</span> <span class=\"step\">{2}/{3}</span><br /><br />{4}",
+    cancel = {
+      title = "Arrêté la mission"
+    }
+  },
+    aptitude = {
+    title = "Aptitudes",
+    description = "Montre les aptitude joueur.",
+    lose_exp = "Aptitude ~b~{1}/{2} ~r~-{3} ~s~exp.",
+    earn_exp = "Aptitude ~b~{1}/{2} ~g~+{3} ~s~exp.",
+    level_down = "Aptitude ~b~{1}/{2} ~r~perte de level ({3}).",
+    level_up = "Aptitude ~b~{1}/{2} ~g~le level monte ({3}).",
+    display = {
+    group = "{1}: ",
+    aptitude = "--- {1} | exp {2} | lvl {3} | progression {4}%"
     }
   }
 }

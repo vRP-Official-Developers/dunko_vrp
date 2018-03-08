@@ -1,3 +1,21 @@
+--[[
+    FiveM Scripts
+    Copyright C 2018  Sighmir
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU Affero General Public License as published
+    by the Free Software Foundation, either version 3 of the License, or
+    at your option any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU Affero General Public License for more details.
+
+    You should have received a copy of the GNU Affero General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+]]
+
 local Tunnel = module("vrp", "lib/Tunnel")
 local Proxy = module("vrp", "lib/Proxy")
 local htmlEntities = module("vrp", "lib/htmlEntities")
@@ -312,9 +330,22 @@ local choice_player_check = {function(player,choice)
 end, lang.police.menu.check.description()}
 
 -- player store weapons
+local store_weapons_cd = {}
+function storeWeaponsCooldown()
+  for user_id,cd in pairs(store_weapons_cd) do
+    if cd > 0 then
+      store_weapons_cd[user_id] = cd - 1
+	end
+  end
+  SetTimeout(1000,function()
+	storeWeaponsCooldown()
+  end)
+end
+storeWeaponsCooldown()
 local choice_store_weapons = {function(player, choice)
   local user_id = vRP.getUserId({player})
-  if user_id ~= nil then
+  if (store_weapons_cd[user_id] == nil or store_weapons_cd[user_id] == 0) and user_id ~= nil then
+    store_weapons_cd[user_id] = 5
     vRPclient.getWeapons(player,{},function(weapons)
       for k,v in pairs(weapons) do
         -- convert weapons to parametric weapon items
@@ -323,10 +354,11 @@ local choice_store_weapons = {function(player, choice)
           vRP.giveInventoryItem({user_id, "wammo|"..k, v.ammo, true})
         end
       end
-
       -- clear all weapons
       vRPclient.giveWeapons(player,{{},true})
     end)
+  else
+    vRPclient.notify(player,{"~r~You are already storing your weapons."})
   end
 end, lang.police.menu.store_weapons.description()}
 
@@ -391,9 +423,9 @@ function jail_clock(target_id,timer)
 	    jail_clock(tonumber(target_id),timer-1)
 	  end) 
     else 
-	  BMclient.loadFreeze(target,{true})
+	  BMclient.loadFreeze(target,{false,true,true})
 	  SetTimeout(15000,function()
-		BMclient.loadFreeze(target,{false})
+		BMclient.loadFreeze(target,{false,false,false})
 	  end)
 	  vRPclient.teleport(target,{425.7607421875,-978.73425292969,30.709615707397}) -- teleport to outside jail
 	  vRPclient.setHandcuffed(target,{false})
@@ -426,9 +458,9 @@ local ch_jail = {function(player,choice)
 		  
                 vRPclient.isHandcuffed(target,{}, function(handcuffed)  
                   if handcuffed then 
-					BMclient.loadFreeze(target,{true})
+					BMclient.loadFreeze(target,{false,true,true})
 					SetTimeout(15000,function()
-					  BMclient.loadFreeze(target,{false})
+					  BMclient.loadFreeze(target,{false,false,false})
 					end)
 				    vRPclient.teleport(target,{1641.5477294922,2570.4819335938,45.564788818359}) -- teleport to inside jail
 				    vRPclient.notify(target,{"~r~You have been sent to jail."})
@@ -500,9 +532,9 @@ AddEventHandler("vRP:playerSpawn", function(user_id, source, first_spawn)
 	    custom = json.decode(value)
 	    if custom ~= nil then
 		  if tonumber(custom) > 0 then
-			BMclient.loadFreeze(target,{true})
+			BMclient.loadFreeze(target,{false,true,true})
 			SetTimeout(15000,function()
-			  BMclient.loadFreeze(target,{false})
+			  BMclient.loadFreeze(target,{false,false,false})
 			end)
             vRPclient.setHandcuffed(target,{true})
             vRPclient.teleport(target,{1641.5477294922,2570.4819335938,45.564788818359}) -- teleport inside jail
@@ -534,8 +566,8 @@ local ch_fine = {function(player,choice)
 			    if reason ~= nil and reason ~= "" then 
 	              local target = vRP.getUserSource({tonumber(target_id)})
 				  if target ~= nil then
-		            if tonumber(fine) > 100000 then
-  			          fine = 100000
+		            if tonumber(fine) > 1000 then
+  			          fine = 1000
 		            end
 		            if tonumber(fine) < 100 then
 		              fine = 100
@@ -609,8 +641,10 @@ local ch_godmode = {function(player,choice)
   if user_id ~= nil then
     if gods[player] then
 	  gods[player] = nil
+	  vRPclient.notify(player,{"~r~Godmode deactivated."})
 	else
 	  gods[player] = user_id
+	  vRPclient.notify(player,{"~g~Godmode activated."})
 	end
   end
 end, "Toggles admin godmode."}
@@ -853,28 +887,8 @@ end,"Spawn a vehicle model."}
 
 -- lockpick vehicle
 local ch_lockpickveh = {function(player,choice) 
-	BMclient.lockpickVehicle(player,{20,false}) -- 20s to lockpick, allow to carjack unlocked vehicles (has to be true for NoCarJack Compatibility)
+	BMclient.lockpickVehicle(player,{20,true}) -- 20s to lockpick, allow to carjack unlocked vehicles (has to be true for NoCarJack Compatibility)
 end,"Lockpick closest vehicle."}
-
-
--- lockpicking item
-vRP.defInventoryItem({"lockpicking_kit","Lockpicking Kit","Used to lockpick vehicles.", -- add it for sale to vrp/cfg/markets.lua if you want to use it
-function(args)
-  local choices = {}
-
-  choices["Lockpick"] = {function(player,choice)
-    local user_id = vRP.getUserId({player})
-    if user_id ~= nil then
-      if vRP.tryGetInventoryItem({user_id, "lockpicking_kit", 1, true}) then
-		BMclient.lockpickVehicle(player,{20,false}) -- 20s to lockpick, allow to carjack unlocked vehicles (has to be true for NoCarJack Compatibility)
-        vRP.closeMenu({player})
-      end
-    end
-  end,"Lockpick closest vehicle."}
-
-  return choices
-end,
-5.00})
 
 -- dynamic freeze
 local ch_freeze = {function(player,choice) 
@@ -905,6 +919,25 @@ local ch_freeze = {function(player,choice)
       end)
 	end
 end,"Freezes a player."}
+
+-- lockpicking item
+vRP.defInventoryItem({"lockpicking_kit","Lockpicking Kit","Used to lockpick vehicles.", -- add it for sale to vrp/cfg/markets.lua if you want to use it
+function(args)
+  local choices = {}
+
+  choices["Lockpick"] = {function(player,choice)
+    local user_id = vRP.getUserId({player})
+    if user_id ~= nil then
+      if vRP.tryGetInventoryItem({user_id, "lockpicking_kit", 1, true}) then
+		BMclient.lockpickVehicle(player,{20,true}) -- 20s to lockpick, allow to carjack unlocked vehicles (has to be true for NoCarJack Compatibility)
+        vRP.closeMenu({player})
+      end
+    end
+  end,"Lockpick closest vehicle."}
+
+  return choices
+end,
+5.00})
 
 -- ADD STATIC MENU CHOICES // STATIC MENUS NEED TO BE ADDED AT vRP/cfg/gui.lua
 vRP.addStaticMenuChoices({"police_weapons", police_weapons}) -- police gear
@@ -988,43 +1021,47 @@ vRP.registerMenuBuilder({"admin", function(add, data)
     local choices = {}
 	
 	if vRP.hasPermission({user_id,"admin.deleteveh"}) then
-      choices["DeleteVeh"] = ch_deleteveh -- Delete nearest vehicle (Fixed pull request https://github.com/Sighmir/vrp_basic_menu/pull/11/files/419405349ca0ad2a215df90cfcf656e7aa0f5e9c from benjatw)
+      choices["@DeleteVeh"] = ch_deleteveh -- Delete nearest vehicle (Fixed pull request https://github.com/Sighmir/vrp_basic_menu/pull/11/files/419405349ca0ad2a215df90cfcf656e7aa0f5e9c from benjatw)
 	end
 	
 	if vRP.hasPermission({user_id,"admin.spawnveh"}) then
-      choices["SpawnVeh"] = ch_spawnveh -- Spawn a vehicle model
+      choices["@SpawnVeh"] = ch_spawnveh -- Spawn a vehicle model
 	end
 	
 	if vRP.hasPermission({user_id,"admin.godmode"}) then
-      choices["Godmode"] = ch_godmode -- Toggles admin godmode (Disable the default admin.god permission to use this!) 
+      choices["@Godmode"] = ch_godmode -- Toggles admin godmode (Disable the default admin.god permission to use this!) 
 	end
 	
     if vRP.hasPermission({user_id,"player.blips"}) then
-      choices["Blips"] = ch_blips -- turn on map blips and sprites
+      choices["@Blips"] = ch_blips -- turn on map blips and sprites
     end
 	
     if vRP.hasPermission({user_id,"player.sprites"}) then
-      choices["Sprites"] = ch_sprites -- turn on only name sprites
+      choices["@Sprites"] = ch_sprites -- turn on only name sprites
     end
 	
     if vRP.hasPermission({user_id,"admin.crun"}) then
-      choices["Crun"] = ch_crun -- run any client command, any GTA V client native http://www.dev-c.com/nativedb/
+      choices["@Crun"] = ch_crun -- run any client command, any GTA V client native http://www.dev-c.com/nativedb/
     end
 	
     if vRP.hasPermission({user_id,"admin.srun"}) then
-      choices["Srun"] = ch_srun -- run any server command, any GTA V server native http://www.dev-c.com/nativedb/
+      choices["@Srun"] = ch_srun -- run any server command, any GTA V server native http://www.dev-c.com/nativedb/
     end
 
 	if vRP.hasPermission({user_id,"player.tptowaypoint"}) then
-      choices["TpToWaypoint"] = choice_tptowaypoint -- teleport user to map blip
+      choices["@TpToWaypoint"] = choice_tptowaypoint -- teleport user to map blip
 	end
 	
 	if vRP.hasPermission({user_id,"admin.easy_unjail"}) then
-      choices["UnJail"] = ch_unjail -- Un jails chosen player if he is jailed (Use admin.easy_unjail as permission to have this in admin menu working in non jailed players)
+      choices["@UnJail"] = ch_unjail -- Un jails chosen player if he is jailed (Use admin.easy_unjail as permission to have this in admin menu working in non jailed players)
     end
 	
 	if vRP.hasPermission({user_id,"admin.spikes"}) then
-      choices["Spikes"] = ch_spikes -- Toggle spikes
+      choices["@Spikes"] = ch_spikes -- Toggle spikes
+    end
+	
+	if vRP.hasPermission({user_id,"admin.bm_freeze"}) then
+      choices["@Freeze"] = ch_freeze -- Toggle freeze
     end
 	
     add(choices)
@@ -1061,12 +1098,12 @@ vRP.registerMenuBuilder({"police", function(add, data)
       choices["Spikes"] = ch_spikes -- Toggle spikes
     end
 	
-	if vRP.hasPermission({user_id,"police.freeze"}) then -- Freezes a player in position
-      choices["Freeze"] = choice_freeze
-    end
-	
     if vRP.hasPermission({user_id,"police.drag"}) then
       choices["Drag"] = ch_drag -- Drags closest handcuffed player
+    end
+	
+	if vRP.hasPermission({user_id,"police.bm_freeze"}) then
+      choices["Freeze"] = ch_freeze -- Toggle freeze
     end
 	
     add(choices)

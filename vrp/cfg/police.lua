@@ -56,7 +56,9 @@ cfg.seizable_items = {
   "credit",
   "weed",
   "M4A1",
-  "AK47"
+  "AK47",
+  "fake_id",
+  "driver"
 }
 
 -- jails {x,y,z,radius}

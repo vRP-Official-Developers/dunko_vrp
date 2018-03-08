@@ -52,14 +52,14 @@ vRP.user_sources = {} -- user sources
 MySQL.createCommand("vRP/base_tables",[[
 CREATE TABLE IF NOT EXISTS vrp_users(
   id INTEGER AUTO_INCREMENT,
-  last_login VARCHAR(255),
+  last_login VARCHAR(100),
   whitelisted BOOLEAN,
   banned BOOLEAN,
   CONSTRAINT pk_user PRIMARY KEY(id)
 );
 
 CREATE TABLE IF NOT EXISTS vrp_user_ids(
-  identifier VARCHAR(255),
+  identifier VARCHAR(100),
   user_id INTEGER,
   CONSTRAINT pk_user_ids PRIMARY KEY(identifier),
   CONSTRAINT fk_user_ids_users FOREIGN KEY(user_id) REFERENCES vrp_users(id) ON DELETE CASCADE
@@ -67,14 +67,14 @@ CREATE TABLE IF NOT EXISTS vrp_user_ids(
 
 CREATE TABLE IF NOT EXISTS vrp_user_data(
   user_id INTEGER,
-  dkey VARCHAR(255),
+  dkey VARCHAR(100),
   dvalue TEXT,
   CONSTRAINT pk_user_data PRIMARY KEY(user_id,dkey),
   CONSTRAINT fk_user_data_users FOREIGN KEY(user_id) REFERENCES vrp_users(id) ON DELETE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS vrp_srv_data(
-  dkey VARCHAR(255),
+  dkey VARCHAR(100),
   dvalue TEXT,
   CONSTRAINT pk_srv_data PRIMARY KEY(dkey)
 );

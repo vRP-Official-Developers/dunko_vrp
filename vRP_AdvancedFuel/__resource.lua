@@ -1,12 +1,25 @@
+client_script 'config.lua'
+server_script 'config.lua'
+
+
+ui_page 'notifs/index.html'
+
+files {
+	'notifs/index.html',
+	'notifs/hotsnackbar.css',
+	'notifs/hotsnackbar.js'
+}
+
+
 client_scripts {
-	'config_c.lua',
+	'notifs.lua',
+	'map.lua',
 	'client.lua',
 	'GUI.lua',
-	'map.lua',
 	'models_c.lua'
 }
 
-server_script {
-	'@vrp/lib/utils.lua',
-	'server.lua'
+server_scripts {
+    '@vrp/lib/utils.lua',
+    'server.lua'
 }

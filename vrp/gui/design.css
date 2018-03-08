@@ -18,52 +18,65 @@ html, body {
 
 .console{
   background-color: white;
-  color: red;
+  color: green;
   font-weight: bold;
 }
 
 /* menu */
 
 .menu{
-  background-color: rgba(255,255,255,0.0);
-  font-family: 'Roboto', sans-serif;
-  color: cyan;
-  width: 300px;
-  height: 99%;
-  margin-left: -75px;
-  margin: 25px; 
-  align-content:center;
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  margin-top: -50px;
-  margin-left: -100px; 
-  text-align: center;
-  cursor: pointer;
+	/* Edit the following image to your correct image or use mine that is located at: http://P4NDAzz.org/ePhone (THIS IS THE PHONE BACKGROUND)*/
+	background-image: url('http://P4NDAzz.org/ePhone/bg9.jpg');
+	/* --------------------------------------------------------------------------------------------------------- */
+    background-color: rgba(46, 138, 211, 0.4);
+    font-family: 'Roboto', sans-serif;
+    color: #ffffff;
+	background-size: cover;	
+    display: inline-block;
+    background-color: #1F2023;
+    border-radius: 30px 30px 0 0;
+    height: 440px;
+    padding: 40px 15px 0 15px;
+    width: 290px;
+    border-top: 1px solid #65686E;
+    border-right: 1px solid #65686E; 
+	margin-left: -75px;
+	margin: 25px; 
+	align-content:center;
+	position: fixed;
+	top: 50%;
+	left: 85%;
+	bottom:0px;
+	margin-top: 523px;
+	margin-left: -100px; 
+	text-align: center;
+	cursor: pointer;
+	cursor: text;	
 }
 
 .menu_description{
-  position: static;
-  float: left;
-  border-radius: 0px 0px 25px 0px;
+  background-color: rgba(46, 138, 211, 0.4);
+  border-radius: 0px 10px 10px 0px;
+ -moz-border-radius: 0px 10px 10px 0px;
+ -webkit-border-radius: 0px 10px 10px 0px;
+  border: 0px solid #000000;
+  font-family: 'Roboto', sans-serif;
+  color: #ffffff;
+  position: absolute;
   font-weight: bold;
   padding: 9px;
-  font-size: 1.2em;
+  font-size: 1.0em;
   max-width: 500px;
-  text-transform: uppercase;
-  text-align: left;
-  font-size: 12px;
-  border: 1px solid cyan;
-  color: cyan;
-  box-shadow: inset 1px 1px 18px 1px #000000;
-  background-color: #3A3A3A;
-  text-shadow: 1px 1px 4px #3A3A3A;
-  font-family: 'Roboto', sans-serif;
 }
 
 .menu h1{
- display:none;
- font-size: 0px;
+  background-color: rgba(255,0,0,0.75);
+  font-family: "Comic Sans MS", cursive, sans-serif;
+  color: white;
+  text-align: center;
+  font-size: 1.6em;
+  padding: 6px;
+  font-weight: bold;
 }
 
 .choices{
@@ -76,28 +89,14 @@ html, body {
 }
 
 .choices div{
-  padding: 10px 24px;
-  margin: 10px auto;
-  text-transform: uppercase;
-  font-size: 12px;
-  border: 1px solid cyan;
-  color: cyan;  
-  text-shadow: 1px 1px 4px #3A3A3A;
-  background-color: #3A3A3A;
-  border-radius: 25px;
-  font-family: 'Roboto', sans-serif;
-  cursor: pointer;
+  padding: 6px;
+  font-size: 1.3em;
   
 }
 
 .choices .selected{
-  background-color: cyan;
-  color: #3A3A3A;
-  font-family: 'Roboto', sans-serif;
-  border: 1px solid #3A3A3A;
-  border-radius: 25px;
-  text-shadow: 1px 1px 4px #00FFFF; 
-  box-shadow: inset 1px 1px 18px 1px #000000;
+  background-color: rgba(255,255,255,0.90);
+  color: black;
 }
 
 /* progress bar */

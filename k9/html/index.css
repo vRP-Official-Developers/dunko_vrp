@@ -1,0 +1,90 @@
+body {
+    background-color: transparent !important;
+}
+
+#k9_base {
+    position: absolute;
+    width: 250px;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: gray;
+    border-color: black;
+    border-width: 1px;
+    border-style: solid;
+}
+
+#k9_title {
+    text-align: center;
+    color: white;
+    background-color: rgba(0, 0, 0, 0.5);
+    border-color: black;
+    border-width: 1px;
+    border-bottom-style: solid;
+    font-size: 20px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 5px;
+    padding-right: 5px;
+    font-weight: bold;
+}
+
+#icon_left {
+    position: absolute;
+    left: 15px;
+}
+
+#icon_right {
+    position: absolute;   
+    right: 15px;
+}
+
+#k9namebox {
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    border-style: solid;
+    border-color: black;
+    border-width: 1px;
+    width: 50%;
+    font-size: 15px;
+    height: 30px;
+    text-align: center;
+}
+
+#k9_footer {
+    position: relative;
+    color: white;
+    font-size: 10px;
+    text-align: center;;
+}
+
+.button_style {
+    position: relative;
+    width: 90%;
+    height: 35px;
+    left: 50%;
+    transform: translateX(-50%);
+    margin-top: 5px;
+    border-style: none;
+    border-radius: 5px;
+}
+
+.icon_style {
+    width: 20px;
+    height: 20px;
+}
+
+.header {
+    text-align: center;
+}
+
+#cancel_button {
+    position: absolute;
+    left: 20%;
+}
+
+#accept_button {
+    position: relative;
+    right: 20%;
+}

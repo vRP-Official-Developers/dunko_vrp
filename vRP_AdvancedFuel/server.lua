@@ -4,9 +4,6 @@ local Proxy = module("vrp", "lib/Proxy")
 vRP = Proxy.getInterface("vRP")
 vRPclient = Tunnel.getInterface("vRP","vRP_fuel")
 
-randomPrice = true --Random the price of each stations
-price = 1 --If random price is on False, set the price here for 1 liter
-
 local players = {}
 local serverEssenceArray = {}
 local StationsPrice = {}
@@ -55,7 +52,12 @@ AddEventHandler("essence:setToAllPlayerEscense", function(essence, vplate, vmode
 			table.insert(serverEssenceArray,{plate=vplate,model=vmodel,es=essence})
 		end
 	end
+
+	TriggerClientEvent('essence:syncWithAllPlayers', -1, essence, vplate, vmodel)
 end)
+
+
+
 
 RegisterServerEvent("essence:buy")
 AddEventHandler("essence:buy", function(amount, index,e)
@@ -72,7 +74,7 @@ AddEventHandler("essence:buy", function(amount, index,e)
 	if(vRP.tryPayment({user_id,toPay})) then
 		TriggerClientEvent("essence:hasBuying", _source, amount)
 	else
-		TriggerClientEvent("showNotif", _source, "~r~You don't have enough money.")
+		TriggerClientEvent("showErrorNotif", _source, "You don't have enought money.")
 	end
 	
 end)
@@ -97,6 +99,35 @@ AddEventHandler("vehicule:getFuel", function(plate,model)
 end)
 
 
+
+RegisterServerEvent("advancedFuel:setEssence_s")
+AddEventHandler("advancedFuel:setEssence_s", function(percent, vplate, vmodel)
+	local bool, ind = searchByModelAndPlate(vplate, vmodel)
+
+	local percentToEs = (percent/100)*0.142
+
+	if(bool) then
+		serverEssenceArray[ind].es = percentToEs
+	else
+		table.insert(serverEssenceArray,{plate=vplate,model=vmodel,es=percentToEs})
+	end
+end)
+
+RegisterServerEvent("essence:buyCan")
+AddEventHandler("essence:buyCan", function()
+	local _source = source
+
+	local toPay = petrolCanPrice
+	local user_id = vRP.getUserId({_source})
+	if(vRP.tryPayment({user_id,toPay})) then
+		TriggerClientEvent("essence:buyCan", _source)
+	else
+		TriggerClientEvent("showErrorNotif", _source, "You don't have enought money.")
+	end
+end)
+
+
+
 function round(num, dec)
   local mult = 10^(dec or 0)
   return math.floor(num * mult + 0.5) / mult
@@ -106,7 +137,7 @@ end
 function renderPrice()
     for i=0,34 do
         if(randomPrice) then
-            StationsPrice[i] = math.random(15,50)/100
+            StationsPrice[i] = round(math.random(),2) + math.random(2,3) + .009
         else
         	StationsPrice[i] = price
         end

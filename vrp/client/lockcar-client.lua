@@ -2,7 +2,7 @@ Citizen.CreateThread(function()
   while true do
     Citizen.Wait(1)
     local ped = GetPlayerPed(-1)
-      if IsControlPressed(0,303) then -- ~ Key
+      if IsControlPressed(0,170) then -- F3 Key
         if tvRP.getNearestOwnedVehicle(5) ~= null then
           local veh = "car"
           if not ok then -- prevent stealing detection on owned vehicle

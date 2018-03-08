@@ -4,5 +4,12 @@ description "vRP basic mission"
 
 dependency "vrp"
 
-server_script "@vrp/lib/utils.lua"
-server_script "server.lua"
+-- client_scripts{ 
+  -- "@vrp/lib/utils.lua",
+  -- "client.lua"
+-- }
+
+server_scripts{ 
+  "@vrp/lib/utils.lua",
+  "server.lua"
+}

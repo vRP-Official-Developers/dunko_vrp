@@ -7,10 +7,24 @@ AddEventHandler('paycheck:salary', function()
 		vRP.giveMoney(user_id,2000)
 		vRPclient.notify(source,{"Payday: $2000"})
 	end		
-	if vRP.hasPermission(user_id,"emergency.paycheck") then
+	-- EMS Paychecks	
+	if vRP.hasPermission(user_id,"emsChief.paycheck") then
+		vRP.giveMoney(user_id,5000)
+		vRPclient.notify(source,{"Payday: $5000"})
+	end
+	if vRP.hasPermission(user_id,"emsLieutenant.paycheck") then
+		vRP.giveMoney(user_id,3000)
+		vRPclient.notify(source,{"Payday: $3000"})
+	end
+	if vRP.hasPermission(user_id,"emsMedic.paycheck") then
 		vRP.giveMoney(user_id,2000)
 		vRPclient.notify(source,{"Payday: $2000"})
 	end
+	if vRP.hasPermission(user_id,"emsSearchRescue.paycheck") then
+		vRP.giveMoney(user_id,2500)
+		vRPclient.notify(source,{"Payday: $2500"})
+	end
+	-- end EMS Paychecks
 	if vRP.hasPermission(user_id,"repair.paycheck") then
 		vRP.giveMoney(user_id,2000)
 		vRPclient.notify(source,{"Payday: $2000"})
@@ -84,6 +98,10 @@ AddEventHandler('paycheck:salary', function()
 		vRPclient.notify(source,{"Payday: $2000"})
 	end
 	if vRP.hasPermission(user_id,"air.paycheck") then
+		vRP.giveMoney(user_id,2000)
+		vRPclient.notify(source,{"Payday: $2000"})
+	end
+	if vRP.hasPermission(user_id,"trash.paycheck") then
 		vRP.giveMoney(user_id,2000)
 		vRPclient.notify(source,{"Payday: $2000"})
 	end

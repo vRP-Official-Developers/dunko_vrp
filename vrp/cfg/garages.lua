@@ -499,10 +499,10 @@ cfg.garage_types = {
     _config = {vtype="bike",blipid=85,blipcolor=31,permissions={"delivery.vehicle"}},
     ["faggio3"] = {"faggio3",0, "faggio3"}
   },
-  ["santa"] = {
-    _config = {vtype="bike",blipid=85,blipcolor=31,permissions={"santa.vehicle"}},
-    ["hydra"] = {"Santa's Sled",0, "hydra"}
-  },  
+  -- ["santa"] = {
+    -- _config = {vtype="bike",blipid=85,blipcolor=31,permissions={"santa.vehicle"}},
+    -- ["hydra"] = {"Santa's Sled",0, "hydra"}
+  -- },  
   ["repair"] = {
     _config = {vtype="car",blipid=50,blipcolor=31,permissions={"repair.vehicle"}},
     ["towtruck2"] = {"towtruck2",0, "towtruck2"},
@@ -511,6 +511,10 @@ cfg.garage_types = {
   ["bankdriver"] = {
     _config = {vtype="car",blipid=67,blipcolor=4,permissions={"bankdriver.vehicle"}},
     ["stockade"] = {"stockade",0, "stockade"}
+  },
+  ["Trash Collector"] = {
+    _config = {vtype="car",blipid=67,blipcolor=4,permissions={"trash.vehicle"}},
+    ["trash"] = {"Truck",0, "trash"}
   },
   ["Medical Driver"] = {
     _config = {vtype="car",blipid=67,blipcolor=4,permissions={"medical.vehicle"}},
@@ -565,6 +569,10 @@ cfg.garages = {
   {"House Garage",-121.71002960205,509.85540771484,142.5652923584},
   {"House Garage",-188.32077026367,502.87573242188,134.23774719238},
   {"House Garage",1366.5837402344,1147.4722900391,113.41327667236 },
+  {"House Garage",-36.333103179932,-674.09722900391,32.33805847168},
+  {"House Garage",1274.7135009766,-1732.7083740234,52.04536819458},
+  {"House Garage",34.516819000244,6604.0004882813,32.449085235596},
+  {"House Garage",-555.20428466797,664.56500244141,145.16401672363},
   {"Police Helicopters",449.30340576172,-981.24963378906,43.69165802002}, -- Main PD
   {"Police Helicopters",1770.2171630859,3239.5561523438,42.13171005249}, -- Sandy Shores
   {"Police Helicopters",-475.24264526367,5988.7353515625,31.336685180664}, -- Paleto Bay
@@ -578,10 +586,9 @@ cfg.garages = {
   {"Pilotsa",1734.9053955078,3297.9689941406,41.223503112793},
   {"airP",2128.9069824219,4806.134765625,41.168750762939},
   {"airH",-745.14343261719,-1468.5361328125,5.0005240440369},
-  {"airP",2128.9069824219,4806.134765625,41.168750762939},
   {"airP",1734.9053955078,3297.9689941406,41.223503112793},
-  {"Santa",-1345.333984375,-2692.7885742188,13.944937705994}  
-  
+  -- {"Santa",-1345.333984375,-2692.7885742188,13.944937705994}  
+  {"Trash Collector",768.86297607422,-1410.4896240234,26.502605438232}
  
   
   
