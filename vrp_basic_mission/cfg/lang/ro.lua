@@ -2,7 +2,7 @@
 local lang = {
   repair = "Repara {1}.",
   reward = "Recompensa: {1} $.",
-  bankdriver = "Bani primiti {1}.",
+  bankdriver = "Bani dati {1}.",
   reward = "Recompensa: {1} $.",
   delivery = {
     title = "Cumpara alimentele de la magazine (vezi mapa) si dupa adu-le la mine!",
