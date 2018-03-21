@@ -457,6 +457,10 @@ cfg.garage_types = {
     _config = {vtype="car",blipid=56,blipcolor=38,permissions={"Bounty.vehicle"}},
     ["fbi"] = {"Unmarked",0, "police"}
   },
+  ["Mafia Garage"] = {
+    _config = {vtype="car",blipid=50,blipcolor=3,permissions={"mafia.vehicle"}},
+    ["infernus"] = {"Infernus", 0, ""}, -- THIS IS JUST AN EXAMPLE , ADD MORE IF YOU WANT.
+  },	
   ["emergency"] = {
     _config = {vtype="car",blipid=50,blipcolor=3,permissions={"emergency.vehicle"}},
     ["Ambulance"] = {"Ambulance",0, "emergency"},
@@ -539,6 +543,7 @@ cfg.garages = {
   {"police",451.2121887207,-1018.2822875977,28.495378494263},	-- jobs garage
   {"Cadet",451.2121887207,-1018.2822875977,28.495378494263}, --- cadet garage
   {"police",477.99038696289,-1020.9154663086,28.011201858521},
+  {"Mafia Garage",1416.6524658203,3622.4460449219,34.863536834717}, -- UPDATE IF YOU WANT. 	
   {"Bounty",512.07818603516,-3052.1579589844,6.0687308311462},  
   {"police",1868.5435791016,3696.0295410156,33.5693359375},  -- sandy shores
   {"police",-476.92425537109,6026.9951171875,31.340547561646},  -- paleto
