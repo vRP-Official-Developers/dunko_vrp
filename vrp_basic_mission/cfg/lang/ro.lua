@@ -1,15 +1,15 @@
 
 local lang = {
   repair = "Repara {1}.",
-  reward = "Premiu: {1} $.",
-  bankdriver = "Bani dati {1}.",
-  reward = "Premiu: {1} $.",
+  reward = "Recompensa: {1} $.",
+  bankdriver = "Bani primiti {1}.",
+  reward = "Recompensa: {1} $.",
   delivery = {
-    title = "Cumpara itemele de la magazine (vezi mapa) si dupa adule la mine!",
+    title = "Cumpara alimentele de la magazine (vezi mapa) si dupa adu-le la mine!",
     item = "- {2} {1}"
   },
   drugseller = {
-	title = "Gaseste Delatorul Ilegal, aduna semintele din locatiile date de el, du-le la laboratorul de droguri (vezi mapa) si dupa adumile!",
+	title = "Gaseste Informatorul Ilegal, aduna semintele din locatiile date de el, du-le la laboratorul de droguri (vezi mapa) si dupa adumi-le!",
 	item = "- {2} {1}"
 	},
   hacker = {
@@ -17,7 +17,7 @@ local lang = {
 	item = "- {2} {1}"
 	},
   fisherman = {
-	title = "Du-te la pescuit (vezi mapa) si dupa adumi Pesti!",
+	title = "Du-te la pescuit (vezi mapa) si dupa adu-mi pestii!",
 	item = "- {2} {1}"
     },
   weapons_smuggler = {
@@ -41,15 +41,15 @@ local lang = {
 	item = "- {2} {1}"
     },
   ems = {
-	title = "Ia rapoarte medicale (vezi mapa) si dupa adule la spital.",
+	title = "Ia rapoarte medicale (vezi mapa) si dupa adu-le la spital.",
 	item = "- {2} {1}"
     },
   trash = {
-	title = "Colecteaza gunoiul (vezi mapa) si dupa adumil.",
+	title = "Colecteaza gunoiul (vezi mapa) si dupa adumi-l.",
 	item = "- {2} {1}"
     },
   forger = {
-	title = "Ia carduri de credit de la hackeri, converteaza-le intr-un ID Fals (vezi mapa) si adumile!",
+	title = "Ia carduri de credit de la hackeri, converteaza-le intr-un ID Fals (vezi mapa) si adumi-le!",
 	item = "- {2} {1}"
     }
 }
