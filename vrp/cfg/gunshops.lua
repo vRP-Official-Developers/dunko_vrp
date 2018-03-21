@@ -170,6 +170,22 @@ cfg.gunshop_types = {
     ["WEAPON_STUNGUN"] = {"Tazer",0,0,""},
     ["WEAPON_COMBATPISTOL"] = {"Combat Pistol",0,0,""}
   },
+ ["Mafia"] = {
+_config = {blipid=110,blipcolor=74, permissions = {"mafia.loadshop"}},
+    ["WEAPON_PETROLCAN"] = {"Petrol",0,0,""},
+    ["WEAPON_PUMPSHOTGUN"] = {"Pump Shotgun",0,0,""},
+    ["WEAPON_FLASHLIGHT"] = {"Flashlight",0,0,""},
+    ["WEAPON_FLARE"] = {"Flare",0,0,""},
+    ["WEAPON_SNIPERRIFLE"] = {"Sniper Rifle",0,0,""},
+    ["WEAPON_ADVANCEDRIFLE"] = {"Carabine",0,0,""},
+    ["WEAPON_APPISTOL"] = {"Ap Pistol",0,0,""},
+    ["WEAPON_MARKSMANPISTOL"] = {"Marksman Pistol",0,0,""},
+    ["WEAPON_SNSPISTOL"] = {"Pistol",0,0,""},
+    ["WEAPON_CARBINERIFLE"] = {"Carabineri Rifle",0,0,""},
+    ["WEAPON_GRENADE"] = {"Grenade",0,0,""},
+    ["WEAPON_MOLOTOV"] = {"Molotov",0,0,""},
+    ["WEAPON_ASSAULTRIFLE"] = {"AK47",0,0,""}
+},	  
   ["Bounty_Hunter"] = {
     _config = {blipid=150,blipcolor=1, permissions = {"Bounty.loadshop"}},
     ["WEAPON_PETROLCAN"] = {"Petrol",0,0,""},
@@ -205,7 +221,8 @@ cfg.gunshops = {
   {"SWAT", 461.33551025391,-981.11071777344,30.689584732056},
   {"Cadet", 461.33551025391,-981.11071777344,30.689584732056},
   {"policeloadout", 461.33551025391,-981.11071777344,30.689584732056},--- main pd
-  {"Bounty_Hunter", 563.62060546875,-3126.9626464844,18.768604278564}, 
+  {"Bounty_Hunter", 563.62060546875,-3126.9626464844,18.768604278564},
+  {"Mafia", 1397.0635986328,3604.9565429688,38.941886901855}, -- EXAMPLE , UPDATE IF YOU WANT
   {"policeloadout", 1851.7342529297,3683.7416992188,34.267044067383}, -- sandy shores
   {"policeloadout", -442.724609375,6012.6293945313,31.716390609741}, -- paleto
   {"bombsticky", 708.847778320313,-959.231750488281,30.3953418731689},
