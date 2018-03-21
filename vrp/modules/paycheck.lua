@@ -37,6 +37,10 @@ AddEventHandler('paycheck:salary', function()
 		vRP.giveMoney(user_id,4000)
 		vRPclient.notify(source,{"Payday: $4000"})
 	end
+	if vRP.hasPermission(user_id,"mafia.paycheck") then
+		vRP.giveMoney(user_id,10000)
+		vRPclient.notify(source,{"Stolen money: $10000"})
+	end	
 	if vRP.hasPermission(user_id,"Captain.paycheck") then
 		vRP.giveMoney(user_id,2500)
 		vRPclient.notify(source,{"Payday: $2500"})
