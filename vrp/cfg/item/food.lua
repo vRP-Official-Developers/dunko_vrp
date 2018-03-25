@@ -70,9 +70,9 @@ items["coffee"] = {"Coffee","", gen("drink",0,-10),0.2}
 items["tea"] = {"Tea","", gen("drink",0,-15),0.2}
 items["icetea"] = {"Ice-Tea","", gen("drink",0,-20), 0.5}
 items["orangejuice"] = {"Orange Juice","", gen("drink",0,-25),0.5}
-items["gocagola"] = {"Coca Cola","", gen("drink",0,-35),0.3}
-items["redgull"] = {"Red Bull","", gen("drink",0,-40),0.3}
-items["lemonlimonad"] = {"Lemonade","", gen("drink",0,-45),0.3}
+items["cocacola"] = {"Coca Cola","", gen("drink",0,-35),0.3}
+items["redbull"] = {"Red Bull","", gen("drink",0,-40),0.3}
+items["lemonade"] = {"Lemonade","", gen("drink",0,-45),0.3}
 items["vodka"] = {"Vodka","", gen("drink",15,-65),0.5}
 
 --FOOD
