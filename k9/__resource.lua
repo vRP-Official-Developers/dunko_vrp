@@ -7,6 +7,10 @@ ui_page("html/index.html")
 
 files {
     "html/index.html",
+    "html/libraries/axios.min.js",
+    "html/libraries/vue.min.js",
+    "html/libraries/vuetify.js",
+    "html/libraries/vuetify.css",
     "html/style.css",
     "html/script.js",
     "html/images/dog_left.png",
