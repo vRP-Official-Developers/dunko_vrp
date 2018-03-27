@@ -417,7 +417,7 @@ local lang = {
     },
     replace = {
       title = "Repune vehiculul",
-      description = "Repunde cel mai apropiat vehicul pe pamant."
+      description = "Repune cel mai apropiat vehicul pe pamant."
     },
     repair = {
       title = "Repara vehicul",

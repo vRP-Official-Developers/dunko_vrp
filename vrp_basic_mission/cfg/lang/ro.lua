@@ -37,11 +37,11 @@ local lang = {
 	item = "- {2} {1}"
     },
   police = {
-	title = "Ia rapoarte de politie (vezi mapa) si da-le managerilor de banci ca sa arate Prezenta Politiei.",
+	title = "Ia rapoartele de politie (vezi mapa) si da-le managerilor de banci ca sa arate Prezenta Politiei.",
 	item = "- {2} {1}"
     },
   ems = {
-	title = "Ia rapoarte medicale (vezi mapa) si dupa adu-le la spital.",
+	title = "Ia rapoartele medicale (vezi mapa) si dupa adu-le la spital.",
 	item = "- {2} {1}"
     },
   trash = {
@@ -49,7 +49,7 @@ local lang = {
 	item = "- {2} {1}"
     },
   forger = {
-	title = "Ia carduri de credit de la hackeri, converteaza-le intr-un ID Fals (vezi mapa) si adumi-le!",
+	title = "Obtine carduri de credit de la hackeri, converteste-le intr-un ID Fals (vezi mapa) si adumi-le!",
 	item = "- {2} {1}"
     }
 }
