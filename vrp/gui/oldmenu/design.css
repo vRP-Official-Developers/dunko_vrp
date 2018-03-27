@@ -1,0 +1,222 @@
+*{
+  margin: 0;
+  padding: 0;
+}
+
+/* make body full page */
+html, body {
+  margin: 0;
+  height: 100%;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+@font-face {
+  font-family: 'Pricedown';
+  src: url(fonts/Pdown.woff);
+}
+
+.console{
+  background-color: white;
+  color: green;
+  font-weight: bold;
+}
+
+/* menu */
+
+.menu{
+	/* Edit the following image to your correct image or use mine that is located at: http://P4NDAzz.org/ePhone (THIS IS THE PHONE BACKGROUND)*/
+	background-image: url('http://P4NDAzz.org/ePhone/bg9.jpg');
+	/* --------------------------------------------------------------------------------------------------------- */
+    background-color: rgba(46, 138, 211, 0.4);
+    font-family: 'Roboto', sans-serif;
+    color: #ffffff;
+	background-size: cover;	
+    display: inline-block;
+    background-color: #1F2023;
+    border-radius: 30px 30px 0 0;
+    height: 440px;
+    padding: 40px 15px 0 15px;
+    width: 290px;
+    border-top: 1px solid #65686E;
+    border-right: 1px solid #65686E; 
+	margin-left: -75px;
+	margin: 25px; 
+	align-content:center;
+	position: fixed;
+	top: 50%;
+	left: 85%;
+	bottom:0px;
+	margin-top: 523px;
+	margin-left: -100px; 
+	text-align: center;
+	cursor: pointer;
+	cursor: text;	
+}
+
+.menu_description{
+  background-color: rgba(46, 138, 211, 0.4);
+  border-radius: 0px 10px 10px 0px;
+ -moz-border-radius: 0px 10px 10px 0px;
+ -webkit-border-radius: 0px 10px 10px 0px;
+  border: 0px solid #000000;
+  font-family: 'Roboto', sans-serif;
+  color: #ffffff;
+  position: absolute;
+  font-weight: bold;
+  padding: 9px;
+  font-size: 1.0em;
+  max-width: 500px;
+}
+
+.menu h1{
+  background-color: rgba(255,0,0,0.75);
+  font-family: "Comic Sans MS", cursive, sans-serif;
+  color: white;
+  text-align: center;
+  font-size: 1.6em;
+  padding: 6px;
+  font-weight: bold;
+}
+
+.choices{
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
+.choices::-webkit-scrollbar{ 
+  display: none; 
+}
+
+.choices div{
+  padding: 6px;
+  font-size: 1.3em;
+  
+}
+
+.choices .selected{
+  background-color: rgba(255,255,255,0.90);
+  color: black;
+}
+
+/* progress bar */
+.progressbar{
+  position: absolute;
+}
+
+.progressbar .inner{
+}
+
+.progressbar .label{
+  position: absolute;
+  color: white;
+  font-weight: bold;
+  text-align: center;
+  text-shadow: 2px 2px black;
+}
+
+/* wprompt */
+.wprompt{
+  background-color: #3A3A3A;
+  border: 1px solid cyan;
+  font-family: 'Roboto', sans-serif;
+  box-shadow: 1px 1px 18px 1px #000000;
+  color: cyan;  
+  width: 300px;
+  height: 200px;
+  border-radius: 0px 25px 25px 0px;
+  display: flex;
+  padding: 5px;
+  flex-direction: column;
+  cursor: pointer;
+}
+
+.wprompt h1{
+  font-size: 12px;
+  font-family: 'Roboto', sans-serif;
+}
+
+.wprompt textarea{
+  outline: none !important;
+  background-color: rgba(58,58,58,0.75);
+  border: 1px solid rgba(0,255,255,0.30);
+  box-shadow: inset 1px 1px 18px 1px #000000;
+  border-radius: 0px 25px 25px 0px;
+  flex: 1;
+  color: cyan;
+  width: 100%;
+  padding: 12px;
+  resize: none;
+  box-sizing: border-box;
+}
+
+.wprompt textarea:focus{
+  outline: none !important;
+}
+
+.wprompt .help{
+  font-size: 12px;
+  font-family: 'Roboto', sans-serif;
+  padding: 3px;
+  text-transform: uppercase;
+}
+
+/* request manager */
+.request_manager{
+  position: absolute;
+  bottom: -1px;
+  right: 25px;
+  text-align: right;
+}
+
+.request_manager div{
+  margin-bottom: 0px;
+}
+
+.request_manager div > span{
+  background-color: #3A3A3A;
+  border: 1px solid cyan;
+  font-family: 'Roboto', sans-serif;
+  box-shadow: inset 1px 1px 18px 1px #000000;
+  border-radius: 5px 5px 0px 0px;
+  font-size: 25px;
+  color: white;
+  margin-bottom: -1px;
+  font-weight: bold;
+  padding: 5px;
+  text-align: center;
+}
+
+.request_manager .yes{
+  font-family: 'Roboto', sans-serif;
+  padding-left: 15px;
+  color: rgb(0,255,0);
+  font-size: 1em;
+  text-transform: uppercase;
+}
+
+.request_manager .no{
+  font-family: 'Roboto', sans-serif;
+  color: rgb(255,0,0);
+  font-size: 1em;
+  text-transform: uppercase;
+}
+
+/* announce */
+
+.announce{
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 780px;
+  height: 130px;
+  padding: 10px;
+  margin-left: -400px;
+  font-weight: bold;
+  font-size: 1.1em;
+  text-shadow: 2px 2px black;
+  color: white;
+  display: none;
+  opacity: 0.90;
+}
+

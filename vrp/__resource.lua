@@ -65,14 +65,16 @@ client_scripts{
 files{
   "cfg/client.lua",
   "gui/index.html",
-  "gui/design.css",
-  "gui/main.js",
-  "gui/Menu.js",
+  "gui/main.css",
+  "gui/ogrp.menu.css",
+  "gui/ogrp.main.js",
+  "gui/ogrp.menu.js",
   "gui/ProgressBar.js",
   "gui/WPrompt.js",
   "gui/RequestManager.js",
   "gui/AnnounceManager.js",
   "gui/Div.js",
   "gui/dynamic_classes.js",
-  "gui/fonts/Pdown.woff"
+  "gui/fonts/Pdown.woff",
+  "gui/fonts/GTA.woff"
 }

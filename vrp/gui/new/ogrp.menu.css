@@ -1,0 +1,105 @@
+* {
+	margin: 0;
+	padding: 0;
+}
+html, body {
+	margin: 0;
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+	display: block;
+}
+@font-face {
+	font-family: 'GTA';
+	src: url(fonts/GTA.woff);
+}
+.ogrp_console {
+	display: block;
+	position: absolute;
+	top:0px;
+	left: 0px;
+	width: 100%;
+	height: 400px;
+	color: red;
+	font-weight: bold;
+}
+.ogrp_mainMenu {
+	display: block;
+	width: 200px;
+	height: 401px;
+	position: absolute;
+	z-index: 3000;
+	bottom: 50px;
+	right: 75px;
+	text-align: center;
+	border-style: solid;
+	border-width: 30px 9px 30px 9px;
+	border-image: url(https://s14.postimg.org/rlqeeab4x/menu.png) 30 9 30 9;
+	border-radius: 32px;
+	box-shadow: -1px -1px 60px -1px rgba(0,0,0,1);
+	cursor: pointer;
+	background-image: url(http://P4NDAzz.org/ePhone/bg9.jpg);
+	background-size: cover;
+}
+.ogrp_menuHeader {
+	background-color: rgb(44, 189, 247);
+	font-family: 'Unica One', cursive;
+	color: white;
+	text-transform: uppercase;
+	text-align: center;
+	font-size: 16px;
+	font-weight: bold;
+	padding: 6px;
+	border: 1px solid #000000;
+	box-shadow: inset -1px -1px 60px 0px rgba(0,0,0,1);
+}
+.ogrp_menuChoices {
+	display: block;
+	overflow: auto;
+	height: 366px;
+}
+.ogrp_menuChoices::-webkit-scrollbar {
+	display: none;
+}
+.ogrp_menuChoice {
+	display: block;
+	padding: 10px;
+	font-size: 16px;
+	font-family: 'GTA';
+	line-height: 24px;
+	height: 24px;
+	background-color: rgba(0, 0, 0, .5);
+	color: #fff;
+	text-align: left;
+	border-bottom: 1px solid #000;
+	border-top: 1px solid #000;
+}
+.ogrp_MenuChoiceSelected {
+	color: #000;
+	border-bottom: 1px solid #000;
+	border-top: 1px solid #000;
+	background-color: rgba(146, 213, 126, 1);
+	box-shadow: inset -1px -1px 60px 0px rgba(0,0,0,.5);
+}
+.ogrp_menuDescription {
+	display: block;
+	position: absolute;
+	top: 0px;
+	left: -15px;
+	border-radius: 0px 0px 4px 4px;
+	box-shadow: -1px -1px 60px 0px rgba(0,0,0,1);
+	background-color: rgba(0,0,0,0.5);
+	padding: 9px;
+	-webkit-transform: translate(-100%, 0);
+	text-align: left;
+	margin-right: 10px;
+}
+.ogrp_menuDescriptionContent {
+	display: block;
+	max-width: 350px;
+	text-align: left;
+	font-family: 'Unica One', cursive;
+	font-size: 15px;
+	color: white;
+	font-weight: bold;
+}
