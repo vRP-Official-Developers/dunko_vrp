@@ -1,3 +1,4 @@
+@ -1,83 +0,0 @@
 resource_manifest_version '05cfa83c-a124-4cfa-a768-c24a5811d8f9'
 
 description "RP module/framework"
@@ -65,13 +66,10 @@ client_scripts{
 files{
   "cfg/client.lua",
   "gui/index.html",
-  "gui/main.css",
-  -- "gui/ogrp.menu.css",
-  -- "gui/ogrp.main.js",
-  -- "gui/ogrp.menu.js",
-  "gui/Menu.js",
   "gui/design.css",
   "gui/main.js",
+  "gui/ogrp.main.js",
+  "gui/ogrp.menu.js",
   "gui/ProgressBar.js",
   "gui/WPrompt.js",
   "gui/RequestManager.js",

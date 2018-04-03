@@ -1,132 +1,165 @@
+function MENU() {
+	var id,menuName, selected, menuLevel, goingBack;
 
-//events
-// .onValid(choice)
-// .onClose()
+	this.opened = false;
 
-function Menu()
-{
-  this.name = "Menu";
-  this.choices = [];
-  this.opened = false;
-  this.selected = -1;
-  this.el_choices = [];
+	debug = function(msg) {
+		$("#ogrpErrDiv").prepend("<br />Menu Debug: " + msg);
+	};
 
-  this.div_desc = document.createElement("div");
-  this.div_desc.classList.add("menu_description");
+	init = function() {
+		id = 0;
+		menuName = "";
+		menuLevel = -1;
+		selected = -1;
+		goingBack = false;
 
-  this.div = document.createElement("div");
-  this.div.classList.add("menu");
+		buildMainMenu();
+	};
 
-  this.div_header = document.createElement("h1");
-  this.div_choices = document.createElement("div");
-  this.div_choices.classList.add("choices");
+	buildMainMenu = function() {
+		$("body").append(
+			$("<div>",{"id":"mainMenu","class":"mainMenu"}).css("display","none").append(
+				$("<h1>",{"id":"menuHeader","class":"menuHeader"})
+			).append(
+				$("<div>",{"id":"menuChoices","class":"menuChoices"})
+			).append(
+				$("<div>",{"id":"menuDescription","class":"menuDescription"}).append(
+					$("<div>",{"id":"menuDescriptionContent","class":"menuDescriptionContent"})
+				)
+			)
+		);
+	};
 
-  this.div.appendChild(this.div_header);
-  this.div.appendChild(this.div_choices);
+	getChoicesCount = function() {
+		return $("#menuChoices").find(".menuChoice").length;
+	};
 
-  document.body.appendChild(this.div);
-  document.body.appendChild(this.div_desc);
-  this.div.style.display = "none";
-  this.div_desc.style.display = "none";
-}
+	getChoiceText = function() {
+		return $("#menuChoices").find(".MenuChoiceSelected")[0].innerHTML;
+	};
 
-Menu.prototype.open = function(name,choices) //menu name and choices as [name,desc] array
-{
-  this.close();
-  this.opened = true;
+	getChoiceDesc = function() {
+		var selectedChoiceEl = $("#menuChoices").find(".MenuChoiceSelected")[0];
 
-  this.div.style.display = "block";
+		return ($(selectedChoiceEl).attr("data-desc")) ? $(selectedChoiceEl).data("desc"):"";
+	};
 
-  this.name = name;
-  this.choices = choices;
+	scrollToMenuOption = function() {
+		if($("#menuChoices").find(".MenuChoiceSelected").length) {
+			var scrollto = $($("#menuChoices").find(".MenuChoiceSelected"));
+			var container = $("#menuChoices");
 
-  this.div_choices.innerHTML = "";
-  this.el_choices = [];
-  for(var i = 0; i < this.choices.length; i++){
-    var el = document.createElement("div");
-    el.innerHTML = this.choices[i][0];
+			if(scrollto.offset().top < container.offset().top || scrollto.offset().top + scrollto.height() >= container.offset().top+container.height()) {
+				container.scrollTop(scrollto.offset().top - container.offset().top + container.scrollTop());
+			}
+		}
+	};
 
-    this.el_choices.push(el);
-    this.div_choices.appendChild(el);
-  }
+	setHeaderColor = function(headerColor) {
+		$("#menuHeader").css("backgroundColor",headerColor);
+	};
 
-  //build dom
-  this.div_header.innerHTML = name;
+	this.open = function(data) {
+		menuName = data.menudata.name;
+		var choices = data.menudata.choices;
+		var css = (data.menudata.css) ? data.menudata.css:false;
+		var headerColor = (css.header_color) ? css.header_color:false;
 
-  this.div_choices.style.height = (this.div.offsetHeight-this.div_choices.offsetTop)+"px";
+		$("#menuChoices").empty();
+		$("#menuHeader").html(menuName);
 
-  this.setSelected(0);
-}
+		setHeaderColor(headerColor);
 
-Menu.prototype.setSelected = function(i)
-{
-  //check validity
-  if(this.selected >= 0 && this.selected < this.el_choices.length){
-    //remove previous selected class
-    this.el_choices[this.selected].classList.remove("selected");
-    //hide desc
-    this.div_desc.style.display = "none";
-  }
+		if(!this.opened) {
+			this.opened = true;
+			goingBack = false;
+			menuLevel = 0;
+		} else if(!goingBack) {
+			++menuLevel;
+		} else {
+			goingBack = false;
+		}
 
-  this.selected = i;
-  if(this.selected < 0)
-    this.selected = this.choices.length-1;
-  else if(this.selected >= this.choices.length)
-    this.selected = 0;
+		$("#mainMenu").show();
 
-  //check validity
-  if(this.selected >= 0 && this.selected < this.el_choices.length){
-    //add selected class
-    this.el_choices[this.selected].classList.add("selected");
+		$.each(choices,function(i,c) {
+			$("#menuChoices").append(
+				$("<div>",{"class":"menuChoice", "data-desc":c[1]}).html(getChoiceContents(c[0]))
+			);
+		});
 
-    //scroll to selected
-    var scrollto = $(this.el_choices[this.selected])
-    var container = $(this.div_choices)
-    if(scrollto.offset().top < container.offset().top || scrollto.offset().top + scrollto.height() >= container.offset().top+container.height())
-      container.scrollTop(scrollto.offset().top - container.offset().top + container.scrollTop());
+		this.setSelected(0);
+	};
 
-    //show desc if exists
-    var choice = this.choices[this.selected];
-    if(choice.length > 1){
-      this.div_desc.innerHTML = choice[1];
-      this.div_desc.style.display = "block";
+	getChoiceContents = function(choice) {
+		if(choice.substr(0,1) === "<") {
+			var bgColor = $(choice).data("bgcolor");
+			return $("<div>").html($(choice).css("background-color",bgColor));
+		} else {
+			return choice;
+		}
+	};
 
-      this.div_desc.style.left = (this.div.offsetLeft+this.div.offsetWidth)+"px";
-      this.div_desc.style.top = (this.div.offsetTop+this.div_header.offsetHeight)+"px";
-    }
-  }
-}
+	this.close = function() {
+		if(this.opened) {
+			goingBack = true;
+			--menuLevel;
 
-Menu.prototype.close = function()
-{
-  if(this.opened){
-    this.opened = false;
-    this.choices = [];
-    this.name = "Menu";
+			if(menuLevel < 1) {
+				this.opened = false;
+				$("#mainMenu").hide();
+			}
 
-    this.div.style.display = "none";
-    this.div_desc.style.display = "none";
+			if(this.onClose) {
+				this.onClose();
+			}
+		}
+	};
 
-    if(this.onClose) this.onClose();
-  }
-}
+	this.setSelected = function(i) {
+		selected = i;
+		$(".menuChoice").removeClass("MenuChoiceSelected");
 
-Menu.prototype.moveUp = function()
-{
-  if(this.opened)
-    this.setSelected(this.selected-1);
-}
+		if(selected < 0) {
+			selected = getChoicesCount()-1;
+		} else if(selected >= getChoicesCount()) {
+			selected = 0;
+		}
 
-Menu.prototype.moveDown = function()
-{
-  if(this.opened)
-    this.setSelected(this.selected+1);
-}
+		if(selected >= 0 && (selected < getChoicesCount())) {
+			$("#menuChoices div.menuChoice:nth-child(" + (selected + 1) + ")").addClass("MenuChoiceSelected");
+		}
 
-Menu.prototype.valid = function(mod)
-{
-  if(this.selected >= 0 && this.selected < this.choices.length){
-    if(this.onValid && this.opened)
-      this.onValid(this.choices[this.selected][0], mod)
-  }
+		scrollToMenuOption();
+
+		if(getChoiceDesc().length) {
+			$("#menuDescriptionContent").html(getChoiceDesc());
+			$("#menuDescription").show();
+		} else {
+			$("#menuDescription").hide();
+		}
+	};
+
+	this.moveUp = function() {
+		if(this.opened) {
+			this.setSelected(selected-1);
+		}
+	};
+
+	this.moveDown = function() {
+		if(this.opened) {
+			this.setSelected(selected+1);
+		}
+	};
+
+	this.valid = function(mod) {
+		if(selected >= 0 && selected < getChoicesCount()) {
+			if(this.onValid && this.opened) {
+				this.onValid(getChoiceText(), mod);
+			}
+		}
+	};
+
+	init();
 }
