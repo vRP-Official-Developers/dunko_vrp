@@ -1021,47 +1021,47 @@ vRP.registerMenuBuilder({"admin", function(add, data)
     local choices = {}
 	
 	if vRP.hasPermission({user_id,"admin.deleteveh"}) then
-      choices["@DeleteVeh"] = ch_deleteveh -- Delete nearest vehicle (Fixed pull request https://github.com/Sighmir/vrp_basic_menu/pull/11/files/419405349ca0ad2a215df90cfcf656e7aa0f5e9c from benjatw)
+      choices["DeleteVeh"] = ch_deleteveh -- Delete nearest vehicle (Fixed pull request https://github.com/Sighmir/vrp_basic_menu/pull/11/files/419405349ca0ad2a215df90cfcf656e7aa0f5e9c from benjatw)
 	end
 	
 	if vRP.hasPermission({user_id,"admin.spawnveh"}) then
-      choices["@SpawnVeh"] = ch_spawnveh -- Spawn a vehicle model
+      choices["SpawnVeh"] = ch_spawnveh -- Spawn a vehicle model
 	end
 	
 	if vRP.hasPermission({user_id,"admin.godmode"}) then
-      choices["@Godmode"] = ch_godmode -- Toggles admin godmode (Disable the default admin.god permission to use this!) 
+      choices["Godmode"] = ch_godmode -- Toggles admin godmode (Disable the default admin.god permission to use this!) 
 	end
 	
     if vRP.hasPermission({user_id,"player.blips"}) then
-      choices["@Blips"] = ch_blips -- turn on map blips and sprites
+      choices["Blips"] = ch_blips -- turn on map blips and sprites
     end
 	
     if vRP.hasPermission({user_id,"player.sprites"}) then
-      choices["@Sprites"] = ch_sprites -- turn on only name sprites
+      choices["Sprites"] = ch_sprites -- turn on only name sprites
     end
 	
     if vRP.hasPermission({user_id,"admin.crun"}) then
-      choices["@Crun"] = ch_crun -- run any client command, any GTA V client native http://www.dev-c.com/nativedb/
+      choices["Crun"] = ch_crun -- run any client command, any GTA V client native http://www.dev-c.com/nativedb/
     end
 	
     if vRP.hasPermission({user_id,"admin.srun"}) then
-      choices["@Srun"] = ch_srun -- run any server command, any GTA V server native http://www.dev-c.com/nativedb/
+      choices["Srun"] = ch_srun -- run any server command, any GTA V server native http://www.dev-c.com/nativedb/
     end
 
 	if vRP.hasPermission({user_id,"player.tptowaypoint"}) then
-      choices["@TpToWaypoint"] = choice_tptowaypoint -- teleport user to map blip
+      choices["TpToWaypoint"] = choice_tptowaypoint -- teleport user to map blip
 	end
 	
 	if vRP.hasPermission({user_id,"admin.easy_unjail"}) then
-      choices["@UnJail"] = ch_unjail -- Un jails chosen player if he is jailed (Use admin.easy_unjail as permission to have this in admin menu working in non jailed players)
+      choices["UnJail"] = ch_unjail -- Un jails chosen player if he is jailed (Use admin.easy_unjail as permission to have this in admin menu working in non jailed players)
     end
 	
 	if vRP.hasPermission({user_id,"admin.spikes"}) then
-      choices["@Spikes"] = ch_spikes -- Toggle spikes
+      choices["Spikes"] = ch_spikes -- Toggle spikes
     end
 	
 	if vRP.hasPermission({user_id,"admin.bm_freeze"}) then
-      choices["@Freeze"] = ch_freeze -- Toggle freeze
+      choices["Freeze"] = ch_freeze -- Toggle freeze
     end
 	
     add(choices)
