@@ -17,8 +17,8 @@ cfg.market_types = {
     ["icetea"] = 80,
     ["orangejuice"] = 80,
     ["cocacola"] = 120,
-    ["redgbll"] = 120,
-    ["lemonaid"] = 140,
+    ["redbull"] = 120,
+    ["lemonade"] = 140,
     ["vodka"] = 300,
 
     --Food
