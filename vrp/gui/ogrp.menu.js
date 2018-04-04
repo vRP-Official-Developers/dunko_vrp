@@ -36,7 +36,7 @@ function OGRP_MENU() {
 	};
 
 	getChoiceText = function() {
-		return $("#ogrp_menuChoices").find(".ogrp_MenuChoiceSelected")[0].innerHTML;
+		return $($("#ogrp_menuChoices").find(".ogrp_MenuChoiceSelected")[0]).text();
 	};
 
 	getChoiceDesc = function() {

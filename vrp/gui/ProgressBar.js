@@ -25,8 +25,8 @@ function ProgressBar(data)
   this.div_inner.style.zIndex = 1;
   this.div_label.style.zIndex = 2;
 
-  this.div.style.backgroundColor = "rgba("+data.r+","+data.g+","+data.b+",0.3)";
-  this.div_inner.style.backgroundColor = "rgba("+data.r+","+data.g+","+data.b+",0.7)";
+  this.div.style.backgroundColor = "rgba(0,0,0,0.5)";
+  this.div_inner.style.backgroundColor = "rgba("+data.r+","+data.g+","+data.b+",0.5)";
 
 }
 
@@ -50,19 +50,73 @@ ProgressBar.prototype.frame = function(time)
     if(anchor_index >= 0){
       if(anchor_name == "minimap"){ //MINIMAP
         var width = cfg.anchor_minimap_width/anchor.length; //divide horizontal map space by number of pbars
-
+		
+if ($(window).width() >= 1900 ) {
         //set size
-        this.div.style.width = this.div_label.style.width = (195)+"px";
+        this.div.style.width = this.div_label.style.width = (134)+"px";
+        this.div_inner.style.height = this.div.style.height = this.div_label.style.height = (9)+"px";
+        this.div_label.style.lineHeight = this.div_label.style.height;
+
+        //set label font size
+        this.div_label.style.fontSize = "0em";
+
+        //set position
+        this.div.style.left = (cfg.anchor_minimap_left+anchor_index*136-31)+"px";
+        this.div.style.top = (document.body.offsetHeight-cfg.anchor_minimap_bottom+197)+"px";
+      }
+else if ($(window).width() <= 1899 && $(window).width() >= 1600 ) {
+        //set size
+        this.div.style.width = this.div_label.style.width = (112)+"px";
         this.div_inner.style.height = this.div.style.height = this.div_label.style.height = (7)+"px";
         this.div_label.style.lineHeight = this.div_label.style.height;
 
         //set label font size
-        this.div_label.style.fontSize = "0.5em";
+        this.div_label.style.fontSize = "0em";
 
         //set position
-        this.div.style.right = (document.body.offsetWidth-this.div.offsetWidth-19)+"px";
-        this.div.style.top = (document.body.offsetHeight-190-anchor_index*15)+"px";
+        this.div.style.left = (cfg.anchor_minimap_left+anchor_index*114-37)+"px";
+        this.div.style.top = (document.body.offsetHeight-cfg.anchor_minimap_bottom+199)+"px";
       }
+else if ($(window).width() <= 1599 && $(window).width() >= 1366 ) {
+        //set size
+        this.div.style.width = this.div_label.style.width = (95)+"px";
+        this.div_inner.style.height = this.div.style.height = this.div_label.style.height = (6)+"px";
+        this.div_label.style.lineHeight = this.div_label.style.height;
+
+        //set label font size
+        this.div_label.style.fontSize = "0em";
+
+        //set position
+        this.div.style.left = (cfg.anchor_minimap_left+anchor_index*97-39)+"px";
+        this.div.style.top = (document.body.offsetHeight-cfg.anchor_minimap_bottom+202)+"px";
+      }
+else if ($(window).width() <= 1365 && $(window).width() >= 1280 ) {
+        //set size
+        this.div.style.width = this.div_label.style.width = (89)+"px";
+        this.div_inner.style.height = this.div.style.height = this.div_label.style.height = (6)+"px";
+        this.div_label.style.lineHeight = this.div_label.style.height;
+
+        //set label font size
+        this.div_label.style.fontSize = "0em";
+
+        //set position
+        this.div.style.left = (cfg.anchor_minimap_left+anchor_index*91-40)+"px";
+        this.div.style.top = (document.body.offsetHeight-cfg.anchor_minimap_bottom+202)+"px";
+      }
+else {
+        //set size
+        this.div.style.width = this.div_label.style.width = (95)+"px";
+        this.div_inner.style.height = this.div.style.height = this.div_label.style.height = (6)+"px";
+        this.div_label.style.lineHeight = this.div_label.style.height;
+
+        //set label font size
+        this.div_label.style.fontSize = "0em";
+
+        //set position
+        this.div.style.left = (cfg.anchor_minimap_left+anchor_index*97-45)+"px";
+        this.div.style.top = (document.body.offsetHeight-cfg.anchor_minimap_bottom+202)+"px";
+      }
+}
       else if(anchor_name == "botright"){ //BOTRIGHT
         //set size
         this.div.style.width = this.div_label.style.width = (200)+"px";
@@ -96,7 +150,7 @@ ProgressBar.prototype.frame = function(time)
   this.disp_value += (this.value - this.disp_value)*0.2;
 
   //update inner bar
-  this.div_inner.style.width = Math.round(this.div.offsetWidth*this.disp_value/100.0)+"px";
+  this.div_inner.style.width = Math.round(this.div.offsetWidth-this.div.offsetWidth*this.disp_value/100.0)+"px";
 }
 
 ProgressBar.prototype.addDom = function()

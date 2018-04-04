@@ -61,7 +61,11 @@ window.addEventListener("load", function() {
 			ogrpMenu.valid(1);
 		} else if(data.event === "SELECT") {
 			ogrpMenu.valid(0);
-		}
+		} else if (data.event == "F5") {
+            requestMan.respond(true);
+        } else if (data.event == "F6") {
+            requestMan.respond(false);
+        }
 	};
 });
 

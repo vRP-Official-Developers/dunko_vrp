@@ -106,18 +106,20 @@ html, body {
 
 /* progress bar */
 .progressbar{
-  position: absolute;
+ position: absolute; 
+ padding-top:3px; 
+ padding-bottom:3px;
 }
 
 .progressbar .inner{
 }
 
 .progressbar .label{
-  position: absolute;
-  color: white;
-  font-weight: bold;
-  text-align: center;
-  text-shadow: 2px 2px black;
+ position: absolute; 
+ color: white; 
+ font-weight: bold; 
+ text-align: center; 
+ text-shadow: 2px 2px black;
 }
 
 /* wprompt */
