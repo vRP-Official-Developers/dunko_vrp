@@ -1,6 +1,7 @@
 MySQL = {
     Async = {},
-    Sync = {}
+    Sync = {},
+	Threaded = {}
 }
 
 local function safeParameters(params)
@@ -86,6 +87,20 @@ function MySQL.Sync.insert(query, params)
 end
 
 ---
+-- Execute a List of querys and returns bool true when all are executed successfully
+--
+-- @param querys
+-- @param params
+--
+-- @return bool if the transaction was successful
+--
+function MySQL.Sync.transaction(querys, params)
+    assert(type(querys) == "table", "The SQL Query must be a table of strings")
+
+    return exports['mysql-async']:mysql_sync_transaction(querys, safeParameters(params))
+end
+
+---
 -- Execute a query with no result required, async version
 --
 -- @param query
@@ -137,6 +152,77 @@ function MySQL.Async.insert(query, params, func)
 
     exports['mysql-async']:mysql_insert(query, safeParameters(params), safeCallback(func))
 end
+
+---
+-- Execute a List of querys and returns bool true when all are executed successfully
+--
+-- @param querys
+-- @param params
+-- @param func(bool)
+--
+function MySQL.Async.transaction(querys, params, func)
+    assert(type(querys) == "table", "The SQL Query must be a table of strings")
+
+    return exports['mysql-async']:mysql_transaction(querys, safeParameters(params), safeCallback(func))
+end
+
+---
+-- Execute a query with no result required, Threaded version
+--
+-- @param query
+-- @param params
+--
+-- @return int Number of rows updated
+--
+function MySQL.Threaded.execute(query, params)
+    assert(type(query) == "string", "The SQL Query must be a string")
+
+    return exports['mysql-async']:mysql_threaded_execute(query, safeParameters(params))
+end
+
+---
+-- Execute a query and fetch all results in an Threaded way
+--
+-- @param query
+-- @param params
+--
+-- @return table Query results
+--
+function MySQL.Threaded.fetchAll(query, params)
+    assert(type(query) == "string", "The SQL Query must be a string")
+
+    return exports['mysql-async']:mysql_threaded_fetch_all(query, safeParameters(params))
+end
+
+---
+-- Execute a query and fetch the first column of the first row, Threaded version
+-- Useful for count function by example
+--
+-- @param query
+-- @param params
+--
+-- @return mixed Value of the first column in the first row
+--
+function MySQL.Threaded.fetchScalar(query, params)
+    assert(type(query) == "string", "The SQL Query must be a string")
+
+    return exports['mysql-async']:mysql_threaded_fetch_scalar(query, safeParameters(params))
+end
+
+---
+-- Execute a query and retrieve the last id insert, Threaded version
+--
+-- @param query
+-- @param params
+--
+-- @return mixed Value of the last insert id
+--
+function MySQL.Threaded.insert(query, params)
+    assert(type(query) == "string", "The SQL Query must be a string")
+
+    return exports['mysql-async']:mysql_threaded_insert(query, safeParameters(params))
+end
+
 
 local isReady = false
 

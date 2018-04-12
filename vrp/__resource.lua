@@ -8,6 +8,7 @@ ui_page "gui/index.html"
 
 -- server scripts
 server_scripts{ 
+  "@mysql-async/lib/MySQL.lua",
   "lib/utils.lua",
   "base.lua",
   "modules/gui.lua",

@@ -24,7 +24,7 @@ server_script '@mysql-async/lib/MySQL.lua'
 
 Add this convar to your server configuration and change the values according to your MySQL installation:
 
-`set mysql_connection_string "server=127.0.0.1;database=gta5_gamemode_essential;userid=root;password=1202"`
+`set mysql_connection_string "server=127.0.0.1;database=gta5_gamemode_essential;userid=myusername;password=1202"`
 
 ## Usage
 

@@ -37,13 +37,16 @@
     <Compile Include="FetchAll.cs" />
     <Compile Include="FetchScalar.cs" />
     <Compile Include="Insert.cs" />
+    <Compile Include="MySQLThread.cs" />
     <Compile Include="Operation.cs" />
     <Compile Include="MySQLAsync.cs" />
+    <Compile Include="Transaction.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="CitizenFX.Core">
       <HintPath>D:\FXServer\citizen\clr2\lib\mono\4.5\CitizenFX.Core.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.CSharp" />
     <Reference Include="MySqlConnector, Version=0.28.2.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\MySqlConnector\src\MySqlConnector\bin\Release\net45\MySqlConnector.dll</HintPath>

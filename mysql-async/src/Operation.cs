@@ -4,7 +4,6 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace MySQLAsync
@@ -13,13 +12,25 @@ namespace MySQLAsync
     {
         internal string ConnectionString;
 
+        internal string Query = "";
+        internal IDictionary<string, object> Parameters = null;
+        internal bool Debug = false;
+        internal uint ThreadedId = 0;
+
         public Operation(string connectionString)
         {
-            this.ConnectionString = connectionString;
+            ConnectionString = connectionString;
         }
 
-        public TResult Execute(string query, IDictionary<string, object> parameters = null, bool debug = false)
+        public TResult Execute(string query = null, IDictionary<string, object> parameters = null, bool debug = false)
         {
+            if (string.IsNullOrEmpty(query))
+            {
+                query = Query;
+                parameters = Parameters;
+                debug = Debug;
+            }
+
             TResult result = default(TResult);
             Stopwatch stopwatch = new Stopwatch();
 
@@ -128,13 +139,30 @@ namespace MySQLAsync
             }
         }
 
+        public async Task<TResult> ExecuteThreaded(string query, IDictionary<string, object> parameters, bool debug = false)
+        {
+            Query = query;
+            Parameters = parameters;
+            Debug = debug;
+            MySQLThread mysqlAsync = MySQLThread.GetInstance();
+            ThreadedId = mysqlAsync.NextId;
+            mysqlAsync.queryCollection.TryAdd(this);
+
+            while (!mysqlAsync.resultCollection.ContainsKey(ThreadedId))
+                await BaseScript.Delay(0);
+
+            mysqlAsync.resultCollection.TryRemove(ThreadedId, out dynamic result);
+
+            return result;
+        }
+
         abstract protected TResult Reader(MySqlCommand command);
 
         abstract protected Task<TResult> ReaderAsync(MySqlCommand command);
 
         private MySqlCommand CreateCommand(string query, IDictionary<string, object> parameters, MySqlConnection connection)
         {
-            MySqlCommand command = (MySqlCommand)connection.CreateCommand();
+            MySqlCommand command = connection.CreateCommand();
             command.CommandText = query;
 
             foreach (var parameter in parameters ?? Enumerable.Empty<KeyValuePair<string, object>>())
@@ -145,7 +173,7 @@ namespace MySQLAsync
             return command;
         }
 
-        private string QueryToString(string query, IDictionary<string, object> parameters)
+        internal string QueryToString(string query, IDictionary<string, object> parameters)
         {
             return query + " {" + string.Join(";", parameters.Select(x => x.Key + "=" + x.Value).ToArray()) + "}";
         }
