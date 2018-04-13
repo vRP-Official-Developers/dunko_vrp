@@ -5,11 +5,11 @@ local lang = {
   bankdriver = "Bani dati {1}.",
   reward = "Recompensa: {1} $.",
   delivery = {
-    title = "Cumpara alimentele de la magazine (vezi mapa) si dupa adu-le la mine!",
+    title = "Cumpara alimentele de la magazine (vezi harta) si dupa adu-le la mine!",
     item = "- {2} {1}"
   },
   drugseller = {
-	title = "Gaseste Informatorul Ilegal, aduna semintele din locatiile date de el, du-le la laboratorul de droguri (vezi mapa) si dupa adumi-le!",
+	title = "Gaseste Informatorul Ilegal, aduna semintele din locatiile date de el, du-le la laboratorul de droguri (vezi harta) si dupa adumi-le!",
 	item = "- {2} {1}"
 	},
   hacker = {
@@ -17,7 +17,7 @@ local lang = {
 	item = "- {2} {1}"
 	},
   fisherman = {
-	title = "Du-te la pescuit (vezi mapa) si dupa adu-mi pestii!",
+	title = "Du-te la pescuit (vezi harta) si dupa adu-mi pestii!",
 	item = "- {2} {1}"
     },
   weapons_smuggler = {
@@ -25,7 +25,7 @@ local lang = {
 	item = "- {2} {1}"
     },
   medical = {
-	title = "Ia Iarba Medicala (vezi mapa) si dupa livreaza-mi Iarba Medicala!",
+	title = "Ia Iarba Medicala (vezi harta) si dupa livreaza-mi Iarba Medicala!",
 	item = "- {2} {1}"
     },
   -- santa = {
@@ -33,23 +33,23 @@ local lang = {
 	-- item = "- {2} {1}"
     -- },
   pilot = {
-	title = "Colecteaza marfa (vezi mapa) si dupa adumi-o!",
+	title = "Colecteaza marfa (vezi harta) si dupa adumi-o!",
 	item = "- {2} {1}"
     },
   police = {
-	title = "Ia rapoartele de politie (vezi mapa) si da-le managerilor de banci ca sa arate Prezenta Politiei.",
+	title = "Ia rapoartele de politie (vezi harta) si da-le managerilor de banci ca sa arate Prezenta Politiei.",
 	item = "- {2} {1}"
     },
   ems = {
-	title = "Ia rapoartele medicale (vezi mapa) si dupa adu-le la spital.",
+	title = "Ia rapoartele medicale (vezi harta) si dupa adu-le la spital.",
 	item = "- {2} {1}"
     },
   trash = {
-	title = "Colecteaza gunoiul (vezi mapa) si dupa adumi-l.",
+	title = "Colecteaza gunoiul (vezi harta) si dupa adumi-l.",
 	item = "- {2} {1}"
     },
   forger = {
-	title = "Obtine carduri de credit de la hackeri, converteste-le intr-un ID Fals (vezi mapa) si adumi-le!",
+	title = "Obtine carduri de credit de la hackeri, converteste-le intr-un ID Fals (vezi harta) si adumi-le!",
 	item = "- {2} {1}"
     }
 }
