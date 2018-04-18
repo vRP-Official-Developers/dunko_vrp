@@ -424,9 +424,10 @@ local lang = {
       description = "Repair the nearest vehicle."
     },
     sellTP = {
-	  title = "Sell To Player",
-	  description = "Sell the nearest vehicle to a player."
-    }, 
+  title = "Sell To Player",
+  description = "Sell the nearest vehicle to a player."
+    }
+  }, 
   gunshop = {
     title = "Gunshop ({1})",
     prompt_ammo = "Amount of ammo to buy for the {1}:",
