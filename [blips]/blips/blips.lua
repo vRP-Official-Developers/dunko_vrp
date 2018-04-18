@@ -39,7 +39,16 @@ local blips = {
 	{title="Garage (Airline)", colour=30, id=16, x = 2128.9069824219, y = 4806.134765625, z = 41.168750762939}, -- Airline Garage
 	{title="Garage (Airline)", colour=30, id=16, x = 1734.9053955078, y = 3297.9689941406, z = 41.223503112793}, -- Airline Garage
 	{title="Garage (Helicopter Airline)", colour=30, id=43, x = -745.14343261719, y = -1468.5361328125, z = 5.0005240440369}, -- Helicopter Garage for Airline Job
-	{title="Trash", colour=30, id=43, x = 807.07354736328, y = -1077.0104980469, z = 28.621067047119} -- Trash for Trash Collector
+	{title="Trash", colour=30, id=43, x = 807.07354736328, y = -1077.0104980469, z = 28.621067047119}, -- Trash for Trash Collector
+	{title="Garage (UPS)", colour=30, id=16, x = 69.852645874023, y = 117.0472946167, z = 79.126907348633}, -- UPS Garage
+	{title="Garage (UBER)", colour=30, id=16, x = 907.38049316406, y = -175.86546325684,z = 74.130157470703}, -- UBER Garage
+	{title="Garage (Fishing)", colour=30, id=16, x = 1508.8854980469,y = 3908.5732421875,z = 30.031631469727}, -- Fishing Garage
+	{title="Garage (Medical Weed)", colour=30, id=16, x = -319.82263183594, y = -942.8408203125,z = 31.080617904663}, -- Medical Weed Garage
+	{title="Garage (Bank Driver)", colour=30, id=16, x = 222.68756103516,y = 222.95631408691,z = 105.41331481934}, -- Bank Driver Garage
+	{title="Garage (Mechanic)", colour=30, id=16, x = 401.42602539063, y = -1631.7053222656,z = 29.291942596436}, -- Mechanic Garage
+	{title="Garage (Delivery)", colour=30, id=16, x = 964.514770507813, y = -1020.13879394531,z = 40.8475074768066}, -- Delivery Garage
+	{title="Garage (Lawyer)", colour=30, id=16, x = -1900.7344970703, y = -560.89245605469, z = 11.802397727966}, -- Lawyer Garage
+	{title="UPS Centre", colour=30, id=16, x = 76.495727539063,y = -27.030916213989,z = 68.562599182129} -- UPS Parcel collection point
   }
 
 Citizen.CreateThread(function()

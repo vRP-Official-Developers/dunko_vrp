@@ -5,22 +5,22 @@ lang = "en"
 
 settings = {}
 settings["en"] = {
-	openMenu = "Press ~g~E~w~ to open the menu.",
-	electricError = "~r~You have an electric vehicle.",
-	fuelError = "~r~You are not in an electric vehicle.",
-	buyFuel = "buy fuel",
-	liters = "gallons",
-	percent = "percent",
+	openMenu = "Apasa ~g~E~w~ pentru a deschide meniul.",
+	electricError = "~r~Conduci o masina electrica.",
+	fuelError = "~r~Nu conduci o masina electrica.",
+	buyFuel = "cumpara combustibil",
+	liters = "litri",
+	percent = "procent",
 	confirm = "Confirm",
-	fuelStation = "Fuel station",
-	boatFuelStation = "Fuel station | Boat",
-	avionFuelStation = "Fuel station | Plane ",
-	heliFuelStation = "Fuel station | Helicopter",
-	getJerryCan = "Press ~g~E~w~ to buy a Petrol can ($"..petrolCanPrice..")",
-	refeel = "Press ~g~E~w~ to refuel the car.",
-	YouHaveBought = "You have bought ",
-	fuel = " gallons of fuel",
-	price = "price"
+	fuelStation = "Benzinarie",
+	boatFuelStation = "Benzinarie | Barci",
+	avionFuelStation = "Benzinarie | Avioane ",
+	heliFuelStation = "Benzinarie | Elicoptere",
+	getJerryCan = "Apasa ~g~E~w~ pentru a cumpara o Canistra ($"..petrolCanPrice..")",
+	refeel = "Apasa ~g~E~w~ pentru a alimenta.",
+	YouHaveBought = "Ai cumparat ",
+	fuel = " litri de combustibil",
+	price = "pret"
 }
 
 settings["fr"] = {
@@ -52,7 +52,7 @@ hud_x = 0.175
 hud_y = 0.885
 
 text_x = 0.2575
-text_y = 0.975
+text_y = 0.985
 
 
 electricityPrice = 3 -- NOT RANOMED !!

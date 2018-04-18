@@ -105,6 +105,21 @@ cfg.groups = {
 	"air.vehicle",
 	"air.paycheck"
   },
+  ["Mafia"] = {
+    _config = { gtype = "job",
+	onspawn = function(player) vRPclient.notify(player,{"You are a member of the mafia."}) end
+	},
+    "police.menu",		-- Acces to the police menu to use all of the things below.
+	"police.easy_cuff", -- Acces to cuff someone
+	"police.drag",		-- Acces to drag a a cuffed person
+	"police.putinveh", -- Acces to put a handcuff player in a vehicle.
+    "police.getoutveh", -- Acces to take out a handcuff player from a vehicle
+	"mafia.loadshop", -- Gunshop for the mafia.
+	"police.store_weapons", -- Acces to store weapons
+	"mafia.vehicle", -- Acces to the garage.
+	"mafia.whitelisted", -- Whitelisted group
+	"mafia.paycheck" -- Paycheck ( if you want)
+  },
   ["Medical Transport"] = {
     _config = { gtype = "job",
 	onspawn = function(player) vRPclient.notify(player,{"You now transport Medical weed."}) end
@@ -321,6 +336,16 @@ cfg.groups = {
 	"uber.mission",
 	"uber.paycheck"
   },
+  ["UPS"] = {
+    _config = { gtype = "job",
+	onspawn = function(player) vRPclient.notify(player,{"You are a Courier, Salary : $2000."}) end
+	},
+    "ups.cloakroom",
+	"harvest.parcels",
+	"ups.vehicle",
+	"mission.delivery.parcels",
+	"ups.paycheck"
+  },
  -- ["Gunrunning"] = {
    -- _config = { gtype = "job",
 	--onspawn = function(player) vRPclient.notify(player,{"Coming soon, Please wait!"}) end
@@ -340,21 +365,6 @@ cfg.groups = {
 	"delivery.vehicle",
 	"delivery.paycheck"
   },
-  ["Mafia"] = {
-    _config = { gtype = "job",
-	onspawn = function(player) vRPclient.notify(player,{"You are a member of the mafia."}) end
-	},
-    	"police.menu",		-- Acces to the police menu to use all of the things below.
-	"police.easy_cuff", -- Acces to cuff someone
-	"police.drag",		-- Acces to drag a a cuffed person
-	"police.putinveh", -- Acces to put a handcuff player in a vehicle.
-    	"police.getoutveh", -- Acces to take out a handcuff player from a vehicle
-	"mafia.loadshop", -- Gunshop for the mafia. Remove/Add weapons from vrp\cfg\gunshops
-	"police.store_weapons", -- Acces to store weapons
-	"mafia.vehicle", -- Acces to the garage. Add more cars in vrp\cfg\garages
-	"mafia.whitelisted", -- Whitelisted group
-	"mafia.paycheck" -- Paycheck ( if you want) change that from vrp\modules\paycheck
-  },	
   ["Trash Collector"] = {
     _config = { gtype = "job",
 	onspawn = function(player) vRPclient.notify(player,{"You are Trash Collector, Salary : $2000."}) end
@@ -915,8 +925,8 @@ cfg.groups = {
     "exotic.vehicle"
   },
   ["mafia"] = {
-    "mafia.whitelisted"
-  },	
+	"mafia.whitelisted"
+  },
   ["ems"] = {  
     "ems.whitelisted"
   },
@@ -945,6 +955,7 @@ cfg.selectors = {
     "Mechanic",
 	"Delivery",
 	"Bankdriver",
+	"UPS",
 	"Fisher",
 	"Medical Transport",
     "Unemployed"
@@ -1002,6 +1013,11 @@ cfg.selectors = {
 	"EMS Paramedic",
 	"Unemployed"
   },
+  ["Mafia"] = {
+    _config = {x =  1391.9857177734, y = 3603.3562011719, z = 38.94193649292, blipid = 351, blipcolor = 3, permissions = {"mafia.whitelisted"} }, -- UPDATE THE COORDINATES
+	"Mafia",
+	"Unemployed"
+  },
   ["Lawyer"] = {
     _config = {x = -1911.9273681641, y = -569.71649169922, z = 19.097215652466, blipid = 351, blipcolor = 7, permissions = {"Lawyer.whitelisted"} },
     "Lawyer",
@@ -1027,11 +1043,6 @@ cfg.selectors = {
 	"Cargo Pilot",
     "Unemployed"
   },
-  ["Mafia"] = {
-    _config = {x =  1391.9857177734, y = 3603.3562011719, z = 38.94193649292, blipid = 351, blipcolor = 3, permissions = {"mafia.whitelisted"} }, -- UPDATE THE COORDINATES
-	"Mafia",
-    "Unemployed"
-  },	
   ["Trash Collector"] = {
     _config = {x = 750.05029296875, y = -1402.9224853516, z = 26.549806594849,blipid = 318, blipcolor = 2}, -- Job starts here
 	"Trash Collector",

@@ -13,6 +13,7 @@ local sheriff_male = { model = "s_m_y_sheriff_01"}
 local sheriff_female = { model = "s_f_y_ranger_01"}
 local hway_male = { model = "s_m_y_hwaycop_01"}
 local cop_male = { model = "s_m_y_cop_01"}
+local ups_male = { model = "S_M_Y_AIRWORKER"}
 local cop_female = { model = "s_f_y_cop_01"}
 local detective_male = { model = "s_m_m_CIASec_01"}
 local officer_male = { model = "s_m_y_cop_01"}
@@ -129,6 +130,10 @@ cfg.cloakroom_types = {
     _config = { permissions = {"Sergeant.cloakroom"} },
     ["Sergeant"] = sergeant_male
   },
+  ["UPS"] = {
+    _config = { permissions = {"ups.cloakroom"} },
+    ["Courier"] = ups_male
+  },
   ["SWAT"] = {
     _config = { permissions = {"SWAT.cloakroom"} },
     ["Male"] = fbi_male,
@@ -169,6 +174,7 @@ cfg.cloakrooms = {
   {"surgery",425.61181640625,-806.519897460938,29.4911422729492},
   {"surgery",-822.166687011719,-1073.58020019531,11.3281087875366},
   {"surgery",-1186.25744628906,-771.20166015625,17.3308639526367},
+  {"UPS",78.672370910645,111.7912902832,81.168083190918},
   {"surgery",-1450.98388671875,-238.164260864258,49.8105850219727},
   {"surgery",4.44537162780762,6512.244140625,31.8778476715088},
   {"surgery",1693.91735839844,4822.66162109375,42.0631141662598},

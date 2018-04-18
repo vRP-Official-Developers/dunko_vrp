@@ -104,6 +104,26 @@ cfg.item_transformers = {
       }
 	 }
   },
+   {
+    name="UPS", -- menu name
+    permissions = {"harvest.parcels"}, -- you can add permissions
+    r=0,g=125,b=255, -- color
+    max_units=100000,
+    units_per_minute=100000,
+    x=76.495727539063,y=-27.030916213989,z=68.562599182129,
+    radius=3, height=1.5, -- area
+    recipes = {
+      ["Gather Parcels"] = { -- action name
+        description="Gathering Parcels", -- action description
+        in_money=0, -- money taken per unit
+        out_money=0, -- money earned per unit
+        reagents={}, -- items taken per unit
+        products={ -- items given per unit
+          ["parcels"] = 1
+        }
+      }
+	 }
+  },
  -- {
     -- name="Santa's Workshop", -- menu name
     -- permissions = {"harvest.presents"}, -- you can add permissions

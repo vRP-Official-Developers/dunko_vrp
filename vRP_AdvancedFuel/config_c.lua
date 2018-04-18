@@ -3,18 +3,18 @@ lang = "en"
 
 settings = {}
 settings["en"] = {
-	openMenu = "Press ~g~E~w~ to open the menu.",
-	electricError = "~r~You have an electric vehicle.",
-	fuelError = "~r~You're not in the good place.",
-	buyFuel = "buy fuel",
-	liters = "liters",
-	percent = "percent",
+	openMenu = "Apasa ~g~E~w~ pentru a deschide meniul.",
+	electricError = "~r~Conduci o masina electrica.",
+	fuelError = "~r~Nu esti in locul potrivit.",
+	buyFuel = "cumpara combustibil",
+	liters = "litri",
+	percent = "procent",
 	confirm = "Confirm",
-	fuelStation = "Fuel station",
-	boatFuelStation = "Fuel station | Boat",
-	avionFuelStation = "Fuel station | Plane ",
-	heliFuelStation = "Fuel station | Helicopter",
-	price = "price"
+	fuelStation = "Benzinarie",
+	boatFuelStation = "Benzinarie | Barci",
+	avionFuelStation = "Benzinarie | Avioane ",
+	heliFuelStation = "Benzinarie | Elicoptere",
+	price = "pret"
 }
 
 settings["fr"] = {

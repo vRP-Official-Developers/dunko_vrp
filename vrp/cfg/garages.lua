@@ -48,6 +48,7 @@ cfg.garage_types = {
     ["sentinel"] = {"Audi S5", 45000, ""},
     ["baller"] = {"Baller",40000, ""},
     ["bestiagts"] = {"Bestia GTS",60000, ""},
+    ["blista"] = {"Blista Compact",42000, ""},
     ["buffalo"] = {"Buffalo",35000, ""},
     ["buffalo2"] = {"Buffalo S",45000, ""},
     ["dominator"] = {"Dominator",35000, ""},
@@ -372,7 +373,7 @@ cfg.garage_types = {
     ["sentinel"] = {"Audi S5", 45000, ""},
     ["baller"] = {"Baller",40000, ""},
     ["bestiagts"] = {"Bestia GTS",60000, ""},
-    ["blista"] = {"Blista Compact",5000, ""},
+    ["blista"] = {"Blista Compact",42000, ""},
     ["buffalo"] = {"Buffalo",35000, ""},
     ["buffalo2"] = {"Buffalo S",45000, ""},
     ["dominator"] = {"Dominator",35000, ""},
@@ -456,10 +457,6 @@ cfg.garage_types = {
     _config = {vtype="car",blipid=56,blipcolor=38,permissions={"Bounty.vehicle"}},
     ["fbi"] = {"Unmarked",0, "police"}
   },
-  ["Mafia Garage"] = {
-    _config = {vtype="car",blipid=50,blipcolor=3,permissions={"mafia.vehicle"}},
-    ["infernus"] = {"Infernus", 0, ""}, -- THIS IS JUST AN EXAMPLE , ADD MORE IF YOU WANT.
-  },	
   ["emergency"] = {
     _config = {vtype="car",blipid=50,blipcolor=3,permissions={"emergency.vehicle"}},
     ["Ambulance"] = {"Ambulance",0, "emergency"},
@@ -473,6 +470,10 @@ cfg.garage_types = {
    ["EMS Helicopters"] = {
     _config = {vtype="car",blipid=43,blipcolor=1,radius=5.1,permissions={"emergency.vehicle"}},
     ["supervolito2"] = {"EMS",0, "emergency"}
+  },
+   ["Mafia Garage"] = {
+    _config = {vtype="car",blipid=50,blipcolor=3,permissions={"mafia.vehicle"}},
+	["infernus"] = {"Infernus", 0, ""}, -- THIS IS JUST AN EXAMPLE , ADD MORE IF YOU WANT.
   },
   ["Pilotla"] = {
     _config = {vtype="plane",blipid=16,blipcolor=30,permissions={"pilot.vehicle"}},
@@ -493,6 +494,10 @@ cfg.garage_types = {
   ["uber"] = {
     _config = {vtype="car",blipid=50,blipcolor=81,permissions={"uber.vehicle"}},
     ["surge"] = {"Surge",0, "surge"}
+  },
+  ["UPS"] = {
+    _config = {vtype="car",blipid=85,blipcolor=81,permissions={"ups.vehicle"}},
+    ["speedo"] = {"Delivery",0, "speedo"}
   },
   ["Lawyer"] = {
     _config = {vtype="car",blipid=50,blipcolor=7,permissions={"Lawyer.vehicle"}},
@@ -542,7 +547,6 @@ cfg.garages = {
   {"police",451.2121887207,-1018.2822875977,28.495378494263},	-- jobs garage
   {"Cadet",451.2121887207,-1018.2822875977,28.495378494263}, --- cadet garage
   {"police",477.99038696289,-1020.9154663086,28.011201858521},
-  {"Mafia Garage",1416.6524658203,3622.4460449219,34.863536834717}, -- UPDATE IF YOU WANT. 	
   {"Bounty",512.07818603516,-3052.1579589844,6.0687308311462},  
   {"police",1868.5435791016,3696.0295410156,33.5693359375},  -- sandy shores
   {"police",-476.92425537109,6026.9951171875,31.340547561646},  -- paleto
@@ -558,8 +562,11 @@ cfg.garages = {
   {"House Garage",-1457.4909667969,-500.61614990234,32.202766418457},
   {"House Garage",-25.273494720459,-1434.4365234375,30.653142929077},
   {"House Garage",-1155.2669677734,-1520.244140625,4.3475861549377},
+  {"House Garage",-872.43200683594,-370.17984008789,38.360645294189},
+  {"House Garage",-354.92651367188,6222.3588867188,31.488939285278},
   {"House Garage",-819.40551757813,183.72904968262,72.136161804199},
   {"House Garage",15.016004562378,547.76171875,176.14279174805},
+  {"UPS",69.852645874023,117.0472946167,79.126907348633},
   {"House Garage",1977.1169433594,3827.2368164063,32.373237609863},
   {"House Garage",2480.5893554688,4953.958984375,45.026481628418},
   {"House Garage",15.016004562378,547.76171875,176.14279174805},
@@ -572,8 +579,10 @@ cfg.garages = {
   {"House Garage",-72.769035339355,495.79925537109,144.10296630859},
   {"House Garage",-121.71002960205,509.85540771484,142.5652923584},
   {"House Garage",-188.32077026367,502.87573242188,134.23774719238},
+  {"House Garage",131.78851318359,568.10815429688,183.4107208252},
   {"House Garage",1366.5837402344,1147.4722900391,113.41327667236 },
   {"House Garage",-36.333103179932,-674.09722900391,32.33805847168},
+  {"Mafia Garage",1409.9451904297,3620.3876953125,34.894344329834},
   {"House Garage",1274.7135009766,-1732.7083740234,52.04536819458},
   {"House Garage",34.516819000244,6604.0004882813,32.449085235596},
   {"House Garage",-555.20428466797,664.56500244141,145.16401672363},

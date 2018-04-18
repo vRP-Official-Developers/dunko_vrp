@@ -159,6 +159,66 @@ function task_mission()
       end
     end
   end
+  
+  --UPS
+  
+  for k,v in pairs(cfg.ups) do -- each repair perm def
+    -- add missions to users
+    local users = vRP.getUsersByPermission({k})
+    for l,w in pairs(users) do
+      local user_id = w
+      local player = vRP.getUserSource({user_id})
+      if not vRP.hasMission({player}) then
+        -- build mission
+        local mdata = {}
+        mdata.name = lang.ups.title()
+
+        -- generate items
+        local todo = 0
+        local ups_items = {}
+        for idname,data in pairs(v.items) do
+          local amount = math.random(data[1],data[2]+1)
+          if amount > 0 then
+            ups_items[idname] = amount
+            todo = todo+1
+          end
+        end
+
+        local step = {
+          text = "",
+          onenter = function(player, area)
+            for idname,amount in pairs(ups_items) do
+              if amount > 0 then -- check if not done
+                if vRP.tryGetInventoryItem({user_id,idname,amount,true}) then
+                  local reward = v.items[idname][3]*amount
+                  vRP.giveMoney({user_id,reward})
+                  vRPclient.notify(player,{glang.money.received({reward})})
+                  todo = todo-1
+                  ups_items[idname] = 0
+                  if todo == 0 then -- all received, finish mission
+                    vRP.nextMissionStep({player})
+                  end
+                end
+              end
+            end
+          end,
+          position = v.positions[math.random(1,#v.positions)]
+        }
+
+        -- mission display
+        for idname,amount in pairs(ups_items) do
+          local name = vRP.getItemName({idname})
+          step.text = step.text..lang.ups.item({name,amount}).."<br />"
+        end
+
+        mdata.steps = {step}
+
+        if todo > 0 then
+          vRP.startMission({player,mdata})
+        end
+      end
+    end
+  end
 
   -- DELIVERY
   for k,v in pairs(cfg.delivery) do -- each repair perm def

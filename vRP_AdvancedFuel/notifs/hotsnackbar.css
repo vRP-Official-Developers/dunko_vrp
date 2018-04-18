@@ -1,17 +1,14 @@
 		.hsdivinit {
 			display: inline-block;
 			position: fixed;
-			/*margin: 0 auto;*/
 			padding: 10px 15px;
 			transition: all 1s cubic-bezier(.25, .8, .25, 1);
-			background: #34495e;
+			background: rgba(0,0,0,0.5);
 			left: 50%;
 			bottom: -200px;
 			transform: translate(-50%, -50%);
 			color: #fff;
-			/*opacity: 0;*/
-			border-radius: 3px;
-			font-family: 'Jaldi', sans-serif;
+			font-family: 'chaletmedium', sans-serif;
 
 		}
 
@@ -46,6 +43,7 @@
 		}
 
 		.hsdone {
+			display:none; /*
 			font-size: 15px;
 			padding: 10px;
 			background:#2ecc71;
@@ -53,27 +51,28 @@
 			display: inline-block;
 			width: 20px;
 			height: 20px;
-			/* color: #444; */
 			text-align: center;
 			border-radius: 50%;
-			box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+			box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23); */
 		}
 
 		.hswarning {
-			font-size: 15px;
+			display:none; 
+			/* font-size: 15px;
 			padding: 10px;
 			background: #f1c40f;
 			color: #fff;
 			display: inline-block;
 			width: 20px;
 			height: 20px;
-			/* color: #444; */
+			
 			text-align: center;
 			border-radius: 50%;
-			box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+			box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23); */
 		}
 
 		.hserror {
+			display:none; /*
 			font-size: 15px;
 			padding: 10px;
 			background: #e74c3c;
@@ -81,12 +80,12 @@
 			display: inline-block;
 			width: 20px;
 			height: 20px;
-			/* color: #444; */
 			text-align: center;
 			border-radius: 50%;
-			box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+			box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23); */
 		}		
 		.hsheart {
+			display:none; /*
 			font-size: 15px;
 			padding: 10px;
 			background: #fff;
@@ -94,12 +93,12 @@
 			display: inline-block;
 			width: 20px;
 			height: 20px;
-			/* color: #444; */
 			text-align: center;
 			border-radius: 50%;
-			box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+			box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23); */
 		}
 		.hssad {
+			display:none;/*
 			font-size: 15px;
 			padding: 10px;
 			background: #ecf0f1;
@@ -107,11 +106,10 @@
 			display: inline-block;
 			width: 20px;
 			height: 20px;
-			/* color: #444; */
 			text-align: center;
 			font-weight: 600;
 			border-radius: 50%;
-			box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+			box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23); */
 		}
 		.hstext{
 			padding: 0 10px;

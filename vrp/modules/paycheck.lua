@@ -101,6 +101,10 @@ AddEventHandler('paycheck:salary', function()
 		vRP.giveBankMoney(user_id,2000)
 		vRPclient.notifyPicture(source,{"CHAR_BANK_MAZE",1,"Airline Company",false,"Payday: ~g~$2000"})
 	end
+	if vRP.hasPermission(user_id,"ups.paycheck") then
+		vRP.giveBankMoney(user_id,2000)
+		vRPclient.notifyPicture(source,{"CHAR_BANK_MAZE",1,"UPS Company",false,"Payday: ~g~$2000"})
+	end
 	if vRP.hasPermission(user_id,"air.paycheck") then
 		vRP.giveBankMoney(user_id,2000)
 		vRPclient.notifyPicture(source,{"CHAR_BANK_MAZE",1,"Airline Company",false,"Payday: ~g~$2000"})

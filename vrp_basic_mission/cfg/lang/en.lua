@@ -28,6 +28,10 @@ local lang = {
 	title = "Get the Medical Weed (see map) and then deliver the Medical Weed to me!",
 	item = "- {2} {1}"
     },
+  ups = {
+	title = "Get the parcels from the UPS center ( see map) and then deliver the parcels to me!",
+	item = "- {2} {1}"
+	},
   -- santa = {
 	-- title = "Deliver the Christmas Presents",
 	-- item = "- {2} {1}"
