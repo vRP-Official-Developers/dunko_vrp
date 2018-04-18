@@ -1,4 +1,3 @@
-
 local lang = {
   repair = "repair {1}.",
   reward = "reward: {1} $.",
@@ -28,6 +27,10 @@ local lang = {
 	title = "قم بالحصول على الأعشاب الطبية (انظر الخريطة) ومن ثم تسليم الأعشاب الطبية الي!",
 	item = "- {2} {1}"
     },
+	  ups = {
+	title = "احصل على الطرود من مركز يو بي اس ( انظر في الخريطة ) ثم قم بتسليم الطرود الي",
+	item = "- {2} {1}"
+	},
   -- santa = {
 	-- title = "Deliver the Christmas Presents",
 	-- item = "- {2} {1}"

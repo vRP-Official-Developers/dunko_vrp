@@ -1,4 +1,3 @@
-
 -- define all language properties الغة العربية زورك البقمي برو قيمر
 
 local lang = {
@@ -424,6 +423,10 @@ local lang = {
       description = "اصلاح اقرب سيارة لديك."
     }
   },
+      sellTP = {
+  title = "بعها على المواطنين",
+  description = "بيع أقرب سيارة على المواطن."
+    }
   gunshop = {
     title = "محل اسلحة ({1})",
     prompt_ammo = "عدد الذخيرة لسلاح {1}:",
