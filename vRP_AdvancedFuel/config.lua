@@ -5,22 +5,22 @@ lang = "en"
 
 settings = {}
 settings["en"] = {
-	openMenu = "Apasa ~g~E~w~ pentru a deschide meniul.",
-	electricError = "~r~Conduci o masina electrica.",
-	fuelError = "~r~Nu conduci o masina electrica.",
-	buyFuel = "cumpara combustibil",
-	liters = "litri",
-	percent = "procent",
+	openMenu = "Press ~g~E~w~ to open the menu.",
+	electricError = "~r~Drive an electric car.",
+	fuelError = "~r~You do not drive an electric car.",
+	buyFuel = "Buy fuel",
+	liters = "Liters",
+	percent = "Percent",
 	confirm = "Confirm",
-	fuelStation = "Benzinarie",
-	boatFuelStation = "Benzinarie | Barci",
-	avionFuelStation = "Benzinarie | Avioane ",
-	heliFuelStation = "Benzinarie | Elicoptere",
-	getJerryCan = "Apasa ~g~E~w~ pentru a cumpara o Canistra ($"..petrolCanPrice..")",
-	refeel = "Apasa ~g~E~w~ pentru a alimenta.",
-	YouHaveBought = "Ai cumparat ",
-	fuel = " litri de combustibil",
-	price = "pret"
+	fuelStation = "Gas station",
+	boatFuelStation = "Gas station Boats",
+	avionFuelStation = "Gas station aircraft",
+	heliFuelStation = "Gas station helicopters",
+	getJerryCan = "Press ~g~E~w~ to buy a Canister ($"..petrolCanPrice..")",
+	refeel = "Press ~g~E~w~ to feed.",
+	YouHaveBought = "Bought ",
+	fuel = " Liters of fuel",
+	price = "Price"
 }
 
 settings["fr"] = {
