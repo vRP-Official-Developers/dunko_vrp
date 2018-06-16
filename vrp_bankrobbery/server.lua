@@ -64,6 +64,15 @@ function get3DDistance(x1, y1, z1, x2, y2, z2)
 	return math.sqrt(math.pow(x1 - x2, 2) + math.pow(y1 - y2, 2) + math.pow(z1 - z2, 2))
 end
 
+AddEventHandler("playerDropped", function()
+	if(robbers[source])then
+		local wtf = robbers[source]
+		local wtf2 = banks[wtf].nameofbank
+		robbers[source] = nil
+		TriggerClientEvent('chatMessage', -1, 'NEWS', {255, 0, 0}, "Robbery was cancelled at: ^2" ..wtf2.."Reason: [Disconnected]")
+	end
+end)
+
 RegisterServerEvent('es_bank:toofar')
 AddEventHandler('es_bank:toofar', function(robb)
 	if(robbers[source])then
