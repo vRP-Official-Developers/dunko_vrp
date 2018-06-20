@@ -295,9 +295,13 @@ local function ch_service_alert(player,choice) -- alert a service
   if service then
     vRPclient.getPosition(player,{},function(x,y,z)
       vRP.prompt(player,lang.phone.service.prompt(),"",function(player, msg)
-        msg = sanitizeString(msg,sanitizes.text[1],sanitizes.text[2])
-        vRPclient.notify(player,{service.notify}) -- notify player
-        vRP.sendServiceAlert(player,choice,x,y,z,msg) -- send service alert (call request)
+			  msg = sanitizeString(msg,sanitizes.text[1],sanitizes.text[2])
+	  	  if msg ~= nil and msg ~= "" then
+			    vRPclient.notify(player,{service.notify}) -- notify player
+			    vRP.sendServiceAlert(player,choice,x,y,z,msg) -- send service alert (call request)
+		    else
+			    vRPclient.notify(player,{"Empty Message."})
+	      end
       end)
     end)
   end
