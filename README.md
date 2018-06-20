@@ -2,7 +2,7 @@
 
 Welcome to Dunko vRP.
 
-Current: V6.6
+Current: V6.7
 
 # Donate/Patreon
 
@@ -42,11 +42,14 @@ If you need help, head over to my Discord:  https://discord.gg/kAfBuJG
 
 # My Server
 
-Name: Dunko vRP V6.6 - Preview/Test Server - discord.gg/kAfBuJG - Sponsored by Zap-Hosting.com
+Name: Dunko vRP V6.7 - Preview/Test Server - discord.gg/kAfBuJG - Sponsored by Zap-Hosting.com
 
 Direct Connect: 134.255.216.169:30120
 
 # What's new
+
+# V6.7
+
 
 # V6.6
 

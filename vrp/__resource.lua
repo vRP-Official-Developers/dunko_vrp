@@ -38,8 +38,8 @@ server_scripts{
   "modules/basic_items.lua",
   "modules/basic_skinshop.lua",
   "modules/cloakroom.lua",
-  "modules/paycheck.lua",
-  "modules/hotkeys.lua"
+  "modules/paycheck.lua"
+  -- "modules/hotkeys.lua"
 }
 
 -- client scripts
@@ -58,8 +58,8 @@ client_scripts{
   "client/police.lua",
   "client/paycheck.lua",
   "client/lockcar-client.lua",
-  "client/admin.lua",
-  "hotkeys/hotkeys.lua"
+  "client/admin.lua"
+  -- "hotkeys/hotkeys.lua"
 }
 
 -- client files
