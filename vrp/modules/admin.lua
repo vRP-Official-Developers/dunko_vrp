@@ -264,7 +264,7 @@ local function ch_calladmin(player,choice)
   if user_id ~= nil then
     vRP.prompt(player,"Describe your problem:","",function(player,desc) 
       desc = desc or ""
-
+      if desc ~= nil and desc ~= "" then
       local answered = false
       local players = {}
       for k,v in pairs(vRP.rusers) do
@@ -291,6 +291,9 @@ local function ch_calladmin(player,choice)
             end
           end
         end)
+      end
+      else
+        vRPclient.notify(player,{"Empty Admin Call."})
       end
     end)
   end
