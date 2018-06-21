@@ -50,6 +50,31 @@ Direct Connect: 134.255.216.169:30120
 
 # V6.7
 
+**Note: For all languages other than EN & RO you will need to go into vrp/cfg/lang/en.lua and copy lines 426-429 to your language file and translate it.
+
+Also in vrp_basic_mission/cfg/lang/en.lua copy lines 31-34 to your language file and translate it.**
+
+- Removed vRP Ping Time Out
+- Updated MySQL Async to version 2.1.1
+- Updated Blista price (fixed an exploit)
+- Removed @ symbol in front of some admin menu additions
+- Added Paychecks to now have pictures
+- Paychecks will now go directly into a players bank
+- Added Mafia job, garage, paycheck and gunshop
+- Set max fine to 100k and max jail time to 60 minutes
+- Added Deputy cloakrooms to Sandy & Paleto
+- Added Job Vehicle garages that where missing (Lawyer, UBER, Mechanic, Fisher, Bank Driver, Medical Weed, Delivery)
+- Updated the Menu - this will now work dynamically on most resolutions (between 720-1080p tested)
+- Update for GUI, where the hunger bar and thirst bar have been modified and rearranged exactly as in GrandTheftAuto V. (The GUI is responsive on the standardized resolutions such as 4:3, 16:9, 21:9)
+- Now the bar of hunger and thirst bar will be in another logic. If you are hungry or thirsty the bar will be at 0, and if it is not it will be full.
+- Update for vRP_AdvancedFuel, changes have been made to notifications and, to the graphical interface for this resource to look better.
+- Added the ability to sell the nearest owned car to another player by ID.
+- Added a job called UPS ( courier type ) where you have to harvest the boxes before you go to addresses to deliver them. (With job vehicle, job uniform)
+- Added more houses in the pack.
+- Amended some cars which are now blacklisted such as Rhino and other Non-RP vehicles.
+- Fixed Romanian language for Base Framework.
+- Fixed vRP_basic_mission Romanian Language.
+- Added a fix for the new function to sell a car to a player into the menu. (K > Vehicle > Sell To Player)
 
 # V6.6
 
