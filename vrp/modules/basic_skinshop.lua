@@ -110,7 +110,7 @@ function vRP.openSkinshop(source,parts)
         menudata[k] = {ondrawable}
       end
 
-      menudata.onclose = function(player)
+menudata.onclose = function(player)
         -- compute price
         vRPclient.getCustomization(source,{},function(custom)
           local price = 0
@@ -120,6 +120,18 @@ function vRP.openSkinshop(source,parts)
             if v[1] ~= old[1] then price = price + cfg.drawable_change_price end -- change of drawable
             if v[2] ~= old[2] then price = price + cfg.texture_change_price end -- change of texture
           end
+
+          if vRP.tryPayment(user_id,price) then
+            if price > 0 then
+              vRPclient.notify(source,{lang.money.paid({price})})
+            end
+          else
+            vRPclient.notify(source,{lang.money.not_enough()})
+            -- revert changes
+            vRPclient.setCustomization(source,{old_custom})
+          end
+        end)
+      end
 
           if vRP.tryPayment(user_id,price) then
             if price > 0 then
