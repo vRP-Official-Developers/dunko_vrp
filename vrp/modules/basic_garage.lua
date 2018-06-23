@@ -155,7 +155,7 @@ for group,vehicles in pairs(vehicle_groups) do
           -- sell vehicle
           local vehicle = vehicles[vname]
           if vehicle then
-            local price = math.ceil(vehicle[2]*cfg.sell_factor)
+            local price = math.ceil((vehicle[2]*cfg.sell_factor)*1)
 
             MySQL.query("vRP/get_vehicle", {user_id = user_id, vehicle = vname}, function(rows, affected)
               if #rows > 0 then -- has vehicle
@@ -183,7 +183,7 @@ for group,vehicles in pairs(vehicle_groups) do
         for k,v in pairs(pvehicles) do
           local vehicle = vehicles[k]
           if vehicle then -- not already owned
-            local price = math.ceil(vehicle[2]*cfg.sell_factor)
+            local price = math.ceil((vehicle[2]*cfg.sell_factor)*1)
             submenu[vehicle[1]] = {choose,lang.garage.buy.info({price,vehicle[3]})}
             kitems[vehicle[1]] = k
           end
@@ -216,7 +216,7 @@ for group,vehicles in pairs(vehicle_groups) do
           -- rent vehicle
           local vehicle = vehicles[vname]
           if vehicle then
-            local price = math.ceil(vehicle[2]*cfg.rent_factor)
+            local price = math.ceil((vehicle[2]*cfg.rent_factor)*1)
             if vRP.tryPayment(user_id,price) then
               -- add vehicle to rent tmp data
               tmpdata.rent_vehicles[vname] = true
@@ -245,7 +245,7 @@ for group,vehicles in pairs(vehicle_groups) do
         -- for each existing vehicle in the garage group
         for k,v in pairs(vehicles) do
           if k ~= "_config" and pvehicles[string.lower(k)] == nil then -- not already owned
-            local price = math.ceil(v[2]*cfg.rent_factor)
+            local price = math.ceil((v[2]*cfg.rent_factor)*1)
             submenu[v[1]] = {choose,lang.garage.buy.info({price,v[3]})}
             kitems[v[1]] = k
           end
