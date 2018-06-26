@@ -132,30 +132,6 @@ menudata.onclose = function(player)
           end
         end)
       end
-          if vRP.tryPayment(user_id,price) then
-            if price > 0 then
-              vRPclient.notify(source,{lang.money.paid({price})})
-            end
-          else
-            vRPclient.notify(source,{lang.money.not_enough()})
-            -- revert changes
-            vRPclient.setCustomization(source,{old_custom})
-          end
-        end)
-      end
-
-          if vRP.tryPayment(user_id,price) then
-            if price > 0 then
-              vRPclient.notify(source,{lang.money.paid({price})})
-            end
-          else
-            vRPclient.notify(source,{lang.money.not_enough()})
-            -- revert changes
-            vRPclient.setCustomization(source,{old_custom})
-          end
-        end)
-      end
-
       -- open menu
       vRP.openMenu(source,menudata)
     end)
