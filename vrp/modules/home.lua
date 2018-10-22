@@ -364,14 +364,18 @@ local function build_entry_menu(user_id, home_name)
   end, lang.home.buy.description({home.buy_price})}
 
   menu[lang.home.sell.title()] = {function(player,choice)
-    vRP.getUserAddress(user_id, function(address)
-      if address ~= nil and address.home == home_name then -- check if already have a home
-        -- sold, give sell price, remove address
-        vRP.giveMoney(user_id, home.sell_price)
-        vRP.removeUserAddress(user_id)
-        vRPclient.notify(player,{lang.home.sell.sold()})
-      else
-        vRPclient.notify(player,{lang.home.sell.no_home()})
+   vRP.request(player,"Are you sure that you want to sell your house?",30,function(player,ok)
+     if ok then
+        vRP.getUserAddress(user_id, function(address)
+          if address ~= nil and address.home == home_name then -- check if already have a home
+            -- sold, give sell price, remove address
+            vRP.giveMoney(user_id, home.sell_price)
+            vRP.removeUserAddress(user_id)
+            vRPclient.notify(player,{lang.home.sell.sold()})
+          else
+            vRPclient.notify(player,{lang.home.sell.no_home()})
+          end
+        end)
       end
     end)
   end, lang.home.sell.description({home.sell_price})}
