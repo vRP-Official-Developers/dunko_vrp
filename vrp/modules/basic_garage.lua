@@ -362,7 +362,7 @@ veh_actions[lang.vehicle.sellTP.title()] = {function(playerID,player,vtype,name)
 						local target = vRP.getUserSource(tonumber(user_id))
 						if target ~= nil then
 							vRP.prompt(player,"Price $: ","",function(player,amount)
-								if (tonumber(amount)) then
+								if (tonumber(amount) > 0) then
 									MySQL.query("vRP/get_vehicle", {user_id = user_id, vehicle = name}, function(pvehicle, affected)
 										if #pvehicle > 0 then
 											vRPclient.notify(player,{"~r~The player already has this vehicle type."})
