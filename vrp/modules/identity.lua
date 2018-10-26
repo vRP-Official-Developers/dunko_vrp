@@ -146,73 +146,39 @@ end)
 
 local cityhall_menu = {name=lang.cityhall.title(),css={top="75px", header_color="rgba(0,125,255,0.75)"}}
 
-function checkName(theText)
-	local foundSpace, valid = false, true
-	local spaceBefore = false
-	local current = ''
-	for i = 1, #theText do
-		local char = theText:sub( i, i )
-		if char == ' ' then 
-			if i == #theText or i == 1 or spaceBefore then 
-				valid = false
-				break
-			end
-			current = ''
-			spaceBefore = true
-		elseif ( char >= 'a' and char <= 'z' ) or ( char >= 'A' and char <= 'Z' ) then 
-			current = current .. char
-			spaceBefore = false
-		else 
-			valid = false
-			break
-		end
-	end
-	
-	if (valid == true)  then
-		return true
-	else
-		return false
-	end
-end
-
 local function ch_identity(player,choice)
   local user_id = vRP.getUserId(player)
-  local name1 = ""
-  local name2 = ""
   if user_id ~= nil then
     vRP.prompt(player,lang.cityhall.identity.prompt_firstname(),"",function(player,firstname)
       if string.len(firstname) >= 2 and string.len(firstname) < 50 then
-        local name1 = firstname
         firstname = sanitizeString(firstname, sanitizes.name[1], sanitizes.name[2])
         vRP.prompt(player,lang.cityhall.identity.prompt_name(),"",function(player,name)
           if string.len(name) >= 2 and string.len(name) < 50 then
-            local name2 = name
             name = sanitizeString(name, sanitizes.name[1], sanitizes.name[2])
             vRP.prompt(player,lang.cityhall.identity.prompt_age(),"",function(player,age)
               age = parseInt(age)
               if age >= 16 and age <= 150 then
-				if (checkName(name1)) then
-					if (checkName(name2)) then
-						if vRP.tryPayment(user_id,cfg.new_identity_cost) then
-							MySQL.execute("vRP/update_user_identity", {
-								user_id = user_id,
-								firstname = firstname,
-								name = name,
-								age = age
-							})
+                if vRP.tryPayment(user_id,cfg.new_identity_cost) then
+                  vRP.generateRegistrationNumber(function(registration)
+                    vRP.generatePhoneNumber(function(phone)
 
-							-- update client registration
-							vRPclient.setRegistrationNumber(player,{registration})
-							vRPclient.notify(player,{lang.money.paid({cfg.new_identity_cost})})
-						else
-							vRPclient.notify(player,{lang.money.not_enough()})
-						end
-					else
-						vRPclient.notify(player,{lang.common.invalid_value()})
-					end
-				else
-					vRPclient.notify(player,{lang.common.invalid_value()})
-				end
+                      MySQL.execute("vRP/update_user_identity", {
+                        user_id = user_id,
+                        firstname = firstname,
+                        name = name,
+                        age = age,
+                        registration = registration,
+                        phone = phone
+                      })
+
+                      -- update client registration
+                      vRPclient.setRegistrationNumber(player,{registration})
+                      vRPclient.notify(player,{lang.money.paid({cfg.new_identity_cost})})
+                    end)
+                  end)
+                else
+                  vRPclient.notify(player,{lang.money.not_enough()})
+                end
               else
                 vRPclient.notify(player,{lang.common.invalid_value()})
               end
