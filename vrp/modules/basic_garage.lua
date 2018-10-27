@@ -363,6 +363,7 @@ veh_actions[lang.vehicle.sellTP.title()] = {function(playerID,player,vtype,name)
 						if target ~= nil then
 							vRP.prompt(player,"Price $: ","",function(player,amount)
 								if (tonumber(amount) > 0) then
+								if (tonumber(amount) and tonumber(amount) > 0 and tonumber(amount) < 999999999999) then
 									MySQL.query("vRP/get_vehicle", {user_id = user_id, vehicle = name}, function(pvehicle, affected)
 										if #pvehicle > 0 then
 											vRPclient.notify(player,{"~r~The player already has this vehicle type."})
@@ -399,7 +400,7 @@ veh_actions[lang.vehicle.sellTP.title()] = {function(playerID,player,vtype,name)
 										end
 									end) 
 								else
-									vRPclient.notify(player,{"~r~The price of the car has to be a number."})
+									vRPclient.notify(player,{"~r~The price of the car has to be a number(or a positive number)."})
 								end
 							end)
 						else
