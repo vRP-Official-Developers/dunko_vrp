@@ -18,7 +18,7 @@ If you need help, head over to my Discord:  https://discord.gg/kAfBuJG
 
 **GET A SERVER THROUGH ZAP HOSTING WITH 10% DISCOUNT CODE: ***Dunko*** --- Click the banner below! They offer a 1 click install of my pack, no messing about with databases or manually installing the files, 1 click and you're ready to go!**
 
-<a href='https://zap-hosting.com/dunko'><img src="https://i.imgur.com/F8U53VC.jpg"></a></img>
+<a href='https://zap-hosting.com/dunkovrp'><img src="https://i.imgur.com/F8U53VC.jpg"></a></img>
 
 **GET A SERVER THROUGH ZAP HOSTING WITH 10% DISCOUNT CODE: ***Dunko*** --- Click the banner above! They offer a 1 click install of my pack, no messing about with databases or manually installing the files, 1 click and you're ready to go!**
 
