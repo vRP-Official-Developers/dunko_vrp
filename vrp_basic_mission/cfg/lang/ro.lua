@@ -2,7 +2,7 @@
 local lang = {
   repair = "Repara {1}.",
   reward = "Recompensa: {1} $.",
-  bankdriver = "Bani livrati {1}.",
+  bankdriver = "Bani dati {1}.",
   reward = "Recompensa: {1} $.",
   delivery = {
     title = "Cumpara alimentele de la magazine (vezi harta) si dupa adu-le la mine!",
@@ -21,11 +21,11 @@ local lang = {
 	item = "- {2} {1}"
     },
   weapons_smuggler = {
-	title = "Ia arme din spatele Amunitiei Paleto Bay si dupa ascunde armele!",
+	title = "Ia arme din spatele Amunitiei Paleto si dupa ascunde armele!",
 	item = "- {2} {1}"
     },
   medical = {
-	title = "Ia Iarba Medicinala (vezi harta) si dupa livreaza-mi Iarba Medicinala!",
+	title = "Ia Iarba Medicala (vezi harta) si dupa livreaza-mi Iarba Medicala!",
 	item = "- {2} {1}"
     },
   -- santa = {
