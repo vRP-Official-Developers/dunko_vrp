@@ -21,6 +21,7 @@ Citizen.CreateThread(function()
 					killername = GetPlayerName(id)
 				end				
 			end
+		if cfg.deathMessages then
 			if killer == playerPed then
 				TriggerServerEvent('playerDied',0,0)
 			elseif killername then
@@ -28,6 +29,7 @@ Citizen.CreateThread(function()
 			else
 				TriggerServerEvent('playerDied',0,2)
 			end
+		end
 			alreadyDead = true
 		end
 		if not IsEntityDead(playerPed) then
