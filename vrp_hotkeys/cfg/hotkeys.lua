@@ -54,5 +54,3 @@ cfg.hotkeys = {
 	end,
   },
 }
-
-return cfg
