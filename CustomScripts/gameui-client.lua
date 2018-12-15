@@ -20,6 +20,7 @@ Citizen.CreateThread(function()
 	while true do
 		Citizen.Wait(1)
 		local pos = GetEntityCoords(GetPlayerPed(-1))
+	if cfg.streetNames then
 		local var1, var2 = GetStreetNameAtCoord(pos.x, pos.y, pos.z, Citizen.ResultAsInteger(), Citizen.ResultAsInteger())
 
 		for k,v in pairs(directions)do
@@ -29,7 +30,7 @@ Citizen.CreateThread(function()
 				break;
 			end
 		end
-
+	
 		if(var2 ~= 0)then
 			drawTxt(0.515, 1.22, 1.0,1.0,0.4, "~w~[~y~" .. tostring(GetStreetNameFromHashKey(var2)) .. "~w~]", 255, 255, 255, 255)
 		end
@@ -39,7 +40,8 @@ Citizen.CreateThread(function()
 				drawTxt(0.515, 1.25, 1.0,1.0,0.4, direction .. "~b~ | ~y~" .. tostring(GetStreetNameFromHashKey(var1)) .. " ~w~/ ~y~" .. zones[GetNameOfZone(pos.x, pos.y, pos.z)], 255, 255, 255, 255)
 			end
 		end
-
+	end
+	if cfg.playerTalking then
 		local t = 0
 			for i = 0,32 do
 				if(GetPlayerName(i))then
@@ -54,12 +56,14 @@ Citizen.CreateThread(function()
 					end
 				end
 			end
-
+	end
+	if cfg.speedometer then
 		if(IsPedInAnyVehicle(GetPlayerPed(-1), false))then
 			local speed = GetEntitySpeed(GetVehiclePedIsIn(GetPlayerPed(-1), false)) * 2.236936
 
 			drawTxt(1.407, 1.30, 1.0,1.0,0.7, "~y~" .. math.ceil(speed) .. "", 255, 255, 255, 255)
 			drawTxt(1.4, 1.337, 1.0,1.0,0.7, "~b~ mph", 255, 255, 255, 255)
 		end
+	end
 	end
 end)

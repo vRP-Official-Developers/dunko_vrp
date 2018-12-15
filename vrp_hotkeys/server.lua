@@ -8,6 +8,10 @@ HKclient = Tunnel.getInterface("vrp_hotkeys","vrp_hotkeys")
 Tunnel.bindInterface("vrp_hotkeys",vRPhk)
 -- USE FOR NECESSARY SERVER FUNCTIONS
 
+--they need to be the same as the ones in vrp/cfg/phone.lua
+--so if the ems service is like "emergency" or "EMS", that service must be in that cfg so it can send a service Alert!
+emsServices = {"emergency"}
+
 function vRPhk.test(msg)
   print("msg "..msg.." received from "..source)
   return 42
@@ -26,7 +30,9 @@ function vRPhk.canSkipComa()
 end
 
 function vRPhk.helpComa(x,y,z)
-  vRP.sendServiceAlert({source,"emergency",x,y,z,"Help! I've fallen and can't get up!"}) -- people will change this message anyway haha
+  for k,v in pairs(emsServices) do
+  vRP.sendServiceAlert({source,v,x,y,z,"Help! I've fallen and can't get up!"}) -- people will change this message anyway haha
+  end
 end
 
 local player_lists = {}

@@ -12,6 +12,7 @@ called = 0
 -- YOU ARE ON A CLIENT SCRIPT ( Just reminding you ;) )
 -- Keys IDs can be found at https://wiki.fivem.net/wiki/Controls
 
+
 -- Hotkeys Configuration: cfg.hotkeys = {[Key] = {group = 1, pressed = function() end, released = function() end},}
 cfg.hotkeys = {
   [46] = {
