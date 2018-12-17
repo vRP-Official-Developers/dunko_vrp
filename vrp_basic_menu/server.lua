@@ -933,10 +933,6 @@ local ch_player_menu = {function(player,choice)
       menu["User List"] = ch_userlist -- a user list for players with vRP ids, player name and identity names only.
     end
 	
-    if vRP.hasPermission({user_id,"player.store_weapons"}) then
-      menu["Store weapons"] = choice_store_weapons -- store player weapons, like police store weapons from vrp
-    end
-	
     if vRP.hasPermission({user_id,"player.store_armor"}) then
       menu["Store armor"] = choice_store_armor -- store player armor
     end
