@@ -150,7 +150,9 @@ for group,vehicles in pairs(vehicle_groups) do
       end
 
       local choose = function(player, choice)
-        local vname = kitems[choice]
+		vRP.request(player,"Are you sure that you want to sell this vehicle?",30,function(player,ok)
+        if ok then
+		local vname = kitems[choice]
         if vname then
           -- sell vehicle
           local vehicle = vehicles[vname]
@@ -161,8 +163,7 @@ for group,vehicles in pairs(vehicle_groups) do
               if #rows > 0 then -- has vehicle
                 vRP.giveMoney(user_id,price)
                 MySQL.execute("vRP/remove_vehicle", {user_id = user_id, vehicle = vname})
-
-                vRPclient.notify(player,{lang.money.received({price})})
+		vRPclient.notify(player,{lang.money.received({price})})
                 vRP.closeMenu(player)
               else
                 vRPclient.notify(player,{lang.common.not_found()})
@@ -170,7 +171,9 @@ for group,vehicles in pairs(vehicle_groups) do
             end)
           end
         end
-      end
+       end
+      end)
+     end
       
       -- get player owned vehicles (indexed by vehicle type name in lower case)
       MySQL.query("vRP/get_vehicles", {user_id = user_id}, function(_pvehicles, affected)

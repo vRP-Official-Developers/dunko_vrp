@@ -329,38 +329,6 @@ local choice_player_check = {function(player,choice)
   end)
 end, lang.police.menu.check.description()}
 
--- player store weapons
-local store_weapons_cd = {}
-function storeWeaponsCooldown()
-  for user_id,cd in pairs(store_weapons_cd) do
-    if cd > 0 then
-      store_weapons_cd[user_id] = cd - 1
-	end
-  end
-  SetTimeout(1000,function()
-	storeWeaponsCooldown()
-  end)
-end
-storeWeaponsCooldown()
-local choice_store_weapons = {function(player, choice)
-  local user_id = vRP.getUserId({player})
-  if (store_weapons_cd[user_id] == nil or store_weapons_cd[user_id] == 0) and user_id ~= nil then
-    store_weapons_cd[user_id] = 5
-    vRPclient.getWeapons(player,{},function(weapons)
-      for k,v in pairs(weapons) do
-        -- convert weapons to parametric weapon items
-        vRP.giveInventoryItem({user_id, "wbody|"..k, 1, true})
-        if v.ammo > 0 then
-          vRP.giveInventoryItem({user_id, "wammo|"..k, v.ammo, true})
-        end
-      end
-      -- clear all weapons
-      vRPclient.giveWeapons(player,{{},true})
-    end)
-  else
-    vRPclient.notify(player,{"~r~You are already storing your weapons."})
-  end
-end, lang.police.menu.store_weapons.description()}
 
 -- armor item
 vRP.defInventoryItem({"body_armor","Body Armor","Intact body armor.",
@@ -963,10 +931,6 @@ local ch_player_menu = {function(player,choice)
 	
     if vRP.hasPermission({user_id,"player.userlist"}) then
       menu["User List"] = ch_userlist -- a user list for players with vRP ids, player name and identity names only.
-    end
-	
-    if vRP.hasPermission({user_id,"player.store_weapons"}) then
-      menu["Store weapons"] = choice_store_weapons -- store player weapons, like police store weapons from vrp
     end
 	
     if vRP.hasPermission({user_id,"player.store_armor"}) then
