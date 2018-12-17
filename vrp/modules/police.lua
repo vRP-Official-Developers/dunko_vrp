@@ -516,23 +516,37 @@ local choice_fine = {function(player, choice)
   end
 end, lang.police.menu.fine.description()}
 
+local isStoring = false
 local choice_store_weapons = {function(player, choice)
   local user_id = vRP.getUserId(player)
-  if user_id ~= nil then
-    vRPclient.getWeapons(player,{},function(weapons)
-      for k,v in pairs(weapons) do
-        -- convert weapons to parametric weapon items
-        vRP.giveInventoryItem(user_id, "wbody|"..k, 1, true)
-        if v.ammo > 0 then
-          vRP.giveInventoryItem(user_id, "wammo|"..k, v.ammo, true)
-        end
-      end
-
-      -- clear all weapons
-      vRPclient.giveWeapons(player,{{},true})
-    end)
-  end
+  
+	vRPclient.getWeapons(player,{},function(weapons)
+		vRP.request(player,"are you sure that you want to store your weapons?",30,function(player,ok)
+			if ok then 
+			  if isStoring == false then
+				isStoring = true
+					vRPclient.giveWeapons(player,{{},true})
+		
+					for k,v in pairs(weapons) do
+					-- convert weapons to parametric weapon items
+					  vRP.giveInventoryItem(user_id, "wbody|"..k, 1, true)
+						if v.ammo > 0 then
+						vRP.giveInventoryItem(user_id, "wammo|"..k, v.ammo, true)
+						end
+						
+					end
+			  vRPclient.notify(player,{"~g~Weapons Stored"})
+				SetTimeout(10000,function()
+					isStoring = false
+				end)
+			  else
+				vRPclient.notify(player,{"~o~You are already storing the weapons"})
+			  end
+			end
+		end)
+	end)
 end, lang.police.menu.store_weapons.description()}
+
 
 -- add choices to the menu
 vRP.registerMenuBuilder("main", function(add, data)
