@@ -157,17 +157,13 @@ for group,vehicles in pairs(vehicle_groups) do
           -- sell vehicle
           local vehicle = vehicles[vname]
           if vehicle then
-            local price = math.ceil(vehicle[2]*cfg.sell_factor)
+            local price = math.ceil((vehicle[2]*cfg.sell_factor)*1)
 
             MySQL.query("vRP/get_vehicle", {user_id = user_id, vehicle = vname}, function(rows, affected)
               if #rows > 0 then -- has vehicle
                 vRP.giveMoney(user_id,price)
                 MySQL.execute("vRP/remove_vehicle", {user_id = user_id, vehicle = vname})
-				  webhook = "https://discordapp.com/api/webhooks/517094258541330448/dD75Ui9E9ebHhiVOUHaXa5SoQIHTWhiiEZL7sstfUpb_WA4n7huP6NTY6Z1HdG-FqexC"
-				  title = "Vendido:"
-				  description = "Nome: " .. GetPlayerName(player) .. "\n ID: " .. user_id .. "\n Vendeu: **" .. vehicle[1] .. "** \n Modelo: **".. vname .. "** \nValor: **" .. price .. "€**"
-				  logToDiscord(webhook,"16721960",title,description,nil,nil)					
-                vRPclient.notify(player,{lang.money.received({price})})
+		vRPclient.notify(player,{lang.money.received({price})})
                 vRP.closeMenu(player)
               else
                 vRPclient.notify(player,{lang.common.not_found()})
