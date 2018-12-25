@@ -497,7 +497,7 @@ cfg.garage_types = {
   },
   ["UPS"] = {
     _config = {vtype="car",blipid=85,blipcolor=81,permissions={"ups.vehicle"}},
-    ["speedo"] = {"Delivery",0, "speedo"}
+    ["boxville4"] = {"Delivery",0, "boxville4"}
   },
   ["Lawyer"] = {
     _config = {vtype="car",blipid=50,blipcolor=7,permissions={"Lawyer.vehicle"}},
