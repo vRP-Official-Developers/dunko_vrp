@@ -56,6 +56,10 @@ AddEventHandler("vRP:playerSpawn", function(user_id, source, first_spawn)
     vRP.setHunger(user_id,0)
     vRP.setThirst(user_id,0)
 
+    if cfg.clear_inventory_on_death then
+      vRP.clearInventory(user_id) -- clear user inventory after death
+    end
+
     if cfg.clear_phone_directory_on_death then
       data.phone_directory = {} -- clear phone directory after death
     end
