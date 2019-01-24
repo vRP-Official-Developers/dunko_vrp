@@ -20,6 +20,7 @@ for i=0,19 do
   cfg.default_customization[i] = {0,0}
 end
 
+cfg.clear_inventory_on_death = false
 cfg.clear_phone_directory_on_death = false
 cfg.lose_aptitudes_on_death = false
 
