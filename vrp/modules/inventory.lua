@@ -524,7 +524,6 @@ function vRP.openChest(source, name, max_weight, cb_close, cb_in, cb_out)
             close_count = 0
             vRP.setSData("chest:"..name, json.encode(chest.items))
             chests[name] = nil
-            vRP.closeMenu(player)
           end)
           -- Ugly patch to close the "already opened" chest.
 
