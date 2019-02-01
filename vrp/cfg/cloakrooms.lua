@@ -10,10 +10,10 @@ local emergency_male = { model = "s_m_m_paramedic_01" }
 local emergency_female = { model = "s_f_y_paramedic_01" }
 local fbi_male = { model = "s_m_y_swat_01" }
 local sheriff_male = { model = "s_m_y_sheriff_01"}
-local sheriff_female = { model = "s_f_y_ranger_01"}
+local sheriff_female = { model = "s_f_y_sheriff_01"}
 local hway_male = { model = "s_m_y_hwaycop_01"}
 local cop_male = { model = "s_m_y_cop_01"}
-local ups_male = { model = "S_M_Y_AIRWORKER"}
+local ups_male = { model = "s_m_m_ups_02"}
 local cop_female = { model = "s_f_y_cop_01"}
 local detective_male = { model = "s_m_m_CIASec_01"}
 local officer_male = { model = "s_m_y_cop_01"}
