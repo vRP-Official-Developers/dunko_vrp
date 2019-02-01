@@ -519,6 +519,14 @@ function vRP.openChest(source, name, max_weight, cb_close, cb_in, cb_out)
             end
           end
 
+          -- Ugly patch to close the "already opened" chest. 
+          SetTimeout(300000, function() -- trigger spawn event
+            close_count = 0
+            vRP.setSData("chest:"..name, json.encode(chest.items))
+            chests[name] = nil
+          end)
+          -- Ugly patch to close the "already opened" chest.
+
           -- open menu
           vRP.openMenu(source, menu)
         end)
