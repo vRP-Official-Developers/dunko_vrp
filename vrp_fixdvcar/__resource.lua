@@ -1,6 +1,3 @@
-
-description "vRP Fixcar with permissions"
-
 dependency "vrp"
 
 client_scripts{ 

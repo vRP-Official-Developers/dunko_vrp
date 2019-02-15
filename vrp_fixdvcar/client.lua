@@ -1,5 +1,23 @@
--- Register a network event 
-RegisterNetEvent( 'wk:deleteVehicle' )
+-- FIX VEHICLE
+RegisterNetEvent("murtaza:fix")
+AddEventHandler("murtaza:fix", function()
+	local playerPed = GetPlayerPed(-1)
+	if IsPedInAnyVehicle(playerPed) then
+		local vehicle = GetVehiclePedIsIn(playerPed)
+		SetVehicleEngineHealth(vehicle, 9999)
+		SetVehiclePetrolTankHealth(vehicle, 9999)
+		SetVehicleFixed(vehicle)
+	else
+	end
+end)
+
+function notification(msg)
+	SetNotificationTextEntry("STRING")
+	AddTextComponentString(msg)
+	DrawNotification(false, false)
+end
+
+-- DELETE VEHICLE
 
 -- The distance to check in front of the player for a vehicle
 -- Distance is in GTA units, which are quite big  
@@ -7,7 +25,8 @@ local distanceToCheck = 5.0
 
 -- Add an event handler for the deleteVehicle event. 
 -- Gets called when a user types in /dv in chat (see server.lua)
-AddEventHandler( 'wk:deleteVehicle', function()
+RegisterNetEvent('wk:deleteVehicle')
+AddEventHandler('wk:deleteVehicle', function()
     local ped = GetPlayerPed( -1 )
 
     if ( DoesEntityExist( ped ) and not IsEntityDead( ped ) ) then 
