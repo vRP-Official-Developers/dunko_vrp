@@ -1,12 +1,10 @@
 -- server scripts
 server_scripts{ 
+  "@vrp/lib/utils.lua",
   "deletepoliceweapons-server.lua",
-  "me-server.lua",
-  "ooc-server.lua",
+  "commands-server.lua",
   "deathmessages-server.lua",
-  -- "deletevehicle-server.lua",
   "weathersync-server.lua",
-  -- "fix-server.lua",
   "dispatch-server.lua"
 }
 
@@ -20,10 +18,7 @@ client_scripts{
   "deletepoliceweapons-client.lua",
   "deathmessages-client.lua",
   "gameui-client.lua",
-  --"names-client.lua",
-  -- "deletevehicle-client.lua",
   "weathersync-client.lua",
-  -- "fix-client.lua",
   "missiontext-client.lua",
   "noweapondrops-client.lua"
  }
