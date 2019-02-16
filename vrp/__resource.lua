@@ -58,7 +58,8 @@ client_scripts{
   "client/police.lua",
   "client/paycheck.lua",
   "client/lockcar-client.lua",
-  "client/admin.lua"
+  "client/admin.lua",
+  "client/inventory.lua"
   -- "hotkeys/hotkeys.lua"
 }
 

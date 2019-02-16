@@ -204,6 +204,12 @@ function vRP.giveInventoryItem(user_id,idname,amount,notify)
       data.inventory[idname] = {amount=amount}
     end
 
+    if vRP.computeItemsWeight(data.inventory) > 15 then
+      TriggerClientEvent("equipBackpack", source)
+    else
+      TriggerClientEvent("removeBackpack", source)
+    end
+
     -- notify
     if notify then
       local player = vRP.getUserSource(user_id)
@@ -235,6 +241,12 @@ function vRP.tryGetInventoryItem(user_id,idname,amount,notify)
         if player ~= nil then
           vRPclient.notify(player,{lang.inventory.give.given({vRP.getItemName(idname),amount})})
         end
+      end
+
+      if vRP.computeItemsWeight(data.inventory) > 15 then
+        TriggerClientEvent("equipBackpack", source)
+      else
+        TriggerClientEvent("removeBackpack", source)
       end
 
       return true
@@ -274,6 +286,12 @@ function vRP.getInventoryWeight(user_id)
     return vRP.computeItemsWeight(data.inventory)
   end
 
+  if vRP.computeItemsWeight(data.inventory) > 15 then
+    TriggerClientEvent("equipBackpack", source)
+  else
+    TriggerClientEvent("removeBackpack", source)
+  end
+
   return 0
 end
 
@@ -307,6 +325,12 @@ function vRP.openInventory(source)
       local hue = math.floor(math.max(125*(1-weight/max_weight), 0))
       menudata["<div class=\"dprogressbar\" data-value=\""..string.format("%.2f",weight/max_weight).."\" data-color=\"hsl("..hue..",100%,50%)\" data-bgcolor=\"hsl("..hue..",100%,25%)\" style=\"height: 12px; border: 3px solid black;\"></div>"] = {function()end, lang.inventory.info_weight({string.format("%.2f",weight),max_weight})}
       local kitems = {}
+
+      if vRP.computeItemsWeight(data.inventory) > 15 then
+        TriggerClientEvent("equipBackpack", source)
+      else
+        TriggerClientEvent("removeBackpack", source)
+      end
 
       -- choose callback, nested menu, create the item menu
       local choose = function(player,choice)
@@ -350,6 +374,12 @@ AddEventHandler("vRP:playerJoin", function(user_id,source,name,last_login)
   local data = vRP.getUserDataTable(user_id)
   if data.inventory == nil then
     data.inventory = {}
+
+    if vRP.computeItemsWeight(data.inventory) > 15 then
+      TriggerClientEvent("equipBackpack", source)
+    else
+      TriggerClientEvent("removeBackpack", source)
+    end
   end
 end)
 
