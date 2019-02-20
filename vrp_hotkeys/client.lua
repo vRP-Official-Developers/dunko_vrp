@@ -3,11 +3,11 @@ Citizen.CreateThread(function()
 	while true do
 		Citizen.Wait(0)
 		for k,v in pairs(cfg.hotkeys) do
-		  if IsControlJustPressed(v.group, k) or IsDisabledControlJustPressed(v.group, k) then
+		  if IsControlJustPressed(v.group, k) or IsDisabledControlJustPressed(v.group, k) and GetLastInputMethod(0) then
 		    v.pressed()
 		  end
 
-		  if IsControlJustReleased(v.group, k) or IsDisabledControlJustReleased(v.group, k) then
+		  if IsControlJustReleased(v.group, k) or IsDisabledControlJustReleased(v.group, k) and GetLastInputMethod(0) then
 		    v.released()
 		  end
 		end
