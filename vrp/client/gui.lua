@@ -143,19 +143,19 @@ Citizen.CreateThread(function()
   while true do
     Citizen.Wait(0)
     -- menu controls
-    if IsControlJustPressed(table.unpack(cfg.controls.phone.up)) then SendNUIMessage({act="event",event="UP"}) end
-    if IsControlJustPressed(table.unpack(cfg.controls.phone.down)) then SendNUIMessage({act="event",event="DOWN"}) end
-    if IsControlJustPressed(table.unpack(cfg.controls.phone.left)) then SendNUIMessage({act="event",event="LEFT"}) end
-    if IsControlJustPressed(table.unpack(cfg.controls.phone.right)) then SendNUIMessage({act="event",event="RIGHT"}) end
-    if IsControlJustPressed(table.unpack(cfg.controls.phone.select)) then SendNUIMessage({act="event",event="SELECT"}) end
-    if IsControlJustPressed(table.unpack(cfg.controls.phone.cancel)) then SendNUIMessage({act="event",event="CANCEL"}) end
+    if IsControlJustPressed(table.unpack(cfg.controls.phone.up)) and GetLastInputMethod(0) then SendNUIMessage({act="event",event="UP"}) end
+    if IsControlJustPressed(table.unpack(cfg.controls.phone.down)) and GetLastInputMethod(0) then SendNUIMessage({act="event",event="DOWN"}) end
+    if IsControlJustPressed(table.unpack(cfg.controls.phone.left)) and GetLastInputMethod(0) then SendNUIMessage({act="event",event="LEFT"}) end
+    if IsControlJustPressed(table.unpack(cfg.controls.phone.right)) and GetLastInputMethod(0) then SendNUIMessage({act="event",event="RIGHT"}) end
+    if IsControlJustPressed(table.unpack(cfg.controls.phone.select)) and GetLastInputMethod(0) then SendNUIMessage({act="event",event="SELECT"}) end
+    if IsControlJustPressed(table.unpack(cfg.controls.phone.cancel)) and GetLastInputMethod(0) then SendNUIMessage({act="event",event="CANCEL"}) end
 
     -- open general menu
-    if IsControlJustPressed(table.unpack(cfg.controls.phone.open)) and (not tvRP.isInComa() or not cfg.coma_disable_menu) and (not tvRP.isHandcuffed() or not cfg.handcuff_disable_menu) then vRPserver.openMainMenu({}) end
+    if IsControlJustPressed(table.unpack(cfg.controls.phone.open)) and (not tvRP.isInComa() or not cfg.coma_disable_menu) and (not tvRP.isHandcuffed() or not cfg.handcuff_disable_menu) and GetLastInputMethod(0) then vRPserver.openMainMenu({}) end
 
     -- F5,F6 (default: control michael, control franklin)
-    if IsControlJustPressed(table.unpack(cfg.controls.request.yes)) then SendNUIMessage({act="event",event="F5"}) end
-    if IsControlJustPressed(table.unpack(cfg.controls.request.no)) then SendNUIMessage({act="event",event="F6"}) end
+    if IsControlJustPressed(table.unpack(cfg.controls.request.yes)) and GetLastInputMethod(0) then SendNUIMessage({act="event",event="F5"}) end
+    if IsControlJustPressed(table.unpack(cfg.controls.request.no)) and GetLastInputMethod(0) then SendNUIMessage({act="event",event="F6"}) end
 
     -- pause events
     local pause_menu = IsPauseMenuActive()
