@@ -34,6 +34,12 @@ local function tr_tick(tr) -- do transformer tick
   for k,v in pairs(tr.players) do
     local user_id = vRP.getUserId(tonumber(k))
     if v and user_id ~= nil then -- for each player transforming
+      
+     vRPclient.getPosition(player,{},function(x,y,z)
+	    vRPclient.getDistanceBetweenCoords(player,{x,y,z,tr.itemtr.x,tr.itemtr.y,tr.itemtr.z},function(distance)
+	      if distance <= tr.itemtr.radius then
+      
+      
       local recipe = tr.itemtr.recipes[v]
       if tr.units > 0 and recipe then -- check units
         -- check reagents
@@ -89,8 +95,11 @@ local function tr_tick(tr) -- do transformer tick
           if tr.itemtr.onstep then tr.itemtr.onstep(tonumber(k),v) end
         end
       end
-    end
+     end
+	  end)
+	 end)
   end
+ end
 
   -- display transformation state to all transforming players
   for k,v in pairs(tr.players) do
