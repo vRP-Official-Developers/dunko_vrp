@@ -27,6 +27,14 @@ function tvRP.getPosition()
   return x,y,z
 end
 
+--returns the distance between 2 coordinates (x,y,z) and (x2,y2,z2)
+function tvRP.getDistanceBetweenCoords(x,y,z,x2,y2,z2)
+
+local distance = GetDistanceBetweenCoords(x,y,z,x2,y2,z2, true)
+  
+  return distance
+end
+
 -- return false if in exterior, true if inside a building
 function tvRP.isInside()
   local x,y,z = tvRP.getPosition()
