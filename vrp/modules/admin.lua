@@ -97,6 +97,9 @@ local function ch_addgroup(player,choice)
     vRP.prompt(player,"User id: ","",function(player,id)
       id = parseInt(id)
       vRP.prompt(player,"Group to add: ","",function(player,group)
+	if group == superadmin or group == admin and not vRP.hasPermission(user_id,"player.group.add.superadmin") then
+	  do return end
+	end
         vRP.addUserGroup(id,group)
         vRPclient.notify(player,{group.." added to user "..id})
       end)
@@ -110,6 +113,9 @@ local function ch_removegroup(player,choice)
     vRP.prompt(player,"User id: ","",function(player,id)
       id = parseInt(id)
       vRP.prompt(player,"Group to remove: ","",function(player,group)
+	if group == superadmin or group == admin and not vRP.hasPermission(user_id,"player.group.add.superadmin") then
+	  do return end
+	end
         vRP.removeUserGroup(id,group)
         vRPclient.notify(player,{group.." removed from user "..id})
       end)
