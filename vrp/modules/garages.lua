@@ -10,7 +10,7 @@ local cfg = {}
 
 cfg.rent_factor = 0.1 -- 10% of the original price if a rent
 cfg.sell_factor = 0.75 -- sell for 75% of the original price
---this is the limit amount that you can put when you are trying to sell your personall vehicle to another player
+--this is the limit amount that you can put when you are trying to sell your personal vehicle to another player
 cfg.limit = 100000000
 
 
@@ -500,7 +500,7 @@ cfg.garage_types = {
   },
   ["UPS"] = {
     _config = {vtype="car",blipid=85,blipcolor=81,permissions={"ups.vehicle"}},
-    ["boxville4"] = {"Delivery",0, "boxville4"}
+    ["speedo"] = {"Delivery",0, "speedo"}
   },
   ["Lawyer"] = {
     _config = {vtype="car",blipid=50,blipcolor=7,permissions={"Lawyer.vehicle"}},

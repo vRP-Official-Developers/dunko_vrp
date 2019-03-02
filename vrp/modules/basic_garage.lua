@@ -27,7 +27,8 @@ local vehicle_groups = cfg.garage_types
 local lang = vRP.lang
 
 local garages = cfg.garages
-
+--defined the limit here as well if you dont put it in the config file
+local limit = cfg.limit or 100000000
 -- garage menus
 
 local garage_menus = {}
@@ -368,7 +369,7 @@ veh_actions[lang.vehicle.sellTP.title()] = {function(playerID,player,vtype,name)
 						local target = vRP.getUserSource(tonumber(user_id))
 						if target ~= nil then
 							vRP.prompt(player,"Price $: ","",function(player,amount)
-								if (tonumber(amount)) then
+								if tonumber(amount) and tonumber(amount) > 0 and tonumber(amount) < limit then
 									MySQL.query("vRP/get_vehicle", {user_id = user_id, vehicle = name}, function(pvehicle, affected)
 										if #pvehicle > 0 then
 											vRPclient.notify(player,{"~r~The player already has this vehicle type."})
