@@ -33,7 +33,7 @@ end
 local function tr_tick(tr) -- do transformer tick
   for k,v in pairs(tr.players) do
     local user_id = vRP.getUserId(tonumber(k))
-    local player = vRP.getUserId(tonumber(user_id))
+    local player = vRP.getUserSource(tonumber(user_id))
     if v and user_id ~= nil then -- for each player transforming
       
      vRPclient.getPosition(player,{},function(x,y,z)
