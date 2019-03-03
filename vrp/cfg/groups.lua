@@ -13,6 +13,8 @@ cfg.groups = {
   ["superadmin"] = {
     _config = {onspawn = function(player) vRPclient.notify(player,{"You are superadmin."}) end},
     "player.group.add",
+    "player.group.add.superadmin",
+    "player.group.add.admin",  --- this is just a example which can be added to admin/mod group if being made
     "player.group.remove",
     "player.givemoney",
     "player.giveitem"
