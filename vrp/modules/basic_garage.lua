@@ -15,6 +15,8 @@ MySQL.createCommand("vRP/add_vehicle","INSERT IGNORE INTO vrp_user_vehicles(user
 MySQL.createCommand("vRP/remove_vehicle","DELETE FROM vrp_user_vehicles WHERE user_id = @user_id AND vehicle = @vehicle")
 MySQL.createCommand("vRP/get_vehicles","SELECT vehicle FROM vrp_user_vehicles WHERE user_id = @user_id")
 MySQL.createCommand("vRP/get_vehicle","SELECT vehicle FROM vrp_user_vehicles WHERE user_id = @user_id AND vehicle = @vehicle")
+MySQL.createCommand("vRP/get_vehicleups","SELECT upgrades FROM vrp_user_vehicles WHERE user_id = @user_id AND vehicle = @vehicle AND upgrades IS NOT NULL")
+
 
 -- init
 MySQL.execute("vRP/vehicles_table")
@@ -529,4 +531,16 @@ vRP.registerMenuBuilder("main", function(add, data)
 
     add(choices)
   end
+end)
+
+RegisterServerEvent("garage:requestMods")
+AddEventHandler("garage:requestMods", function(vname)
+  local user_id = vRP.getUserId(source)
+  local src = vRP.getUserSource(user_id)
+  MySQL.query("vRP/get_vehicleups", {user_id = user_id, vehicle = vname}, function(rows, affected)
+    if #rows > 0 then -- has vehicle
+      vRPclient.garage_setmods(src, {rows[1].upgrades})
+    end
+  end)
+    
 end)
