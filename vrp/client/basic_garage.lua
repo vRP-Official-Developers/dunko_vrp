@@ -261,4 +261,113 @@ function tvRP.vc_toggleLock(vtype)
   end
 end
 
+function tvRP.vc_toggleLock(vtype)
+  local vehicle = vehicles[vtype]
+  if vehicle then
+    local veh = vehicle[3]
+    local locked = GetVehicleDoorLockStatus(veh) >= 2
+    if locked then -- unlock
+      SetVehicleDoorsLockedForAllPlayers(veh, false)
+      SetVehicleDoorsLocked(veh,1)
+      SetVehicleDoorsLockedForPlayer(veh, PlayerId(), false)
+      tvRP.notify("Vehicle unlocked.")
+    else -- lock
+      SetVehicleDoorsLocked(veh,2)
+      SetVehicleDoorsLockedForAllPlayers(veh, true)
+      tvRP.notify("Vehicle locked.")
+    end
+  end
+end
+
+function tvRP.garage_setmods(mods)
+	local ped = GetPlayerPed(-1)
+	local veh = GetVehiclePedIsUsing(ped)
+	local a = string.find(mods, ":")
+	local ct = 0
+	SetVehicleModKit(veh,0)
+	while mods ~= nil do
+		local b
+		if a ~= nil then
+			b = mods:sub(0,a-1)
+			mods = mods:sub(a+1)
+			a = string.find(mods, ":")
+		else
+			b = mods
+			mods = nil
+		end
+		local u = string.find(b, ",")
+		if ct == 0 then
+			local u1 = b:sub(0,u-1)
+			local u2 = b:sub(u+1)
+			SetVehicleColours(veh,tonumber(u1),tonumber(u2))
+		elseif ct == 1 then
+			local u1 = b:sub(0,u-1)
+			local u2 = b:sub(u+1)
+			SetVehicleExtraColours(veh,tonumber(u1),tonumber(u2))
+		elseif ct == 2 then
+			local u1 = b:sub(0,u-1)
+			local u2 = b:sub(u+1)
+			local spl = string.find(u2, ",")
+			local u3 = u2:sub(spl+1)
+			u2 = u2:sub(0,spl-1)
+			SetVehicleNeonLightsColour(veh,tonumber(u1),tonumber(u2),tonumber(u3))
+		elseif ct == 3 then
+			local bl = false
+			if tostring(b) == "true" then bl = true end
+			SetVehicleNeonLightEnabled(veh,0,bl)
+			SetVehicleNeonLightEnabled(veh,1,bl)
+			SetVehicleNeonLightEnabled(veh,2,bl)
+			SetVehicleNeonLightEnabled(veh,3,bl)
+		elseif ct == 4 then
+			local u1 = b:sub(0,u-1)
+			local u2 = b:sub(u+1)
+			local spl = string.find(u2, ",")
+			local u3 = u2:sub(spl+1)
+			u2 = u2:sub(0,spl-1)
+			SetVehicleTyreSmokeColor(veh,tonumber(u1),tonumber(u2),tonumber(u3))
+		elseif ct == 5 then
+			SetVehicleNumberPlateTextIndex(veh,tonumber(b))
+		elseif ct == 6 then
+			SetVehicleWindowTint(veh,tonumber(b))
+		elseif ct == 7 then
+			SetVehicleWheelType(veh,tonumber(b))
+		elseif ct == 8 then
+			local bl = false
+			if tostring(b) == "true" then bl = true end
+			SetVehicleTyresCanBurst(veh,bl)
+		elseif ct == 9 then
+			local c = string.find(b, ";")
+			while b ~= nil do
+				local d
+				if c ~= nil then
+					d = b:sub(0,c-1)
+					b = b:sub(c+1)
+					c = string.find(b, ";")
+				else
+					d = b
+					b = nil
+				end
+				
+				if d ~= nil then
+					local u = string.find(d, ",")
+					local u1 = d:sub(0,u-1)
+					local u2 = d:sub(u+1)
+					local spl = string.find(u2, ",")
+					local u3 = u2:sub(spl+1)
+					u2 = u2:sub(0,spl-1)
+					local bl = false
+					if tostring(u3) == "true" then bl = true end
+					if tonumber(u1) == 18 or tonumber(u1) == 22  or tonumber(u1) == 20 then
+						ToggleVehicleMod(veh,tonumber(u1),bl)
+						SetVehicleMod(veh,tonumber(u1),tonumber(u2),bl)
+					else
+						SetVehicleMod(veh,tonumber(u1),tonumber(u2),bl)
+					end
+				end
+			end
+		end
+		ct = ct+1
+	end
+end
+
 
