@@ -16,7 +16,7 @@ item = "- {2} {1}"
 	title = "¡Cortar tarjetas de crédito desde las terminales ocultas y luego venderme tarjetas de crédito!",
 item = "- {2} {1}"
 },
-  pescador = {
+fisherman = {
 	title = "Ve a pescar (ver mapa) y luego tráeme esos peces!",
 item = "- {2} {1}"
     },
