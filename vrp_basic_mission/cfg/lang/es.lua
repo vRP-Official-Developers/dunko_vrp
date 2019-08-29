@@ -1,57 +1,57 @@
 
-lang local = {
+local lang  = {
   repair = "Reparar {1}.",
   reward = "Recompensa: {1} $.",
   bankdriver = "Given Money {1}.",
   reward = "Recompensa: {1} $.",
-  entrega = {
-    title = "¡Compre los artículos de los Mercados (ver mapa) y luego tráigalos!",
+  delivery = {
+    title = "Â¡Compre los artÃ­culos de los Mercados (ver mapa) y luego trÃ¡igalos!",
     item = "- {2} {1}"
   },
   drugseller = {
-title = "Encuentra al Informador Ilegal, recoge las semillas de la ubicación que él da, llévalas al Laboratorio de Drogas (ver mapa) y luego tráelas a mí!",
+	title = "Encuentra al Informador Ilegal, recoge las semillas de la ubicaciÃ³n que Ã©l da, llÃ©valas al Laboratorio de Drogas (ver mapa) y luego trÃ¡elas a mÃ­!",
 item = "- {2} {1}"
 },
   hacker = {
-title = "¡Cortar tarjetas de crédito desde las terminales ocultas y luego venderme tarjetas de crédito!",
+	title = "Â¡Cortar tarjetas de crÃ©dito desde las terminales ocultas y luego venderme tarjetas de crÃ©dito!",
 item = "- {2} {1}"
 },
   pescador = {
-title = "Ve a pescar (ver mapa) y luego tráeme esos peces!",
+	title = "Ve a pescar (ver mapa) y luego trÃ¡eme esos peces!",
 item = "- {2} {1}"
     },
   weapons_smuggler = {
-title = "¡Saca las armas de Paleto Ammunation y luego guarda las armas!",
+	title = "Â¡Saca las armas de Paleto Ammunation y luego guarda las armas!",
 item = "- {2} {1}"
     },
   medical = {
-title = "¡Obtenga la hierba medicinal (ver mapa) y luego envíeme la hierba medicinal!",
+	title = "Â¡Obtenga la hierba medicinal (ver mapa) y luego envÃ­eme la hierba medicinal!",
 item = "- {2} {1}"
     },
   -- santa = {
 -- title = "Entregar los regalos de Navidad",
 -- item = "- {2} {1}"
     -- -},
-  piloto = {
-title = "¡Recoge carga (ver mapa) y luego me entrega la carga!",
+  pilot = {
+	title = "Â¡Recoge carga (ver mapa) y luego me entrega la carga!",
 item = "- {2} {1}"
     },
-  policía = {
-title = "Obtenga informes de la policía (ver mapa) y entrégueseles a los gerentes del banco para que muestren la presencia policial",
+  police = {
+	title = "Obtenga informes de la policÃ­a (ver mapa) y entrÃ©gueseles a los gerentes del banco para que muestren la presencia policial",
 item = "- {2} {1}"
     },
   ems = {
-title = "Obtener informes médicos (ver mapa) y luego entregarlos en el Hospital.",
+	title = "Obtener informes mÃ©dicos (ver mapa) y luego entregarlos en el Hospital.",
 item = "- {2} {1}"
     },
   trash = {
-title = "Recolectar basura (ver mapa) y traerlos a mí",
+	title = "Recolectar basura (ver mapa) y traerlos a mÃ­",
 item = "- {2} {1}"
     },
   forger = {
-title = "¡Obtenga tarjetas de crédito de los hackers, conviértalas en Fake ID (ver mapa) y tráigalas!",
+	title = "Â¡Obtenga tarjetas de crÃ©dito de los hackers, conviÃ©rtalas en Fake ID (ver mapa) y trÃ¡igalas!",
 item = "- {2} {1}"
     }
 }
 
-vuelta lang*
+return lang
