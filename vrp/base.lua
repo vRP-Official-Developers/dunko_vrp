@@ -81,7 +81,7 @@ CREATE TABLE IF NOT EXISTS vrp_srv_data(
 ]])
 
 MySQL.createCommand("vRP/create_user","INSERT INTO vrp_users(whitelisted,banned) VALUES(false,false); SELECT LAST_INSERT_ID() AS id")
-MySQL.createCommand("vRP/add_identifier","INSERT INTO vrp_user_ids(identifier,user_id) VALUES(@identifier,@user_id)")
+MySQL.createCommand("vRP/set_identifier","REPLACE INTO vrp_user_ids(identifier,user_id) VALUES(@identifier,@user_id)")
 MySQL.createCommand("vRP/userid_byidentifier","SELECT user_id FROM vrp_user_ids WHERE identifier = @identifier")
 
 MySQL.createCommand("vRP/set_userdata","REPLACE INTO vrp_user_data(user_id,dkey,dvalue) VALUES(@user_id,@key,@value)")
@@ -103,6 +103,14 @@ MySQL.execute("vRP/base_tables")
 
 -- identification system
 
+function vRP.setIdentifiers(user_id, ids)
+  for l,w in pairs(ids) do
+    if not config.ignore_ip_identifier or (string.find(w, "ip:") == nil) then  -- ignore ip identifier
+      MySQL.execute("vRP/set_identifier", {user_id = user_id, identifier = w})
+    end
+  end
+end
+
 --- sql.
 -- cbreturn user id or nil in case of error (if not found, will create it)
 function vRP.getUserIdByIdentifiers(ids, cbr)
@@ -118,7 +126,11 @@ function vRP.getUserIdByIdentifiers(ids, cbr)
         if not config.ignore_ip_identifier or (string.find(ids[i], "ip:") == nil) then  -- ignore ip identifier
           MySQL.query("vRP/userid_byidentifier", {identifier = ids[i]}, function(rows, affected)
             if #rows > 0 then  -- found
-              task({rows[1].user_id})
+              local user_id = rows[1].user_id
+               -- update identifiers
+              vRP.setIdentifiers(user_id, ids)
+
+              task({user_id})
             else -- not found
               search()
             end
@@ -131,11 +143,7 @@ function vRP.getUserIdByIdentifiers(ids, cbr)
           if #rows > 0 then
             local user_id = rows[1].id
             -- add identifiers
-            for l,w in pairs(ids) do
-              if not config.ignore_ip_identifier or (string.find(w, "ip:") == nil) then  -- ignore ip identifier
-                MySQL.execute("vRP/add_identifier", {user_id = user_id, identifier = w})
-              end
-            end
+            vRP.setIdentifiers(user_id, ids)
 
             task({user_id})
           else
