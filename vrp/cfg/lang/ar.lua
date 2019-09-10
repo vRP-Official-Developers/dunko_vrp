@@ -423,10 +423,10 @@ local lang = {
       description = "اصلاح اقرب سيارة لديك."
     }
   },
-      sellTP = {
+    sellTP = {
   title = "بعها على المواطنين",
   description = "بيع أقرب سيارة على المواطن."
-    }
+  },
   gunshop = {
     title = "محل اسلحة ({1})",
     prompt_ammo = "عدد الذخيرة لسلاح {1}:",
