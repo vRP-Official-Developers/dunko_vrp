@@ -3,5 +3,5 @@ echo -
 echo FXServer VRP
 echo -
 pause
-start F:\DunkoFiveM\run.cmd +exec server.cfg
+start C:\FxServer\FxServer.exe +exec server.cfg
 exit
