@@ -151,7 +151,7 @@ Citizen.CreateThread(function()
     if IsControlJustPressed(table.unpack(cfg.controls.phone.cancel)) and GetLastInputMethod(0) then SendNUIMessage({act="event",event="CANCEL"}) end
 
     -- open general menu
-    if IsControlJustPressed(table.unpack(cfg.controls.phone.open)) and not tastoBloccato and (not tvRP.isInComa() or not cfg.coma_disable_menu) and (not tvRP.isHandcuffed() or not cfg.handcuff_disable_menu) then
+    if IsControlJustPressed(table.unpack(cfg.controls.phone.open)) and (not tvRP.isInComa() or not cfg.coma_disable_menu) and (not tvRP.isHandcuffed() or not cfg.handcuff_disable_menu) and GetLastInputMethod(0) then 
       vRPserver.openMainMenu({})
     end
 
