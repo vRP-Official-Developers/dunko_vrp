@@ -1,5 +1,3 @@
-local Proxy = module("vrp", "lib/Proxy")
-
 Citizen.CreateThread(function()
     while true do
         Citizen.Wait(900000) -- Every X ms you'll get paid (300000 = 5 min)
