@@ -56,7 +56,6 @@ client_scripts{
   "client/identity.lua",
   "client/basic_garage.lua",
   "client/police.lua",
-  "client/paycheck.lua",
   "client/lockcar-client.lua",
   "client/admin.lua",
   "client/inventory.lua"
