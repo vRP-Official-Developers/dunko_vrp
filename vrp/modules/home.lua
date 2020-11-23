@@ -389,6 +389,7 @@ local function build_client_homes(source)
   if user_id ~= nil then
     for k,v in pairs(cfg.homes) do
       local x,y,z = table.unpack(v.entry_point)
+      local houseName = ''
 
       local function entry_enter(player,area)
         local user_id = vRP.getUserId(player)
@@ -401,7 +402,15 @@ local function build_client_homes(source)
         vRP.closeMenu(player)
       end
 
-      vRPclient.addBlip(source,{x,y,z,v.blipid,v.blipcolor,k})
+      local j = string.find(k, ' ', 6)
+      
+      if j ~= nil then
+        houseName = string.sub(k, 1, j)
+      else
+        houseName = k
+      end
+
+      vRPclient.addBlip(source,{x,y,z,v.blipid,v.blipcolor,houseName})
       vRPclient.addMarker(source,{x,y,z-1,0.7,0.7,0.5,0,255,125,125,150})
 
       vRP.setArea(source,"vRP:home"..k,x,y,z,1,1.5,entry_enter,entry_leave)
