@@ -7,9 +7,11 @@
 -- create new blip, return native id
 function tvRP.addBlip(x,y,z,idtype,idcolor,text)
   local blip = AddBlipForCoord(x+0.001,y+0.001,z+0.001) -- solve strange gta5 madness with integer -> double
-  SetBlipSprite(blip, idtype)
-  SetBlipAsShortRange(blip, true)
-  SetBlipColour(blip,idcolor)
+  SetBlipSprite(blip, idtype) -- Sets the displayed sprite(https://docs.fivem.net/docs/game-references/blips/) for a specific blip.
+  SetBlipAsShortRange(blip, true) -- Sets whether or not the specified blip should only be displayed when nearby, or on the minimap.
+  SetBlipColour(blip,idcolor) --Set Blip Color
+  SetBlipScale(blip, 0.9) -- Set Blip Size on Map
+  SetBlipDisplay(blip,6) -- Shows the blip in map and minimap
 
   if text ~= nil then
     BeginTextCommandSetBlipName("STRING")
