@@ -1,4 +1,3 @@
-local Proxy = module("vrp", "lib/Proxy")
 
 Citizen.CreateThread(function()
     while true do
