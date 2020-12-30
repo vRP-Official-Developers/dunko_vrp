@@ -28,7 +28,7 @@ If you need help, head over to my Discord:  https://discord.gg/kAfBuJG
 
 3) Go to ghmattimysql/config.json and enter your database details
 
-4) Do not forget to install<a href="https://github.com/citizenfx/cfx-server-data">FiveM base resources</a>
+4) Do not forget to install <a href="https://github.com/citizenfx/cfx-server-data">FiveM base resources</a>
 
 5) (Optional) Whilst in vrp/cfg/base.lua go to line 25 and change "en" to your language
 
