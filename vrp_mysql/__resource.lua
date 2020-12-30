@@ -1,16 +1,9 @@
 
-description "vRP MySQL async"
-
+description "vRP MySQL async - Modified Version"
+dependency "ghmattimysql"
 -- server scripts
 server_scripts{ 
   "@vrp/lib/utils.lua",
-  "init.lua",
-  "mysql.net.dll"
+  "MySQL.lua"
 }
 
-server_exports{
-  "createConnection",
-  "createCommand",
-  "query",
-  "checkTask"
-}
