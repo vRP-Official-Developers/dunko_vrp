@@ -2,12 +2,17 @@
 local cfg = {}
 
 -- mysql credentials
-cfg.db = {
-  host = "127.0.0.1", -- database ip (default is local)
-  database = "vrpfx",   -- name of database
-  user = "root",    --  database username
-  password = ""   -- password of your database
-}
+-- cfg.db = {
+--   host = "127.0.0.1", -- database ip (default is local)
+--   database = "vrpfx",   -- name of database
+--   user = "root",    --  database username
+--   password = ""   -- password of your database
+-- }
+
+--[[
+  THE ABOVE DB CREDENTIALS ARE NO LONGER USED. 
+  Go to ghmattimysql/config.json and enter your database details
+]]
 
 cfg.save_interval = 30 -- seconds
 cfg.whitelist = false -- enable/disable whitelist
