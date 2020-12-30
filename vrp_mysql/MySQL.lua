@@ -1,6 +1,8 @@
 local MySQL = {}
 local Queries = {}
 
+-- Modified Version of MySQL - JamesUK
+
 function MySQL.createCommand(queryname, query)
     if not Queries[queryname] then 
         Queries[queryname] = query
@@ -24,9 +26,7 @@ end
 function MySQL.query(queryname, variables, cb)
     if Queries[queryname] then 
         if variables then 
-            print(Queries[queryname])
             exports['ghmattimysql']:execute(Queries[queryname], variables, function(rows, affected)
-                print('GHMATTI', json.encode(rows))
                 cb(rows, affected)
             end)
         end 
