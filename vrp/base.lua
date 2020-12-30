@@ -8,10 +8,6 @@ Debug = module("lib/Debug")
 local config = module("cfg/base")
 local version = module("version")
 Debug.active = config.debug
-MySQL.debug = config.debug
-
--- open MySQL connection
-MySQL.createConnection("vRP", config.db.host,config.db.user,config.db.password,config.db.database)
 
 -- versioning
 print("[vRP] launch version "..version)
@@ -49,7 +45,7 @@ vRP.user_tmp_tables = {} -- user tmp data tables (logger storage, not saved)
 vRP.user_sources = {} -- user sources 
 
 -- queries
-MySQL.createCommand("vRP/base_tables",[[
+MySQL.SingleQuery([[
 CREATE TABLE IF NOT EXISTS vrp_users(
   id INTEGER AUTO_INCREMENT,
   last_login VARCHAR(100),
@@ -57,30 +53,35 @@ CREATE TABLE IF NOT EXISTS vrp_users(
   banned BOOLEAN,
   CONSTRAINT pk_user PRIMARY KEY(id)
 );
-
-CREATE TABLE IF NOT EXISTS vrp_user_ids(
-  identifier VARCHAR(100),
-  user_id INTEGER,
-  CONSTRAINT pk_user_ids PRIMARY KEY(identifier),
-  CONSTRAINT fk_user_ids_users FOREIGN KEY(user_id) REFERENCES vrp_users(id) ON DELETE CASCADE
-);
-
-CREATE TABLE IF NOT EXISTS vrp_user_data(
-  user_id INTEGER,
-  dkey VARCHAR(100),
-  dvalue TEXT,
-  CONSTRAINT pk_user_data PRIMARY KEY(user_id,dkey),
-  CONSTRAINT fk_user_data_users FOREIGN KEY(user_id) REFERENCES vrp_users(id) ON DELETE CASCADE
-);
-
-CREATE TABLE IF NOT EXISTS vrp_srv_data(
-  dkey VARCHAR(100),
-  dvalue TEXT,
-  CONSTRAINT pk_srv_data PRIMARY KEY(dkey)
-);
+]])
+MySQL.SingleQuery([[
+  CREATE TABLE IF NOT EXISTS vrp_user_ids (
+      identifier VARCHAR(100) NOT NULL,
+      user_id INTEGER,
+      CONSTRAINT pk_user_ids PRIMARY KEY(identifier)
+  );
+]])
+MySQL.SingleQuery([[
+  CREATE TABLE IF NOT EXISTS vrp_user_data(
+    user_id INTEGER,
+    dkey VARCHAR(100),
+    dvalue TEXT,
+    CONSTRAINT pk_user_data PRIMARY KEY(user_id,dkey),
+    CONSTRAINT fk_user_data_users FOREIGN KEY(user_id) REFERENCES vrp_users(id) ON DELETE CASCADE
+  );
+]])
+MySQL.SingleQuery([[
+  CREATE TABLE IF NOT EXISTS vrp_srv_data(
+      dkey VARCHAR(100),
+      dvalue TEXT,
+      CONSTRAINT pk_srv_data PRIMARY KEY(dkey)
+  );
 ]])
 
-MySQL.createCommand("vRP/create_user","INSERT INTO vrp_users(whitelisted,banned) VALUES(false,false); SELECT LAST_INSERT_ID() AS id")
+
+
+
+MySQL.createCommand("vRP/create_user","INSERT INTO vrp_users(whitelisted,banned) VALUES(false,false)")
 MySQL.createCommand("vRP/add_identifier","INSERT INTO vrp_user_ids(identifier,user_id) VALUES(@identifier,@user_id)")
 MySQL.createCommand("vRP/userid_byidentifier","SELECT user_id FROM vrp_user_ids WHERE identifier = @identifier")
 
@@ -128,8 +129,8 @@ function vRP.getUserIdByIdentifiers(ids, cbr)
         end
       else -- no ids found, create user
         MySQL.query("vRP/create_user", {}, function(rows, affected)
-          if #rows > 0 then
-            local user_id = rows[1].id
+          if rows.affectedRows > 0 then
+            local user_id = rows.insertId
             -- add identifiers
             for l,w in pairs(ids) do
               if not config.ignore_ip_identifier or (string.find(w, "ip:") == nil) then  -- ignore ip identifier
