@@ -123,6 +123,7 @@ function tvRP.giveWeapons(weapons,clear_before)
 
     GiveWeaponToPed(player, hash, ammo, false)
   end
+  return true
 end
 
 --[[
