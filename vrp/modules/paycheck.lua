@@ -8,16 +8,13 @@ Citizen.CreateThread(function()
 		for i=1, #paychecks do 
 			local paycheck = paychecks[i]
 			for k,v in pairs(players) do
-				for i=1, paycheck.permissions do 
+				for i=1, #paycheck.permissions do 
 					if vRP.hasPermission(k, paycheck.permissions[i]) then 
 						if not playersPaid[k] then 
+							local source = vRP.getUserSource(k)
 							vRP.giveBankMoney(k, paycheck.paycheck)
 							vRPclient.notifyPicture(source,{"CHAR_BANK_MAZE",1,paycheck.name,false,"You've been paid! Amount:"..paycheck.paycheck})
 							playersPaid[k] = true
-							if paycheck.isGift then 
-								vRP.getMoney(user_id, 150)
-                				vRPclient.notify(source, {"You have been taxed for your gift: $-150"})
-							end
 						end
 						break
 					end
