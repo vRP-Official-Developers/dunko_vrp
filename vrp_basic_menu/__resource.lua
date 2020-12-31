@@ -27,7 +27,6 @@ client_scripts{
   "client/Proxy.lua",
   "client.lua",
   "playerblips/client.lua",
-  "runcode/client.lua",
   "tptowaypoint/client.lua",
   "drag/client.lua",
   "spikes/client.lua"
@@ -35,6 +34,5 @@ client_scripts{
 
 server_scripts{ 
   "@vrp/lib/utils.lua",
-  "runcode/server.lua",
   "server.lua"
 }

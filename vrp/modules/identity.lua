@@ -8,20 +8,7 @@ local sanitizes = module("cfg/sanitizes")
 -- this module describe the identity system
 
 -- init sql
-MySQL.createCommand("vRP/identity_tables", [[
-CREATE TABLE IF NOT EXISTS vrp_user_identities(
-  user_id INTEGER,
-  registration VARCHAR(100),
-  phone VARCHAR(100),
-  firstname VARCHAR(100),
-  name VARCHAR(100),
-  age INTEGER,
-  CONSTRAINT pk_user_identities PRIMARY KEY(user_id),
-  CONSTRAINT fk_user_identities_users FOREIGN KEY(user_id) REFERENCES vrp_users(id) ON DELETE CASCADE,
-  INDEX(registration),
-  INDEX(phone)
-);
-]])
+
 
 MySQL.createCommand("vRP/get_user_identity","SELECT * FROM vrp_user_identities WHERE user_id = @user_id")
 MySQL.createCommand("vRP/init_user_identity","INSERT IGNORE INTO vrp_user_identities(user_id,registration,phone,firstname,name,age) VALUES(@user_id,@registration,@phone,@firstname,@name,@age)")
@@ -29,8 +16,7 @@ MySQL.createCommand("vRP/update_user_identity","UPDATE vrp_user_identities SET f
 MySQL.createCommand("vRP/get_userbyreg","SELECT user_id FROM vrp_user_identities WHERE registration = @registration")
 MySQL.createCommand("vRP/get_userbyphone","SELECT user_id FROM vrp_user_identities WHERE phone = @phone")
 
--- init
-MySQL.execute("vRP/identity_tables")
+
 
 -- api
 
