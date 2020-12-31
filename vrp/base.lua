@@ -53,9 +53,9 @@ Citizen.CreateThread(function()
     last_login VARCHAR(100),
     whitelisted BOOLEAN,
     banned BOOLEAN,
-    bantime VARCHAR(100),
-    banreason VARCHAR(1000),
-    banadmin VARCHAR(100),
+    bantime VARCHAR(100) NOT NULL,
+    banreason VARCHAR(1000) NOT NULL,
+    banadmin VARCHAR(100) NOT NULL,
     CONSTRAINT pk_user PRIMARY KEY(id)
     );
     ]])
@@ -93,13 +93,13 @@ Citizen.CreateThread(function()
     );
     ]])
     MySQL.SingleQuery([[
-        CREATE TABLE IF NOT EXISTS vrp_user_moneys(
-        user_id INTEGER,
-        wallet INTEGER,
-        bank INTEGER,
-        CONSTRAINT pk_user_moneys PRIMARY KEY(user_id),
-        CONSTRAINT fk_user_moneys_users FOREIGN KEY(user_id) REFERENCES vrp_users(id) ON DELETE CASCADE
-        );
+    CREATE TABLE IF NOT EXISTS vrp_user_moneys(
+    user_id INTEGER,
+    wallet INTEGER,
+    bank INTEGER,
+    CONSTRAINT pk_user_moneys PRIMARY KEY(user_id),
+    CONSTRAINT fk_user_moneys_users FOREIGN KEY(user_id) REFERENCES vrp_users(id) ON DELETE CASCADE
+    );
     ]])
     MySQL.SingleQuery([[
     CREATE TABLE IF NOT EXISTS vrp_user_business(
