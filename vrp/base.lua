@@ -397,7 +397,6 @@ end
 function vRP.BanIdentifiers(user_id, value)
     MySQL.query('vRP/select_identifier_byid_all', {id = user_id}, function(rows)
         for i = 1, #rows do 
-            print(rows[i].identifier)
             MySQL.execute("vRP/set_identifierbanned", {banned = value, iden = rows[i].identifier })
         end
     end)
