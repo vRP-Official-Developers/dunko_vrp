@@ -7,19 +7,6 @@ local lang = vRP.lang
 
 local sanitizes = module("cfg/sanitizes")
 
--- sql
-MySQL.createCommand("vRP/business_tables",[[
-CREATE TABLE IF NOT EXISTS vrp_user_business(
-  user_id INTEGER,
-  name VARCHAR(30),
-  description TEXT,
-  capital INTEGER,
-  laundered INTEGER,
-  reset_timestamp INTEGER,
-  CONSTRAINT pk_user_business PRIMARY KEY(user_id),
-  CONSTRAINT fk_user_business_users FOREIGN KEY(user_id) REFERENCES vrp_users(id) ON DELETE CASCADE
-);
-]])
 
 MySQL.createCommand("vRP/create_business","INSERT IGNORE INTO vrp_user_business(user_id,name,description,capital,laundered,reset_timestamp) VALUES(@user_id,@name,'',@capital,0,@time)")
 MySQL.createCommand("vRP/delete_business","DELETE FROM vrp_user_business WHERE user_id = @user_id")
@@ -28,9 +15,6 @@ MySQL.createCommand("vRP/add_capital","UPDATE vrp_user_business SET capital = ca
 MySQL.createCommand("vRP/add_laundered","UPDATE vrp_user_business SET laundered = laundered + @laundered WHERE user_id = @user_id")
 MySQL.createCommand("vRP/get_business_page","SELECT user_id,name,description,capital FROM vrp_user_business ORDER BY capital DESC LIMIT @b,@n")
 MySQL.createCommand("vRP/reset_transfer","UPDATE vrp_user_business SET laundered = 0, reset_timestamp = @time WHERE user_id = @user_id")
-
--- init
-MySQL.execute("vRP/business_tables")
 
 -- api
 

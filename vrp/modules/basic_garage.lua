@@ -1,23 +1,14 @@
 -- a basic garage implementation
 
 -- vehicle db
-MySQL.createCommand("vRP/vehicles_table", [[
-CREATE TABLE IF NOT EXISTS vrp_user_vehicles(
-  user_id INTEGER,
-  vehicle VARCHAR(100),
-  vehicle_plate varchar(255) NOT NULL,
-  CONSTRAINT pk_user_vehicles PRIMARY KEY(user_id,vehicle),
-  CONSTRAINT fk_user_vehicles_users FOREIGN KEY(user_id) REFERENCES vrp_users(id) ON DELETE CASCADE
-);
-]])
+
 
 MySQL.createCommand("vRP/add_vehicle","INSERT IGNORE INTO vrp_user_vehicles(user_id,vehicle,vehicle_plate) VALUES(@user_id,@vehicle,@registration)")
 MySQL.createCommand("vRP/remove_vehicle","DELETE FROM vrp_user_vehicles WHERE user_id = @user_id AND vehicle = @vehicle")
 MySQL.createCommand("vRP/get_vehicles","SELECT vehicle FROM vrp_user_vehicles WHERE user_id = @user_id")
 MySQL.createCommand("vRP/get_vehicle","SELECT vehicle FROM vrp_user_vehicles WHERE user_id = @user_id AND vehicle = @vehicle")
 
--- init
-MySQL.execute("vRP/vehicles_table")
+
 
 -- load config
 
