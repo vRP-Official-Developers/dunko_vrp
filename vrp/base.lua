@@ -63,7 +63,7 @@ Citizen.CreateThread(function()
     CREATE TABLE IF NOT EXISTS vrp_user_ids (
     identifier VARCHAR(100) NOT NULL,
     user_id INTEGER,
-    banned BOOLEAN,
+    banned BOOLEAN NOT NULL,
     CONSTRAINT pk_user_ids PRIMARY KEY(identifier)
     );
     ]])
@@ -160,6 +160,8 @@ end)
 MySQL.createCommand("vRP/create_user","INSERT INTO vrp_users(whitelisted,banned) VALUES(false,false)")
 MySQL.createCommand("vRP/add_identifier","INSERT INTO vrp_user_ids(identifier,user_id) VALUES(@identifier,@user_id)")
 MySQL.createCommand("vRP/userid_byidentifier","SELECT user_id FROM vrp_user_ids WHERE identifier = @identifier")
+MySQL.createCommand("vRP/identifier_all","SELECT * FROM vrp_user_ids WHERE identifier = @identifier")
+MySQL.createCommand("vRP/select_identifier_byid_all","SELECT * FROM vrp_user_ids WHERE user_id = @id")
 
 MySQL.createCommand("vRP/set_userdata","REPLACE INTO vrp_user_data(user_id,dkey,dvalue) VALUES(@user_id,@key,@value)")
 MySQL.createCommand("vRP/get_userdata","SELECT dvalue FROM vrp_user_data WHERE user_id = @user_id AND dkey = @key")
@@ -169,6 +171,7 @@ MySQL.createCommand("vRP/get_srvdata","SELECT dvalue FROM vrp_srv_data WHERE dke
 
 MySQL.createCommand("vRP/get_banned","SELECT banned FROM vrp_users WHERE id = @user_id")
 MySQL.createCommand("vRP/set_banned","UPDATE vrp_users SET banned = @banned, bantime = @bantime,  banreason = @banreason,  banadmin = @banadmin WHERE id = @user_id")
+MySQL.createCommand("vRP/set_identifierbanned","UPDATE vrp_user_ids SET banned = @banned WHERE identifier = @iden")
 MySQL.createCommand("vRP/getbanreasontime", "SELECT * FROM vrp_users WHERE id = @user_id")
 
 MySQL.createCommand("vRP/get_whitelisted","SELECT whitelisted FROM vrp_users WHERE id = @user_id")
@@ -377,11 +380,35 @@ function vRP.getUserSource(user_id)
     return vRP.user_sources[user_id]
 end
 
+function vRP.IdentifierBanCheck(source,user_id,cb)
+    for i,v in pairs(GetPlayerIdentifiers(source)) do 
+        MySQL.query('vRP/identifier_all', {identifier = v}, function(rows)
+            for i = 1,#rows do 
+                if rows[i].banned then 
+                    if user_id ~= rows[i].user_id then 
+                        cb(true, rows[i].user_id)
+                    end 
+                end
+            end
+        end)
+    end
+end
+
+function vRP.BanIdentifiers(user_id, value)
+    MySQL.query('vRP/select_identifier_byid_all', {id = user_id}, function(rows)
+        for i = 1, #rows do 
+            MySQL.execute("vRP/set_identifierbanned", {banned = value, iden = rows[i].identifier })
+        end
+    end)
+end
+
 function vRP.setBanned(user_id,banned,time,reason, admin)
     if banned then 
         MySQL.execute("vRP/set_banned", {user_id = user_id, banned = banned, bantime = time, banreason = reason, banadmin = admin})
+        vRP.BanIdentifiers(user_id, true)
     else 
         MySQL.execute("vRP/set_banned", {user_id = user_id, banned = banned, bantime = "", banreason =  "", banadmin =  ""})
+        vRP.BanIdentifiers(user_id, false)
     end 
 end
 
@@ -444,6 +471,13 @@ AddEventHandler("playerConnecting",function(name,setMessage, deferrals)
     if ids ~= nil and #ids > 0 then
         deferrals.update("[vRP] Checking identifiers...")
         vRP.getUserIdByIdentifiers(ids, function(user_id)
+            vRP.IdentifierBanCheck(source, user_id, function(status, id)
+                if status then
+                    print("[vRP] User rejected for attempting to evade ID: " .. user_id .. " | (Ignore joined message, they were rejected)") 
+                    deferrals.done("[vRP]: You are banned from this server, please do not try to evade your ban. If you believe this was an error quote your ID which is: " .. id)
+                    return 
+                end
+            end)
             -- if user_id ~= nil and vRP.rusers[user_id] == nil then -- check user validity and if not already connected (old way, disabled until playerDropped is sure to be called)
             if user_id ~= nil then -- check user validity 
                 deferrals.update("[vRP] Checking banned...")
