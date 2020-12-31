@@ -168,8 +168,8 @@ MySQL.createCommand("vRP/set_srvdata","REPLACE INTO vrp_srv_data(dkey,dvalue) VA
 MySQL.createCommand("vRP/get_srvdata","SELECT dvalue FROM vrp_srv_data WHERE dkey = @key")
 
 MySQL.createCommand("vRP/get_banned","SELECT banned FROM vrp_users WHERE id = @user_id")
-MySQL.createCommand("vRP/set_banned","UPDATE vrp_users SET banned = @banned WHERE id = @user_id")
-MySQL.createCommand("vRP/getbanreason+time", "Select bantime, banreason, banadmin FROM vrp_users WHERE id = @user_id")
+MySQL.createCommand("vRP/set_banned","UPDATE vrp_users SET banned = @banned, bantime = @bantime,  banreason = @banreason,  banadmin = @banadmin WHERE id = @user_id")
+MySQL.createCommand("vRP/getbanreasontime", "SELECT * FROM vrp_users WHERE id = @user_id")
 
 MySQL.createCommand("vRP/get_whitelisted","SELECT whitelisted FROM vrp_users WHERE id = @user_id")
 MySQL.createCommand("vRP/set_whitelisted","UPDATE vrp_users SET whitelisted = @whitelisted WHERE id = @user_id")
@@ -262,9 +262,6 @@ function vRP.isBanned(user_id, cbr)
 end
 
 --- sql
-function vRP.setBanned(user_id,banned)
-    MySQL.execute("vRP/set_banned", {user_id = user_id, banned = banned})
-end
 
 --- sql
 function vRP.isWhitelisted(user_id, cbr)
@@ -297,7 +294,7 @@ function vRP.getLastLogin(user_id, cbr)
 end
 
 function vRP.fetchBanReasonTime(user_id,cbr)
-    MySQL.query("vRP/getbanreason+time", {id = user_id}, function(rows, affected)
+    MySQL.query("vRP/getbanreasontime", {user_id = user_id}, function(rows, affected)
         if #rows > 0 then 
             cbr(rows[1].bantime, rows[1].banreason, rows[1].banadmin)
         end
@@ -380,12 +377,35 @@ function vRP.getUserSource(user_id)
     return vRP.user_sources[user_id]
 end
 
-function vRP.ban(source,reason)
-    local user_id = vRP.getUserId(source)
-    
-    if user_id ~= nil then
-        vRP.setBanned(user_id,true)
-        vRP.kick(source,"[Banned] "..reason)
+function vRP.setBanned(user_id,banned,time,reason, admin)
+    if banned then 
+        MySQL.execute("vRP/set_banned", {user_id = user_id, banned = banned, bantime = time, banreason = reason, banadmin = admin})
+    else 
+        MySQL.execute("vRP/set_banned", {user_id = user_id, banned = banned, bantime = "", banreason =  "", banadmin =  ""})
+    end 
+end
+
+function vRP.ban(adminsource,permid,time,reason)
+    local adminPermID = vRP.getUserId(adminsource)
+    local getBannedPlayerSrc = vRP.getUserSource(tonumber(permid))
+    if getBannedPlayerSrc then 
+        if tonumber(time) then 
+            local banTime = os.time()
+            banTime = banTime  + (60 * 60 * tonumber(time))  
+            vRP.setBanned(permid,true,time,reason, GetPlayerName(adminsource) .. " | ID Of Admin: " .. adminPermID)
+            vRP.kick(getBannedPlayerSrc,"You have been banned from this server. Your ban expires in: " .. os.date("%c", banTime) .. " Reason: " .. reason .. " | BanningAdmin: " ..  GetPlayerName(adminsource) .. " | ID Of Admin: " .. adminPermID ) 
+        else 
+            vRP.setBanned(permid,true,time,reason, GetPlayerName(adminsource) .. " | ID Of Admin: " .. adminPermID)
+            vRP.kick(getBannedPlayerSrc,"You have been banned from this server. Your ban expires in: " .. "Never, you've been permanently banned." .. " Reason: " .. reason .. " | BanningAdmin: " ..  GetPlayerName(adminsource) .. " | ID Of Admin: " .. adminPermID ) 
+        end
+    else 
+        if tonumber(time) then 
+            local banTime = os.time()
+            banTime = banTime  + (60 * 60 * tonumber(time))  
+            vRP.setBanned(permid,true,time,reason, GetPlayerName(adminsource) .. " | ID Of Admin: " .. adminPermID)
+        else 
+            vRP.setBanned(permid,true,time,reason, GetPlayerName(adminsource) .. " | ID Of Admin: " .. adminPermID)
+        end
     end
 end
 
@@ -482,9 +502,10 @@ AddEventHandler("playerConnecting",function(name,setMessage, deferrals)
                         vRP.fetchBanReasonTime(user_id,function(bantime, banreason, banadmin)
                             if tonumber(bantime) then 
                                 local timern = os.time()
-                                if timern > bantime then 
+                                if timern > tonumber(bantime) then 
                                     deferrals.update('Your ban has expired. Please do not violate this server\'s rules again. You will now be automatically connected!')
-                                    Wait(1500)
+                                    Wait(2000)
+                                    vRP.setBanned(user_id,false)
                                     if vRP.rusers[user_id] == nil then -- not present on the server, init
                                         -- init entries
                                         vRP.users[ids[1]] = user_id
@@ -530,10 +551,10 @@ AddEventHandler("playerConnecting",function(name,setMessage, deferrals)
                                     return 
                                 end
                                 print("[vRP] "..name.." ("..vRP.getPlayerEndpoint(source)..") rejected: banned (user_id = "..user_id..")")
-                                deferrals.done("[vRP] You have been banned from this server. Your ban will expire on the: " .. os.date("%c", bantime) .. " Reason: " .. banreason .. " Banning Admin: " .. banadmin)
+                                deferrals.done("[vRP] You have been banned from this server.\nYour ban will expire on the: " .. os.date("%c", bantime) .. "\nReason: " .. banreason .. "\n\nBanning Admin: " .. banadmin)
                             else 
                                 print("[vRP] "..name.." ("..vRP.getPlayerEndpoint(source)..") rejected: banned (user_id = "..user_id..")")
-                                deferrals.done("[vRP] You have been banned from this server. Your ban will expire: Never, you have been permanently banned Reason: " .. banreason .. " Banning Admin: " .. banadmin)
+                                deferrals.done("[vRP] You have been banned from this server.\nYour ban will expire: Never, you have been permanently banned \nReason: " .. banreason .. "\n\nBanning Admin: " .. banadmin)
                             end
                         end)
                     end

@@ -144,13 +144,27 @@ local function ch_ban(player,choice)
     if user_id ~= nil and vRP.hasPermission(user_id,"player.ban") then
         vRP.prompt(player,"User id to ban: ","",function(player,id)
             id = parseInt(id)
-            vRP.prompt(player,"Reason: ","",function(player,reason)
-                local source = vRP.getUserSource(id)
-                if source ~= nil then
-                    vRP.ban(source,reason)
-                    vRPclient.notify(player,{"banned user "..id})
-                end
-            end)
+            if id then  -- Thanks to JamesUK <3 For updated temp bans
+                vRP.prompt(player,"Reason: ","",function(player,reason)
+                    if reason then 
+                        vRP.prompt(player,"Duration of Ban (-1 for perm ban): ","",function(player,hours)
+                            if tonumber(hours) then 
+                                if tonumber(hours) == -1 then 
+                                    vRP.ban(player,id,"perm",reason)
+                                else 
+                                    vRP.ban(player,id,hours,reason)
+                                end
+                            else 
+                                vRPclient.notify(player,{"Please enter a number for the ban hours."})
+                            end 
+                        end)
+                    else 
+                        vRPclient.notify(player,{"Please enter a ban reason!"})
+                    end 
+                end)
+            else 
+                vRPclient.notify(player,{"Please enter an id to ban!"})
+            end      
         end)
     end
 end
