@@ -63,6 +63,7 @@ Citizen.CreateThread(function()
     CREATE TABLE IF NOT EXISTS vrp_user_ids (
     identifier VARCHAR(100) NOT NULL,
     user_id INTEGER,
+    banned BOOLEAN,
     CONSTRAINT pk_user_ids PRIMARY KEY(identifier)
     );
     ]])
@@ -80,6 +81,69 @@ Citizen.CreateThread(function()
     dkey VARCHAR(100),
     dvalue TEXT,
     CONSTRAINT pk_srv_data PRIMARY KEY(dkey)
+    );
+    ]])
+    MySQL.SingleQuery([[
+    CREATE TABLE IF NOT EXISTS vrp_user_moneys(
+    user_id INTEGER,
+    wallet INTEGER,
+    bank INTEGER,
+    CONSTRAINT pk_user_moneys PRIMARY KEY(user_id),
+    CONSTRAINT fk_user_moneys_users FOREIGN KEY(user_id) REFERENCES vrp_users(id) ON DELETE CASCADE
+    );
+    ]])
+    MySQL.SingleQuery([[
+        CREATE TABLE IF NOT EXISTS vrp_user_moneys(
+        user_id INTEGER,
+        wallet INTEGER,
+        bank INTEGER,
+        CONSTRAINT pk_user_moneys PRIMARY KEY(user_id),
+        CONSTRAINT fk_user_moneys_users FOREIGN KEY(user_id) REFERENCES vrp_users(id) ON DELETE CASCADE
+        );
+    ]])
+    MySQL.SingleQuery([[
+    CREATE TABLE IF NOT EXISTS vrp_user_business(
+    user_id INTEGER,
+    name VARCHAR(30),
+    description TEXT,
+    capital INTEGER,
+    laundered INTEGER,
+    reset_timestamp INTEGER,
+    CONSTRAINT pk_user_business PRIMARY KEY(user_id),
+    CONSTRAINT fk_user_business_users FOREIGN KEY(user_id) REFERENCES vrp_users(id) ON DELETE CASCADE
+    );
+    ]])
+    MySQL.SingleQuery([[
+    CREATE TABLE IF NOT EXISTS vrp_user_vehicles(
+    user_id INTEGER,
+    vehicle VARCHAR(100),
+    vehicle_plate varchar(255) NOT NULL,
+    CONSTRAINT pk_user_vehicles PRIMARY KEY(user_id,vehicle),
+    CONSTRAINT fk_user_vehicles_users FOREIGN KEY(user_id) REFERENCES vrp_users(id) ON DELETE CASCADE
+    );
+    ]])
+    MySQL.SingleQuery([[
+    CREATE TABLE IF NOT EXISTS vrp_user_homes(
+    user_id INTEGER,
+    home VARCHAR(100),
+    number INTEGER,
+    CONSTRAINT pk_user_homes PRIMARY KEY(user_id),
+    CONSTRAINT fk_user_homes_users FOREIGN KEY(user_id) REFERENCES vrp_users(id) ON DELETE CASCADE,
+    UNIQUE(home,number)
+    );
+    ]])
+    MySQL.SingleQuery([[
+    CREATE TABLE IF NOT EXISTS vrp_user_identities(
+    user_id INTEGER,
+    registration VARCHAR(100),
+    phone VARCHAR(100),
+    firstname VARCHAR(100),
+    name VARCHAR(100),
+    age INTEGER,
+    CONSTRAINT pk_user_identities PRIMARY KEY(user_id),
+    CONSTRAINT fk_user_identities_users FOREIGN KEY(user_id) REFERENCES vrp_users(id) ON DELETE CASCADE,
+    INDEX(registration),
+    INDEX(phone)
     );
     ]])
     MySQL.SingleQuery("ALTER TABLE vrp_users ADD IF NOT EXISTS bantime varchar(100) NOT NULL;")
@@ -233,9 +297,9 @@ function vRP.getLastLogin(user_id, cbr)
 end
 
 function vRP.fetchBanReasonTime(user_id,cbr)
-    MySQL.query("vRP/getbanreason+time", {user_id = user_id, key = key}, function(rows, affected)
+    MySQL.query("vRP/getbanreason+time", {id = user_id}, function(rows, affected)
         if #rows > 0 then 
-            
+            cbr(rows[1].bantime, rows[1].banreason, rows[1].banadmin)
         end
     end)
 end
@@ -415,8 +479,63 @@ AddEventHandler("playerConnecting",function(name,setMessage, deferrals)
                             end
                         end)
                     else
-                        print("[vRP] "..name.." ("..vRP.getPlayerEndpoint(source)..") rejected: banned (user_id = "..user_id..")")
-                        deferrals.done("[vRP] Banned (user_id = "..user_id..").")
+                        vRP.fetchBanReasonTime(user_id,function(bantime, banreason, banadmin)
+                            if tonumber(bantime) then 
+                                local timern = os.time()
+                                if timern > bantime then 
+                                    deferrals.update('Your ban has expired. Please do not violate this server\'s rules again. You will now be automatically connected!')
+                                    Wait(1500)
+                                    if vRP.rusers[user_id] == nil then -- not present on the server, init
+                                        -- init entries
+                                        vRP.users[ids[1]] = user_id
+                                        vRP.rusers[user_id] = ids[1]
+                                        vRP.user_tables[user_id] = {}
+                                        vRP.user_tmp_tables[user_id] = {}
+                                        vRP.user_sources[user_id] = source
+                                        
+                                        -- load user data table
+                                        deferrals.update("[vRP] Loading datatable...")
+                                        vRP.getUData(user_id, "vRP:datatable", function(sdata)
+                                            local data = json.decode(sdata)
+                                            if type(data) == "table" then vRP.user_tables[user_id] = data end
+                                            
+                                            -- init user tmp table
+                                            local tmpdata = vRP.getUserTmpTable(user_id)
+                                            
+                                            deferrals.update("[vRP] Getting last login...")
+                                            vRP.getLastLogin(user_id, function(last_login)
+                                                tmpdata.last_login = last_login or ""
+                                                tmpdata.spawns = 0
+                                                
+                                                -- set last login
+                                                local ep = vRP.getPlayerEndpoint(source)
+                                                local last_login_stamp = ep.." "..os.date("%H:%M:%S %d/%m/%Y")
+                                                MySQL.execute("vRP/set_last_login", {user_id = user_id, last_login = last_login_stamp})
+                                                
+                                                -- trigger join
+                                                print("[vRP] "..name.." ("..vRP.getPlayerEndpoint(source)..") joined after his ban expired. (user_id = "..user_id..")")
+                                                TriggerEvent("vRP:playerJoin", user_id, source, name, tmpdata.last_login)
+                                                deferrals.done()
+                                            end)
+                                        end)
+                                    else -- already connected
+                                        print("[vRP] "..name.." ("..vRP.getPlayerEndpoint(source)..") re-joined after his ban expired.  (user_id = "..user_id..")")
+                                        TriggerEvent("vRP:playerRejoin", user_id, source, name)
+                                        deferrals.done()
+                                        
+                                        -- reset first spawn
+                                        local tmpdata = vRP.getUserTmpTable(user_id)
+                                        tmpdata.spawns = 0
+                                    end
+                                    return 
+                                end
+                                print("[vRP] "..name.." ("..vRP.getPlayerEndpoint(source)..") rejected: banned (user_id = "..user_id..")")
+                                deferrals.done("[vRP] You have been banned from this server. Your ban will expire on the: " .. os.date("%c", bantime) .. " Reason: " .. banreason .. " Banning Admin: " .. banadmin)
+                            else 
+                                print("[vRP] "..name.." ("..vRP.getPlayerEndpoint(source)..") rejected: banned (user_id = "..user_id..")")
+                                deferrals.done("[vRP] You have been banned from this server. Your ban will expire: Never, you have been permanently banned Reason: " .. banreason .. " Banning Admin: " .. banadmin)
+                            end
+                        end)
                     end
                 end)
             else
