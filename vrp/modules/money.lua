@@ -140,8 +140,7 @@ end
 
 -- events, init user account if doesn't exist at connection
 AddEventHandler("vRP:playerJoin",function(user_id,source,name,last_login)
-  MySQL.execute("vRP/money_init_user", {user_id = user_id, wallet = cfg.open_wallet, bank = cfg.open_bank}, function(affected)
-    -- load money (wallet,bank)
+  MySQL.query("vRP/money_init_user", {user_id = user_id, wallet = cfg.open_wallet, bank = cfg.open_bank}, function(affected)
     local tmp = vRP.getUserTmpTable(user_id)
     if tmp then
       MySQL.query("vRP/get_money", {user_id = user_id}, function(rows, affected)
