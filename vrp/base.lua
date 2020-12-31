@@ -45,41 +45,48 @@ vRP.user_tmp_tables = {} -- user tmp data tables (logger storage, not saved)
 vRP.user_sources = {} -- user sources 
 
 -- queries
-MySQL.SingleQuery([[
-CREATE TABLE IF NOT EXISTS vrp_users(
-id INTEGER AUTO_INCREMENT,
-last_login VARCHAR(100),
-whitelisted BOOLEAN,
-banned BOOLEAN,
-bantime VARCHAR(100),
-banreason VARCHAR(1000),
-banadmin VARCHAR(100),
-CONSTRAINT pk_user PRIMARY KEY(id)
-);
-]])
-MySQL.SingleQuery([[
-CREATE TABLE IF NOT EXISTS vrp_user_ids (
-identifier VARCHAR(100) NOT NULL,
-user_id INTEGER,
-CONSTRAINT pk_user_ids PRIMARY KEY(identifier)
-);
-]])
-MySQL.SingleQuery([[
-CREATE TABLE IF NOT EXISTS vrp_user_data(
-user_id INTEGER,
-dkey VARCHAR(100),
-dvalue TEXT,
-CONSTRAINT pk_user_data PRIMARY KEY(user_id,dkey),
-CONSTRAINT fk_user_data_users FOREIGN KEY(user_id) REFERENCES vrp_users(id) ON DELETE CASCADE
-);
-]])
-MySQL.SingleQuery([[
-CREATE TABLE IF NOT EXISTS vrp_srv_data(
-dkey VARCHAR(100),
-dvalue TEXT,
-CONSTRAINT pk_srv_data PRIMARY KEY(dkey)
-);
-]])
+Citizen.CreateThread(function()
+    Wait(2500) -- Wait for GHMatti to Initialize
+    MySQL.SingleQuery([[
+    CREATE TABLE IF NOT EXISTS vrp_users(
+    id INTEGER AUTO_INCREMENT,
+    last_login VARCHAR(100),
+    whitelisted BOOLEAN,
+    banned BOOLEAN,
+    bantime VARCHAR(100),
+    banreason VARCHAR(1000),
+    banadmin VARCHAR(100),
+    CONSTRAINT pk_user PRIMARY KEY(id)
+    );
+    ]])
+    MySQL.SingleQuery([[
+    CREATE TABLE IF NOT EXISTS vrp_user_ids (
+    identifier VARCHAR(100) NOT NULL,
+    user_id INTEGER,
+    CONSTRAINT pk_user_ids PRIMARY KEY(identifier)
+    );
+    ]])
+    MySQL.SingleQuery([[
+    CREATE TABLE IF NOT EXISTS vrp_user_data(
+    user_id INTEGER,
+    dkey VARCHAR(100),
+    dvalue TEXT,
+    CONSTRAINT pk_user_data PRIMARY KEY(user_id,dkey),
+    CONSTRAINT fk_user_data_users FOREIGN KEY(user_id) REFERENCES vrp_users(id) ON DELETE CASCADE
+    );
+    ]])
+    MySQL.SingleQuery([[
+    CREATE TABLE IF NOT EXISTS vrp_srv_data(
+    dkey VARCHAR(100),
+    dvalue TEXT,
+    CONSTRAINT pk_srv_data PRIMARY KEY(dkey)
+    );
+    ]])
+    MySQL.SingleQuery("ALTER TABLE vrp_users ADD IF NOT EXISTS bantime varchar(100) NOT NULL;")
+    MySQL.SingleQuery("ALTER TABLE vrp_users ADD IF NOT EXISTS banreason varchar(100) NOT NULL;")
+    MySQL.SingleQuery("ALTER TABLE vrp_users ADD IF NOT EXISTS banadmin varchar(100) NOT NULL;")
+    print("[vRP] init base tables")
+end)
 
 
 
@@ -106,8 +113,7 @@ MySQL.createCommand("vRP/set_last_login","UPDATE vrp_users SET last_login = @las
 MySQL.createCommand("vRP/get_last_login","SELECT last_login FROM vrp_users WHERE id = @user_id")
 
 -- init tables
-print("[vRP] init base tables")
-MySQL.execute("vRP/base_tables")
+
 
 -- identification system
 
@@ -229,7 +235,7 @@ end
 function vRP.fetchBanReasonTime(user_id,cbr)
     MySQL.query("vRP/getbanreason+time", {user_id = user_id, key = key}, function(rows, affected)
         if #rows > 0 then 
-
+            
         end
     end)
 end
