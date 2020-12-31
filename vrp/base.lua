@@ -52,6 +52,8 @@ last_login VARCHAR(100),
 whitelisted BOOLEAN,
 banned BOOLEAN,
 bantime VARCHAR(100),
+banreason VARCHAR(1000),
+banadmin VARCHAR(100),
 CONSTRAINT pk_user PRIMARY KEY(id)
 );
 ]])
@@ -96,6 +98,8 @@ MySQL.createCommand("vRP/get_srvdata","SELECT dvalue FROM vrp_srv_data WHERE dke
 
 MySQL.createCommand("vRP/get_banned","SELECT banned FROM vrp_users WHERE id = @user_id")
 MySQL.createCommand("vRP/set_banned","UPDATE vrp_users SET banned = @banned WHERE id = @user_id")
+MySQL.createCommand("vRP/getbanreason+time", "Select bantime, banreason, banadmin FROM vrp_users WHERE id = @user_id")
+
 MySQL.createCommand("vRP/get_whitelisted","SELECT whitelisted FROM vrp_users WHERE id = @user_id")
 MySQL.createCommand("vRP/set_whitelisted","UPDATE vrp_users SET whitelisted = @whitelisted WHERE id = @user_id")
 MySQL.createCommand("vRP/set_last_login","UPDATE vrp_users SET last_login = @last_login WHERE id = @user_id")
@@ -218,6 +222,14 @@ function vRP.getLastLogin(user_id, cbr)
             task({rows[1].last_login})
         else
             task()
+        end
+    end)
+end
+
+function vRP.fetchBanReasonTime(user_id,cbr)
+    MySQL.query("vRP/getbanreason+time", {user_id = user_id, key = key}, function(rows, affected)
+        if #rows > 0 then 
+
         end
     end)
 end
