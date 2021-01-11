@@ -43,7 +43,6 @@ vRP.rusers = {} -- store the opposite of users
 vRP.user_tables = {} -- user data tables (logger storage, saved to database)
 vRP.user_tmp_tables = {} -- user tmp data tables (logger storage, not saved)
 vRP.user_sources = {} -- user sources 
-
 -- queries
 Citizen.CreateThread(function()
     Wait(2500) -- Wait for GHMatti to Initialize
@@ -53,9 +52,9 @@ Citizen.CreateThread(function()
     last_login VARCHAR(100),
     whitelisted BOOLEAN,
     banned BOOLEAN,
-    bantime VARCHAR(100) NOT NULL,
-    banreason VARCHAR(1000) NOT NULL,
-    banadmin VARCHAR(100) NOT NULL,
+    bantime VARCHAR(100) NOT NULL DEFAULT "",
+    banreason VARCHAR(1000) NOT NULL DEFAULT "",
+    banadmin VARCHAR(100) NOT NULL DEFAULT "",
     CONSTRAINT pk_user PRIMARY KEY(id)
     );
     ]])
@@ -146,9 +145,9 @@ Citizen.CreateThread(function()
     INDEX(phone)
     );
     ]])
-    MySQL.SingleQuery("ALTER TABLE vrp_users ADD IF NOT EXISTS bantime varchar(100) NOT NULL;")
-    MySQL.SingleQuery("ALTER TABLE vrp_users ADD IF NOT EXISTS banreason varchar(100) NOT NULL;")
-    MySQL.SingleQuery("ALTER TABLE vrp_users ADD IF NOT EXISTS banadmin varchar(100) NOT NULL;")
+    MySQL.SingleQuery("ALTER TABLE vrp_users ADD IF NOT EXISTS bantime varchar(100) NOT NULL DEFAULT '';")
+    MySQL.SingleQuery("ALTER TABLE vrp_users ADD IF NOT EXISTS banreason varchar(100) NOT NULL DEFAULT '';")
+    MySQL.SingleQuery("ALTER TABLE vrp_users ADD IF NOT EXISTS banadmin varchar(100) NOT NULL DEFAULT ''; ")
     print("[vRP] init base tables")
 end)
 
