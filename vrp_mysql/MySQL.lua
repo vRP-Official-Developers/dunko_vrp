@@ -27,7 +27,9 @@ function MySQL.query(queryname, variables, cb)
     if Queries[queryname] then 
         if variables then 
             exports['ghmattimysql']:execute(Queries[queryname], variables, function(rows, affected)
-                cb(rows, affected)
+                if cb then 
+                    cb(rows, affected)
+                end 
             end)
         end 
     else 
