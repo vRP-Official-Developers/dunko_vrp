@@ -62,7 +62,7 @@ Citizen.CreateThread(function()
     CREATE TABLE IF NOT EXISTS vrp_user_ids (
     identifier VARCHAR(100) NOT NULL,
     user_id INTEGER,
-    banned BOOLEAN NOT NULL,
+    banned BOOLEAN NOT NULL DEFAULT "",
     CONSTRAINT pk_user_ids PRIMARY KEY(identifier)
     );
     ]])
