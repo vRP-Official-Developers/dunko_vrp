@@ -27,7 +27,6 @@ client_scripts {
 
 -- server scripts
 server_scripts{ 
-  "@mysql-async/lib/MySQL.lua",
   "lib/utils.lua",
   "base.lua",
   "modules/gui.lua",
@@ -63,6 +62,7 @@ server_scripts{
 
 -- client scripts
 client_scripts{
+  "cfg/skinshops.lua",
   "lib/utils.lua",
   "client/Tunnel.lua",
   "client/Proxy.lua",
@@ -77,7 +77,8 @@ client_scripts{
   "client/police.lua",
   "client/lockcar-client.lua",
   "client/admin.lua",
-  "client/inventory.lua"
+  "client/inventory.lua",
+  "client/clothing.lua"
   -- "hotkeys/hotkeys.lua"
 }
 
