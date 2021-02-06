@@ -135,8 +135,8 @@ cfg.paychecks = {
         permissions = {"trash.paycheck"}
     },
     {
-        name = "Gift For Play",
-        paycheck = 100 ,
+        name = "Gift For Playing",
+        paycheck = 100,
         permissions = {"user.paycheck"},
         isGift = true
     },
