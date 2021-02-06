@@ -342,7 +342,7 @@ Citizen.CreateThread(function()
 					Wait(1)
 				end
 			else
-			DrawMarker(9, x, y, z, 0.0, 0.0, 0.0, 90.0, 0.0, 0.0, 1.0, 1.0, 1.0, 00, 255, 00, 1.0,false, false, 2, true, "clothing", "clothing", false)
+			DrawMarker(9, x, y, z, 0.0, 0.0, 0.0, 90.0, 0.0, 0.0, 1.0, 1.0, 1.0, 51, 153, 255, 1.0,false, false, 2, true, "clothing", "clothing", false)
             end 
         end 
     end
