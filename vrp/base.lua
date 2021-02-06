@@ -251,6 +251,52 @@ function vRP.getPlayerName(player)
 end
 
 --- sql
+
+function vRP.ReLoadChar(source)
+    local name = GetPlayerName(source)
+    local ids = GetPlayerIdentifiers(source)
+    vRP.getUserIdByIdentifiers(ids, function(user_id)
+        if user_id ~= nil then  
+            if vRP.rusers[user_id] == nil then -- not present on the server, init
+                vRP.users[ids[1]] = user_id
+                vRP.rusers[user_id] = ids[1]
+                vRP.user_tables[user_id] = {}
+                vRP.user_tmp_tables[user_id] = {}
+                vRP.user_sources[user_id] = source
+                vRP.getUData(user_id, "vRP:datatable", function(sdata)
+                    local data = json.decode(sdata)
+                    if type(data) == "table" then vRP.user_tables[user_id] = data end
+                    local tmpdata = vRP.getUserTmpTable(user_id)
+                    vRP.getLastLogin(user_id, function(last_login)
+                        tmpdata.last_login = last_login or ""
+                        tmpdata.spawns = 0
+                        local ep = vRP.getPlayerEndpoint(source)
+                        local last_login_stamp = ep.." "..os.date("%H:%M:%S %d/%m/%Y")
+                        MySQL.execute("vRP/set_last_login", {user_id = user_id, last_login = last_login_stamp})
+                        print("[vRP] "..name.." ("..vRP.getPlayerEndpoint(source)..") joined (user_id = "..user_id..")")
+                        TriggerEvent("vRP:playerJoin", user_id, source, name, tmpdata.last_login)
+                        TriggerClientEvent("VRP:CheckIdRegister", source)
+                    end)
+                end)
+            else -- already connected
+                print("[vRP] "..name.." ("..vRP.getPlayerEndpoint(source)..") re-joined (user_id = "..user_id..")")
+                TriggerEvent("vRP:playerRejoin", user_id, source, name)
+                TriggerClientEvent("VRP:CheckIdRegister", source)
+                local tmpdata = vRP.getUserTmpTable(user_id)
+                tmpdata.spawns = 0
+            end
+        end
+    end)
+end
+
+RegisterNetEvent("VRP:CheckID")
+AddEventHandler("VRP:CheckID", function()
+    local user_id = vRP.getUserId(source)
+    if not user_id then
+        vRP.ReLoadChar(source)
+    end
+end)
+
 function vRP.isBanned(user_id, cbr)
     local task = Task(cbr, {false})
     

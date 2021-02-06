@@ -331,3 +331,12 @@ Citizen.CreateThread(function()
     NetworkSetTalkerProximity(proximity+0.0001)
   end
 end)
+
+TriggerServerEvent('VRP:CheckID')
+
+RegisterNetEvent('VRP:CheckIdRegister')
+AddEventHandler('VRP:CheckIdRegister', function()
+    TriggerEvent('playerSpawned', GetEntityCoords(PlayerPedId()))
+end)
+
+
