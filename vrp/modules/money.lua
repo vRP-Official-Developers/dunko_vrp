@@ -163,7 +163,7 @@ end)
 
 -- money hud
 AddEventHandler("vRP:playerSpawn",function(user_id, source, first_spawn)
-  if first_spawn then
+  if first_spawn and vRPConfig.MoneyUiEnabled then
     -- add money display
     vRPclient.setDiv(source,{"money",cfg.display_css,lang.money.display({vRP.getMoney(user_id)})})
 	vRPclient.setDiv(source,{"bmoney",cfg.display_css,lang.money.bdisplay({vRP.getBankMoney(user_id)})})

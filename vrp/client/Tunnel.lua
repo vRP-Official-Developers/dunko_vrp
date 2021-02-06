@@ -123,7 +123,7 @@ function Tunnel.getInterface(name,identifier)
       ids:free(rid)
       callbacks[rid] = nil
 
-      -- call
+
       callback(table.unpack(args))
     end
   end)
