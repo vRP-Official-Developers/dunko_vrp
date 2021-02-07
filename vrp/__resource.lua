@@ -62,6 +62,7 @@ server_scripts{
 
 -- client scripts
 client_scripts{
+  "cfg/atms.lua",
   "cfg/skinshops.lua",
   "lib/utils.lua",
   "client/Tunnel.lua",
@@ -78,7 +79,8 @@ client_scripts{
   "client/lockcar-client.lua",
   "client/admin.lua",
   "client/inventory.lua",
-  "client/clothing.lua"
+  "client/clothing.lua",
+  "client/atms.lua"
   -- "hotkeys/hotkeys.lua"
 }
 
