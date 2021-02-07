@@ -336,9 +336,11 @@ Citizen.CreateThread(function()
     while true do 
         Wait(250)
         inMarker = false;
+        local ped = PlayerPedId()
+        local coords = GetEntityCoords(ped)
         for i,v in pairs(skinshops) do 
             local x,y,z = v[2], v[3], v[4]
-            if #(GetEntityCoords(PlayerPedId()) - vec3(x,y,z)) <= 1.0 then
+            if #(coords - vec3(x,y,z)) <= 1.0 then
                 inMarker = true 
                 break
             end    
@@ -346,7 +348,6 @@ Citizen.CreateThread(function()
         if not MenuOpen and inMarker then 
             MenuOpen = true
             RageUI.Visible(RMenu:Get('vRPClothing', 'main'), true) 
-            local ped = PlayerPedId()
             Face.Index = GetPedDrawableVariation(ped, 0)
             Face.TextureIndex = GetPedTextureVariation(ped, 0)
             Mask.Index = GetPedDrawableVariation(ped, 1)
@@ -422,9 +423,11 @@ Citizen.CreateThread(function()
                 Torso2.Max[i] = i;
             end 
         end
-        if not inMarker and MenuOpen then 
+        if not inMarker and MenuOpen then
+            RageUI.ActuallyCloseAll()
+            RageUI.Visible(RMenu:Get('vRPClothing', 'clothingsubmenu'), false)
+            RageUI.Visible(RMenu:Get('vRPClothing', 'changegendersubmenu'), false)  
             RageUI.Visible(RMenu:Get('vRPClothing', 'main'), false)
-            RageUI.Visible(RMenu:Get('vRPClothing', 'clothingsubmenu'), false)  
             MenuOpen = false
         end
     end

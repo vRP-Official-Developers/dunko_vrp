@@ -597,6 +597,20 @@ function RageUI.Render(instructionalButton)
     end
 end
 
+
+function RageUI.ActuallyCloseAll()
+    if RageUI.CurrentMenu.Closed ~= nil then
+        RageUI.CurrentMenu.Closed()
+    end
+    if RageUI.CurrentMenu.Parent ~= nil then
+        RageUI.NextMenu = nil
+        RageUI.Visible(RageUI.CurrentMenu, false)
+    else
+        RageUI.NextMenu = nil
+        RageUI.Visible(RageUI.CurrentMenu, false)
+    end
+end
+
 ---DrawContent
 ---@param items function
 ---@param panels function
