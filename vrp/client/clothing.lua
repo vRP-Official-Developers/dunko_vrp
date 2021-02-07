@@ -423,9 +423,11 @@ Citizen.CreateThread(function()
                 Torso2.Max[i] = i;
             end 
         end
-        if not inMarker and MenuOpen then 
+        if not inMarker and MenuOpen then
+            RageUI.ActuallyCloseAll()
+            RageUI.Visible(RMenu:Get('vRPClothing', 'clothingsubmenu'), false)
+            RageUI.Visible(RMenu:Get('vRPClothing', 'changegendersubmenu'), false)  
             RageUI.Visible(RMenu:Get('vRPClothing', 'main'), false)
-            RageUI.Visible(RMenu:Get('vRPClothing', 'clothingsubmenu'), false)  
             MenuOpen = false
         end
     end
