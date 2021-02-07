@@ -87,6 +87,34 @@ RageUI.CreateWhile(1.0, true, function()
             RageUI.Button("Change Gender", "", {}, true, function(Hovered, Active, Selected) end, RMenu:Get("vRPClothing", "changegendersubmenu"))
         end)
     end
+    if RageUI.Visible(RMenu:Get('vRPClothing', 'changegendersubmenu')) then 
+        RageUI.DrawContent({ header = true, glare = true, instructionalButton = true}, function()
+            RageUI.Button("Female", "", {}, true, function(Hovered, Active, Selected) 
+                if Selected then 
+                    local model = GetHashKey('mp_f_freemode_01')
+                    RequestModel(model)
+                    while not HasModelLoaded(model) do
+                        RequestModel(model)
+                        Citizen.Wait(0)
+                    end
+                    SetPlayerModel(PlayerId(), model)
+                    SetPedComponentVariation(GetPlayerPed(-1), 0, 0, 0, 2) 
+                end
+            end,RMenu:Get("vRPClothing", "changegendersubmenu"))
+            RageUI.Button("Male", "", {}, true, function(Hovered, Active, Selected) 
+                if Selected then
+                    local model = GetHashKey('mp_m_freemode_01')
+                    RequestModel(model)
+                    while not HasModelLoaded(model) do
+                        RequestModel(model)
+                        Citizen.Wait(0)
+                    end
+                    SetPlayerModel(PlayerId(), model)
+                    SetPedComponentVariation(GetPlayerPed(-1), 0, 0, 0, 2) 
+                end
+            end)
+        end)
+    end
     if RageUI.Visible(RMenu:Get('vRPClothing', 'clothingsubmenu')) then
         DrawAdvancedText(0.870, 0.850, 0.005, 0.0028, 0.4, 'Press SPACE to input an ID',  255, 255, 255, 255, 6, 0)
         if IsControlJustPressed(0, 203) then 
@@ -342,48 +370,57 @@ Citizen.CreateThread(function()
 					Wait(1)
 				end
 			else
-			DrawMarker(9, x, y, z, 0.0, 0.0, 0.0, 90.0, 0.0, 0.0, 1.0, 1.0, 1.0, 51, 153, 255, 1.0,false, false, 2, true, "clothing", "clothing", false)
+			    DrawMarker(9, x, y, z, 0.0, 0.0, 0.0, 90.0, 0.0, 0.0, 1.0, 1.0, 1.0, 51, 153, 255, 1.0,false, false, 2, true, "clothing", "clothing", false)
             end 
         end 
     end
 end)
 
+local inMarker = false;
 Citizen.CreateThread(function()
     while true do 
         Wait(250)
+        inMarker = false;
         for i,v in pairs(skinshops) do 
             local x,y,z = v[2], v[3], v[4]
-            if #(GetEntityCoords(PlayerPedId()) - vec3(x,y,z)) >= 1.0 then
-                if not MenuOpen then 
-                    RageUI.Visible(RMenu:Get('vRPClothing', 'main'), true) 
-                    MenuOpen = true
-                    local ped = PlayerPedId()
-                    Face.Index = GetPedDrawableVariation(ped, 0)
-                    Face.TextureIndex = GetPedTextureVariation(ped, 0)
-                    Mask.Index = GetPedDrawableVariation(ped, 1)
-                    Mask.TextureIndex = GetPedTextureVariation(ped, 1)
-                    Hair.Index = GetPedDrawableVariation(ped, 2)
-                    Hair.TextureIndex = GetPedTextureVariation(ped, 2)
-                    Torso.Index = GetPedDrawableVariation(ped, 3)
-                    Torso.TextureIndex = GetPedTextureVariation(ped, 3)
-                    Legs.Index = GetPedDrawableVariation(ped, 4)
-                    Legs.TextureIndex = GetPedTextureVariation(ped, 4)
-                    Parachute.Index = GetPedDrawableVariation(ped, 5)
-                    Parachute.TextureIndex = GetPedTextureVariation(ped, 5)
-                    Shoes.Index = GetPedDrawableVariation(ped, 6)
-                    Shoes.TextureIndex = GetPedTextureVariation(ped, 6)
-                    Accessory.Index = GetPedDrawableVariation(ped, 7)
-                    Accessory.TextureIndex = GetPedTextureVariation(ped, 7)
-                    Undershirt.Index = GetPedDrawableVariation(ped, 8)
-                    Undershirt.TextureIndex = GetPedTextureVariation(ped, 8)
-                    Kevlar.Index = GetPedDrawableVariation(ped, 9)
-                    Kevlar.TextureIndex = GetPedTextureVariation(ped, 9)
-                    Badge.Index = GetPedDrawableVariation(ped, 10)
-                    Badge.TextureIndex = GetPedTextureVariation(ped, 10)
-                    Torso2.Index = GetPedDrawableVariation(ped, 11)
-                    Torso2.TextureIndex = GetPedTextureVariation(ped, 11)
-                end
-            end
+            if #(GetEntityCoords(PlayerPedId()) - vec3(x,y,z)) <= 1.0 then
+                inMarker = true 
+                break
+            end    
+        end
+        if not MenuOpen and inMarker then 
+            MenuOpen = true
+            RageUI.Visible(RMenu:Get('vRPClothing', 'main'), true) 
+            local ped = PlayerPedId()
+            Face.Index = GetPedDrawableVariation(ped, 0)
+            Face.TextureIndex = GetPedTextureVariation(ped, 0)
+            Mask.Index = GetPedDrawableVariation(ped, 1)
+            Mask.TextureIndex = GetPedTextureVariation(ped, 1)
+            Hair.Index = GetPedDrawableVariation(ped, 2)
+            Hair.TextureIndex = GetPedTextureVariation(ped, 2)
+            Torso.Index = GetPedDrawableVariation(ped, 3)
+            Torso.TextureIndex = GetPedTextureVariation(ped, 3)
+            Legs.Index = GetPedDrawableVariation(ped, 4)
+            Legs.TextureIndex = GetPedTextureVariation(ped, 4)
+            Parachute.Index = GetPedDrawableVariation(ped, 5)
+            Parachute.TextureIndex = GetPedTextureVariation(ped, 5)
+            Shoes.Index = GetPedDrawableVariation(ped, 6)
+            Shoes.TextureIndex = GetPedTextureVariation(ped, 6)
+            Accessory.Index = GetPedDrawableVariation(ped, 7)
+            Accessory.TextureIndex = GetPedTextureVariation(ped, 7)
+            Undershirt.Index = GetPedDrawableVariation(ped, 8)
+            Undershirt.TextureIndex = GetPedTextureVariation(ped, 8)
+            Kevlar.Index = GetPedDrawableVariation(ped, 9)
+            Kevlar.TextureIndex = GetPedTextureVariation(ped, 9)
+            Badge.Index = GetPedDrawableVariation(ped, 10)
+            Badge.TextureIndex = GetPedTextureVariation(ped, 10)
+            Torso2.Index = GetPedDrawableVariation(ped, 11)
+            Torso2.TextureIndex = GetPedTextureVariation(ped, 11)
+        end
+        if not inMarker and MenuOpen then 
+            RageUI.Visible(RMenu:Get('vRPClothing', 'main'), false)
+            RageUI.Visible(RMenu:Get('vRPClothing', 'clothingsubmenu'), false)  
+            MenuOpen = false
         end
     end
 end)
