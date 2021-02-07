@@ -17,51 +17,6 @@ local Torso2 = {Max = {}, Index = 0, TextureIndex = 0};
 local SelectedOption = nil;
 local MenuOpen = false;
 
-for i=0, GetNumberOfPedDrawableVariations(PlayerPedId(), 0) + 1 do 
-    Face.Max[i] = i;
-end 
-for i=0, GetNumberOfPedDrawableVariations(PlayerPedId(), 1) + 1 do 
-    Mask.Max[i] = i;
-end 
-
-for i=0, GetNumberOfPedDrawableVariations(PlayerPedId(), 2) + 1 do 
-    Hair.Max[i] = i;
-end
-
-for i=0, GetNumberOfPedDrawableVariations(PlayerPedId(), 3) + 1 do 
-    Torso.Max[i] = i;
-end 
-
-for i=0, GetNumberOfPedDrawableVariations(PlayerPedId(), 4) + 1 do 
-    Legs.Max[i] = i;
-end 
-
-for i=0, GetNumberOfPedDrawableVariations(PlayerPedId(), 5) + 1 do 
-    Parachute.Max[i] = i;
-end 
-
-for i=0, GetNumberOfPedDrawableVariations(PlayerPedId(), 6) + 1 do 
-    Shoes.Max[i] = i;
-end 
-
-for i=0, GetNumberOfPedDrawableVariations(PlayerPedId(), 7) + 1 do 
-    Accessory.Max[i] = i;
-end 
-
-for i=0, GetNumberOfPedDrawableVariations(PlayerPedId(), 8) + 1 do 
-    Undershirt.Max[i] = i;
-end 
-
-for i=0, GetNumberOfPedDrawableVariations(PlayerPedId(), 9) + 1 do 
-    Kevlar.Max[i] = i;
-end 
-
-for i=0, GetNumberOfPedDrawableVariations(PlayerPedId(), 10) + 1 do 
-    Badge.Max[i] = i;
-end 
-for i=0, GetNumberOfPedDrawableVariations(PlayerPedId(), 11) + 1 do 
-    Torso2.Max[i] = i;
-end 
 
 
 function DrawAdvancedText(x,y ,w,h,sc, text, r,g,b,a,font,jus)
@@ -126,8 +81,8 @@ RageUI.CreateWhile(1.0, true, function()
                 end
                 if (GetOnscreenKeyboardResult()) then
                     local result = GetOnscreenKeyboardResult()
-                    SetPedComponentVariation(PlayerPedId(), SelectedOption, tonumber(result), 0, 0)
                     local ped = PlayerPedId()
+                    SetPedComponentVariation(ped, SelectedOption, tonumber(result), 0, 0)
                     Face.Index = GetPedDrawableVariation(ped, 0)
                     Face.TextureIndex = GetPedTextureVariation(ped, 0)
                     Mask.Index = GetPedDrawableVariation(ped, 1)
@@ -416,6 +371,56 @@ Citizen.CreateThread(function()
             Badge.TextureIndex = GetPedTextureVariation(ped, 10)
             Torso2.Index = GetPedDrawableVariation(ped, 11)
             Torso2.TextureIndex = GetPedTextureVariation(ped, 11)
+            Face.Max = {}
+            Mask.Max = {}
+            Hair.Max = {}
+            Torso.Max = {}
+            Hair.Max = {}
+            Torso.Max = {}
+            Legs.Max = {}
+            Parachute.Max = {}
+            Shoes.Max = {}
+            Accessory.Max = {}
+            Undershirt.Max = {}
+            Kevlar.Max = {}
+            Badge.Max = {}
+            Torso2.Max = {}
+            for i=0, GetNumberOfPedDrawableVariations(ped, 0) + 1 do 
+                Face.Max[i] = i;
+            end 
+            for i=0, GetNumberOfPedDrawableVariations(ped, 1) + 1 do 
+                Mask.Max[i] = i;
+            end 
+            for i=0, GetNumberOfPedDrawableVariations(ped, 2) + 1 do 
+                Hair.Max[i] = i;
+            end
+            for i=0, GetNumberOfPedDrawableVariations(ped, 3) + 1 do 
+                Torso.Max[i] = i;
+            end 
+            for i=0, GetNumberOfPedDrawableVariations(ped, 4) + 1 do 
+                Legs.Max[i] = i;
+            end  
+            for i=0, GetNumberOfPedDrawableVariations(ped, 5) + 1 do 
+                Parachute.Max[i] = i;
+            end 
+            for i=0, GetNumberOfPedDrawableVariations(ped, 6) + 1 do 
+                Shoes.Max[i] = i;
+            end 
+            for i=0, GetNumberOfPedDrawableVariations(ped, 7) + 1 do 
+                Accessory.Max[i] = i;
+            end 
+            for i=0, GetNumberOfPedDrawableVariations(ped, 8) + 1 do 
+                Undershirt.Max[i] = i;
+            end 
+            for i=0, GetNumberOfPedDrawableVariations(ped, 9) + 1 do 
+                Kevlar.Max[i] = i;
+            end 
+            for i=0, GetNumberOfPedDrawableVariations(ped, 10) + 1 do 
+                Badge.Max[i] = i;
+            end 
+            for i=0, GetNumberOfPedDrawableVariations(ped, 11) + 1 do 
+                Torso2.Max[i] = i;
+            end 
         end
         if not inMarker and MenuOpen then 
             RageUI.Visible(RMenu:Get('vRPClothing', 'main'), false)
