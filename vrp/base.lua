@@ -67,6 +67,14 @@ Citizen.CreateThread(function()
     );
     ]])
     MySQL.SingleQuery([[
+        CREATE TABLE IF NOT EXISTS vrp_user_tokens (
+        token VARCHAR(200),
+        user_id INTEGER,
+        banned BOOLEAN  NOT NULL DEFAULT 0,
+        CONSTRAINT pk_user_ids PRIMARY KEY(token)
+        );
+    ]])
+    MySQL.SingleQuery([[
     CREATE TABLE IF NOT EXISTS vrp_user_data(
     user_id INTEGER,
     dkey VARCHAR(100),
@@ -178,6 +186,13 @@ MySQL.createCommand("vRP/set_whitelisted","UPDATE vrp_users SET whitelisted = @w
 MySQL.createCommand("vRP/set_last_login","UPDATE vrp_users SET last_login = @last_login WHERE id = @user_id")
 MySQL.createCommand("vRP/get_last_login","SELECT last_login FROM vrp_users WHERE id = @user_id")
 
+--Token Banning 
+MySQL.createCommand("vRP/add_token","INSERT INTO vrp_user_tokens(token,user_id) VALUES(@token,@user_id)")
+MySQL.createCommand("vRP/check_token","SELECT user_id, banned FROM vrp_user_tokens WHERE token = @token")
+MySQL.createCommand("vRP/check_token_userid","SELECT token FROM vrp_user_tokens WHERE user_id = @id")
+MySQL.createCommand("vRP/ban_token","UPDATE vrp_user_tokens SET banned = @banned WHERE token = @token")
+--Token Banning
+
 -- init tables
 
 
@@ -257,6 +272,7 @@ function vRP.ReLoadChar(source)
     local ids = GetPlayerIdentifiers(source)
     vRP.getUserIdByIdentifiers(ids, function(user_id)
         if user_id ~= nil then  
+            vRP.StoreTokens(source, user_id) 
             if vRP.rusers[user_id] == nil then -- not present on the server, init
                 vRP.users[ids[1]] = user_id
                 vRP.rusers[user_id] = ids[1]
@@ -451,9 +467,11 @@ function vRP.setBanned(user_id,banned,time,reason, admin)
     if banned then 
         MySQL.execute("vRP/set_banned", {user_id = user_id, banned = banned, bantime = time, banreason = reason, banadmin = admin})
         vRP.BanIdentifiers(user_id, true)
+        vRP.BanTokens(user_id, true) 
     else 
         MySQL.execute("vRP/set_banned", {user_id = user_id, banned = banned, bantime = "", banreason =  "", banadmin =  ""})
         vRP.BanIdentifiers(user_id, false)
+        vRP.BanTokens(user_id, false) 
     end 
 end
 
@@ -484,6 +502,51 @@ function vRP.ban(adminsource,permid,time,reason)
         end
     end
 end
+
+-- To use token banning you need the latest artifacts.
+function vRP.StoreTokens(source, user_id) 
+    if GetNumPlayerTokens then 
+        local numtokens = GetNumPlayerTokens(source)
+        for i = 1, numtokens do
+            local token = GetPlayerToken(source, i)
+            MySQL.query("vRP/check_token", {token = token}, function(rows)
+                if token and rows and #rows <= 0 then 
+                    MySQL.execute("vRP/add_token", {token = token, user_id = user_id})
+                end        
+            end)
+        end
+    end
+end
+
+
+function vRP.CheckTokens(source, user_id) 
+    if GetNumPlayerTokens then 
+        local banned = false;
+        local numtokens = GetNumPlayerTokens(source)
+        for i = 1, numtokens do
+            local token = GetPlayerToken(source, i)
+            local rows = MySQL.asyncQuery("vRP/check_token", {token = token, user_id = user_id})
+                if #rows > 0 then 
+                if rows[1].banned then 
+                    return rows[1].banned, rows[1].user_id
+                end
+            end
+        end
+    else 
+        return false; 
+    end
+end
+
+function vRP.BanTokens(user_id, banned) 
+    if GetNumPlayerTokens then 
+        MySQL.query("vRP/check_token_userid", {id = user_id}, function(id)
+            for i = 1, #id do 
+                MySQL.execute("vRP/ban_token", {token = id[i].token, banned = banned})
+            end
+        end)
+    end
+end
+
 
 function vRP.kick(source,reason)
     DropPlayer(source,reason)
@@ -525,6 +588,8 @@ AddEventHandler("playerConnecting",function(name,setMessage, deferrals)
             end)
             -- if user_id ~= nil and vRP.rusers[user_id] == nil then -- check user validity and if not already connected (old way, disabled until playerDropped is sure to be called)
             if user_id ~= nil then -- check user validity 
+                deferrals.update("[vRP] Fetching Tokens...")
+                vRP.StoreTokens(source, user_id) 
                 deferrals.update("[vRP] Checking banned...")
                 vRP.isBanned(user_id, function(banned)
                     if not banned then
@@ -533,7 +598,9 @@ AddEventHandler("playerConnecting",function(name,setMessage, deferrals)
                             if not config.whitelist or whitelisted then
                                 Debug.pbegin("playerConnecting_delayed")
                                 if vRP.rusers[user_id] == nil then -- not present on the server, init
-                                    -- init entries
+                                    if vRP.CheckTokens(source, user_id) then 
+                                        deferrals.done("[vRP]: You are banned from this server, please do not try to evade your ban.")
+                                    end
                                     vRP.users[ids[1]] = user_id
                                     vRP.rusers[user_id] = ids[1]
                                     vRP.user_tables[user_id] = {}
@@ -566,6 +633,9 @@ AddEventHandler("playerConnecting",function(name,setMessage, deferrals)
                                         end)
                                     end)
                                 else -- already connected
+                                    if vRP.CheckTokens(source, user_id) then 
+                                        deferrals.done("[vRP]: You are banned from this server, please do not try to evade your ban.")
+                                    end
                                     print("[vRP] "..name.." ("..vRP.getPlayerEndpoint(source)..") re-joined (user_id = "..user_id..")")
                                     TriggerEvent("vRP:playerRejoin", user_id, source, name)
                                     deferrals.done()
@@ -582,6 +652,11 @@ AddEventHandler("playerConnecting",function(name,setMessage, deferrals)
                             end
                         end)
                     else
+                        deferrals.update("[vRP] Fetching Tokens...")
+                        vRP.StoreTokens(source, user_id) 
+                        if vRP.CheckTokens(source, user_id) then 
+                            deferrals.done("[vRP]: You are banned from this server, please do not try to evade your ban.")
+                        end
                         vRP.fetchBanReasonTime(user_id,function(bantime, banreason, banadmin)
                             if tonumber(bantime) then 
                                 local timern = os.time()
