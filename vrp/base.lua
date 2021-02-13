@@ -539,15 +539,9 @@ end
 
 function vRP.BanTokens(user_id, banned) 
     if GetNumPlayerTokens then 
-        MySQL.query("vRP/check_token_userid", {}, function(id)
+        MySQL.query("vRP/check_token_userid", {id = user_id}, function(id)
             for i = 1, #id do 
-                MySQL.query("vRP/check_token", {token = id[i].token, user_id = user_id}, function(rows)
-                    if rows and #rows <= 0 then 
-                        for i = 1, #rows do 
-                            MySQL.execute("vRP/ban_token", {token = rows[i].token, banned = banned})
-                        end
-                    end        
-                end)
+                MySQL.execute("vRP/ban_token", {token = id[i].token, banned = banned})
             end
         end)
     end
