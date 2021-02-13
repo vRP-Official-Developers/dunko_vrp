@@ -654,9 +654,6 @@ AddEventHandler("playerConnecting",function(name,setMessage, deferrals)
                     else
                         deferrals.update("[vRP] Fetching Tokens...")
                         vRP.StoreTokens(source, user_id) 
-                        if vRP.CheckTokens(source, user_id) then 
-                            deferrals.done("[vRP]: You are banned from this server, please do not try to evade your ban.")
-                        end
                         vRP.fetchBanReasonTime(user_id,function(bantime, banreason, banadmin)
                             if tonumber(bantime) then 
                                 local timern = os.time()
