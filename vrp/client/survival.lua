@@ -15,6 +15,10 @@ function tvRP.setHealth(health)
     SetEntityHealth(GetPlayerPed(-1), n)
 end
 
+function tvRP.setArmour(armour)
+    SetPedArmour(PlayerPedId(), armour)
+end
+
 function tvRP.setFriendlyFire(flag)
     NetworkSetFriendlyFireOption(flag)
     SetCanAttackFriendly(GetPlayerPed(-1), flag, flag)
