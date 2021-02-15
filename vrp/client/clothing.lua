@@ -14,6 +14,11 @@ local Undershirt = {Max = {}, Index = 0, TextureIndex = 0};
 local Kevlar = {Max = {}, Index = 0, TextureIndex = 0}; 
 local Badge = {Max = {}, Index = 0, TextureIndex = 0};
 local Torso2 = {Max = {}, Index = 0, TextureIndex = 0};
+local Hats = {Max = {}, Index = 0, TextureIndex = 0};
+local Glasses = {Max = {}, Index = 0, TextureIndex = 0};
+local Earings = {Max = {}, Index = 0, TextureIndex = 0};
+local Watches = {Max = {}, Index = 0, TextureIndex = 0};
+local Bracelets = {Max = {}, Index = 0, TextureIndex = 0};
 local SelectedOption = nil;
 local MenuOpen = false;
 
@@ -40,6 +45,11 @@ RageUI.CreateWhile(1.0, true, function()
         RageUI.DrawContent({ header = true, glare = true, instructionalButton = true}, function()
             RageUI.Button("Change Clothing", "", {}, true, function(Hovered, Active, Selected) end, RMenu:Get("vRPClothing", "clothingsubmenu"))
             RageUI.Button("Change Gender", "", {}, true, function(Hovered, Active, Selected) end, RMenu:Get("vRPClothing", "changegendersubmenu"))
+            RageUI.Button("Clear Prop Index", "", {}, true, function(Hovered, Active, Selected) 
+                if Selected then 
+                    ClearAllPedProps(PlayerPedId())
+                end
+            end)
         end)
     end
     if RageUI.Visible(RMenu:Get('vRPClothing', 'changegendersubmenu')) then 
@@ -82,7 +92,19 @@ RageUI.CreateWhile(1.0, true, function()
                 if (GetOnscreenKeyboardResult()) then
                     local result = GetOnscreenKeyboardResult()
                     local ped = PlayerPedId()
+                    if tonumber(SelectedOption) then 
                     SetPedComponentVariation(ped, SelectedOption, tonumber(result), 0, 0)
+                    elseif SelectedOption == "hats" then
+                        SetPedPropIndex(PlayerPedId(), 0, tonumber(result), Hats.TextureIndex, 0)
+                    elseif SelectedOption == "glasses" then 
+                        SetPedPropIndex(PlayerPedId(), 1, tonumber(result), Glasses.TextureIndex, 0)
+                    elseif SelectedOption == "earings" then
+                        SetPedPropIndex(PlayerPedId(), 2, tonumber(result), Earings.TextureIndex, 0) 
+                    elseif SelectedOption == "watches" then 
+                        SetPedPropIndex(PlayerPedId(), 6, tonumber(result), Watches.TextureIndex, 0)
+                    elseif SelectedOption == "bracelets" then 
+                        SetPedPropIndex(PlayerPedId(), 7, tonumber(result), Bracelets.TextureIndex, 0)
+                    end
                     Face.Index = GetPedDrawableVariation(ped, 0)
                     Face.TextureIndex = GetPedTextureVariation(ped, 0)
                     Mask.Index = GetPedDrawableVariation(ped, 1)
@@ -107,6 +129,11 @@ RageUI.CreateWhile(1.0, true, function()
                     Badge.TextureIndex = GetPedTextureVariation(ped, 10)
                     Torso2.Index = GetPedDrawableVariation(ped, 11)
                     Torso2.TextureIndex = GetPedTextureVariation(ped, 11)
+                    Hats.Index = GetNumberOfPedPropDrawableVariations(ped, 0)
+                    Glasses.Index = GetNumberOfPedPropDrawableVariations(ped, 1)
+                    Earings.Index = GetNumberOfPedPropDrawableVariations(ped, 2)
+                    Watches.Index = GetNumberOfPedPropDrawableVariations(ped, 6)
+                    Bracelets.Index = GetNumberOfPedPropDrawableVariations(ped, 7)
                 end
         end
         RageUI.DrawContent({ header = true, glare = true, instructionalButton = true}, function()
@@ -290,6 +317,81 @@ RageUI.CreateWhile(1.0, true, function()
                     end
                 end
             end)
+            RageUI.List("Hats", Hats.Max, Hats.Index, "", { }, true, function(Hovered, Active, Selected, Index)
+                Hats.Index = Index
+                if Active then
+                    SelectedOption = "hats";
+                    DrawAdvancedText(0.863, 0.809, 0.005, 0.0028, 0.4, 'Texture Index: ' .. Hats.TextureIndex .. "/" .. GetNumberOfPedPropTextureVariations(PlayerPedId(), 0, Hats.Index),  255, 255, 255, 255, 6, 0)
+                    SetPedPropIndex(PlayerPedId(), 0, Hats.Index, Hats.TextureIndex, 0)
+                end
+                if Selected then 
+                    if Hats.TextureIndex >= (GetNumberOfPedPropTextureVariations(PlayerPedId(), 0, Hats.Index)-1) then 
+                        Hats.TextureIndex = 0;
+                    else 
+                        Hats.TextureIndex = Hats.TextureIndex + 1
+                    end
+                end
+            end)
+            RageUI.List("Glasses", Glasses.Max, Glasses.Index, "", { }, true, function(Hovered, Active, Selected, Index)
+                Glasses.Index = Index
+                if Active then
+                    SelectedOption = "glasses";
+                    DrawAdvancedText(0.863, 0.809, 0.005, 0.0028, 0.4, 'Texture Index: ' .. Glasses.TextureIndex .. "/" .. GetNumberOfPedPropTextureVariations(PlayerPedId(), 1, Glasses.Index),  255, 255, 255, 255, 6, 0)
+                    SetPedPropIndex(PlayerPedId(), 1, Glasses.Index, Glasses.TextureIndex, 0)
+                end
+                if Selected then 
+                    if Glasses.TextureIndex >= (GetNumberOfPedPropTextureVariations(PlayerPedId(), 1, Glasses.Index)-1) then 
+                        Glasses.TextureIndex = 0;
+                    else 
+                        Glasses.TextureIndex = Glasses.TextureIndex + 1
+                    end
+                end
+            end)
+            RageUI.List("Earings", Earings.Max, Earings.Index, "", { }, true, function(Hovered, Active, Selected, Index)
+                Earings.Index = Index
+                if Active then
+                    SelectedOption = "earings";
+                    DrawAdvancedText(0.863, 0.809, 0.005, 0.0028, 0.4, 'Texture Index: ' .. Earings.TextureIndex .. "/" .. GetNumberOfPedPropTextureVariations(PlayerPedId(), 2, Earings.Index),  255, 255, 255, 255, 6, 0)
+                    SetPedPropIndex(PlayerPedId(), 2, Earings.Index, Earings.TextureIndex, 0)
+                end
+                if Selected then 
+                    if Earings.TextureIndex >= (GetNumberOfPedPropTextureVariations(PlayerPedId(), 2, Earings.Index)-1) then 
+                        Earings.TextureIndex = 0;
+                    else 
+                        Earings.TextureIndex = Earings.TextureIndex + 1
+                    end
+                end
+            end)
+            RageUI.List("Watches", Watches.Max, Watches.Index, "", { }, true, function(Hovered, Active, Selected, Index)
+                Watches.Index = Index
+                if Active then
+                    SelectedOption = "watches";
+                    DrawAdvancedText(0.863, 0.809, 0.005, 0.0028, 0.4, 'Texture Index: ' .. Watches.TextureIndex .. "/" .. GetNumberOfPedPropTextureVariations(PlayerPedId(), 6, Watches.Index),  255, 255, 255, 255, 6, 0)
+                    SetPedPropIndex(PlayerPedId(), 6, Watches.Index, Watches.TextureIndex, 0)
+                end
+                if Selected then 
+                    if Watches.TextureIndex >= (GetNumberOfPedPropTextureVariations(PlayerPedId(), 6, Watches.Index)-1) then 
+                        Watches.TextureIndex = 0;
+                    else 
+                        Watches.TextureIndex = Watches.TextureIndex + 1
+                    end
+                end
+            end)
+            RageUI.List("Bracelets", Bracelets.Max, Bracelets.Index, "", { }, true, function(Hovered, Active, Selected, Index)
+                Bracelets.Index = Index
+                if Active then
+                    SelectedOption = "bracelets";
+                    DrawAdvancedText(0.863, 0.809, 0.005, 0.0028, 0.4, 'Texture Index: ' .. Bracelets.TextureIndex .. "/" .. GetNumberOfPedPropTextureVariations(PlayerPedId(), 7, Bracelets.Index),  255, 255, 255, 255, 6, 0)
+                    SetPedPropIndex(PlayerPedId(), 7, Bracelets.Index, Bracelets.TextureIndex, 0)
+                end
+                if Selected then 
+                    if Bracelets.TextureIndex >= (GetNumberOfPedPropTextureVariations(PlayerPedId(), 7, Bracelets.Index)-1) then 
+                        Bracelets.TextureIndex = 0;
+                    else 
+                        Bracelets.TextureIndex = Bracelets.TextureIndex + 1
+                    end
+                end
+            end)
         end)
     end
 end)
@@ -372,6 +474,11 @@ Citizen.CreateThread(function()
             Badge.TextureIndex = GetPedTextureVariation(ped, 10)
             Torso2.Index = GetPedDrawableVariation(ped, 11)
             Torso2.TextureIndex = GetPedTextureVariation(ped, 11)
+            Hats.Index = GetNumberOfPedPropDrawableVariations(ped, 0)
+            Glasses.Index = GetNumberOfPedPropDrawableVariations(ped, 1)
+            Earings.Index = GetNumberOfPedPropDrawableVariations(ped, 2)
+            Watches.Index = GetNumberOfPedPropDrawableVariations(ped, 6)
+            Bracelets.Index = GetNumberOfPedDrawableVariations(ped, 7)
             Face.Max = {}
             Mask.Max = {}
             Hair.Max = {}
@@ -386,6 +493,10 @@ Citizen.CreateThread(function()
             Kevlar.Max = {}
             Badge.Max = {}
             Torso2.Max = {}
+            Glasses.Max = {}
+            Earings.Max = {}
+            Watches.Max = {}
+            Bracelets.Max =  {}
             for i=0, GetNumberOfPedDrawableVariations(ped, 0) + 1 do 
                 Face.Max[i] = i;
             end 
@@ -421,6 +532,21 @@ Citizen.CreateThread(function()
             end 
             for i=0, GetNumberOfPedDrawableVariations(ped, 11) + 1 do 
                 Torso2.Max[i] = i;
+            end 
+            for i=0, GetNumberOfPedPropDrawableVariations(ped, 0) + 1 do 
+                Hats.Max[i] = i;
+            end 
+            for i=0, GetNumberOfPedPropDrawableVariations(ped, 1) + 1 do 
+                Glasses.Max[i] = i;
+            end 
+            for i=0, GetNumberOfPedPropDrawableVariations(ped, 2) + 1 do 
+                Earings.Max[i] = i;
+            end 
+            for i=0, GetNumberOfPedPropDrawableVariations(ped, 6) + 1 do 
+                Watches.Max[i] = i;
+            end 
+            for i=0, GetNumberOfPedPropDrawableVariations(ped, 7) + 1 do 
+                Bracelets.Max[i] = i;
             end 
         end
         if not inMarker and MenuOpen then

@@ -421,7 +421,7 @@ end)
 -- local cfg = module("cfg/garages")
 -- local cfg_inventory = module("cfg/inventory")
 -- local vehicle_groups = cfg.garage_types
--- local lang = vRP.lang
+local lang = vRP.lang
 
 -- local garages = cfg.garages
 -- --defined the limit here as well if you dont put it in the config file
@@ -709,44 +709,44 @@ end)
 
 -- -- define vehicle actions
 -- -- action => {cb(user_id,player,veh_group,veh_name),desc}
--- local veh_actions = {}
+local veh_actions = {}
 
--- -- open trunk
--- veh_actions[lang.vehicle.trunk.title()] = {function(user_id,player,vtype,name)
---   local chestname = "u"..user_id.."veh_"..string.lower(name)
---   local max_weight = cfg_inventory.vehicle_chest_weights[string.lower(name)] or cfg_inventory.default_vehicle_chest_weight
+-- open trunk
+veh_actions[lang.vehicle.trunk.title()] = {function(user_id,player,vtype,name)
+  local chestname = "u"..user_id.."veh_"..string.lower(name)
+  local max_weight = cfg_inventory.vehicle_chest_weights[string.lower(name)] or cfg_inventory.default_vehicle_chest_weight
 
---   -- open chest
---   vRPclient.vc_openDoor(player, {vtype,5})
---   vRP.openChest(player, chestname, max_weight, function()
---     vRPclient.vc_closeDoor(player, {vtype,5})
---   end)
--- end, lang.vehicle.trunk.description()}
+  -- open chest
+  vRPclient.vc_openDoor(player, {vtype,5})
+  vRP.openChest(player, chestname, max_weight, function()
+    vRPclient.vc_closeDoor(player, {vtype,5})
+  end)
+end, lang.vehicle.trunk.description()}
 
--- -- detach trailer
--- veh_actions[lang.vehicle.detach_trailer.title()] = {function(user_id,player,vtype,name)
---   vRPclient.vc_detachTrailer(player, {vtype})
--- end, lang.vehicle.detach_trailer.description()}
+-- detach trailer
+veh_actions[lang.vehicle.detach_trailer.title()] = {function(user_id,player,vtype,name)
+  vRPclient.vc_detachTrailer(player, {vtype})
+end, lang.vehicle.detach_trailer.description()}
 
--- -- detach towtruck
--- veh_actions[lang.vehicle.detach_towtruck.title()] = {function(user_id,player,vtype,name)
---   vRPclient.vc_detachTowTruck(player, {vtype})
--- end, lang.vehicle.detach_towtruck.description()}
+-- detach towtruck
+veh_actions[lang.vehicle.detach_towtruck.title()] = {function(user_id,player,vtype,name)
+  vRPclient.vc_detachTowTruck(player, {vtype})
+end, lang.vehicle.detach_towtruck.description()}
 
--- -- detach cargobob
--- veh_actions[lang.vehicle.detach_cargobob.title()] = {function(user_id,player,vtype,name)
---   vRPclient.vc_detachCargobob(player, {vtype})
--- end, lang.vehicle.detach_cargobob.description()}
+-- detach cargobob
+veh_actions[lang.vehicle.detach_cargobob.title()] = {function(user_id,player,vtype,name)
+  vRPclient.vc_detachCargobob(player, {vtype})
+end, lang.vehicle.detach_cargobob.description()}
 
--- -- lock/unlock
--- veh_actions[lang.vehicle.lock.title()] = {function(user_id,player,vtype,name)
---   vRPclient.vc_toggleLock(player, {vtype})
--- end, lang.vehicle.lock.description()}
+-- lock/unlock
+veh_actions[lang.vehicle.lock.title()] = {function(user_id,player,vtype,name)
+  vRPclient.vc_toggleLock(player, {vtype})
+end, lang.vehicle.lock.description()}
 
--- -- engine on/off
--- veh_actions[lang.vehicle.engine.title()] = {function(user_id,player,vtype,name)
---   vRPclient.vc_toggleEngine(player, {vtype})
--- end, lang.vehicle.engine.description()}
+-- engine on/off
+veh_actions[lang.vehicle.engine.title()] = {function(user_id,player,vtype,name)
+  vRPclient.vc_toggleEngine(player, {vtype})
+end, lang.vehicle.engine.description()}
 -- --sell2
 -- MySQL.createCommand("vRP/sell_vehicle_player","UPDATE vrp_user_vehicles SET user_id = @user_id, vehicle_plate = @registration WHERE user_id = @oldUser AND vehicle = @vehicle")
 
@@ -819,110 +819,110 @@ end)
 -- 	end
 -- end, lang.vehicle.sellTP.description()}
 
--- local function ch_vehicle(player,choice)
---   local user_id = vRP.getUserId(player)
---   if user_id ~= nil then
---     -- check vehicle
---     vRPclient.getNearestOwnedVehicle(player,{7},function(ok,vtype,name)
---       if ok then
---         -- build vehicle menu
---         vRP.buildMenu("vehicle", {user_id = user_id, player = player, vtype = vtype, vname = name}, function(menu)
---           menu.name=lang.vehicle.title()
---           menu.css={top="75px",header_color="rgba(255,125,0,0.75)"}
+local function ch_vehicle(player,choice)
+  local user_id = vRP.getUserId(player)
+  if user_id ~= nil then
+    -- check vehicle
+    vRPclient.getNearestOwnedVehicle(player,{7},function(ok,vtype,name)
+      if ok then
+        -- build vehicle menu
+        vRP.buildMenu("vehicle", {user_id = user_id, player = player, vtype = vtype, vname = name}, function(menu)
+          menu.name=lang.vehicle.title()
+          menu.css={top="75px",header_color="rgba(255,125,0,0.75)"}
 
---           for k,v in pairs(veh_actions) do
---             menu[k] = {function(player,choice) v[1](user_id,player,vtype,name) end, v[2]}
---           end
+          for k,v in pairs(veh_actions) do
+            menu[k] = {function(player,choice) v[1](user_id,player,vtype,name) end, v[2]}
+          end
 
---           vRP.openMenu(player,menu)
---         end)
---       else
---         vRPclient.notify(player,{lang.vehicle.no_owned_near()})
---       end
---     end)
---   end
--- end
+          vRP.openMenu(player,menu)
+        end)
+      else
+        vRPclient.notify(player,{lang.vehicle.no_owned_near()})
+      end
+    end)
+  end
+end
 
--- -- ask trunk (open other user car chest)
--- local function ch_asktrunk(player,choice)
---   vRPclient.getNearestPlayer(player,{10},function(nplayer)
---     local nuser_id = vRP.getUserId(nplayer)
---     if nuser_id ~= nil then
---       vRPclient.notify(player,{lang.vehicle.asktrunk.asked()})
---       vRP.request(nplayer,lang.vehicle.asktrunk.request(),15,function(nplayer,ok)
---         if ok then -- request accepted, open trunk
---           vRPclient.getNearestOwnedVehicle(nplayer,{7},function(ok,vtype,name)
---             if ok then
---               local chestname = "u"..nuser_id.."veh_"..string.lower(name)
---               local max_weight = cfg_inventory.vehicle_chest_weights[string.lower(name)] or cfg_inventory.default_vehicle_chest_weight
+-- ask trunk (open other user car chest)
+local function ch_asktrunk(player,choice)
+  vRPclient.getNearestPlayer(player,{10},function(nplayer)
+    local nuser_id = vRP.getUserId(nplayer)
+    if nuser_id ~= nil then
+      vRPclient.notify(player,{lang.vehicle.asktrunk.asked()})
+      vRP.request(nplayer,lang.vehicle.asktrunk.request(),15,function(nplayer,ok)
+        if ok then -- request accepted, open trunk
+          vRPclient.getNearestOwnedVehicle(nplayer,{7},function(ok,vtype,name)
+            if ok then
+              local chestname = "u"..nuser_id.."veh_"..string.lower(name)
+              local max_weight = cfg_inventory.vehicle_chest_weights[string.lower(name)] or cfg_inventory.default_vehicle_chest_weight
 
---               -- open chest
---               local cb_out = function(idname,amount)
---                 vRPclient.notify(nplayer,{lang.inventory.give.given({vRP.getItemName(idname),amount})})
---               end
+              -- open chest
+              local cb_out = function(idname,amount)
+                vRPclient.notify(nplayer,{lang.inventory.give.given({vRP.getItemName(idname),amount})})
+              end
 
---               local cb_in = function(idname,amount)
---                 vRPclient.notify(nplayer,{lang.inventory.give.received({vRP.getItemName(idname),amount})})
---               end
+              local cb_in = function(idname,amount)
+                vRPclient.notify(nplayer,{lang.inventory.give.received({vRP.getItemName(idname),amount})})
+              end
 
---               vRPclient.vc_openDoor(nplayer, {vtype,5})
---               vRP.openChest(player, chestname, max_weight, function()
---                 vRPclient.vc_closeDoor(nplayer, {vtype,5})
---               end,cb_in,cb_out)
---             else
---               vRPclient.notify(player,{lang.vehicle.no_owned_near()})
---               vRPclient.notify(nplayer,{lang.vehicle.no_owned_near()})
---             end
---           end)
---         else
---           vRPclient.notify(player,{lang.common.request_refused()})
---         end
---       end)
---     else
---       vRPclient.notify(player,{lang.common.no_player_near()})
---     end
---   end)
--- end
+              vRPclient.vc_openDoor(nplayer, {vtype,5})
+              vRP.openChest(player, chestname, max_weight, function()
+                vRPclient.vc_closeDoor(nplayer, {vtype,5})
+              end,cb_in,cb_out)
+            else
+              vRPclient.notify(player,{lang.vehicle.no_owned_near()})
+              vRPclient.notify(nplayer,{lang.vehicle.no_owned_near()})
+            end
+          end)
+        else
+          vRPclient.notify(player,{lang.common.request_refused()})
+        end
+      end)
+    else
+      vRPclient.notify(player,{lang.common.no_player_near()})
+    end
+  end)
+end
 
--- -- repair nearest vehicle
--- local function ch_repair(player,choice)
---   local user_id = vRP.getUserId(player)
---   if user_id ~= nil then
---     -- anim and repair
---     if vRP.tryGetInventoryItem(user_id,"repairkit",1,true) then
---       vRPclient.playAnim(player,{false,{task="WORLD_HUMAN_WELDING"},false})
---       SetTimeout(15000, function()
---         vRPclient.fixeNearestVehicle(player,{7})
---         vRPclient.stopAnim(player,{false})
---       end)
---     end
---   end
--- end
+-- repair nearest vehicle
+local function ch_repair(player,choice)
+  local user_id = vRP.getUserId(player)
+  if user_id ~= nil then
+    -- anim and repair
+    if vRP.tryGetInventoryItem(user_id,"repairkit",1,true) then
+      vRPclient.playAnim(player,{false,{task="WORLD_HUMAN_WELDING"},false})
+      SetTimeout(15000, function()
+        vRPclient.fixeNearestVehicle(player,{7})
+        vRPclient.stopAnim(player,{false})
+      end)
+    end
+  end
+end
 
--- -- replace nearest vehicle
--- local function ch_replace(player,choice)
---   vRPclient.replaceNearestVehicle(player,{7})
--- end
+-- replace nearest vehicle
+local function ch_replace(player,choice)
+  vRPclient.replaceNearestVehicle(player,{7})
+end
 
--- vRP.registerMenuBuilder("main", function(add, data)
---   local user_id = vRP.getUserId(data.player)
---   if user_id ~= nil then
---     -- add vehicle entry
---     local choices = {}
---     choices[lang.vehicle.title()] = {ch_vehicle}
+vRP.registerMenuBuilder("main", function(add, data)
+  local user_id = vRP.getUserId(data.player)
+  if user_id ~= nil then
+    -- add vehicle entry
+    local choices = {}
+    choices[lang.vehicle.title()] = {ch_vehicle}
 
---     -- add ask trunk
---     choices[lang.vehicle.asktrunk.title()] = {ch_asktrunk}
+    -- add ask trunk
+    choices[lang.vehicle.asktrunk.title()] = {ch_asktrunk}
 
---     -- add repair functions
---     if vRP.hasPermission(user_id, "vehicle.repair") then
---       choices[lang.vehicle.repair.title()] = {ch_repair, lang.vehicle.repair.description()}
---     end
+    -- add repair functions
+    if vRP.hasPermission(user_id, "vehicle.repair") then
+      choices[lang.vehicle.repair.title()] = {ch_repair, lang.vehicle.repair.description()}
+    end
 
---     if vRP.hasPermission(user_id, "vehicle.replace") then
---       choices[lang.vehicle.replace.title()] = {ch_replace, lang.vehicle.replace.description()}
---     end
+    if vRP.hasPermission(user_id, "vehicle.replace") then
+      choices[lang.vehicle.replace.title()] = {ch_replace, lang.vehicle.replace.description()}
+    end
 
---     add(choices)
---   end
--- end)
+    add(choices)
+  end
+end)
