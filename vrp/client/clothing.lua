@@ -479,6 +479,11 @@ Citizen.CreateThread(function()
             Earings.Index = GetPedPropIndex(ped, 2)
             Watches.Index = GetPedPropIndex(ped, 6)
             Bracelets.Index = GetPedPropIndex(ped, 7)
+            Hats.TextureIndex = GetPedPropTextureIndex(ped, 0)
+            Glasses.TextureIndex = GetPedPropTextureIndex(ped, 1)
+            Earings.TextureIndex = GetPedPropTextureIndex(ped, 2)
+            Watches.TextureIndex = GetPedPropTextureIndex(ped, 6)
+            Bracelets.TextureIndex = GetPedPropTextureIndex(ped, 7)
             Face.Max = {}
             Mask.Max = {}
             Hair.Max = {}
