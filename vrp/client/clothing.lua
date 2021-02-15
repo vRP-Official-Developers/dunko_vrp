@@ -474,11 +474,11 @@ Citizen.CreateThread(function()
             Badge.TextureIndex = GetPedTextureVariation(ped, 10)
             Torso2.Index = GetPedDrawableVariation(ped, 11)
             Torso2.TextureIndex = GetPedTextureVariation(ped, 11)
-            Hats.Index = GetNumberOfPedPropDrawableVariations(ped, 0)
-            Glasses.Index = GetNumberOfPedPropDrawableVariations(ped, 1)
-            Earings.Index = GetNumberOfPedPropDrawableVariations(ped, 2)
-            Watches.Index = GetNumberOfPedPropDrawableVariations(ped, 6)
-            Bracelets.Index = GetNumberOfPedDrawableVariations(ped, 7)
+            Hats.Index = GetPedPropIndex(ped, 0)
+            Glasses.Index = GetPedPropIndex(ped, 1)
+            Earings.Index = GetPedPropIndex(ped, 2)
+            Watches.Index = GetPedPropIndex(ped, 6)
+            Bracelets.Index = GetPedPropIndex(ped, 7)
             Face.Max = {}
             Mask.Max = {}
             Hair.Max = {}
