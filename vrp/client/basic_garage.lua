@@ -49,7 +49,7 @@ function tvRP.spawnGarageVehicle(vtype,name,pos) -- vtype is the vehicle type (o
       SetModelAsNoLongerNeeded(mhash)
     end
   else
-    tvRP.notify("You can only have one "..vtype.." vehicule out.")
+    tvRP.notify("You can only have one "..vtype.." type of vehicle out.")
   end
 end
 

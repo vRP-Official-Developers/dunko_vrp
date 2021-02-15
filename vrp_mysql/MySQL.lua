@@ -23,6 +23,23 @@ function MySQL.execute(queryname, variables)
     end 
 end
 
+
+
+
+function MySQL.asyncQuery(queryname, variables)
+    if Queries[queryname] then 
+        if variables then 
+            local rows = exports['ghmattimysql']:executeSync(Queries[queryname], variables)
+            return rows
+        end 
+    else 
+        print('VRP_DB_DRIVER: Error query does not exist!')
+        cb({{},nil})
+    end 
+end
+
+
+
 function MySQL.query(queryname, variables, cb)
     if Queries[queryname] then 
         if variables then 

@@ -20,13 +20,12 @@ Citizen.CreateThread(function()
       local x,y,z = table.unpack(GetEntityCoords(GetPlayerPed(-1),true))
       vRPserver.updatePos({x,y,z})
       vRPserver.updateHealth({tvRP.getHealth()})
+      vRPserver.updateArmour({GetPedArmour(PlayerPedId())})
       vRPserver.updateWeapons({tvRP.getWeapons()})
       vRPserver.updateCustomization({tvRP.getCustomization()})
     end
   end
 end)
-
--- WEAPONS
 
 -- def
 local weapon_types = {
