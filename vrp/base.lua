@@ -389,7 +389,7 @@ function vRP.getSData(key, cbr)
     local task = Task(cbr,{""})
     
     MySQL.query("vRP/get_srvdata", {key = key}, function(rows, affected)
-        if #rows > 0 then
+        if rows and #rows > 0 then
             task({rows[1].dvalue})
         else
             task()
