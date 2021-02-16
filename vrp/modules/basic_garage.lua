@@ -4,9 +4,6 @@ local cfg = module("cfg/garages")
 local cfg_inventory = module("cfg/inventory")
 local vehicle_groups = cfg.garage_types
 local limit = cfg.limit or 100000000
-MySQL.SingleQuery("ALTER TABLE vrp_user_vehicles ADD IF NOT EXISTS rented BOOLEAN NOT NULL DEFAULT 0;")
-MySQL.SingleQuery("ALTER TABLE vrp_user_vehicles ADD IF NOT EXISTS rentedid varchar(200) NOT NULL DEFAULT '';")
-MySQL.SingleQuery("ALTER TABLE vrp_user_vehicles ADD IF NOT EXISTS rentedtime varchar(2048) NOT NULL DEFAULT '';")
 MySQL.createCommand("vRP/add_vehicle","INSERT IGNORE INTO vrp_user_vehicles(user_id,vehicle,vehicle_plate) VALUES(@user_id,@vehicle,@registration)")
 MySQL.createCommand("vRP/remove_vehicle","DELETE FROM vrp_user_vehicles WHERE user_id = @user_id AND vehicle = @vehicle")
 MySQL.createCommand("vRP/get_vehicles", "SELECT vehicle, rentedtime FROM vrp_user_vehicles WHERE user_id = @user_id AND rented = 0")
@@ -21,6 +18,7 @@ MySQL.createCommand("vRP/fetch_rented_vehs", "SELECT * FROM vrp_user_vehicles WH
 
 Citizen.CreateThread(function()
     while true do
+        Wait(300000)
         MySQL.query('vRP/fetch_rented_vehs', {}, function(pvehicles)
             for i,v in pairs(pvehicles) do 
                if os.time() > tonumber(v.rentedtime) then
@@ -29,7 +27,6 @@ Citizen.CreateThread(function()
             end
         end)
         print('Vehicle Rents checked.')
-        Wait(300000)
     end
 end)
 
