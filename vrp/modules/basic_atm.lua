@@ -41,7 +41,7 @@ RegisterNetEvent('VRP:Withdraw')
 AddEventHandler('VRP:Withdraw', function(amount)
     local source = source
     amount = parseInt(amount)
-    if onesync then    
+    if onesync ~= "off" then    
         --Onesync allows extra security behind events should enable it if it's not already.
         local ped = GetPlayerPed(source)
         local playerCoords = GetEntityCoords(ped)
@@ -83,7 +83,7 @@ RegisterNetEvent('VRP:Deposit')
 AddEventHandler('VRP:Deposit', function(amount)
     local source = source
     amount = parseInt(amount)
-    if onesync then
+    if onesync ~= "off" then    
         --Onesync allows extra security behind events should enable it if it's not already.
         local ped = GetPlayerPed(source)
         local playerCoords = GetEntityCoords(ped)
