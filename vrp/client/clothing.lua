@@ -538,6 +538,27 @@ Citizen.CreateThread(function()
             for i=0, GetNumberOfPedDrawableVariations(ped, 11) + 1 do 
                 Torso2.Max[i] = i;
             end 
+            Hats.Max[-1] = -1
+            Glasses.Max[-1] = -1
+            Earings.Max[-1] = -1
+            Watches.Max[-1] = -1
+            Bracelets.Max[-1] = -1
+            -- Hot fix for weird native behaviour
+            if Hats.TextureIndex == -1 then 
+                Hats.TextureIndex = 0
+            end
+            if Glasses.TextureIndex == -1 then 
+                Glasses.TextureIndex = 0
+            end
+            if Earings.TextureIndex == -1 then 
+                Earings.TextureIndex = 0
+            end
+            if Watches.TextureIndex == -1 then 
+                Watches.TextureIndex = 0
+            end
+            if Bracelets.TextureIndex == -1 then 
+                Bracelets.TextureIndex = 0
+            end
             for i=0, GetNumberOfPedPropDrawableVariations(ped, 0) + 1 do 
                 Hats.Max[i] = i;
             end 
