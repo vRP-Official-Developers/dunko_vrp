@@ -7,24 +7,23 @@ Debug = module("lib/Debug")
 
 local config = module("cfg/base")
 local version = module("version")
-Debug.active = config.debug
 
--- versioning
-print("[vRP] launch version "..version)
---[[
-PerformHttpRequest("https://raw.githubusercontent.com/ImagicTheCat/vRP/master/vrp/version.lua",function(err,text,headers)
-    if err == 0 then
-        text = string.gsub(text,"return ","")
-        local r_version = tonumber(text)
-        if version ~= r_version then
-            print("[vRP] WARNING: A new version of vRP is available here https://github.com/ImagicTheCat/vRP, update to benefit from the last features and to fix exploits/bugs.")
-        end
-    else
-        print("[vRP] unable to check the remote version")
+print("^5[VRP]: ^7" .. 'Checking for vRP Updates..')
+
+PerformHttpRequest("https://raw.githubusercontent.com/DunkoUK/dunko_vrp/master/vrp/version.lua",function(err,text,headers)
+if err == 200 then
+    text = string.gsub(text,"return ","")
+    local r_version = tonumber(text)
+    if version ~= r_version then
+        print("^5[VRP]: ^7" .. 'A Dunko Update is available from: https://github.com/DunkoUK/dunko_vrp')
     end
+else
+    print("[vRP] unable to check the remote version")
+end
 end, "GET", "")
---]]
 
+
+Debug.active = config.debug
 vRP = {}
 Proxy.addInterface("vRP",vRP)
 
