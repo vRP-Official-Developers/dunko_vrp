@@ -1,6 +1,7 @@
 local htmlEntities = module("lib/htmlEntities")
 local Tools = module("lib/Tools")
-
+local RageUIAdmin = module("cfg/admin_menu")
+local Groups = module("cfg/groups")
 -- this module define some admin menu functions
 
 local player_lists = {}
@@ -95,18 +96,24 @@ local function ch_addgroup(player,choice)
     local user_id = vRP.getUserId(player)
     if user_id ~= nil and vRP.hasPermission(user_id,"player.group.add") then
         vRP.prompt(player,"User id: ","",function(player,id)
-            id = parseInt(id)
-            vRP.prompt(player,"Group to add: ","",function(player,group)
-                if group == superadmin and not vRP.hasPermission(user_id,"player.group.add.superadmin") then
-                    do return end
-                end
-                if group == admin and not vRP.hasPermission(user_id,"player.group.add.admin") then
-                    do return end
-                end  		  
-                vRP.addUserGroup(id,group)
-                vRPclient.notify(player,{group.." added to user "..id})
-            end)
+            if id then 
+                id = parseInt(id)
+                vRP.prompt(player,"Group to add: ","",function(player,group)
+                    if Groups.groups[group] and Groups.groups[group]._config and Groups.groups[group]._config['special'] then 
+                        if vRP.hasPermission(user_id, 'player.manage_' .. group) then
+                                vRP.addUserGroup(id, group)
+                                vRPclient.notify(player,{'~g~Success! Added Group: ' .. group})
+                        else 
+                            vRPclient.notify(player,{'~r~You do not have permission to add this group.'})
+                        end
+                    else 
+                        vRP.addUserGroup(id, group)
+                        vRPclient.notify(player,{'~g~Success! Added Group: ' .. group})
+                    end 
+                end)
+            end 
         end)
+    
     end
 end
 
@@ -115,10 +122,21 @@ local function ch_removegroup(player,choice)
     if user_id ~= nil and vRP.hasPermission(user_id,"player.group.remove") then
         vRP.prompt(player,"User id: ","",function(player,id)
             id = parseInt(id)
-            vRP.prompt(player,"Group to remove: ","",function(player,group)
-                vRP.removeUserGroup(id,group)
-                vRPclient.notify(player,{group.." removed from user "..id})
-            end)
+            if id then 
+                vRP.prompt(player,"Group to remove: ","",function(player,group)
+                    if Groups.groups[group] and Groups.groups[group]._config and Groups.groups[group]._config['special'] then 
+                        if vRP.hasPermission(user_id, 'player.manage_' .. group) then
+                                vRP.removeUserGroup(id, group)
+                                vRPclient.notify(player,{'~g~Success! Removed Group: ' .. group})
+                        else 
+                            vRPclient.notify(player,{'~r~You do not have permission to remove this group.'})
+                        end
+                    else 
+                        vRP.removeUserGroup(id, group)
+                        vRPclient.notify(player,{'~g~Success! Removed Group: ' .. group})
+                    end 
+                end)
+            end
         end)
     end
 end
@@ -318,6 +336,454 @@ local function ch_calladmin(player,choice)
         end)
     end
 end
+
+
+--vRP Admin 
+
+RegisterNetEvent('vRPAdmin:ReturnPlayers')
+AddEventHandler('vRPAdmin:ReturnPlayers', function()
+    local source = source
+    local user_id = vRP.getUserId(source)
+    if vRP.hasPermission(user_id, 'vrp.adminmenu') then 
+        local Table = {}
+        local Buttons = {}
+        local Config = {}
+        for i,v in pairs(GetPlayers()) do 
+            local user_id = vRP.getUserId(v)
+            if user_id ~= nil then 
+                Table[user_id] = {v, GetPlayerName(v)}
+            end
+        end
+        for i,v in pairs(RageUIAdmin.Buttons) do 
+            if vRP.hasPermission(user_id, v[2]) then 
+                Buttons[i] = true
+            end
+        end
+        for i,v in pairs(RageUIAdmin.MiscButtons) do 
+            if vRP.hasPermission(user_id, v[2]) then 
+                Config[i] = v[3]
+            end
+        end
+        TriggerClientEvent('vRPAdmin:RecievePlayers', source, Table, Buttons, Config)
+    end
+end)
+
+RegisterNetEvent('vRPAdmin:Groups')
+AddEventHandler('vRPAdmin:Groups', function(id)
+    local source = source
+    local user_id = vRP.getUserId(source)
+    local GroupsL = {}
+    if vRP.hasPermission(user_id, 'vrp.adminmenu') then 
+        for i,v in pairs(Groups.groups) do 
+            if vRP.hasGroup(id, i) then
+                GroupsL[i] = true;
+            end
+        end
+        TriggerClientEvent('vRPAdmin:ReturnGroups', source, GroupsL)
+    else 
+        print(GetPlayerName(source) .. ' is cheating! He\'s triggering events without permission')
+    end
+end)
+
+
+
+RegisterNetEvent('vRPAdmin:EntityCleanupGun')
+AddEventHandler('vRPAdmin:EntityCleanupGun', function()
+    local source = source
+    local user_id = vRP.getUserId(source)
+    if vRP.hasPermission(user_id, 'player.propcleanup') then
+        TriggerClientEvent('vRPAdmin:EntityCleanupGun', source)
+    else 
+        print(GetPlayerName(source) .. ' is cheating! He\'s triggering events without permission')
+    end
+end)
+
+RegisterNetEvent('vRPAdmin:PropCleanup')
+AddEventHandler('vRPAdmin:PropCleanup', function()
+    local source = source
+    local user_id = vRP.getUserId(source)
+    if vRP.hasPermission(user_id, 'player.propcleanup') then
+        TriggerClientEvent('chat:addMessage', -1, {
+            color = { 255, 0, 0},
+            multiline = true,
+            args = {"System", "Staff Member: " .. GetPlayerName(source) .. ' has triggered a entity cleanup. Entity cleanup in 60s'}
+          })
+          Wait(30000)
+          TriggerClientEvent('chat:addMessage', -1, {
+            color = { 255, 0, 0},
+            multiline = true,
+            args = {"System", "Staff Member: " .. GetPlayerName(source) .. ' Entity cleanup in 30s.'}
+          })
+          Wait(30000)
+          for i,v in pairs(GetAllObjects()) do 
+             DeleteEntity(v)
+          end
+          TriggerClientEvent('chat:addMessage', -1, {
+            color = { 255, 0, 0},
+            multiline = true,
+            args = {"System", "Entity Cleanup Completed"}
+          })
+        else 
+        print(GetPlayerName(source) .. ' is cheating! He\'s triggering events without permission')
+    end
+end)
+
+
+RegisterNetEvent('vRPAdmin:DeAttachEntity')
+AddEventHandler('vRPAdmin:DeAttachEntity', function()
+    local source = source
+    local user_id = vRP.getUserId(source)
+    if vRP.hasPermission(user_id, 'player.propcleanup') then
+        TriggerClientEvent('chat:addMessage', -1, {
+            color = { 255, 0, 0},
+            multiline = true,
+            args = {"System", "Staff Member: " .. GetPlayerName(source) .. ' has triggered a Deattach entity cleanup. Entity cleanup in 60s'}
+          })
+          Wait(30000)
+          TriggerClientEvent('chat:addMessage', -1, {
+            color = { 255, 0, 0},
+            multiline = true,
+            args = {"System", "Staff Member: " .. GetPlayerName(source) .. '  Deattach entity cleanup in 30s.'}
+          })
+          Wait(30000)
+          TriggerClientEvent("vRPAdmin:EntityWipe", -1)
+          TriggerClientEvent('chat:addMessage', -1, {
+            color = { 255, 0, 0},
+            multiline = true,
+            args = {"System", " Deattach entity Cleanup Completed"}
+          })
+        else 
+        print(GetPlayerName(source) .. ' is cheating! He\'s triggering events without permission')
+    end
+end)
+
+RegisterNetEvent('vRPAdmin:PedCleanup')
+AddEventHandler('vRPAdmin:PedCleanup', function()
+    local source = source
+    local user_id = vRP.getUserId(source)
+    if vRP.hasPermission(user_id, 'player.pedcleanup') then
+        TriggerClientEvent('chat:addMessage', -1, {
+            color = { 255, 0, 0},
+            multiline = true,
+            args = {"System", "Staff Member: " .. GetPlayerName(source) .. ' has triggered a Ped cleanup. Ped cleanup in 60s'}
+          })
+          Wait(30000)
+          TriggerClientEvent('chat:addMessage', -1, {
+            color = { 255, 0, 0},
+            multiline = true,
+            args = {"System", "Staff Member: " .. GetPlayerName(source) .. ' Ped cleanup in 30s.'}
+          })
+          Wait(30000)
+          for i,v in pairs(GetAllPeds()) do 
+             DeleteEntity(v)
+          end
+          TriggerClientEvent('chat:addMessage', -1, {
+            color = { 255, 0, 0},
+            multiline = true,
+            args = {"System", "Ped Cleanup Completed"}
+          })
+        else 
+        print(GetPlayerName(source) .. ' is cheating! He\'s triggering events without permission')
+    end
+end)
+
+
+RegisterNetEvent('vRPAdmin:VehCleanup')
+AddEventHandler('vRPAdmin:VehCleanup', function()
+    local source = source
+    local user_id = vRP.getUserId(source)
+    if vRP.hasPermission(user_id, 'player.pedcleanup') then
+        TriggerClientEvent('chat:addMessage', -1, {
+            color = { 255, 0, 0},
+            multiline = true,
+            args = {"System", "Staff Member: " .. GetPlayerName(source) .. ' has triggered a Vehicle cleanup. Vehicle cleanup in 60s'}
+          })
+          Wait(30000)
+          TriggerClientEvent('chat:addMessage', -1, {
+            color = { 255, 0, 0},
+            multiline = true,
+            args = {"System", "Staff Member: " .. GetPlayerName(source) .. ' Vehicle cleanup in 30s.'}
+          })
+          Wait(30000)
+          for i,v in pairs(GetAllVehicles()) do 
+             DeleteEntity(v)
+          end
+          TriggerClientEvent('chat:addMessage', -1, {
+            color = { 255, 0, 0},
+            multiline = true,
+            args = {"System", "Vehicle Cleanup Completed"}
+          })
+        else 
+        print(GetPlayerName(source) .. ' is cheating! He\'s triggering events without permission')
+    end
+end)
+
+RegisterNetEvent('vRPAdmin:CleanAll')
+AddEventHandler('vRPAdmin:CleanAll', function()
+    local source = source
+    local user_id = vRP.getUserId(source)
+    if vRP.hasPermission(user_id, 'player.cleanallcleanup') then
+        TriggerClientEvent('chat:addMessage', -1, {
+            color = { 255, 0, 0},
+            multiline = true,
+            args = {"System", "Staff Member: " .. GetPlayerName(source) .. ' has triggered a Vehicle, Ped, Entity Cleanup. The cleanup starts in 60s.'}
+          })
+          Wait(30000)
+          TriggerClientEvent('chat:addMessage', -1, {
+            color = { 255, 0, 0},
+            multiline = true,
+            args = {"System", "Staff Member: " .. GetPlayerName(source) .. ' has triggered a Vehicle, Ped, Entity Cleanup. The cleanup starts in 30s.'}
+          })
+          Wait(30000)
+          for i,v in pairs(GetAllVehicles()) do 
+            DeleteEntity(v)
+         end
+         for i,v in pairs(GetAllPeds()) do 
+           DeleteEntity(v)
+        end
+        for i,v in pairs(GetAllObjects()) do
+           DeleteEntity(v)
+        end
+          TriggerClientEvent('chat:addMessage', -1, {
+            color = { 255, 0, 0},
+            multiline = true,
+            args = {"System", "Vehicle, Ped, Entity Cleanup Completed"}
+          })
+        else 
+        print(GetPlayerName(source) .. ' is cheating! He\'s triggering events without permission')
+    end
+end)
+
+RegisterNetEvent('vRPAdmin:RemoveGroup')
+AddEventHandler('vRPAdmin:RemoveGroup', function(id, group)
+    local source = source
+    local user_id = vRP.getUserId(source)
+    if vRP.hasPermission(user_id, 'player.removeGroups') then
+        if Groups.groups[group] and Groups.groups[group]._config and Groups.groups[group]._config['special'] then 
+            if vRP.hasPermission(user_id, 'player.manage_' .. group) then
+                    vRP.removeUserGroup(id, group)
+                    vRPclient.notify(source,{'~g~Success! Removed Group: ' .. group})
+                    local GroupsL = {}
+                    for i,v in pairs(Groups.groups) do 
+                        if vRP.hasGroup(id, i) then
+                            GroupsL[i] = true;
+                        end
+                    end
+                    TriggerClientEvent('vRPAdmin:ReturnGroups', source, GroupsL)
+            else 
+                vRPclient.notify(source,{'~r~You do not have permission to remove this group.'})
+            end
+        else 
+            vRP.removeUserGroup(id, group)
+            vRPclient.notify(source,{'~g~Success! Removed Group: ' .. group})
+            local GroupsL = {}
+            for i,v in pairs(Groups.groups) do 
+                if vRP.hasGroup(id, i) then
+                    GroupsL[i] = true;
+                end
+            end
+            TriggerClientEvent('vRPAdmin:ReturnGroups', source, GroupsL)
+        end 
+    else 
+        print(GetPlayerName(source) .. ' is cheating! He\'s triggering events without permission')
+    end 
+end)
+
+
+RegisterNetEvent('vRPAdmin:AddGroup')
+AddEventHandler('vRPAdmin:AddGroup', function(id, group)
+    local source = source
+    local user_id = vRP.getUserId(source)
+    if vRP.hasPermission(user_id, 'player.addGroups') then
+        if Groups.groups[group] and Groups.groups[group]._config and Groups.groups[group]._config['special'] then 
+            if vRP.hasPermission(user_id, 'player.manage_' .. group) then
+                    vRP.addUserGroup(id, group)
+                    vRPclient.notify(source,{'~g~Success! Added Group: ' .. group})
+                    local GroupsL = {}
+                    for i,v in pairs(Groups.groups) do 
+                        if vRP.hasGroup(id, i) then
+                            GroupsL[i] = true;
+                        end
+                    end
+                    TriggerClientEvent('vRPAdmin:ReturnGroups', source, GroupsL)
+            else 
+                vRPclient.notify(source,{'~r~You do not have permission to add this group.'})
+            end
+        else 
+            vRP.addUserGroup(id, group)
+            vRPclient.notify(source,{'~g~Success! Added Group: ' .. group})
+            local GroupsL = {}
+            for i,v in pairs(Groups.groups) do 
+                if vRP.hasGroup(id, i) then
+                    GroupsL[i] = true;
+                end
+            end
+            TriggerClientEvent('vRPAdmin:ReturnGroups', source, GroupsL)
+        end 
+    else 
+        print(GetPlayerName(source) .. ' is cheating! He\'s triggering events without permission')
+    end 
+end)
+
+RegisterNetEvent('vRPAdmin:Revive')
+AddEventHandler('vRPAdmin:Revive', function(id)
+    local source = source 
+    local SelectedPlrSource = vRP.getUserSource(id) 
+    local userid = vRP.getUserId(source)
+    if vRP.hasPermission(userid, 'player.revive') then
+        if SelectedPlrSource then  
+            vRPclient.varyHealth(SelectedPlrSource,{100})
+            vRPclient.notify(source,{"~g~Revived Player"})
+        else 
+            vRPclient.notify(source,{"~r~This player may have left the game."})
+        end
+    else 
+        print(GetPlayerName(source) .. ' is cheating! He\'s triggering events without permission')
+    end 
+end)
+
+RegisterNetEvent('vRPAdmin:SlapPlayer')
+AddEventHandler('vRPAdmin:SlapPlayer', function(id)
+    local source = source 
+    local SelectedPlrSource = vRP.getUserSource(id) 
+    local userid = vRP.getUserId(source)
+    if vRP.hasPermission(userid, 'player.slap') then
+        if SelectedPlrSource then  
+            vRPclient.setHealth(SelectedPlrSource,{0})
+            vRPclient.notify(source,{"~g~Slapped Player"})
+        else 
+            vRPclient.notify(source,{"~r~This player may have left the game."})
+        end
+    else 
+        print(GetPlayerName(source) .. ' is cheating! He\'s triggering events without permission')
+    end 
+end)
+
+local onesync = GetConvar('onesync', nil)
+RegisterNetEvent('vRPAdmin:SpectatePlr')
+AddEventHandler('vRPAdmin:SpectatePlr', function(id)
+    local source = source 
+    local SelectedPlrSource = vRP.getUserSource(id) 
+    local userid = vRP.getUserId(source)
+    if vRP.hasPermission(userid, 'player.spectate') then
+        if SelectedPlrSource then  
+            if onesync ~= "off" then 
+                local ped = GetPlayerPed(SelectedPlrSource)
+                local pedCoords = GetEntityCoords(ped)
+                print(pedCoords)
+                TriggerClientEvent('vRPAdmin:Spectate', source, SelectedPlrSource, pedCoords)
+            else 
+                TriggerClientEvent('vRPAdmin:Spectate', source, SelectedPlrSource)  
+            end
+        else 
+            vRPclient.notify(source,{"~r~This player may have left the game."})
+        end
+    else 
+        print(GetPlayerName(source) .. ' is cheating! He\'s triggering events without permission')
+    end 
+end)
+
+RegisterNetEvent('vRPAdmin:TPTo')
+AddEventHandler('vRPAdmin:TPTo', function(id)
+    local source = source 
+    local SelectedPlrSource = vRP.getUserSource(id) 
+    local userid = vRP.getUserId(source)
+    if vRP.hasPermission(userid, 'player.tpto') then
+        if SelectedPlrSource then  
+            if onesync ~= "off" then 
+                local ped = GetPlayerPed(source)
+                local otherPlr = GetPlayerPed(SelectedPlrSource)
+                local pedCoords = GetEntityCoords(otherPlr)
+                SetEntityCoords(ped, pedCoords)
+            else 
+                TriggerClientEvent('vRPAdmin:TPTo', source, false, id)  
+            end
+        else 
+            vRPclient.notify(source,{"~r~This player may have left the game."})
+        end
+    else 
+        print(GetPlayerName(source) .. ' is cheating! He\'s triggering events without permission')
+    end 
+end)
+
+RegisterNetEvent('vRPAdmin:Bring')
+AddEventHandler('vRPAdmin:Bring', function(id)
+    local source = source 
+    local SelectedPlrSource = vRP.getUserSource(id) 
+    local userid = vRP.getUserId(source)
+    if vRP.hasPermission(userid, 'player.tpto') then
+        if SelectedPlrSource then  
+            if onesync ~= "off" then 
+                local ped = GetPlayerPed(source)
+                local otherPlr = GetPlayerPed(SelectedPlrSource)
+                local pedCoords = GetEntityCoords(ped)
+                SetEntityCoords(otherPlr, pedCoords)
+            else 
+                TriggerClientEvent('vRPAdmin:Bring', SelectedPlrSource, false, id)  
+            end
+        else 
+            vRPclient.notify(source,{"~r~This player may have left the game."})
+        end
+    else 
+        print(GetPlayerName(source) .. ' is cheating! He\'s triggering events without permission')
+    end 
+end)
+
+RegisterNetEvent('vRPAdmin:Kick')
+AddEventHandler('vRPAdmin:Kick', function(id, reason)
+    local source = source 
+    local SelectedPlrSource = vRP.getUserSource(id) 
+    local userid = vRP.getUserId(source)
+    if vRP.hasPermission(userid, 'player.kick') then
+        if SelectedPlrSource then  
+            vRP.kick(SelectedPlrSource,reason)
+            vRPclient.notify(source,{'~g~Successfully kicked Player.'})
+        end
+    end
+end)
+
+RegisterNetEvent('vRPAdmin:ServerShutdown')
+AddEventHandler('vRPAdmin:ServerShutdown', function()
+    local source = source 
+    local userid = vRP.getUserId(source)
+    if vRP.hasPermission(userid, 'player.shutdownserver') then
+        TriggerClientEvent('VRPAdmin:ActivateShutdown', -1)
+        Wait(300000)
+        for i,v in pairs(GetPlayers()) do 
+            DropPlayer(v, 'This server has shutdown please try rejoining in a few minutes.')
+        end
+    end
+end)
+
+
+RegisterNetEvent('vRPAdmin:Ban')
+AddEventHandler('vRPAdmin:Ban', function(id, hours, reason)
+    local source = source 
+    local SelectedPlrSource = vRP.getUserSource(id) 
+    local userid = vRP.getUserId(source)
+    if vRP.hasPermission(userid, 'player.ban') then
+        if SelectedPlrSource then  
+            if tonumber(hours) then 
+                if tonumber(hours) == -1 then 
+                    vRP.ban(source,id,"perm",reason)
+                    vRPclient.notify(source,{'~g~Successfully banned Player.'})
+                else 
+                    vRP.ban(source,id,hours,reason)
+                    vRPclient.notify(source,{'~g~Successfully banned Player.'})
+                end
+            else 
+                vRPclient.notify(source,{"Please enter a number for the ban hours."})
+            end 
+        end
+    end
+end)
+
+
+
+
+--vRP Admin
+
+
 
 RegisterCommand('calladmin', function(source)
     local user_id = vRP.getUserId(source)
