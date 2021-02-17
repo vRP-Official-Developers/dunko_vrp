@@ -42,6 +42,8 @@ If you need help, head over to my Discord:  https://discord.gg/kAfBuJG
 
 10) Open Start_Server.cmd with Notepad++ and put in the directory you have your server in.
 
+11) Also, please where possible use Onesync it provides you with so many more features. <a href="https://forum.cfx.re/t/onesync-infinity-how-to-use-it/996612">OneSync Forum Post</a>
+
 # My Server
 
 Name: Dunko vRP V6.7 - Preview/Test Server - discord.gg/kAfBuJG - Sponsored by Zap-Hosting.com
