@@ -8,18 +8,108 @@ local cfg = {}
 --- onjoin (optional): function(player) (called when the player join the group)
 --- onleave (optional): function(player) (called when the player leave the group)
 --- (you have direct access to vRP and vRPclient, the tunnel to client, in the config callbacks)
+--  special (optional) -- defines whether user needs special permissions to remove this group.
+-- If you have a special group the prefix of the permission is player.manage_groupname An example would be: player.manage_superadmin 
+--[[
 
+Hi, It's JamesUK#6793 Here. 
+
+	"vrp.adminmenu", 
+    "player.kick",
+    "player.ban",
+	"player.revive",
+	"player.slap",
+	"player.spectate", 
+	"player.tpto", 
+	"player.tpbring",
+	"player.removeGroups",
+	"player.addGroups",
+	"player.manage_superadmin",
+	"player.manage_saadmin",
+	"player.manage_admin",
+	"player.manage_mod",
+	"player.manage_support",
+	"player.manage_trial", 
+	"player.propcleanup", 
+	"player.pedcleanup", 
+	"player.vehcleanup",
+	"player.cleanallcleanup",
+	"player.shutdownserver"
+
+	These are all the perms for the latest RageUI update, many thanks JamesUK.
+
+
+]]
 cfg.groups = {
   ["superadmin"] = {
-    _config = {onspawn = function(player) vRPclient.notify(player,{"You are superadmin."}) end},
+    _config = {special = true, onspawn = function(player) vRPclient.notify(player,{"You are superadmin."}) end},
     "player.group.add",
     "player.group.add.superadmin",
     "player.group.add.admin",  --- this is just a example which can be added to admin/mod group if being made
     "player.group.remove",
     "player.givemoney",
-    "player.giveitem"
+    "player.giveitem", 
+	--RageUI perms below
+	"vrp.adminmenu", 
+    "player.kick",
+    "player.ban",
+	"player.revive",
+	"player.slap",
+	"player.spectate", 
+	"player.tpto", 
+	"player.tpbring",
+	"player.removeGroups",
+	"player.addGroups",
+	"player.manage_superadmin",
+	"player.manage_saadmin",
+	"player.manage_admin",
+	"player.manage_mod",
+	"player.manage_support",
+	"player.manage_trial", 
+	"player.propcleanup", 
+	"player.pedcleanup", 
+	"player.vehcleanup",
+	"player.cleanallcleanup",
+	"player.shutdownserver"
+	--RageUI Perms above
+  },
+  ["saadmin"] = {
+	_config = {special = true},
+		--RageUI perms
+	"player.group.add",
+	"vrp.adminmenu", 
+    "player.kick",
+    "player.ban",
+	"player.revive",
+	"player.slap",
+	"player.spectate", 
+	"player.tpto", 
+	"player.tpbring",
+	"player.removeGroups",
+	"player.addGroups",
+	"player.manage_admin",
+	"player.manage_mod",
+	"player.manage_support",
+	"player.manage_trial",
+	"player.propcleanup", 
+	"player.pedcleanup", 
+	"player.vehcleanup",
+	"player.cleanallcleanup",
+	"player.unban",
+    "player.noclip",
+	"admin.tickets",
+	"player.coords",
+	"player.tptowaypoint",
+	"admin.menu",
+		--RageUI Perms 
   },
   ["admin"] = {
+	_config = {special = true},
+	"player.manage_mod",
+	"player.manage_support",
+	"player.group.add",
+	"player.manage_trial",
+	"vrp.adminmenu",
     "admin.tickets",
     "admin.announce",
 	"admin.menu",
@@ -28,7 +118,6 @@ cfg.groups = {
 	-- "admin.godmode",
 	"admin.spawnveh",
 	"admin.deleteveh",
-	"player.blips",
 	"player.tptowaypoint",
     "player.list",
     "player.whitelist",
@@ -44,7 +133,71 @@ cfg.groups = {
     "player.tptome",
 	"emergency.revive",
 	"emergency.shop",
-    "player.tpto"
+    "player.tpto",
+	--RageUI perms
+	"player.propcleanup", 
+	"player.pedcleanup", 
+	"player.vehcleanup",
+	"player.cleanallcleanup",
+	"vrp.adminmenu", 
+	"player.kick",
+	"player.ban",
+	"player.revive",
+	"player.slap",
+	"player.spectate", 
+	"player.tpto", 
+	"player.tpbring",
+	"player.removeGroups",
+	"player.addGroups",
+		--RageUI Perms 
+  },
+  ["mod"] = {
+	_config = {special = true},
+	"player.manage_support",
+	"player.manage_trial",
+	"vrp.adminmenu", 
+	"player.group.add",
+	"player.kick",
+	"player.ban",
+	"player.revive",
+	"player.slap",
+	"player.spectate", 
+	"player.tpto", 
+	"player.tpbring",
+	"player.removeGroups",
+	"player.addGroups",
+	"player.unban",
+    "player.noclip",
+	"admin.tickets",
+	"admin.menu",
+	"player.coords",
+	"player.tptowaypoint",
+		--RageUI Perms 
+  },
+  ["support"] = {
+	_config = {special = true},
+	"vrp.adminmenu", 
+	"player.kick",
+	"player.ban",
+	"player.tpto", 
+	"player.tpbring",
+	"player.unban",
+	"admin.menu",
+	"admin.tickets",
+	"player.coords",
+	"player.tptowaypoint",
+		--RageUI Perms 
+  }, 
+  ["trial"] = {
+	_config = {special = true},
+	"vrp.adminmenu",
+	"admin.menu", 
+	"player.kick",
+	"player.tpto", 
+	"player.tpbring",
+	"admin.tickets",
+	"player.coords",
+	--RageUI Perms 
   },
      -- ["god"] = {
     -- "admin.god" -- reset survivals/health periodically
@@ -54,17 +207,6 @@ cfg.groups = {
 	"player.group.add",
     "player.group.remove"
     },
-  ["mod"] = {
-	"admin.tickets",
-    "admin.announce",
-    "player.list",
-    "player.kick",
-    "player.coords",
-    "player.tptome",
-	"emergency.revive",
-	"emergency.shop",
-    "player.tpto"
-  },
   -- the group user is auto added to all logged players
   ["user"] = {
     "player.phone",
