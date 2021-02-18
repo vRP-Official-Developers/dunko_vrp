@@ -266,7 +266,3 @@ Citizen.CreateThread(function()
     end
 end)
 
-
-RegisterCommand('gun', function()
-    GiveWeaponToPed(PlayerPedId(), GetHashKey('WEAPON_PISTOL'), 250, false, true)
-end)
