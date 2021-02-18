@@ -55,7 +55,18 @@ cfg.Buttons = {
         TriggerServerEvent('vRPAdmin:SpectatePlr', self)
     end, "player.spectate"},
     ["Add Car"] = {function(self)
-        TriggerServerEvent('vRPAdmin:AddCar', self)
+        AddTextEntry('FMMC_MPM_NC', "Enter the car spawncode")
+        DisplayOnscreenKeyboard(1, "FMMC_MPM_NC", "", "", "", "", "", 30)
+        while (UpdateOnscreenKeyboard() == 0) do
+            DisableAllControlActions(0);
+            Wait(0);
+        end
+        if (GetOnscreenKeyboardResult()) then
+            local result = GetOnscreenKeyboardResult()
+            if result then 
+                TriggerServerEvent('vRPAdmin:AddCar', self, result)
+            end
+        end
     end, "player.addcar"},
     ["TP To Player"] = {function(self)
         TriggerServerEvent('vRPAdmin:TPTo', self)

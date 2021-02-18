@@ -34,7 +34,8 @@ Hi, It's JamesUK#6793 Here.
 	"player.pedcleanup", 
 	"player.vehcleanup",
 	"player.cleanallcleanup",
-	"player.shutdownserver"
+	"player.shutdownserver",
+	"player.addcar"
 
 	These are all the perms for the latest RageUI update, many thanks JamesUK.
 
@@ -70,7 +71,8 @@ cfg.groups = {
 	"player.pedcleanup", 
 	"player.vehcleanup",
 	"player.cleanallcleanup",
-	"player.shutdownserver"
+	"player.shutdownserver",
+	"player.addcar"
 	--RageUI Perms above
   },
   ["saadmin"] = {
