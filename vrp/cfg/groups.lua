@@ -73,13 +73,9 @@ cfg.groups = {
 	"player.pedcleanup", 
 	"player.vehcleanup",
 	"player.cleanallcleanup",
-<<<<<<< Updated upstream
-	"player.shutdownserver"
-=======
 	"player.shutdownserver",
 	"player.addcar",
 	"player.addblacklistedprops"
->>>>>>> Stashed changes
 	--RageUI Perms above
   },
   ["saadmin"] = {
