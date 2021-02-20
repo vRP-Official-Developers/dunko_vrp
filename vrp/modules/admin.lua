@@ -348,7 +348,7 @@ AddEventHandler("entityCreating",  function(entity)
         local config = LoadResourceFile(GetCurrentResourceName(), "modules/banned-props.json")
         local configjson = json.decode(config)
         if configjson then 
-            if configjson[model] then 
+            if configjson[tostring(model)] then
                 CancelEvent()
             end
         end 
