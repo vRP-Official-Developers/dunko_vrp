@@ -34,13 +34,10 @@ Hi, It's JamesUK#6793 Here.
 	"player.pedcleanup", 
 	"player.vehcleanup",
 	"player.cleanallcleanup",
-<<<<<<< Updated upstream
 	"player.shutdownserver"
-=======
 	"player.shutdownserver",
 	"player.addcar", 
 	"player.addblacklistedprops" -- Allows users to add blacklisted props only give to extremley trusted staff.
->>>>>>> Stashed changes
 
 	These are all the perms for the latest RageUI update, many thanks JamesUK.
 
