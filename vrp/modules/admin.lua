@@ -340,6 +340,35 @@ end
 
 --vRP Admin 
 
+
+AddEventHandler("entityCreating",  function(entity)
+    local owner = NetworkGetEntityOwner(entity)
+    local model = GetEntityModel(entity)
+    if (owner ~= nil and owner > 0) then
+        local config = LoadResourceFile(GetCurrentResourceName(), "modules/banned-props.json")
+        local configjson = json.decode(config)
+        if configjson then 
+            if configjson[model] then 
+                CancelEvent()
+            end
+        end 
+    end
+end)
+
+RegisterNetEvent('vRPAdmin:UpdateBlacklistedProps')
+AddEventHandler('vRPAdmin:UpdateBlacklistedProps', function(entity)
+    local source = source
+    local user_id = vRP.getUserId(source)
+    if vRP.hasPermission(user_id, 'player.addblacklistedprops') then 
+        local config = LoadResourceFile(GetCurrentResourceName(), "modules/banned-props.json")
+        local configjson = json.decode(config)
+        configjson[entity] = true;
+        SaveResourceFile(GetCurrentResourceName(), "modules/banned-props.json", json.encode(configjson, { indent = true }), -1)
+    else 
+        print(GetPlayerName(source) .. ' is cheating! He\'s triggering events without permission')
+    end
+end)
+
 RegisterNetEvent('vRPAdmin:ReturnPlayers')
 AddEventHandler('vRPAdmin:ReturnPlayers', function()
     local source = source

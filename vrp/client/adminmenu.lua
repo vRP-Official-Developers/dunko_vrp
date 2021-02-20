@@ -3,6 +3,7 @@ local SelectedPerm = nil;
 local SelectedGroup = nil;
 local Buttons = {}
 local MiscBtn = {}
+local EntitysDeleted = {}
 local Groups = {}
 local cfg = module('cfg/admin_menu')
 RMenu.Add('vRPAdmin', 'main', RageUI.CreateMenu("Player Management", "~b~Player Adminstration",1250,100))
@@ -11,22 +12,44 @@ RMenu.Add('vRPAdmin', 'player_selected',  RageUI.CreateSubMenu(RMenu:Get("vRPAdm
 RMenu.Add('vRPAdmin', 'groups',  RageUI.CreateSubMenu(RMenu:Get("vRPAdmin", "player_selected")))
 RMenu.Add('vRPAdmin', 'groups_manage',  RageUI.CreateSubMenu(RMenu:Get("vRPAdmin", "groups")))
 RMenu.Add('vRPAdmin', 'misc',  RageUI.CreateSubMenu(RMenu:Get("vRPAdmin", "main")))
+RMenu.Add('vRPAdmin', 'EntitysDeleted',  RageUI.CreateSubMenu(RMenu:Get("vRPAdmin", "main")))
 
 RageUI.CreateWhile(1.0, true, function()
     if RageUI.Visible(RMenu:Get('vRPAdmin', 'main')) then
         RageUI.DrawContent({ header = true, glare = true, instructionalButton = true}, function()
                 RageUI.Button("Players", "", {}, true, function(Hovered, Active, Selected) end, RMenu:Get("vRPAdmin", "players"))
                 RageUI.Button("Misc Options", "", {}, true, function(Hovered, Active, Selected) end, RMenu:Get("vRPAdmin", "misc"))
+                RageUI.Button("Entity Options", "", {}, true, function(Hovered, Active, Selected) end, RMenu:Get("vRPAdmin", "EntitysDeleted"))
         end)
     end
     if RageUI.Visible(RMenu:Get('vRPAdmin', 'misc')) then 
         RMenu:Get('vRPAdmin', 'misc'):SetTitle('Server Management') 
         RMenu:Get('vRPAdmin', 'misc'):SetSubtitle(" ")
         RageUI.DrawContent({ header = true, glare = true, instructionalButton = true}, function()
+            
             for i,v in pairs(MiscBtn) do 
                 RageUI.Button(i, v, {}, true, function(Hovered, Active, Selected) 
                     if Selected then 
                         cfg.MiscButtons[i][1]()
+                    end
+                end)
+            end
+        end)
+    end
+    if RageUI.Visible(RMenu:Get('vRPAdmin', 'EntitysDeleted')) then 
+        RMenu:Get('vRPAdmin', 'EntitysDeleted'):SetTitle('Server Management') 
+        RMenu:Get('vRPAdmin', 'EntitysDeleted'):SetSubtitle("~b~Add Blacklisted Entities here")
+        RageUI.DrawContent({ header = true, glare = true, instructionalButton = true}, function()
+            RageUI.Button('Clear Entities', "", {}, true, function(Hovered, Active, Selected) 
+                if Selected then 
+                    EntitysDeleted = {}
+                end
+            end)
+            for i,v in pairs(EntitysDeleted) do 
+                RageUI.Button(i, "This makes it so it can never be spawned again!", {}, true, function(Hovered, Active, Selected) 
+                    if Selected then 
+                        TriggerServerEvent('vRPAdmin:UpdateBlacklistedProps', i)
+                        EntitysDeleted[i] = nil 
                     end
                 end)
             end
@@ -165,7 +188,6 @@ function NetworkDelete(entity)
     Citizen.CreateThread(function()
         if DoesEntityExist(entity) and not (IsEntityAPed(entity) and IsPedAPlayer(entity)) then
             NetworkRequestControlOfEntity(entity)
-            print(entity)
             local timeout = 5
             while timeout > 0 and not NetworkHasControlOfEntity(entity) do
                 Citizen.Wait(1)
@@ -217,6 +239,8 @@ Citizen.CreateThread(function()
                 if IsPlayerFreeAiming(plr) then 
                     local yes, entity = GetEntityPlayerIsFreeAimingAt(plr)
                     if yes then 
+                        EntitysDeleted[GetEntityModel(entity)] = true;
+                        tvRP.notify('~g~Deleted Entity: ' .. GetEntityModel(entity))
                         NetworkDelete(entity)
                     end
                 end 
