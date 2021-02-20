@@ -50,6 +50,8 @@ Citizen.CreateThread(function()
 end)
 
 local function teleportToWaypoint()
+    --Credits: https://gist.github.com/samyh89/32a780abcd1eea05ab32a61985857486
+    --Just a better TP to waypoint and I cba to make one so here is one creds
     Citizen.CreateThread(function()
         local entity = PlayerPedId()
         if IsPedInAnyVehicle(entity, false) then
