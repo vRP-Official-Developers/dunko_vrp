@@ -34,10 +34,9 @@ Hi, It's JamesUK#6793 Here.
 	"player.pedcleanup", 
 	"player.vehcleanup",
 	"player.cleanallcleanup",
-	"player.shutdownserver"
 	"player.shutdownserver",
-	"player.addcar", 
-	"player.addblacklistedprops" -- Allows users to add blacklisted props only give to extremley trusted staff.
+	"player.addcar",
+	"player.tptowaypoint"
 
 	These are all the perms for the latest RageUI update, many thanks JamesUK.
 
@@ -75,8 +74,8 @@ cfg.groups = {
 	"player.cleanallcleanup",
 	"player.shutdownserver",
 	"player.addcar",
-	"player.addblacklistedprops"
 	--RageUI Perms above
+	"player.tptowaypoint"
   },
   ["saadmin"] = {
 	_config = {special = true},
