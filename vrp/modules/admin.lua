@@ -771,6 +771,24 @@ AddEventHandler('vRPAdmin:Kick', function(id, reason)
     end
 end)
 
+
+RegisterNetEvent('vRPAdmin:AddCar')
+AddEventHandler('vRPAdmin:AddCar', function(id, car)
+    local source = source 
+    local SelectedPlrSource = vRP.getUserSource(id) 
+    local userid = vRP.getUserId(source)
+    if vRP.hasPermission(userid, 'player.addcar') then
+        if SelectedPlrSource and car ~= "" then  
+            vRP.getUserIdentity(id, function(identity)					
+                MySQL.execute("vRP/add_vehicle", {user_id = id, vehicle = car, registration = "P "..identity.registration})
+            end)
+            vRPclient.notify(source,{'~g~Successfully added Player\'s car'})
+        else 
+            vRPclient.notify(source,{'~r~Failed to add Player\'s car'})
+        end
+    end
+end)
+
 RegisterNetEvent('vRPAdmin:ServerShutdown')
 AddEventHandler('vRPAdmin:ServerShutdown', function()
     local source = source 
@@ -889,6 +907,11 @@ vRP.registerMenuBuilder("main", function(add, data)
                 end
                 if vRP.hasPermission(user_id,"player.kick") then
                     menu["Kick"] = {ch_kick}
+                end
+                if vRP.hasPermission(user_id, "player.tptowaypoint") then 
+                    menu["TP To Waypoint"]  = {function(player,choice)
+                        TriggerClientEvent("TpToWaypoint", player)
+                    end, "Teleport to map blip."}
                 end
                 if vRP.hasPermission(user_id,"player.ban") then
                     menu["Ban"] = {ch_ban}
