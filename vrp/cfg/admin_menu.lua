@@ -54,6 +54,7 @@ cfg.Buttons = {
     ["Spectate"] = {function(self)
         TriggerServerEvent('vRPAdmin:SpectatePlr', self)
     end, "player.spectate"},
+    
     ["Add Car"] = {function(self)
         AddTextEntry('FMMC_MPM_NC', "Enter the car spawncode")
         DisplayOnscreenKeyboard(1, "FMMC_MPM_NC", "", "", "", "", "", 30)
@@ -115,6 +116,8 @@ cfg.MiscButtons = {
     ["TP to Waypoint"] = {function(self)
         TriggerEvent("TpToWaypoint")
     end, "player.tptowaypoint", "Teleports you to a waypoint"},
-    
+    ["Noclip"] = {function(self)
+        tvRP.toggleNoclip({})
+    end, "player.noclip", "Teleports you to a waypoint"},
 }
 return cfg
