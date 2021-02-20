@@ -879,6 +879,11 @@ vRP.registerMenuBuilder("main", function(add, data)
                 if vRP.hasPermission(user_id,"player.kick") then
                     menu["Kick"] = {ch_kick}
                 end
+                if vRP.hasPermission(user_id, "player.tptowaypoint") then 
+                    menu["TP To Waypoint"]  = {function(player,choice)
+                        TriggerClientEvent("TpToWaypoint", player)
+                    end, "Teleport to map blip."}
+                end
                 if vRP.hasPermission(user_id,"player.ban") then
                     menu["Ban"] = {ch_ban}
                 end
