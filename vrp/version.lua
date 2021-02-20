@@ -1,1 +1,1 @@
-return 6.9
+return 7.0
