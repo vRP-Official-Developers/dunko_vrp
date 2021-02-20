@@ -50,45 +50,65 @@ Citizen.CreateThread(function()
 end)
 
 local function teleportToWaypoint()
-    local targetPed = GetPlayerPed(-1)
-    local targetVeh = GetVehiclePedIsUsing(targetPed)
-    if (IsPedInAnyVehicle(targetPed)) then
-        targetPed = targetVeh
-    end
-
-    if (not IsWaypointActive()) then
-        vRP.notify({"~r~ Map Marker not found."})
-        return
-    end
-
-    local waypointBlip = GetFirstBlipInfoId(8) -- 8 = waypoint Id
-    local x, y, z = table.unpack(Citizen.InvokeNative(0xFA7C7F0AADF25D09, waypointBlip, Citizen.ResultAsVector()))
-
-    -- ensure entity teleports above the ground
-    local ground
-    local groundFound = false
-    local groundCheckHeights = {100.0, 150.0, 50.0, 0.0, 200.0, 250.0, 300.0, 350.0, 400.0, 450.0, 500.0, 550.0, 600.0,
-                                650.0, 700.0, 750.0, 800.0}
-
-    for i, height in ipairs(groundCheckHeights) do
-        SetEntityCoordsNoOffset(targetPed, x, y, height, 0, 0, 1)
-        Wait(10)
-
-        ground, z = GetGroundZFor_3dCoord(x, y, height)
-        if (ground) then
-            z = z + 3
-            groundFound = true
-            break
+    Citizen.CreateThread(function()
+        local entity = PlayerPedId()
+        if IsPedInAnyVehicle(entity, false) then
+            entity = GetVehiclePedIsUsing(entity)
         end
-    end
+        local success = false
+        local blipFound = false
+        local blipIterator = GetBlipInfoIdIterator()
+        local blip = GetFirstBlipInfoId(8)
 
-    if (not groundFound) then
-        z = 1000
-        GiveDelayedWeaponToPed(PlayerPedId(), 0xFBAB5776, 1, 0) -- parachute
-    end
+        while DoesBlipExist(blip) do
+            if GetBlipInfoIdType(blip) == 4 then
+                cx, cy, cz = table.unpack(Citizen.InvokeNative(0xFA7C7F0AADF25D09, blip, Citizen.ReturnResultAnyway(), Citizen.ResultAsVector())) --GetBlipInfoIdCoord(blip)
+                blipFound = true
+                break
+            end
+            blip = GetNextBlipInfoId(blipIterator)
+        end
 
-    SetEntityCoordsNoOffset(targetPed, x, y, z, 0, 0, 1)
-    vRP.notify({"~g~ Teleported to waypoint."})
+        if blipFound then
+            DoScreenFadeOut(250)
+            while IsScreenFadedOut() do
+                Citizen.Wait(250)
+                
+            end
+            local groundFound = false
+            local yaw = GetEntityHeading(entity)
+            
+            for i = 0, 1000, 1 do
+                SetEntityCoordsNoOffset(entity, cx, cy, ToFloat(i), false, false, false)
+                SetEntityRotation(entity, 0, 0, 0, 0 ,0)
+                SetEntityHeading(entity, yaw)
+                SetGameplayCamRelativeHeading(0)
+                Citizen.Wait(0)
+                if GetGroundZFor_3dCoord(cx, cy, ToFloat(i), cz, false) then --GetGroundZFor3dCoord(cx, cy, i, 0, 0) GetGroundZFor_3dCoord(cx, cy, i)
+                    cz = ToFloat(i)
+                    groundFound = true
+                    break
+                end
+            end
+            if not groundFound then
+                cz = -300.0
+            end
+            success = true
+        else
+            tvRP.notify('~r~Blip not found.')
+        end
+        if success then
+            SetEntityCoordsNoOffset(entity, cx, cy, cz, false, false, true)
+            SetGameplayCamRelativeHeading(0)
+            if IsPedSittingInAnyVehicle(PlayerPedId()) then
+                if GetPedInVehicleSeat(GetVehiclePedIsUsing(PlayerPedId()), -1) == PlayerPedId() then
+                    SetVehicleOnGroundProperly(GetVehiclePedIsUsing(PlayerPedId()))
+                end
+            end
+            DoScreenFadeIn(250)
+            tvRP.notify('~g~Teleported success!')
+        end
+    end)
 end
 RegisterNetEvent("TpToWaypoint")
 AddEventHandler("TpToWaypoint", teleportToWaypoint)
