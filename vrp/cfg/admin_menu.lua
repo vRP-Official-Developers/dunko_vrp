@@ -112,6 +112,9 @@ cfg.MiscButtons = {
     ["Shutdown Server"] = {function(self)
         TriggerServerEvent('vRPAdmin:ServerShutdown')
     end, "player.shutdownserver", "Shuts down the server!"},
+    ["TP to Waypoint"] = {function(self)
+        TriggerEvent("TpToWaypoint")
+    end, "player.tptowaypoint", "Teleports you to a waypoint"},
     
 }
 return cfg
