@@ -1,4 +1,7 @@
 
+fx_version 'cerulean'
+games {  'gta5' }
+
 description "vRP MySQL async - Modified Version"
 dependency "ghmattimysql"
 -- server scripts
