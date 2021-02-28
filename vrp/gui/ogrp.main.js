@@ -7,17 +7,17 @@ window.addEventListener("load", function() {
 	var ogrpMenu = new OGRP_MENU();
 
 	requestMan.onResponse = function(id, ok) {
-		$.post("http://vrp/request",JSON.stringify({act: "response", id: id, ok: ok}));
+		$.post("https://vrp/request",JSON.stringify({act: "response", id: id, ok: ok}));
 	};
 
 	ogrpMenu.onClose = function() {
-		$.post("http://vrp/menu",JSON.stringify({act: "close", id: ogrpMenu.id}));
+		$.post("https://vrp/menu",JSON.stringify({act: "close", id: ogrpMenu.id}));
 	};
 	ogrpMenu.onValid = function(choice,mod) {
-		$.post("http://vrp/menu",JSON.stringify({act: "valid", id: ogrpMenu.id, choice: choice, mod: mod}));
+		$.post("https://vrp/menu",JSON.stringify({act: "valid", id: ogrpMenu.id, choice: choice, mod: mod}));
 	};
 
-	$.post("http://vrp/cfg","");
+	$.post("https://vrp/cfg","");
 
 	window.addEventListener("message", function(evt) {
 		var data = evt.data;

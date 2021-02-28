@@ -16,21 +16,21 @@ window.addEventListener("load", function() {
     var announcemgr = new AnnounceManager();
 
     requestmgr.onResponse = function(id, ok) {
-        $.post("http://vrp/request", JSON.stringify({ act: "response", id: id, ok: ok }));
+        $.post("https://vrp/request", JSON.stringify({ act: "response", id: id, ok: ok }));
     }
     wprompt.onClose = function() {
-            $.post("http://vrp/prompt", JSON.stringify({ act: "close", result: wprompt.result.substring(0, 1000) }));
+            $.post("https://vrp/prompt", JSON.stringify({ act: "close", result: wprompt.result.substring(0, 1000) }));
         }
         /*dynamic_menu.onClose = function () {
-        	$.post("http://vrp/menu", JSON.stringify({act: "close", id: dynamic_menu.id}));
+        	$.post("https://vrp/menu", JSON.stringify({act: "close", id: dynamic_menu.id}));
         }
         dynamic_menu.onValid = function (choice, mod) {
-        	$.post("http://vrp/menu", JSON.stringify({act: "valid", id: dynamic_menu.id, choice: choice, mod: mod}));
+        	$.post("https://vrp/menu", JSON.stringify({act: "valid", id: dynamic_menu.id, choice: choice, mod: mod}));
         }*/
 
 
     //request config
-    $.post("http://vrp/cfg", "");
+    $.post("https://vrp/cfg", "");
 
     //var current_menu = dynamic_menu;
     var pbars = {}
