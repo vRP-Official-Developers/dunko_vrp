@@ -131,7 +131,7 @@ Citizen.CreateThread(function()
 
     for k,v in pairs(markers) do
       -- 150 is the min distance wich the markers will be starting to be drawn
-      if GetDistanceBetweenCoords(v.x,v.y,v.z,px,py,pz,true) <= 150.0 then
+      if #(vector3(v.x,v.y,v.z) - vector3(px,py,pz)) <= 150.0 then
         drawing_markers[k] = v
       else
         if drawing_markers[k] then drawing_markers[k] = nil end
@@ -151,7 +151,7 @@ Citizen.CreateThread(function()
     -- starts lagging
     for k,v in pairs(drawing_markers) do
       -- check visibility
-      if GetDistanceBetweenCoords(v.x,v.y,v.z,px,py,pz,true) <= v.visible_distance then
+      if #(vector3(v.x,v.y,v.z) - vector3(px,py,pz)) <= v.visible_distance then
         DrawMarker(1,v.x,v.y,v.z,0,0,0,0,0,0,v.sx,v.sy,v.sz,v.r,v.g,v.b,v.a,0,0,0,0)
       end
     end
