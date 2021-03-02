@@ -45,7 +45,8 @@ function tvRP.spawnGarageVehicle(vtype,name,pos) -- vtype is the vehicle type (o
       SetNetworkIdCanMigrate(nid,cfg.vehicle_migration)
 
       vehicles[vtype] = {vtype,name,nveh} -- set current vehicule
-
+      print(name, nveh)
+      TriggerServerEvent("LSC:applyModifications", name, nveh)
       SetModelAsNoLongerNeeded(mhash)
     end
   else
@@ -139,6 +140,7 @@ function tvRP.getNearestOwnedVehicle(radius)
   for k,v in pairs(vehicles) do
     local x,y,z = table.unpack(GetEntityCoords(v[3],true))
     local dist = GetDistanceBetweenCoords(x,y,z,px,py,pz,true)
+    -- {vtype,name,nveh} 
     if dist <= radius+0.0001 then return true,v[1],v[2] end
   end
 

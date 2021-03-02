@@ -57,7 +57,8 @@ server_scripts{
   "modules/basic_items.lua",
   "modules/basic_skinshop.lua",
   "modules/cloakroom.lua",
-  "modules/paycheck.lua"
+  "modules/paycheck.lua",
+  "modules/LsCustoms.lua"
   -- "modules/hotkeys.lua"
 }
 
@@ -87,7 +88,9 @@ client_scripts{
   "client/clothing.lua",
   "client/atms.lua",
   "client/garages.lua",
-  "client/adminmenu.lua"
+  "client/adminmenu.lua",
+  "client/LsCustomsMenu.lua",
+  "client/LsCustoms.lua",
   -- "hotkeys/hotkeys.lua"
 }
 
