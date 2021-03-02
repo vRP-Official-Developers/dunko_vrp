@@ -2,7 +2,7 @@
 
 Welcome to Dunko vRP.
 
-Current: V6.8
+Current: V7.1
 
 # Donate/Patreon
 
@@ -51,6 +51,15 @@ Name: Dunko vRP V6.7 - Preview/Test Server - discord.gg/kAfBuJG - Sponsored by Z
 Direct Connect: 134.255.216.169:30120
 
 # What's new
+
+# V7.1 
+
+- Added RageUI Garages
+- Added RageUI Admin Menu
+- Added Door Locks
+- Prop Blacklisting with Live Updates. 
+- Better TP To Waypoint on Admin Menu
+- Vehicle Renting
 
 # V6.8
 
