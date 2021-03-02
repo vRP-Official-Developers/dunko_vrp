@@ -14,7 +14,8 @@ function tvRP.addBlip(x,y,z,idtype,idcolor,text)
   SetBlipDisplay(blip,6) -- Shows the blip in map and minimap
 
   if text ~= nil then
-    BeginTextCommandSetBlipName("STRING")
+    AddTextEntry("MAPBLIP", text)
+    BeginTextCommandSetBlipName("MAPBLIP")
     AddTextComponentString(text)
     EndTextCommandSetBlipName(blip)
   end
