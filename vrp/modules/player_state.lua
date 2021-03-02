@@ -75,6 +75,10 @@ AddEventHandler("vRP:playerSpawn", function(user_id, source, first_spawn)
             data.gaptitudes = {} -- clear aptitudes after death
         end
 
+        if vRPConfig.LoseItemsOnDeath then 
+            vRP.clearInventory(user_id) 
+        end
+        
         vRP.setMoney(user_id, 0)
 
         -- disable handcuff

@@ -14,7 +14,7 @@ function tvRP.spawnGarageVehicle(vtype,name,pos) -- vtype is the vehicle type (o
   end
 
   vehicle = vehicles[vtype]
-  if vehicle == nil then
+  if vRPConfig.AllowMoreThenOneCar or vehicle == nil then
     -- load vehicle model
     local mhash = GetHashKey(name)
 
@@ -50,7 +50,7 @@ function tvRP.spawnGarageVehicle(vtype,name,pos) -- vtype is the vehicle type (o
       SetModelAsNoLongerNeeded(mhash)
     end
   else
-    tvRP.notify("You can only have one "..vtype.." type of vehicle out.")
+    tvRP.notify("You can only have one Veh type: "..vtype.." of vehicle out.")
   end
 end
 
