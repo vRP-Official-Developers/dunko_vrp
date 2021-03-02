@@ -2,7 +2,7 @@
 
 Welcome to Dunko vRP.
 
-Current: V6.8
+Current: V7.1
 
 # Donate/Patreon
 
