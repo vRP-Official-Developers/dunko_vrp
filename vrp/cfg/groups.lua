@@ -37,6 +37,7 @@ Hi, It's JamesUK#6793 Here.
 	"player.shutdownserver",
 	"player.addcar",
 	"player.tptowaypoint",
+	"admin.spawnveh"
 	"player.addblacklistedprops" -- Allows live updating of blacklisted props only give to trusted staff.
 
 	These are all the perms for the latest RageUI update, many thanks JamesUK.
