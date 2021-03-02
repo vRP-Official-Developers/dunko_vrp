@@ -16,6 +16,8 @@ if err == 200 then
     local r_version = tonumber(text)
     if version ~= r_version then
         print("^5[VRP]: ^7" .. 'A Dunko Update is available from: https://github.com/DunkoUK/dunko_vrp')
+    else 
+        print("^5[VRP]: ^7" .. 'You are running the most up to date Dunko Version. Thanks for using Dunko_vRP and thanks to our contributors for updating the project. Support Found At: https://discord.gg/b8wQn2XqDt')
     end
 else
     print("[vRP] unable to check the remote version")
@@ -66,12 +68,12 @@ Citizen.CreateThread(function()
     );
     ]])
     MySQL.SingleQuery([[
-        CREATE TABLE IF NOT EXISTS vrp_user_tokens (
-        token VARCHAR(200),
-        user_id INTEGER,
-        banned BOOLEAN  NOT NULL DEFAULT 0,
-        CONSTRAINT pk_user_ids PRIMARY KEY(token)
-        );
+    CREATE TABLE IF NOT EXISTS vrp_user_tokens (
+    token VARCHAR(200),
+    user_id INTEGER,
+    banned BOOLEAN  NOT NULL DEFAULT 0,
+    CONSTRAINT pk_user_tokens PRIMARY KEY(token)
+    );
     ]])
     MySQL.SingleQuery([[
     CREATE TABLE IF NOT EXISTS vrp_user_data(
@@ -87,15 +89,6 @@ Citizen.CreateThread(function()
     dkey VARCHAR(100),
     dvalue TEXT,
     CONSTRAINT pk_srv_data PRIMARY KEY(dkey)
-    );
-    ]])
-    MySQL.SingleQuery([[
-    CREATE TABLE IF NOT EXISTS vrp_user_moneys(
-    user_id INTEGER,
-    wallet INTEGER,
-    bank INTEGER,
-    CONSTRAINT pk_user_moneys PRIMARY KEY(user_id),
-    CONSTRAINT fk_user_moneys_users FOREIGN KEY(user_id) REFERENCES vrp_users(id) ON DELETE CASCADE
     );
     ]])
     MySQL.SingleQuery([[
