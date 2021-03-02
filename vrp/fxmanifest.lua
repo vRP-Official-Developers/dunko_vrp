@@ -71,6 +71,7 @@ client_scripts{
   "client/Tunnel.lua",
   "client/Proxy.lua",
   "client/base.lua",
+  "utils/*",
   "client/iplloader.lua",
   "client/gui.lua",
   "client/player_state.lua",
