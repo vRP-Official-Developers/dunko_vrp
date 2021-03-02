@@ -52,6 +52,15 @@ Direct Connect: 134.255.216.169:30120
 
 # What's new
 
+# V7.1 
+
+- Added RageUI Garages
+- Added RageUI Admin Menu
+- Added Door Locks
+- Prop Blacklisting with Live Updates. 
+- Better TP To Waypoint on Admin Menu
+- Vehicle Renting
+
 # V6.8
 
 - Added GHMattiMysql Support 
