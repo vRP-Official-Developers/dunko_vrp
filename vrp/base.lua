@@ -46,7 +46,7 @@ vRP.user_tmp_tables = {} -- user tmp data tables (logger storage, not saved)
 vRP.user_sources = {} -- user sources 
 -- queries
 Citizen.CreateThread(function()
-    Wait(2500) -- Wait for GHMatti to Initialize
+    Wait(1000) -- Wait for GHMatti to Initialize
     MySQL.SingleQuery([[
     CREATE TABLE IF NOT EXISTS vrp_users(
     id INTEGER AUTO_INCREMENT,
@@ -154,6 +154,10 @@ Citizen.CreateThread(function()
     MySQL.SingleQuery("ALTER TABLE vrp_user_vehicles ADD IF NOT EXISTS rented BOOLEAN NOT NULL DEFAULT 0;")
     MySQL.SingleQuery("ALTER TABLE vrp_user_vehicles ADD IF NOT EXISTS rentedid varchar(200) NOT NULL DEFAULT '';")
     MySQL.SingleQuery("ALTER TABLE vrp_user_vehicles ADD IF NOT EXISTS rentedtime varchar(2048) NOT NULL DEFAULT '';")
+    MySQL.createCommand("vRPls/create_modifications_column", "alter table vrp_user_vehicles add if not exists modifications text not null")
+	MySQL.createCommand("vRPls/update_vehicle_modifications", "update vrp_user_vehicles set modifications = @modifications where user_id = @user_id and vehicle = @vehicle")
+	MySQL.createCommand("vRPls/get_vehicle_modifications", "select modifications from vrp_user_vehicles where user_id = @user_id and vehicle = @vehicle")
+	MySQL.execute("vRPls/create_modifications_column")
     print("[vRP] init base tables")
 end)
 

@@ -2203,7 +2203,11 @@
             tag = (string = `[${options.tag}]${levelTag}`, `${options.color}${string}${Color.Default}`);
         var string;
         if (tag.includes("WARNING")) {
-            return; // Ignores query warnings.
+            return; // Ignores query warnings. ETIMEDOUT
+        }
+        if (tag.includes("ETIMEDOUT")) {
+            console.log(`^1[vRP GhMattiMySql]^1:^7 The server took long to load but do not worry, a connection will be established. If you see this away from server startup the connection is timing out.`)
+            return;
         }
         if (msg.includes("ECONNREFUSED")) {
             console.log(`^1[vRP GhMattiMySql]^1:^7 The database connection could not be established. Make sure to edit the ghmattimysql/config.json with the correct credentials.`)
