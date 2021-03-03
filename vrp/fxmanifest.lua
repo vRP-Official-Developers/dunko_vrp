@@ -58,7 +58,8 @@ server_scripts{
   "modules/basic_skinshop.lua",
   "modules/cloakroom.lua",
   "modules/paycheck.lua",
-  "modules/LsCustoms.lua"
+  "modules/LsCustoms.lua",
+  "modules/server_commands.lua"
   -- "modules/hotkeys.lua"
 }
 

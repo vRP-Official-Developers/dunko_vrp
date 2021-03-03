@@ -505,6 +505,34 @@ function vRP.ban(adminsource,permid,time,reason)
     end
 end
 
+function vRP.banConsole(permid,time,reason)
+    local adminPermID = "Console Ban"
+    local getBannedPlayerSrc = vRP.getUserSource(tonumber(permid))
+    if getBannedPlayerSrc then 
+        if tonumber(time) then 
+            local banTime = os.time()
+            banTime = banTime  + (60 * 60 * tonumber(time))  
+            vRP.setBanned(permid,true,banTime,reason,  'Console' .. " | ID Of Admin: " .. adminPermID)
+            vRP.kick(getBannedPlayerSrc,"You have been banned from this server. Your ban expires in: " .. os.date("%c", banTime) .. " Reason: " .. reason .. " | BanningAdmin: " ..  'Console' .. " | ID Of Admin: " .. adminPermID ) 
+            print("~g~Success banned! User PermID:" .. permid)
+        else 
+            print("~g~Success banned! User PermID:" .. permid)
+            vRP.setBanned(permid,true,"perm",reason,  'Console' .. " | ID Of Admin: " .. adminPermID)
+            vRP.kick(getBannedPlayerSrc,"You have been banned from this server. Your ban expires in: " .. "Never, you've been permanently banned." .. " Reason: " .. reason .. " | BanningAdmin: " ..  'Console' .. " | ID Of Admin: " .. adminPermID ) 
+        end
+    else 
+        if tonumber(time) then 
+            local banTime = os.time()
+            banTime = banTime  + (60 * 60 * tonumber(time))  
+            print("~g~Success banned! User PermID:" .. permid)
+            vRP.setBanned(permid,true,banTime,reason, 'Console' .. " | ID Of Admin: " .. adminPermID)
+        else 
+            print("~g~Success banned! User PermID:" .. permid)
+            vRP.setBanned(permid,true,"perm",reason, 'Console' .. " | ID Of Admin: " .. adminPermID)
+        end
+    end
+end
+
 -- To use token banning you need the latest artifacts.
 function vRP.StoreTokens(source, user_id) 
     if GetNumPlayerTokens then 
