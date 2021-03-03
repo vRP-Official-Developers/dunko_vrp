@@ -2203,8 +2203,7 @@
             tag = (string = `[${options.tag}]${levelTag}`, `${options.color}${string}${Color.Default}`);
         var string;
         if (tag.includes("WARNING")) {
-            console.log(`${tag} ${msg}`)
-            return;
+            return; // Ignores query warnings.
         }
         if (msg.includes("ECONNREFUSED")) {
             console.log(`^1[vRP GhMattiMySql]^1:^7 The database connection could not be established. Make sure to edit the ghmattimysql/config.json with the correct credentials.`)
