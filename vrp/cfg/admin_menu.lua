@@ -132,9 +132,9 @@ cfg.MiscButtons = {
                 local mhash = GetHashKey(result)
                 local i = 0
                 while not HasModelLoaded(mhash) and i < 10000 do
-                RequestModel(mhash)
-                Citizen.Wait(10)
-                i = i+1
+                    RequestModel(mhash)
+                    Citizen.Wait(10)
+                    i = i+1
                     if i > 150 then 
                         tvRP.notify('~r~Model could not be loaded!')
                         break 

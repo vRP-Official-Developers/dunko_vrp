@@ -2202,9 +2202,15 @@
         const levelTag = "" !== options.level ? ` [${options.level}]` : "",
             tag = (string = `[${options.tag}]${levelTag}`, `${options.color}${string}${Color.Default}`);
         var string;
-        if (!tag.includes("WARNING")) {
+        if (tag.includes("WARNING")) {
             console.log(`${tag} ${msg}`)
+            return;
         }
+        if (msg.includes("ECONNREFUSED")) {
+            console.log(`^1[vRP GhMattiMySql]^1:^7 The database connection could not be established. Make sure to edit the ghmattimysql/config.json with the correct credentials.`)
+            return;
+        }
+        console.log(`${tag} ${msg}`)
     };
     ! function(LogLevel) { LogLevel[LogLevel.Info = 0] = "Info", LogLevel[LogLevel.Success = 1] = "Success", LogLevel[LogLevel.Warning = 2] = "Warning", LogLevel[LogLevel.Error = 3] = "Error" }(LogLevel || (LogLevel = {}));
     var logger_logLevel = LogLevel;
