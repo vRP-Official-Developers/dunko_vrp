@@ -3,12 +3,7 @@ vRP Los Santos Customs V1.2
 Credits - MythicalBro and マーモット#2533 for the vRP version and some bug fixes
 ]]
 
-Citizen.CreateThread(function ()
-	MySQL.createCommand("vRPls/create_modifications_column", "alter table vrp_user_vehicles add if not exists modifications text not null")
-	MySQL.createCommand("vRPls/update_vehicle_modifications", "update vrp_user_vehicles set modifications = @modifications where user_id = @user_id and vehicle = @vehicle")
-	MySQL.createCommand("vRPls/get_vehicle_modifications", "select modifications from vrp_user_vehicles where user_id = @user_id and vehicle = @vehicle")
-	MySQL.execute("vRPls/create_modifications_column")
-end)
+
 
 local tbl = {
 	[1] = {locked = false, player = nil},

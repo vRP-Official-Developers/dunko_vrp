@@ -52,6 +52,13 @@ Direct Connect: 134.255.216.169:30120
 
 # What's new
 
+# V7.2
+
+- Added Better Error reports in some areas for user understanding.
+- Added LSCustoms with saving
+- Fixed various bugs/issues.
+- Deprecated: vRP_loadfreeze.
+
 # V7.1 
 
 - Added RageUI Garages
