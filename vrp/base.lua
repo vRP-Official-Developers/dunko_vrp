@@ -148,6 +148,18 @@ Citizen.CreateThread(function()
     INDEX(phone)
     );
     ]])
+    MySQL.SingleQuery([[
+    CREATE TABLE IF NOT EXISTS vrp_warnings (
+    warning_id INT,
+    user_id INT,
+    warning_type VARCHAR(25),
+    duration INT,
+    admin VARCHAR(100),
+    warning_date DATE,
+    reason VARCHAR(2000),
+    PRIMARY KEY (warning_id)
+    )
+    ]])
     MySQL.SingleQuery("ALTER TABLE vrp_users ADD IF NOT EXISTS bantime varchar(100) NOT NULL DEFAULT '';")
     MySQL.SingleQuery("ALTER TABLE vrp_users ADD IF NOT EXISTS banreason varchar(100) NOT NULL DEFAULT '';")
     MySQL.SingleQuery("ALTER TABLE vrp_users ADD IF NOT EXISTS banadmin varchar(100) NOT NULL DEFAULT ''; ")
