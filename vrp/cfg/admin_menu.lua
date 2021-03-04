@@ -41,9 +41,24 @@ cfg.Buttons = {
         local result = GetOnscreenKeyboardResult()
         if result then 
             result = result
-            TriggerServerEvent('vRPAdmin:Kick', self, result)
+            TriggerServerEvent('vRPAdmin:Kick', self, result, false)
         end
     end
+    end, "player.kick"},
+    ["No Warning Kick"] = {function(self)
+        AddTextEntry('FMMC_MPM_NC', "Enter Reason to Kick Player")
+        DisplayOnscreenKeyboard(1, "FMMC_MPM_NC", "", "", "", "", "", 30)
+        while (UpdateOnscreenKeyboard() == 0) do
+            DisableAllControlActions(0);
+            Wait(0);
+        end
+        if (GetOnscreenKeyboardResult()) then
+            local result = GetOnscreenKeyboardResult()
+            if result then 
+                result = result
+                TriggerServerEvent('vRPAdmin:Kick', self, result, true)
+            end
+        end
     end, "player.kick"},
     ["Revive"] = {function(self)
         TriggerServerEvent('vRPAdmin:Revive', self)
