@@ -43,13 +43,13 @@ Citizen.CreateThread(function()
 				
                 if closeDoor ~= 0 then
                     if v.locked then
-                        DrawText3Ds(v.coords[1], v.coords[2], v.coords[3], "~r~LÅST ~w~[~g~E~w~] for at låse op")
+                        DrawText3Ds(v.coords[1], v.coords[2], v.coords[3], "~r~Locked ~w~[~g~E~w~] to unlock")
                         local locked, heading = GetStateOfClosestDoorOfType(v.hash, v.coords[1], v.coords[2], v.coords[3], v.locked, 0)
                         if heading > -0.01 and heading < 0.01 then
                             FreezeEntityPosition(closeDoor, v.locked)
                         end
                     else
-                        DrawText3Ds(v.coords[1], v.coords[2], v.coords[3], "~g~ÅBEN ~w~[~r~E~w~] for at låse")
+                        DrawText3Ds(v.coords[1], v.coords[2], v.coords[3], "~g~Unlocked ~w~[~r~E~w~] to lock")
                         FreezeEntityPosition(closeDoor, v.locked)
                     end
                     if IsControlJustReleased(0, 38) then
