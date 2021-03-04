@@ -150,7 +150,7 @@ Citizen.CreateThread(function()
     ]])
     MySQL.SingleQuery([[
     CREATE TABLE IF NOT EXISTS vrp_warnings (
-    warning_id INT,
+    warning_id INT AUTO_INCREMENT,
     user_id INT,
     warning_type VARCHAR(25),
     duration INT,
