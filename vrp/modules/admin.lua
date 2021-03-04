@@ -149,6 +149,7 @@ local function ch_kick(player,choice)
             vRP.prompt(player,"Reason: ","",function(player,reason)
                 local source = vRP.getUserSource(id)
                 if source ~= nil then
+                    saveKickLog(id, GetPlayerName(player), reason)
                     vRP.kick(source,reason)
                     vRPclient.notify(player,{"kicked user "..id})
                 end
@@ -166,6 +167,7 @@ local function ch_ban(player,choice)
                 vRP.prompt(player,"Reason: ","",function(player,reason)
                     if reason then 
                         vRP.prompt(player,"Duration of Ban (-1 for perm ban): ","",function(player,hours)
+                            saveBanLog(id, GetPlayerName(player), reason)
                             if tonumber(hours) then 
                                 if tonumber(hours) == -1 then 
                                     vRP.ban(player,id,"perm",reason)
@@ -759,12 +761,15 @@ AddEventHandler('vRPAdmin:Bring', function(id)
 end)
 
 RegisterNetEvent('vRPAdmin:Kick')
-AddEventHandler('vRPAdmin:Kick', function(id, reason)
+AddEventHandler('vRPAdmin:Kick', function(id, reason, nof10)
     local source = source 
     local SelectedPlrSource = vRP.getUserSource(id) 
     local userid = vRP.getUserId(source)
     if vRP.hasPermission(userid, 'player.kick') then
         if SelectedPlrSource then  
+            if not nof10 then 
+                saveKickLog(id, GetPlayerName(source), reason)
+            end
             vRP.kick(SelectedPlrSource,reason)
             vRPclient.notify(source,{'~g~Successfully kicked Player.'})
         end
@@ -809,6 +814,7 @@ AddEventHandler('vRPAdmin:Ban', function(id, hours, reason)
     local SelectedPlrSource = vRP.getUserSource(id) 
     local userid = vRP.getUserId(source)
     if vRP.hasPermission(userid, 'player.ban') then
+        saveBanLog(id, GetPlayerName(source), reason)
         if SelectedPlrSource then  
             if tonumber(hours) then 
                 if tonumber(hours) == -1 then 
