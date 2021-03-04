@@ -24,7 +24,6 @@ function getvrpWarnings(user_id,source)
 		newdate = tonumber(date) / 1000
 		newdate = os.date('%Y-%m-%d', newdate)
 		warningTable["warning_date"] = newdate
-        warningTable["warning_id"] = warningID
 	end
 	return vrpwarningstables
 end
