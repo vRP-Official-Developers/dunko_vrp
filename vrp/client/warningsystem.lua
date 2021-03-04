@@ -30,7 +30,6 @@ RegisterCommand('warnings', function()
 end)
 
 if vRPConfig.F10System then 
-    print('ji')
     RegisterKeyMapping('warnings', 'Opens Warnings', 'keyboard', 'F10')
 end
 
@@ -42,13 +41,14 @@ Citizen.CreateThread(function()
 			DrawAdvancedText(0.59, 0.198, 0.005, 0.0028, 0.619, vRPConfig.ServerName .. ' Warnings', 255, 255, 255, 255, 7, 0)
 			DrawRect(0.498, 0.232, 0.615, -0.0040000000000001, 0, 168, 255, 204)
 			DrawRect(0.498, 0.285, 0.535, -0.0040000000000001, 0, 168, 255, 204)
-			DrawAdvancedText(0.344, 0.27, 0.005, 0.0028, 0.4, "Type", 255, 255, 255, 255, 6, 0)
-			DrawAdvancedText(0.379, 0.271, 0.005, 0.0028, 0.4, "Duration", 255, 255, 255, 255, 6, 0)
-			DrawAdvancedText(0.417, 0.271, 0.005, 0.0028, 0.4, "Admin", 255, 255, 255, 255, 6, 0)
-			DrawAdvancedText(0.463, 0.271, 0.005, 0.0028, 0.4, "Date", 255, 255, 255, 255, 6, 0)
-			DrawAdvancedText(0.672, 0.271, 0.005, 0.0028, 0.4, "Reason", 255, 255, 255, 255, 6, 0)
+            DrawAdvancedText(0.344, 0.27, 0.005, 0.0028, 0.4, "WarningID", 255, 255, 255, 255, 6, 0)
+			DrawAdvancedText(0.379, 0.27, 0.005, 0.0028, 0.4, "Type", 255, 255, 255, 255, 6, 0)
+			DrawAdvancedText(0.417, 0.271, 0.005, 0.0028, 0.4, "Duration", 255, 255, 255, 255, 6, 0)
+			DrawAdvancedText(0.463, 0.271, 0.005, 0.0028, 0.4, "Admin", 255, 255, 255, 255, 6, 0)
+			DrawAdvancedText(0.510, 0.271, 0.005, 0.0028, 0.4, "Date", 255, 255, 255, 255, 6, 0)
+			DrawAdvancedText(0.675, 0.271, 0.005, 0.0028, 0.4, "Reason", 255, 255, 255, 255, 6, 0)
 			for warningID,warningTable in pairs(vrpWarnings) do
-				local warning_type,duration,admin,date,reason = warningTable["warning_type"],warningTable["duration"],warningTable["admin"],warningTable["warning_date"],warningTable["reason"]
+				local warning_id, warning_type,duration,admin,date,reason = warningTable["warning_id"], warningTable["warning_type"],warningTable["duration"],warningTable["admin"],warningTable["warning_date"],warningTable["reason"]
 				if warning_type == "Warning" then
 					warningColourR = 255
 					warningColourG = 255
@@ -62,11 +62,12 @@ Citizen.CreateThread(function()
 					warningColourG = 44
 					warningColourB = 44
 				end
-				DrawAdvancedText(0.344, 0.309+(rowcounter*xoffset), 0.005, 0.0028, 0.4, warning_type, warningColourR, warningColourG, warningColourB, 255, 6, 0)
-				DrawAdvancedText(0.379, 0.309+(rowcounter*xoffset), 0.005, 0.0028, 0.4, tostring(duration) .. "hrs",  255, 255, 255, 255, 6, 0)
-				DrawAdvancedText(0.417, 0.309+(rowcounter*xoffset), 0.005, 0.0028, 0.4, admin,  255, 255, 255, 255, 6, 0)
-				DrawAdvancedText(0.463, 0.309+(rowcounter*xoffset), 0.005, 0.0028, 0.4, date,  255, 255, 255, 255, 6, 0)
-				DrawAdvancedText(0.672, 0.309+(rowcounter*xoffset), 0.005, 0.0028, 0.4, reason,  255, 255, 255, 255, 6, 0)
+                DrawAdvancedText(0.344, 0.309+(rowcounter*xoffset), 0.005, 0.0028, 0.4, warning_id,  255, 255, 255, 255, 6, 0)
+				DrawAdvancedText(0.379, 0.309+(rowcounter*xoffset), 0.005, 0.0028, 0.4, warning_type, warningColourR, warningColourG, warningColourB, 255, 6, 0)
+				DrawAdvancedText(0.417, 0.309+(rowcounter*xoffset), 0.005, 0.0028, 0.4, tostring(duration) .. "hrs",  255, 255, 255, 255, 6, 0)
+				DrawAdvancedText(0.463, 0.309+(rowcounter*xoffset), 0.005, 0.0028, 0.4, admin,  255, 255, 255, 255, 6, 0)
+				DrawAdvancedText(0.510, 0.309+(rowcounter*xoffset), 0.005, 0.0028, 0.4, date,  255, 255, 255, 255, 6, 0)
+				DrawAdvancedText(0.675, 0.309+(rowcounter*xoffset), 0.005, 0.0028, 0.4, reason,  255, 255, 255, 255, 6, 0)
 				rowcounter = rowcounter + 1
 			end
 			rowcounter = 0
