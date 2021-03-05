@@ -104,7 +104,12 @@ cfg.Buttons = {
             end
         end
     end, "player.addGroups"},
+    ["Warn Player"] = {function(self)
+        userWarningMessage = getWarningUserMsg()
+        TriggerServerEvent("vrp:warnPlayer",self,userWarningMessage)        
+    end, "player.kick"},
 }
+
 
 cfg.MiscButtons = {
     ["Entity Cleanup"] = {function(self)
