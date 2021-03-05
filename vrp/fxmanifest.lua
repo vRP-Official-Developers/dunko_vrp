@@ -59,7 +59,8 @@ server_scripts{
   "modules/cloakroom.lua",
   "modules/paycheck.lua",
   "modules/LsCustoms.lua",
-  "modules/server_commands.lua"
+  "modules/server_commands.lua",
+  "modules/warningsystem.lua"
   -- "modules/hotkeys.lua"
 }
 
@@ -92,6 +93,7 @@ client_scripts{
   "client/adminmenu.lua",
   "client/LsCustomsMenu.lua",
   "client/LsCustoms.lua",
+  "client/warningsystem.lua"
   -- "hotkeys/hotkeys.lua"
 }
 

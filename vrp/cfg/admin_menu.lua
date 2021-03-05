@@ -41,9 +41,24 @@ cfg.Buttons = {
         local result = GetOnscreenKeyboardResult()
         if result then 
             result = result
-            TriggerServerEvent('vRPAdmin:Kick', self, result)
+            TriggerServerEvent('vRPAdmin:Kick', self, result, false)
         end
     end
+    end, "player.kick"},
+    ["No Warning Kick"] = {function(self)
+        AddTextEntry('FMMC_MPM_NC', "Enter Reason to Kick Player")
+        DisplayOnscreenKeyboard(1, "FMMC_MPM_NC", "", "", "", "", "", 30)
+        while (UpdateOnscreenKeyboard() == 0) do
+            DisableAllControlActions(0);
+            Wait(0);
+        end
+        if (GetOnscreenKeyboardResult()) then
+            local result = GetOnscreenKeyboardResult()
+            if result then 
+                result = result
+                TriggerServerEvent('vRPAdmin:Kick', self, result, true)
+            end
+        end
     end, "player.kick"},
     ["Revive"] = {function(self)
         TriggerServerEvent('vRPAdmin:Revive', self)
@@ -89,12 +104,31 @@ cfg.Buttons = {
             end
         end
     end, "player.addGroups"},
+    ["Warn Player"] = {function(self)
+        userWarningMessage = getWarningUserMsg()
+        TriggerServerEvent("vrp:warnPlayer",self,userWarningMessage)        
+    end, "player.kick"},
 }
 
+--vRP:RemoveWarning
 cfg.MiscButtons = {
     ["Entity Cleanup"] = {function(self)
         TriggerServerEvent('vRPAdmin:PropCleanup')
     end, "player.propcleanup", "Gets rid of those pesky modders ramps! (Onesync)"},
+    ["Remove Warning"] = {function(self)
+        AddTextEntry('FMMC_MPM_NC', "Enter the WarningID")
+        DisplayOnscreenKeyboard(1, "FMMC_MPM_NC", "", "", "", "", "", 30)
+        while (UpdateOnscreenKeyboard() == 0) do
+            DisableAllControlActions(0);
+            Wait(0);
+        end
+        if (GetOnscreenKeyboardResult()) then
+            local result = GetOnscreenKeyboardResult()
+            if result then 
+                TriggerServerEvent('vRP:RemoveWarning', result)
+            end
+        end
+    end, "admin.removewarning", "Removes a warning"},
     ["Entity Cleanup Gun"] = {function(self)
         TriggerServerEvent('vRPAdmin:EntityCleanupGun')
     end, "player.propcleanup", "Makes your current Gun a Cleanup Gun! Deletes anything you aim at"},

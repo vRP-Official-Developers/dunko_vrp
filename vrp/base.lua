@@ -148,6 +148,18 @@ Citizen.CreateThread(function()
     INDEX(phone)
     );
     ]])
+    MySQL.SingleQuery([[
+    CREATE TABLE IF NOT EXISTS vrp_warnings (
+    warning_id INT AUTO_INCREMENT,
+    user_id INT,
+    warning_type VARCHAR(25),
+    duration INT,
+    admin VARCHAR(100),
+    warning_date DATE,
+    reason VARCHAR(2000),
+    PRIMARY KEY (warning_id)
+    )
+    ]])
     MySQL.SingleQuery("ALTER TABLE vrp_users ADD IF NOT EXISTS bantime varchar(100) NOT NULL DEFAULT '';")
     MySQL.SingleQuery("ALTER TABLE vrp_users ADD IF NOT EXISTS banreason varchar(100) NOT NULL DEFAULT '';")
     MySQL.SingleQuery("ALTER TABLE vrp_users ADD IF NOT EXISTS banadmin varchar(100) NOT NULL DEFAULT ''; ")
@@ -793,33 +805,14 @@ AddEventHandler("vRPcli:playerSpawned", function()
         local tmp = vRP.getUserTmpTable(user_id)
         tmp.spawns = tmp.spawns+1
         local first_spawn = (tmp.spawns == 1)
-        
         if first_spawn then
-            -- first spawn, reference player
-            -- send players to new player
             for k,v in pairs(vRP.user_sources) do
                 vRPclient.addPlayer(source,{v})
             end
-            -- send new player to all players
             vRPclient.addPlayer(-1,{source})
         end
-        
-        -- set client tunnel delay at first spawn
-        --Tunnel.setDestDelay(player, config.load_delay)
-        
-        -- show loading
-        vRPclient.setProgressBar(player,{"vRP:loading", "botright", "Loading...", 0,0,0, 100})
-        
-        SetTimeout(600, function() -- trigger spawn event
-            TriggerEvent("vRP:playerSpawn",user_id,player,first_spawn)
-            
-            SetTimeout(config.load_duration*1000, function() -- set client delay to normal delay
-                Tunnel.setDestDelay(player, config.global_delay)
-                vRPclient.removeProgressBar(player,{"vRP:loading"})
-            end)
-        end)
+        TriggerEvent("vRP:playerSpawn",user_id,player,first_spawn)
     end
-    
     Debug.pend()
 end)
 

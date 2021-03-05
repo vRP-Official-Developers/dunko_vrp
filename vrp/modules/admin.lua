@@ -149,10 +149,34 @@ local function ch_kick(player,choice)
             vRP.prompt(player,"Reason: ","",function(player,reason)
                 local source = vRP.getUserSource(id)
                 if source ~= nil then
+                    saveKickLog(id, GetPlayerName(player), reason)
                     vRP.kick(source,reason)
                     vRPclient.notify(player,{"kicked user "..id})
                 end
             end)
+        end)
+    end
+end
+
+RegisterNetEvent('vRP:RemoveWarning')
+AddEventHandler('vRP:RemoveWarning', function(warningid)
+    local source = source
+    local user_id = vRP.getUserId(source)
+    if user_id ~= nil and vRP.hasPermission(user_id,"admin.removewarning") then
+        exports['ghmattimysql']:execute("DELETE FROM vrp_warnings WHERE warning_id = @uid", {uid = warningid})
+        vRPclient.notify(source,{"~g~Removed Warning"})
+    end
+end)
+
+local function ch_removewarning(player, choice)
+    local user_id = vRP.getUserId(player)
+    if user_id ~= nil and vRP.hasPermission(user_id,"admin.removewarning") then
+        vRP.prompt(player,"Warning ID to remove warning from: ","",function(player,idwarning)
+            if idwarning and tonumber(idwarning) then 
+                exports['ghmattimysql']:execute("DELETE FROM vrp_warnings WHERE warning_id = @uid", {uid = idwarning})
+            else 
+                vRPclient.notify(player,{"Please enter a warningID!"})
+            end
         end)
     end
 end
@@ -166,6 +190,7 @@ local function ch_ban(player,choice)
                 vRP.prompt(player,"Reason: ","",function(player,reason)
                     if reason then 
                         vRP.prompt(player,"Duration of Ban (-1 for perm ban): ","",function(player,hours)
+                            saveBanLog(id, GetPlayerName(player), reason, hours)
                             if tonumber(hours) then 
                                 if tonumber(hours) == -1 then 
                                     vRP.ban(player,id,"perm",reason)
@@ -759,12 +784,15 @@ AddEventHandler('vRPAdmin:Bring', function(id)
 end)
 
 RegisterNetEvent('vRPAdmin:Kick')
-AddEventHandler('vRPAdmin:Kick', function(id, reason)
+AddEventHandler('vRPAdmin:Kick', function(id, reason, nof10)
     local source = source 
     local SelectedPlrSource = vRP.getUserSource(id) 
     local userid = vRP.getUserId(source)
     if vRP.hasPermission(userid, 'player.kick') then
         if SelectedPlrSource then  
+            if not nof10 then 
+                saveKickLog(id, GetPlayerName(source), reason)
+            end
             vRP.kick(SelectedPlrSource,reason)
             vRPclient.notify(source,{'~g~Successfully kicked Player.'})
         end
@@ -809,6 +837,7 @@ AddEventHandler('vRPAdmin:Ban', function(id, hours, reason)
     local SelectedPlrSource = vRP.getUserSource(id) 
     local userid = vRP.getUserId(source)
     if vRP.hasPermission(userid, 'player.ban') then
+        saveBanLog(id, GetPlayerName(source), reason, hours)
         if SelectedPlrSource then  
             if tonumber(hours) then 
                 if tonumber(hours) == -1 then 
@@ -915,6 +944,9 @@ vRP.registerMenuBuilder("main", function(add, data)
                 end
                 if vRP.hasPermission(user_id,"player.ban") then
                     menu["Ban"] = {ch_ban}
+                end
+                if vRP.hasPermission(user_id, "admin.removewarning") then 
+                    menu["Remove Warning"] = {ch_removewarning}
                 end
                 if vRP.hasPermission(user_id,"player.unban") then
                     menu["Unban"] = {ch_unban}
