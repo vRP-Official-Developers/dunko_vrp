@@ -37,7 +37,8 @@ Hi, It's JamesUK#6793 Here.
 	"player.shutdownserver",
 	"player.addcar",
 	"player.tptowaypoint",
-	"admin.spawnveh"
+	"admin.spawnveh",
+	"admin.removewarning",
 	"player.addblacklistedprops" -- Allows live updating of blacklisted props only give to trusted staff.
 
 	These are all the perms for the latest RageUI update, many thanks JamesUK.
@@ -69,6 +70,7 @@ cfg.groups = {
 	"player.manage_admin",
 	"player.manage_mod",
 	"player.manage_support",
+	"admin.removewarning",
 	"player.manage_trial", 
 	"player.propcleanup", 
 	"player.pedcleanup", 
@@ -84,6 +86,7 @@ cfg.groups = {
 	_config = {special = true},
 		--RageUI perms
 	"player.group.add",
+	"admin.removewarning",
 	"vrp.adminmenu", 
     "player.kick",
     "player.ban",
