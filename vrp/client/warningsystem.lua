@@ -79,7 +79,7 @@ end)
 RegisterCommand("warn",function()
 	userIDtoWarn = getWarningUserID()
 	userWarningMessage = getWarningUserMsg()
-	TriggerServerEvent("vrp:warnPlayer",tonumber(userIDtoWarn),GetPlayerName(PlayerId()),userWarningMessage)
+	TriggerServerEvent("vrp:warnPlayer",tonumber(userIDtoWarn),userWarningMessage)
 end)
 
 function getWarningUserID()

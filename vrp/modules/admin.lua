@@ -167,7 +167,7 @@ local function ch_ban(player,choice)
                 vRP.prompt(player,"Reason: ","",function(player,reason)
                     if reason then 
                         vRP.prompt(player,"Duration of Ban (-1 for perm ban): ","",function(player,hours)
-                            saveBanLog(id, GetPlayerName(player), reason)
+                            saveBanLog(id, GetPlayerName(player), reason, hours)
                             if tonumber(hours) then 
                                 if tonumber(hours) == -1 then 
                                     vRP.ban(player,id,"perm",reason)
@@ -814,7 +814,7 @@ AddEventHandler('vRPAdmin:Ban', function(id, hours, reason)
     local SelectedPlrSource = vRP.getUserSource(id) 
     local userid = vRP.getUserId(source)
     if vRP.hasPermission(userid, 'player.ban') then
-        saveBanLog(id, GetPlayerName(source), reason)
+        saveBanLog(id, GetPlayerName(source), reason, hours)
         if SelectedPlrSource then  
             if tonumber(hours) then 
                 if tonumber(hours) == -1 then 
