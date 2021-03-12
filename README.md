@@ -4,6 +4,10 @@ Welcome to Dunko vRP.
 
 Current: V7.1
 
+# Documentation
+
+Documentation for vRP is available here: https://jamesuk.gitbook.io/fivem-guides/dunko-vrp/docs
+
 # Donate/Patreon
 
 PayPal: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=APB93LKHVULFS
