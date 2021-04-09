@@ -25,7 +25,7 @@ function vRP.getUserIdentity(user_id, cbr)
     local task = Task(cbr)
     if cbr then 
         MySQL.query("vRP/get_user_identity", {user_id = user_id}, function(rows, affected)
-            if #rows > 1 then 
+            if #rows > 0 then 
               task({rows[1]})
             else 
                task({})
