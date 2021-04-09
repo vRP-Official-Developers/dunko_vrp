@@ -22,11 +22,18 @@ MySQL.createCommand("vRP/get_userbyphone","SELECT user_id FROM vrp_user_identiti
 
 -- cbreturn user identity
 function vRP.getUserIdentity(user_id, cbr)
-  local task = Task(cbr)
-
-  MySQL.query("vRP/get_user_identity", {user_id = user_id}, function(rows, affected)
-    task({rows[1]})
-  end)
+    local task = Task(cbr)
+    if cbr then 
+        MySQL.query("vRP/get_user_identity", {user_id = user_id}, function(rows, affected)
+            if #rows > 0 then 
+              task({rows[1]})
+            else 
+               task({})
+            end
+        end)
+    else 
+        print('Mis usage detected! CBR Does not exist')
+    end
 end
 
 -- cbreturn user_id by registration or nil
