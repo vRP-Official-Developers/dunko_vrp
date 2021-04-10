@@ -10,9 +10,11 @@ vRPConfig.LoadPreviews = true; -- Controls the car previews with the RageUI Gara
 vRPConfig.VehicleStoreRadius = 250; -- Controls radius a vehicle can be stored from.
 vRPConfig.AdminCoolDown = false; -- Enables an admin cooldown 
 vRPConfig.AdminCooldownTime = 60; -- 1 minute in (seconds) duration of cooldown. 
-vRPConfig.StoreWeaponsOnDeath = false; -- Stores the players weapon on death allowing them to be looted.
-vRPConfig.DoNotDisplayIps = false; -- Removes all vRP related references in the console to player ip addresses.
+vRPConfig.StoreWeaponsOnDeath = true; -- Stores the players weapon on death allowing them to be looted.
+vRPConfig.DoNotDisplayIps = true; -- Removes all vRP related references in the console to player ip addresses.
 vRPConfig.LoseItemsOnDeath = true; -- Controls whether you lose inventory items on death.
 vRPConfig.AllowMoreThenOneCar = false; -- Controls if you can have more than one car out.
 vRPConfig.F10System = true; -- Logs warnings and can be accessed via F10 (Thanks to Rubbertoe98) (https://github.com/rubbertoe98/FiveM-Scripts/tree/master/vrp_punishments)
 vRPConfig.ServerName = "vRP" -- Controls the name that is displayed on warnings title etc.
+
+-- Thanks to JamesUK#6793 for the many options provided here.
