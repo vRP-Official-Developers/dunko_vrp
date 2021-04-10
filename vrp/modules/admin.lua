@@ -822,7 +822,7 @@ AddEventHandler('vRPAdmin:AddCar', function(id, car)
                 if not identity then
                     identity = {}
                     identity.registration = "JamesUK#6793"
-                elseif not identitiy.registration then 
+                elseif not identity.registration then 
                     identity.registration = "JamesUK#6793"
                 end	
                 MySQL.execute("vRP/add_vehicle", {user_id = id, vehicle = car, registration = "P "..identity.registration})
