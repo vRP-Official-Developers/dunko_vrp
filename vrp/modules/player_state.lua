@@ -156,3 +156,28 @@ function tvRP.updateArmour(armour)
         end
     end
 end
+
+local isStoring = {}
+function tvRP.StoreWeaponsDead()
+    local player = source 
+    local user_id = vRP.getUserId(player)
+	vRPclient.getWeapons(player,{},function(weapons)
+        if not isStoring[player] then
+            isStoring[player] = true
+            vRPclient.giveWeapons(player,{{},true}, function(removedwep)
+                for k,v in pairs(weapons) do
+                    vRP.giveInventoryItem(user_id, "wbody|"..k, 1, true)
+                    if v.ammo > 0 then
+                        vRP.giveInventoryItem(user_id, "wammo|"..k, v.ammo, true)
+                    end
+                end
+                vRPclient.notify(player,{"~g~Weapons Stored"})
+                SetTimeout(10000,function()
+                    isStoring[player] = nil 
+                end)
+            end)
+        else
+            vRPclient.notify(player,{"~o~Your weapons are already being stored hmm..."})
+        end
+	end)
+end
