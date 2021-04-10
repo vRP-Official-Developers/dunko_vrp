@@ -8,3 +8,7 @@ vRPConfig.EnableHealthRegen = true; -- Controls the health regen. (Whether they 
 vRPConfig.EnableBuyVehicles = true; -- Enables ability to buy vehicles from the RageUI Garages.  
 vRPConfig.LoadPreviews = true; -- Controls the car previews with the RageUI Garages.
 vRPConfig.VehicleStoreRadius = 250; -- Controls radius a vehicle can be stored from.
+vRPConfig.AdminCoolDown = false; -- Enables an admin cooldown 
+vRPConfig.AdminCooldownTime = 60000; -- 1 minute in (milliseconds) duration of cooldown. 
+vRPConfig.StoreWeaponsOnDeath = false; -- Stores the players weapon on death allowing them to be looted.
+vRPConfig.DoNotDisplayIps = false; -- Removes all vRP related references in the console to player ip addresses.
