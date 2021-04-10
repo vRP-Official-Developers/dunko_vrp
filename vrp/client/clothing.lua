@@ -182,7 +182,7 @@ RageUI.CreateWhile(1.0, true, function()
                     end
                 end
             end)
-            RageUI.List("Torso", Torso.Max, Torso.Index, "", { }, true, function(Hovered, Active, Selected, Index)
+            RageUI.List("Hands", Torso.Max, Torso.Index, "", { }, true, function(Hovered, Active, Selected, Index)
                 Torso.Index = Index
                 if Active then
                     SelectedOption = 3;
@@ -283,7 +283,7 @@ RageUI.CreateWhile(1.0, true, function()
                     if Kevlar.TextureIndex > (GetNumberOfPedTextureVariations(PlayerPedId(), 9, Kevlar.Index)-1) then 
                         Kevlar.TextureIndex = 0;
                     else 
-                        Kevlar.TextureIndex = Accessory.TextureIndex + 1
+                        Kevlar.TextureIndex = Kevlar.TextureIndex + 1
                     end
                 end
             end)

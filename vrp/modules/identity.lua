@@ -22,11 +22,18 @@ MySQL.createCommand("vRP/get_userbyphone","SELECT user_id FROM vrp_user_identiti
 
 -- cbreturn user identity
 function vRP.getUserIdentity(user_id, cbr)
-  local task = Task(cbr)
-
-  MySQL.query("vRP/get_user_identity", {user_id = user_id}, function(rows, affected)
-    task({rows[1]})
-  end)
+    local task = Task(cbr)
+    if cbr then 
+        MySQL.query("vRP/get_user_identity", {user_id = user_id}, function(rows, affected)
+            if #rows > 0 then 
+              task({rows[1]})
+            else 
+               task({})
+            end
+        end)
+    else 
+        print('Mis usage detected! CBR Does not exist')
+    end
 end
 
 -- cbreturn user_id by registration or nil
@@ -197,8 +204,6 @@ local function build_client_cityhall(source) -- build the city hall area/marker/
   local user_id = vRP.getUserId(source)
   if user_id ~= nil then
     local x,y,z = table.unpack(cfg.city_hall)
-
-    vRPclient.addBlip(source,{x,y,z,cfg.blip[1],cfg.blip[2],lang.cityhall.title()})
     vRPclient.addMarker(source,{x,y,z-1,0.7,0.7,0.5,0,255,125,125,150})
 
     vRP.setArea(source,"vRP:cityhall",x,y,z,1,1.5,cityhall_enter,cityhall_leave)

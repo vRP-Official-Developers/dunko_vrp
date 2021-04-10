@@ -317,7 +317,7 @@ local function hidden_placement_tick()
 
   SetTimeout(300000, hidden_placement_tick)
 end
-SetTimeout(5000, hidden_placement_tick) -- delayed to wait items loading
+SetTimeout(10000, hidden_placement_tick) -- delayed to wait items loading
 
 -- INFORMER
 

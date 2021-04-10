@@ -1,4 +1,5 @@
-resource_manifest_version '44febabe-d386-4d18-afbe-5e627f4af937'
+fx_version 'cerulean'
+games {  'gta5' }
 
 description "RP module/framework"
 
@@ -56,7 +57,10 @@ server_scripts{
   "modules/basic_items.lua",
   "modules/basic_skinshop.lua",
   "modules/cloakroom.lua",
-  "modules/paycheck.lua"
+  "modules/paycheck.lua",
+  "modules/LsCustoms.lua",
+  "modules/server_commands.lua",
+  "modules/warningsystem.lua"
   -- "modules/hotkeys.lua"
 }
 
@@ -70,6 +74,7 @@ client_scripts{
   "client/Tunnel.lua",
   "client/Proxy.lua",
   "client/base.lua",
+  "utils/*",
   "client/iplloader.lua",
   "client/gui.lua",
   "client/player_state.lua",
@@ -85,7 +90,10 @@ client_scripts{
   "client/clothing.lua",
   "client/atms.lua",
   "client/garages.lua",
-  "client/adminmenu.lua"
+  "client/adminmenu.lua",
+  "client/LsCustomsMenu.lua",
+  "client/LsCustoms.lua",
+  "client/warningsystem.lua"
   -- "hotkeys/hotkeys.lua"
 }
 
