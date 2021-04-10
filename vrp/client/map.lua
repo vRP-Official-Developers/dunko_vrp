@@ -14,7 +14,8 @@ function tvRP.addBlip(x,y,z,idtype,idcolor,text)
   SetBlipDisplay(blip,6) -- Shows the blip in map and minimap
 
   if text ~= nil then
-    BeginTextCommandSetBlipName("STRING")
+    AddTextEntry("MAPBLIP", text)
+    BeginTextCommandSetBlipName("MAPBLIP")
     AddTextComponentString(text)
     EndTextCommandSetBlipName(blip)
   end
@@ -64,6 +65,7 @@ end
 local markers = {}
 local marker_ids = Tools.newIDGenerator()
 local named_markers = {}
+local drawing_markers = {}
 
 -- add a circular marker to the game map
 -- return marker id
@@ -121,6 +123,24 @@ function tvRP.removeNamedMarker(name)
   end
 end
 
+-- markers sort loop
+Citizen.CreateThread(function()
+  while true do
+    Citizen.Wait(1000)
+
+    local px,py,pz = tvRP.getPosition()
+
+    for k,v in pairs(markers) do
+      -- 150 is the min distance wich the markers will be starting to be drawn
+      if #(vector3(v.x,v.y,v.z) - vector3(px,py,pz)) <= 150.0 then
+        drawing_markers[k] = v
+      else
+        if drawing_markers[k] then drawing_markers[k] = nil end
+      end
+    end
+  end
+end)
+
 -- markers draw loop
 Citizen.CreateThread(function()
   while true do
@@ -128,9 +148,11 @@ Citizen.CreateThread(function()
 
     local px,py,pz = tvRP.getPosition()
 
-    for k,v in pairs(markers) do
+    -- if this loop get filled with too many markers, the clientside
+    -- starts lagging
+    for k,v in pairs(drawing_markers) do
       -- check visibility
-      if GetDistanceBetweenCoords(v.x,v.y,v.z,px,py,pz,true) <= v.visible_distance then
+      if #(vector3(v.x,v.y,v.z) - vector3(px,py,pz)) <= v.visible_distance then
         DrawMarker(1,v.x,v.y,v.z,0,0,0,0,0,0,v.sx,v.sy,v.sz,v.r,v.g,v.b,v.a,0,0,0,0)
       end
     end

@@ -16,6 +16,8 @@ if err == 200 then
     local r_version = tonumber(text)
     if version ~= r_version then
         print("^5[VRP]: ^7" .. 'A Dunko Update is available from: https://github.com/DunkoUK/dunko_vrp')
+    else 
+        print("^5[VRP]: ^7" .. 'You are running the most up to date Dunko Version. Thanks for using Dunko_vRP and thanks to our contributors for updating the project. Support Found At: https://discord.gg/b8wQn2XqDt')
     end
 else
     print("[vRP] unable to check the remote version")
@@ -44,7 +46,7 @@ vRP.user_tmp_tables = {} -- user tmp data tables (logger storage, not saved)
 vRP.user_sources = {} -- user sources 
 -- queries
 Citizen.CreateThread(function()
-    Wait(2500) -- Wait for GHMatti to Initialize
+    Wait(1000) -- Wait for GHMatti to Initialize
     MySQL.SingleQuery([[
     CREATE TABLE IF NOT EXISTS vrp_users(
     id INTEGER AUTO_INCREMENT,
@@ -66,12 +68,12 @@ Citizen.CreateThread(function()
     );
     ]])
     MySQL.SingleQuery([[
-        CREATE TABLE IF NOT EXISTS vrp_user_tokens (
-        token VARCHAR(200),
-        user_id INTEGER,
-        banned BOOLEAN  NOT NULL DEFAULT 0,
-        CONSTRAINT pk_user_ids PRIMARY KEY(token)
-        );
+    CREATE TABLE IF NOT EXISTS vrp_user_tokens (
+    token VARCHAR(200),
+    user_id INTEGER,
+    banned BOOLEAN  NOT NULL DEFAULT 0,
+    CONSTRAINT pk_user_tokens PRIMARY KEY(token)
+    );
     ]])
     MySQL.SingleQuery([[
     CREATE TABLE IF NOT EXISTS vrp_user_data(
@@ -87,15 +89,6 @@ Citizen.CreateThread(function()
     dkey VARCHAR(100),
     dvalue TEXT,
     CONSTRAINT pk_srv_data PRIMARY KEY(dkey)
-    );
-    ]])
-    MySQL.SingleQuery([[
-    CREATE TABLE IF NOT EXISTS vrp_user_moneys(
-    user_id INTEGER,
-    wallet INTEGER,
-    bank INTEGER,
-    CONSTRAINT pk_user_moneys PRIMARY KEY(user_id),
-    CONSTRAINT fk_user_moneys_users FOREIGN KEY(user_id) REFERENCES vrp_users(id) ON DELETE CASCADE
     );
     ]])
     MySQL.SingleQuery([[
@@ -124,6 +117,9 @@ Citizen.CreateThread(function()
     user_id INTEGER,
     vehicle VARCHAR(100),
     vehicle_plate varchar(255) NOT NULL,
+    rented BOOLEAN NOT NULL DEFAULT 0,
+    rentedid varchar(200) NOT NULL DEFAULT '',
+    rentedtime varchar(2048) NOT NULL DEFAULT '',
     CONSTRAINT pk_user_vehicles PRIMARY KEY(user_id,vehicle),
     CONSTRAINT fk_user_vehicles_users FOREIGN KEY(user_id) REFERENCES vrp_users(id) ON DELETE CASCADE
     );
@@ -152,12 +148,28 @@ Citizen.CreateThread(function()
     INDEX(phone)
     );
     ]])
+    MySQL.SingleQuery([[
+    CREATE TABLE IF NOT EXISTS vrp_warnings (
+    warning_id INT AUTO_INCREMENT,
+    user_id INT,
+    warning_type VARCHAR(25),
+    duration INT,
+    admin VARCHAR(100),
+    warning_date DATE,
+    reason VARCHAR(2000),
+    PRIMARY KEY (warning_id)
+    )
+    ]])
     MySQL.SingleQuery("ALTER TABLE vrp_users ADD IF NOT EXISTS bantime varchar(100) NOT NULL DEFAULT '';")
     MySQL.SingleQuery("ALTER TABLE vrp_users ADD IF NOT EXISTS banreason varchar(100) NOT NULL DEFAULT '';")
     MySQL.SingleQuery("ALTER TABLE vrp_users ADD IF NOT EXISTS banadmin varchar(100) NOT NULL DEFAULT ''; ")
     MySQL.SingleQuery("ALTER TABLE vrp_user_vehicles ADD IF NOT EXISTS rented BOOLEAN NOT NULL DEFAULT 0;")
     MySQL.SingleQuery("ALTER TABLE vrp_user_vehicles ADD IF NOT EXISTS rentedid varchar(200) NOT NULL DEFAULT '';")
     MySQL.SingleQuery("ALTER TABLE vrp_user_vehicles ADD IF NOT EXISTS rentedtime varchar(2048) NOT NULL DEFAULT '';")
+    MySQL.createCommand("vRPls/create_modifications_column", "alter table vrp_user_vehicles add if not exists modifications text not null")
+	MySQL.createCommand("vRPls/update_vehicle_modifications", "update vrp_user_vehicles set modifications = @modifications where user_id = @user_id and vehicle = @vehicle")
+	MySQL.createCommand("vRPls/get_vehicle_modifications", "select modifications from vrp_user_vehicles where user_id = @user_id and vehicle = @vehicle")
+	MySQL.execute("vRPls/create_modifications_column")
     print("[vRP] init base tables")
 end)
 
@@ -508,6 +520,34 @@ function vRP.ban(adminsource,permid,time,reason)
     end
 end
 
+function vRP.banConsole(permid,time,reason)
+    local adminPermID = "Console Ban"
+    local getBannedPlayerSrc = vRP.getUserSource(tonumber(permid))
+    if getBannedPlayerSrc then 
+        if tonumber(time) then 
+            local banTime = os.time()
+            banTime = banTime  + (60 * 60 * tonumber(time))  
+            vRP.setBanned(permid,true,banTime,reason,  'Console' .. " | ID Of Admin: " .. adminPermID)
+            vRP.kick(getBannedPlayerSrc,"You have been banned from this server. Your ban expires in: " .. os.date("%c", banTime) .. " Reason: " .. reason .. " | BanningAdmin: " ..  'Console' .. " | ID Of Admin: " .. adminPermID ) 
+            print("~g~Success banned! User PermID:" .. permid)
+        else 
+            print("~g~Success banned! User PermID:" .. permid)
+            vRP.setBanned(permid,true,"perm",reason,  'Console' .. " | ID Of Admin: " .. adminPermID)
+            vRP.kick(getBannedPlayerSrc,"You have been banned from this server. Your ban expires in: " .. "Never, you've been permanently banned." .. " Reason: " .. reason .. " | BanningAdmin: " ..  'Console' .. " | ID Of Admin: " .. adminPermID ) 
+        end
+    else 
+        if tonumber(time) then 
+            local banTime = os.time()
+            banTime = banTime  + (60 * 60 * tonumber(time))  
+            print("~g~Success banned! User PermID:" .. permid)
+            vRP.setBanned(permid,true,banTime,reason, 'Console' .. " | ID Of Admin: " .. adminPermID)
+        else 
+            print("~g~Success banned! User PermID:" .. permid)
+            vRP.setBanned(permid,true,"perm",reason, 'Console' .. " | ID Of Admin: " .. adminPermID)
+        end
+    end
+end
+
 -- To use token banning you need the latest artifacts.
 function vRP.StoreTokens(source, user_id) 
     if GetNumPlayerTokens then 
@@ -768,33 +808,14 @@ AddEventHandler("vRPcli:playerSpawned", function()
         local tmp = vRP.getUserTmpTable(user_id)
         tmp.spawns = tmp.spawns+1
         local first_spawn = (tmp.spawns == 1)
-        
         if first_spawn then
-            -- first spawn, reference player
-            -- send players to new player
             for k,v in pairs(vRP.user_sources) do
                 vRPclient.addPlayer(source,{v})
             end
-            -- send new player to all players
             vRPclient.addPlayer(-1,{source})
         end
-        
-        -- set client tunnel delay at first spawn
-        --Tunnel.setDestDelay(player, config.load_delay)
-        
-        -- show loading
-        vRPclient.setProgressBar(player,{"vRP:loading", "botright", "Loading...", 0,0,0, 100})
-        
-        SetTimeout(600, function() -- trigger spawn event
-            TriggerEvent("vRP:playerSpawn",user_id,player,first_spawn)
-            
-            SetTimeout(config.load_duration*1000, function() -- set client delay to normal delay
-                Tunnel.setDestDelay(player, config.global_delay)
-                vRPclient.removeProgressBar(player,{"vRP:loading"})
-            end)
-        end)
+        TriggerEvent("vRP:playerSpawn",user_id,player,first_spawn)
     end
-    
     Debug.pend()
 end)
 
