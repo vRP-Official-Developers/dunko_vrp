@@ -322,6 +322,11 @@ function vRP.ReLoadChar(source)
     end)
 end
 
+-- This can only be used server side and is for the vRP bot. 
+exports("CallVRP", function(method_name, params)
+    return vRP[method_name](params)
+end)
+
 RegisterNetEvent("VRP:CheckID")
 AddEventHandler("VRP:CheckID", function()
     local user_id = vRP.getUserId(source)
