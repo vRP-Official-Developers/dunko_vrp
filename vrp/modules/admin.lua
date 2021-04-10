@@ -328,7 +328,6 @@ local AdminCooldown = {}
 local function ch_calladmin(player,choice)
     local user_id = vRP.getUserId(player)
     if vRPConfig.AdminCoolDown then 
-        print(os.time(), AdminCooldown[player])
         if AdminCooldown[player] and not (os.time() > AdminCooldown[player]) then
             return vRPclient.notify(player,{"~r~Please wait 60 seconds before calling again."})
         else 
