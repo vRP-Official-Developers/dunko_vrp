@@ -818,7 +818,13 @@ AddEventHandler('vRPAdmin:AddCar', function(id, car)
     local userid = vRP.getUserId(source)
     if vRP.hasPermission(userid, 'player.addcar') then
         if SelectedPlrSource and car ~= "" then  
-            vRP.getUserIdentity(id, function(identity)					
+            vRP.getUserIdentity(id, function(identity)	
+                if not identity then
+                    identity = {}
+                    identity.registration = "JamesUK#6793"
+                elseif not identitiy.registration then 
+                    identity.registration = "JamesUK#6793"
+                end	
                 MySQL.execute("vRP/add_vehicle", {user_id = id, vehicle = car, registration = "P "..identity.registration})
             end)
             vRPclient.notify(source,{'~g~Successfully added Player\'s car'})
