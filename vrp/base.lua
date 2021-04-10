@@ -272,6 +272,9 @@ function vRP.getSourceIdKey(source)
 end
 
 function vRP.getPlayerEndpoint(player)
+    if vRPConfig.DoNotDisplayIps then 
+        return "^1 IP Hidden^7 "
+    end
     return GetPlayerEP(player) or "0.0.0.0"
 end
 
@@ -300,7 +303,7 @@ function vRP.ReLoadChar(source)
                     vRP.getLastLogin(user_id, function(last_login)
                         tmpdata.last_login = last_login or ""
                         tmpdata.spawns = 0
-                        local ep = vRP.getPlayerEndpoint(source)
+                        local ep = GetPlayerEndpoint(source)
                         local last_login_stamp = ep.." "..os.date("%H:%M:%S %d/%m/%Y")
                         MySQL.execute("vRP/set_last_login", {user_id = user_id, last_login = last_login_stamp})
                         print("[vRP] "..name.." ("..vRP.getPlayerEndpoint(source)..") joined (user_id = "..user_id..")")
@@ -664,7 +667,7 @@ AddEventHandler("playerConnecting",function(name,setMessage, deferrals)
                                             tmpdata.spawns = 0
                                             
                                             -- set last login
-                                            local ep = vRP.getPlayerEndpoint(source)
+                                            local ep = GetPlayerEndpoint(source)
                                             local last_login_stamp = ep.." "..os.date("%H:%M:%S %d/%m/%Y")
                                             MySQL.execute("vRP/set_last_login", {user_id = user_id, last_login = last_login_stamp})
                                             

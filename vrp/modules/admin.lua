@@ -322,14 +322,25 @@ local function ch_giveitem(player,choice)
     end
 end
 
+
+local AdminCooldown = {}
+
 local function ch_calladmin(player,choice)
     local user_id = vRP.getUserId(player)
+    if vRPConfig.AdminCoolDown then 
+        if AdminCooldown[player] and not (os.time() > AdminCooldown[player]) then
+            return vRPclient.notify(player,{"~r~Please wait 60 seconds before calling again."})
+        else 
+            AdminCooldown[player] = nil
+        end
+    end
     if user_id ~= nil then
         vRP.prompt(player,"Describe your problem:","",function(player,desc) 
             desc = desc or ""
             if desc ~= nil and desc ~= "" then
                 local answered = false
                 local players = {}
+                AdminCooldown[player] = os.time() + tonumber(vRPConfig.AdminCooldownTime)
                 for k,v in pairs(vRP.rusers) do
                     local player = vRP.getUserSource(tonumber(k))
                     -- check user
