@@ -14,19 +14,82 @@ client.on('ready', () => {
     init()
 });
 
-if (settingsjson.settings.StatusEnabled == true) {
+let bank = 0
+let wallet = 0
+let userids = 0
+exports.ghmattimysql.execute("SELECT * FROM vrp_user_moneys", [], (result) => {
+    for (i = 0; i < result.length; i++) {
+        bank = parseInt(bank) + parseInt(result[0].bank)
+    }
+    for (i = 0; i < result.length; i++) {
+        wallet = parseInt(wallet) + parseInt(result[0].wallet)
+    }
+    userids = result.length
+})
+setInterval(() => {
+    exports.ghmattimysql.execute("SELECT * FROM vrp_user_moneys", [], (result) => {
+        for (i = 0; i < result.length; i++) {
+            bank = parseInt(bank) + parseInt(result[0].bank)
+        }
+        for (i = 0; i < result.length; i++) {
+            wallet = parseInt(wallet) + parseInt(result[0].wallet)
+        }
+        userids = result.length
+    })
+}, 60000);
+
+if (settingsjson.settings.StatusEnabled) {
     setInterval(() => {
-            if (!client.guilds.get(settingsjson.settings.GuildID)) return console.log(`[^1JamesUK Discord Bot^7]: Status is enabled but not configured correctly and will not work as intended.`)
-            let channelid = client.guilds.get(settingsjson.settings.GuildID).channels.find(r => r.name === settingsjson.settings.StatusChannel);
-            if (!channelid) return console.log(`[^1JamesUK Discord Bot^7]: Status channel is not available / cannot be found.`)
-            channelid.send('T').then(id => {
-                let json = require(resourcePath + '/params.json')
-                json.messageid = id
-                console.log(json)
-                fs.writeFile(`${resourcePath}/params.json`, JSON.stringify(json))
+        if (!client.guilds.get(settingsjson.settings.GuildID)) return console.log(`[^1JamesUK Discord Bot^7]: Status is enabled but not configured correctly and will not work as intended.`)
+        let channelid = client.guilds.get(settingsjson.settings.GuildID).channels.find(r => r.name === settingsjson.settings.StatusChannel);
+        if (!channelid) return console.log(`[^1JamesUK Discord Bot^7]: Status channel is not available / cannot be found.`)
+        let settingsjsons = require(resourcePath + '/params.json')
+        let totalSeconds = (client.uptime / 1000);
+        totalSeconds %= 86400;
+        let hours = Math.floor(totalSeconds / 3600);
+        totalSeconds %= 3600;
+        let minutes = Math.floor(totalSeconds / 60);
+        channelid.fetchMessage(settingsjsons.messageid).then(msg => {
+            let status = {
+                "color": 4289797,
+                "fields": [{
+                        "name": "Players",
+                        "value": `${GetNumPlayerIndices()}/${GetConvarInt("sv_maxclients",32)}`,
+                        "inline": true
+                    },
+                    {
+                        "name": "Amount of £ in economy (bank)",
+                        "value": `${bank}`,
+                        "inline": true
+                    },
+                    {
+                        "name": "Amount of £ in economy (wallet)",
+                        "value": `${wallet}`,
+                        "inline": true
+                    },
+                    {
+                        "name": "Uptime",
+                        "value": `${hours} hours, ${minutes} minutes`,
+                        "inline": true
+                    },
+                    {
+                        "name": "All Time Users",
+                        "value": `${userids} users has joined since release`,
+                        "inline": true
+                    }
+                ],
+                "description": `Connect to the server with: ${client.ip}`,
+                "title": "Server Status"
+            }
+            msg.edit({ embed: status })
+        }).catch(err => {
+            channelid.send('Status Page JamesUK#6793 Starting..').then(id => {
+                settingsjsons.messageid = id.id
+                fs.writeFile(`${resourcePath}/params.json`, JSON.stringify(settingsjsons), function(err) {});
+                return
             })
-        },
-        15000);
+        })
+    }, 15000);
 }
 
 
