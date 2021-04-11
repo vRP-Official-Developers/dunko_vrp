@@ -2,6 +2,7 @@ exports.settings = {
     Level1Perm: "L1",
     Level2Perm: "L2", // Change these to the role names of the relevant permission!
     Level3Perm: "L3",
+    ip: "192.168.0.1" // ip of the server or domain!
 }
 
 /* 

@@ -8,6 +8,7 @@ const fs = require('fs');
 const settingsjson = require(resourcePath + '/settings.js')
 
 client.path = resourcePath
+client.ip = settingsjson.settings.ip
 client.on('ready', () => {
     console.log(`[^1JamesUK Discord Bot^7]: Logged in as ${client.user.tag}! Players: ${GetNumPlayerIndices()}`);
     init()
