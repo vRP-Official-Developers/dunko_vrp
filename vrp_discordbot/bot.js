@@ -83,7 +83,16 @@ client.on('message', (message) => {
     }
     if (cmd) {
         if (permissions < cmd.conf.perm) return;
-        cmd.runcmd(exports, client, message, params, permissions);
+        try {
+            cmd.runcmd(exports, client, message, params, permissions);
+        } catch (err) {
+            let embed = {
+                "title": "Error Occured!",
+                "description": "\nAn error occured. Contact JamesUK#6793 in vRP with the code:\n\n```" + err.message + "\n```",
+                "color": 13632027
+            }
+            message.channel.send({ embed })
+        }
     }
 });
 

@@ -49,6 +49,12 @@ AddEventHandler("vrp:warnPlayer",function(target_id,warningReason)
 	end
 end)
 
+function vRP.GiveWarning(target_id, adminName, warningReason)
+	local warning = "Warning"
+	local warningDate = getCurrentDate()
+	exports['ghmattimysql']:execute("INSERT INTO vrp_warnings (`user_id`, `warning_type`, `duration`, `admin`, `warning_date`, `reason`) VALUES (@user_id, @warning_type, 0, @admin, @warning_date,@reason);", {user_id = target_id,warning_type = warning, admin = adminName, warning_date = warningDate, reason = warningReason}, function() end)
+end
+
 RegisterServerEvent("vrp:removewarningPlayer")
 AddEventHandler("vrp:removewarningPlayer",function(target_id,warningID)
 	local source = source
