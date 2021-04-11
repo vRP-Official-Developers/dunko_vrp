@@ -10,7 +10,7 @@
     "license": "MIT",
     "dependencies": {
         "discord.js": "^11.6.4",
-        "easy-table": "^1.1.1",
+        "ascii-table": "^0.0.9",
         "dotenv": "^6.2.0"
     }
 }

@@ -1,5 +1,4 @@
 const Discord = require('discord.js');
-var Table = require('easy-table')
 const client = new Discord.Client();
 const path = require('path')
 const resourcePath = global.GetResourcePath ?
@@ -8,6 +7,7 @@ require('dotenv').config({ path: path.join(resourcePath, './.env') })
 const fs = require('fs');
 const settingsjson = require(resourcePath + '/settings.js')
 
+client.path = resourcePath
 client.on('ready', () => {
     console.log(`[^1JamesUK Discord Bot^7]: Logged in as ${client.user.tag}! Players: ${GetNumPlayerIndices()}`);
     init()
