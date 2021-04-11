@@ -14,6 +14,20 @@ client.on('ready', () => {
     init()
 });
 
+if (settingsjson.settings.StatusEnabled == true) {
+    setInterval(() => {
+            if (!client.guilds.get(settingsjson.settings.GuildID)) return console.log(`[^1JamesUK Discord Bot^7]: Status is enabled but not configured correctly and will not work as intended.`)
+            let channelid = client.guilds.get(settingsjson.settings.GuildID).channels.find(r => r.name === settingsjson.settings.StatusChannel);
+            if (!channelid) return console.log(`[^1JamesUK Discord Bot^7]: Status channel is not available / cannot be found.`)
+            channelid.send('T').then(id => {
+                let json = require(resourcePath + '/params.json')
+                json.messageid = id
+                console.log(json)
+                fs.writeFile(`${resourcePath}/params.json`, JSON.stringify(json))
+            })
+        },
+        15000);
+}
 
 
 
