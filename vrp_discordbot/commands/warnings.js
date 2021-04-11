@@ -15,9 +15,6 @@ exports.runcmd = (fivemexports, client, message, params) => {
         }
         message.channel.send('```ascii\n' + table.toString() + '```').catch(err => {
             fs.writeFile(`${client.path}/warnings_${params[0]}.txt`, table.toString(), function(err) {
-                if (err) {
-                    return console.log(err);
-                }
                 message.channel.send(`Well this is horrifying this F10 is too large for Discord, ${message.author}`, { files: [`${client.path}/warnings_${params[0]}.txt`] }).then(ss => {
                     fs.unlinkSync(`${client.path}/warnings_${params[0]}.txt`)
                 })
