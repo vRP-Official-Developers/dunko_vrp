@@ -9,6 +9,8 @@ dependency 'yarn'
 dependency 'vrp'
 
 server_scripts {
+    "@vrp/lib/utils.lua",
+    "versioncheck.lua",
     "bot.js"
 }
 

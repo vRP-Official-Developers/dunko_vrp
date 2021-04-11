@@ -83,7 +83,7 @@ client.on('message', (message) => {
     }
     if (cmd) {
         if (permissions < cmd.conf.perm) return;
-        cmd.runcmd(client, message, params, permissions);
+        cmd.runcmd(exports, client, message, params, permissions);
     }
 });
 
