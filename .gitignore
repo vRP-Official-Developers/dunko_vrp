@@ -6,3 +6,7 @@ vrp/cfg/lang/en.lua
 vrp/cfg/lang/en.lua
 .vscode/settings.json
 vrp_panel/node_modules/*
+vrp_discordbot/node_modules/*
+vrp_discordbot/yarn-error.log
+vrp_discordbot/yarn.lock
+vrp_discordbot/.env
