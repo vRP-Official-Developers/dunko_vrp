@@ -1,13 +1,5 @@
 window.addEventListener("load", function() {
     errdiv = document.createElement("div");
-    if (true) { //debug
-        errdiv.classList.add("console");
-        document.body.appendChild(errdiv);
-        window.onerror = function(errorMsg, url, lineNumber, column, errorObj) {
-            errdiv.innerHTML += '<br />Error: ' + errorMsg + ' Script: ' + url + ' Line: ' + lineNumber +
-                ' Column: ' + column + ' StackTrace: ' + errorObj;
-        }
-    }
 
     //init dynamic menu
     //var dynamic_menu = new Menu();
