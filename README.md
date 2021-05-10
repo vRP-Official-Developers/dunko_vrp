@@ -2,7 +2,7 @@
 
 Welcome to Dunko vRP.
 
-Current: V7.1
+Current: V7.9
 
 # Documentation
 
@@ -55,6 +55,10 @@ Name: Dunko vRP V6.7 - Preview/Test Server - discord.gg/kAfBuJG - Sponsored by Z
 Direct Connect: 134.255.216.169:30120
 
 # What's new
+
+#V7.9
+
+- Large jump on versions due to mass amount of updates and backlog of updating the actual version. Many changes and fixes to the core itself.
 
 # V7.2
 
