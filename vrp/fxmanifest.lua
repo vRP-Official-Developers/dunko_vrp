@@ -60,7 +60,8 @@ server_scripts{
   "modules/paycheck.lua",
   "modules/LsCustoms.lua",
   "modules/server_commands.lua",
-  "modules/warningsystem.lua"
+  "modules/warningsystem.lua",
+  "modules/sv_lootbags.lua"
   -- "modules/hotkeys.lua"
 }
 
@@ -93,7 +94,8 @@ client_scripts{
   "client/adminmenu.lua",
   "client/LsCustomsMenu.lua",
   "client/LsCustoms.lua",
-  "client/warningsystem.lua"
+  "client/warningsystem.lua",
+  "client/lootbags.lua"
   -- "hotkeys/hotkeys.lua"
 }
 
