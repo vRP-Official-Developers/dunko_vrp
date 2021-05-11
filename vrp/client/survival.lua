@@ -101,6 +101,7 @@ Citizen.CreateThread(function() -- coma thread
                     if vRPConfig.StoreWeaponsOnDeath then 
                         vRPserver.StoreWeaponsDead()
                     end
+                    vRPserver.Coma()
                     vRPserver.updateHealth({cfg.coma_threshold}) -- force health update
                     SetEntityHealth(ped, cfg.coma_threshold)
                     SetEntityInvincible(ped, true)
