@@ -20,10 +20,12 @@ function tvRP.Coma()
         LootBagEntities[lootbagnetid] = {lootbag, lootbag, false, source}
         LootBagEntities[lootbagnetid].Items = {}
         local ndata = vRP.getUserDataTable(user_id)
+        local stored_inventory = nil;
         if ndata ~= nil then
             if ndata.inventory ~= nil then
+                stored_inventory = ndata.inventory
                 vRP.clearInventory(user_id)
-                for k, v in pairs(ndata.inventory) do
+                for k, v in pairs(stored_inventory) do
                     LootBagEntities[lootbagnetid].Items[k] = {}
                     LootBagEntities[lootbagnetid].Items[k].amount = v.amount
                 end
@@ -132,7 +134,7 @@ if vRPConfig.LootBags then
         local RefreshMenu = nil;
         local cb_take = function(idname)
             local citem = LootBagEntities[netid].Items[idname]
-            if citem.amount <= 0 then
+            if not citem or citem.amount <= 0 then
                 LootBagEntities[netid].Items[idname] = nil 
                 return;
             end
@@ -183,7 +185,9 @@ if vRPConfig.LootBags then
             local items = 0;
             for k, v in pairs(LootBagEntities[netid].Items) do
                 local name, description, weight = vRP.getItemDefinition(k)
-                submenu2[k][2] = lang.inventory.iteminfo({v.amount, description, string.format("%.2f", weight)})
+                if submenu2[name] then 
+                    submenu2[name][2] = lang.inventory.iteminfo({v.amount, description, string.format("%.2f", weight)})
+                end
                 items = items + 1
             end
             if items == 0 then 
