@@ -9,6 +9,12 @@ const settingsjson = require(resourcePath + '/settings.js')
 
 client.path = resourcePath
 client.ip = settingsjson.settings.ip
+
+if (process.env.TOKEN == "" || process.env.TOKEN == "TOKEN") {
+    console.log(`[^1JamesUK Discord Bot^7]: Error! No Token Provided you forgot to edit the .env`);
+    throw new Error('Whoops!')
+}
+
 client.on('ready', () => {
     console.log(`[^1JamesUK Discord Bot^7]: Logged in as ${client.user.tag}! Players: ${GetNumPlayerIndices()}`);
     init()
@@ -173,5 +179,6 @@ client.on('message', (message) => {
         }
     }
 });
+
 
 client.login(process.env.TOKEN)
