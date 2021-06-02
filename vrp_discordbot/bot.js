@@ -33,6 +33,9 @@ exports.ghmattimysql.execute("SELECT * FROM vrp_user_moneys", [], (result) => {
     userids = result.length
 })
 setInterval(() => {
+    bank = 0; 
+    wallet = 0;
+    userids = 0;
     exports.ghmattimysql.execute("SELECT * FROM vrp_user_moneys", [], (result) => {
         for (i = 0; i < result.length; i++) {
             bank = parseInt(bank) + parseInt(result[0].bank)
