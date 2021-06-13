@@ -4,6 +4,10 @@ Welcome to Dunko vRP.
 
 Current: V7.9
 
+# ReWrite Notice 
+
+This repository and framework is scheduled to be rewritten soon.
+
 # Documentation
 
 Documentation for vRP is available here: https://jamesuk.gitbook.io/fivem-guides/dunko-vrp/docs
