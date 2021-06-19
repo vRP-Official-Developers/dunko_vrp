@@ -106,7 +106,11 @@ cfg.Buttons = {
     end, "player.addGroups"},
     ["Warn Player"] = {function(self)
         userWarningMessage = getWarningUserMsg()
-        TriggerServerEvent("vrp:warnPlayer",self,userWarningMessage)        
+        if userWarningMessage then
+            TriggerServerEvent("vrp:warnPlayer",self,userWarningMessage)
+        else
+            tvRP.notify('Please enter a warning message!')
+        end
     end, "player.kick"},
 }
 
