@@ -854,14 +854,15 @@ AddEventHandler('vRPAdmin:Ban', function(id, hours, reason)
     local SelectedPlrSource = vRP.getUserSource(id) 
     local userid = vRP.getUserId(source)
     if vRP.hasPermission(userid, 'player.ban') then
-        saveBanLog(id, GetPlayerName(source), reason, hours)
         if SelectedPlrSource then  
             if tonumber(hours) then 
                 if tonumber(hours) == -1 then 
                     vRP.ban(source,id,"perm",reason)
+                    saveBanLog(id, GetPlayerName(source), reason, hours)
                     vRPclient.notify(source,{'~g~Successfully banned Player.'})
                 else 
                     vRP.ban(source,id,hours,reason)
+                    saveBanLog(id, GetPlayerName(source), reason, hours)
                     vRPclient.notify(source,{'~g~Successfully banned Player.'})
                 end
             else 
