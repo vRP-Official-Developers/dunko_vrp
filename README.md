@@ -2,17 +2,18 @@
 
 Welcome to Dunko vRP.
 
-Current: V7.9
+Current: V8.1.1
 
 # ReWrite Notice 
 
 This repository and framework is scheduled to be rewritten soon.
 
-Intent of Rewrite: 13/06/2021
+Intent of Rewrite: Soon™
 
-# Documentation
+# Documentation & FAQ
 
 Documentation for vRP is available here: https://jamesuk.gitbook.io/fivem-guides/dunko-vrp/docs
+FAQ for Dunk vRP: https://vrpdocs.jamesuk.xyz/dunko-vrp/faq
 
 # Donate/Patreon
 
@@ -54,15 +55,16 @@ If you need help, head over to my Discord:  https://discord.gg/kAfBuJG
 
 11) Also, please where possible use Onesync it provides you with so many more features. <a href="https://forum.cfx.re/t/onesync-infinity-how-to-use-it/996612">OneSync Forum Post</a>
 
-# My Server
-
-Name: Dunko vRP V6.7 - Preview/Test Server - discord.gg/kAfBuJG - Sponsored by Zap-Hosting.com
-
-Direct Connect: 134.255.216.169:30120
 
 # What's new
 
-#V7.9
+# V8.1.1
+ - Updated Resources Manifest to the Updated Version
+
+# V8.1
+ - Another Large Jump on Version that wasn't tracked correctly
+
+# V7.9
 
 - Large jump on versions due to mass amount of updates and backlog of updating the actual version. Many changes and fixes to the core itself.
 
