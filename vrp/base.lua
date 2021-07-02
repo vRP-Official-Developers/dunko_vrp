@@ -509,12 +509,12 @@ function vRP.ban(adminsource,permid,time,reason)
             local banTime = os.time()
             banTime = banTime  + (60 * 60 * tonumber(time))  
             vRP.setBanned(permid,true,banTime,reason, GetPlayerName(adminsource) .. " | ID Of Admin: " .. adminPermID)
-            vRP.kick(getBannedPlayerSrc,"You have been banned from this server. Your ban expires in: " .. os.date("%c", banTime) .. " Reason: " .. reason .. " | BanningAdmin: " ..  GetPlayerName(adminsource) .. " | ID Of Admin: " .. adminPermID ) 
+            vRP.kick(getBannedPlayerSrc,"You have been banned from this server. Your ban expires in: " .. os.date("%c", banTime) .. " Reason: " .. reason .. " | Banning Admin: " ..  GetPlayerName(adminsource) .. " | ID Of Admin: " .. adminPermID ) 
             vRPclient.notify(adminsource,{"~g~Success banned! User PermID:" .. permid})
         else 
             vRPclient.notify(adminsource,{"~g~Success banned! User PermID:" .. permid})
             vRP.setBanned(permid,true,"perm",reason, GetPlayerName(adminsource) .. " | ID Of Admin: " .. adminPermID)
-            vRP.kick(getBannedPlayerSrc,"You have been banned from this server. Your ban expires in: " .. "Never, you've been permanently banned." .. " Reason: " .. reason .. " | BanningAdmin: " ..  GetPlayerName(adminsource) .. " | ID Of Admin: " .. adminPermID ) 
+            vRP.kick(getBannedPlayerSrc,"You have been banned from this server. Your ban expires in: " .. "Never, you've been permanently banned." .. " Reason: " .. reason .. " | Banning Admin: " ..  GetPlayerName(adminsource) .. " | ID Of Admin: " .. adminPermID ) 
         end
     else 
         if tonumber(time) then 
