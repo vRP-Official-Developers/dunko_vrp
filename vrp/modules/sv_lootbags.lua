@@ -8,7 +8,7 @@ local LootBagEntities = {}
     Also, awful code design as was quickly created will be revamped in the rewrite of Dunko vRP.
 ]]
 
-local name = ""
+
 
 function tvRP.Coma()
     local source = source
@@ -21,6 +21,7 @@ function tvRP.Coma()
         local lootbagnetid = NetworkGetNetworkIdFromEntity(lootbag)
         LootBagEntities[lootbagnetid] = {lootbag, lootbag, false, source}
         LootBagEntities[lootbagnetid].Items = {}
+        LootBagEntities[lootbagnetid].name = name1 
         local ndata = vRP.getUserDataTable(user_id)
         local stored_inventory = nil;
         if ndata ~= nil then
@@ -30,7 +31,6 @@ function tvRP.Coma()
                 for k, v in pairs(stored_inventory) do
                     LootBagEntities[lootbagnetid].Items[k] = {}
                     LootBagEntities[lootbagnetid].Items[k].amount = v.amount
-                    name = name1
                 end
             end
         end
@@ -48,7 +48,7 @@ if vRPConfig.LootBags then
                 LootBagEntities[netid][5] = source
                 OpenInv(source, netid, LootBagEntities[netid].Items)
                 if vRPConfig.DisplayNamelLootbag then
-                    vRPclient.notify(source,{"~g~You have opened " ..name.. "'s lootbag"})
+                    vRPclient.notify(source,{"~g~You have opened " .. LootBagEntities[netid].name .. "'s lootbag"})
                 end
             end
         else
