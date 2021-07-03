@@ -4,10 +4,11 @@ local LootBagEntities = {}
 
 
 --[[
-
     QUICK LOOTBAGS MADE BY JAMESUK MAY CONTAIN BUGS. JAMESUK DOES NOT GURANTEE THIS SCRIPT TO BE BUG FREE.
     Also, awful code design as was quickly created will be revamped in the rewrite of Dunko vRP.
 ]]
+
+local name = ""
 
 function tvRP.Coma()
     local source = source
@@ -15,6 +16,7 @@ function tvRP.Coma()
         Wait(3000) -- wait delay for death.
         local user_id = vRP.getUserId(source)
         local model = GetHashKey('prop_cs_heist_bag_01')
+        local name1 = GetPlayerName(source)
         local lootbag = CreateObjectNoOffset(model, GetEntityCoords(GetPlayerPed(source)) + 0.4, true, true, false)
         local lootbagnetid = NetworkGetNetworkIdFromEntity(lootbag)
         LootBagEntities[lootbagnetid] = {lootbag, lootbag, false, source}
@@ -28,6 +30,7 @@ function tvRP.Coma()
                 for k, v in pairs(stored_inventory) do
                     LootBagEntities[lootbagnetid].Items[k] = {}
                     LootBagEntities[lootbagnetid].Items[k].amount = v.amount
+                    name = name1
                 end
             end
         end
@@ -44,6 +47,9 @@ if vRPConfig.LootBags then
             if user_id ~= nil then
                 LootBagEntities[netid][5] = source
                 OpenInv(source, netid, LootBagEntities[netid].Items)
+                if vRPConfig.DisplayNamelLootbag then
+                    vRPclient.notify(source,{"~g~You have opened " ..name.. "'s lootbag"})
+                end
             end
         else
             vRPclient.notify(source, {'~r~This loot bag is already being looted.'})

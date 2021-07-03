@@ -18,4 +18,5 @@ vRPConfig.F10System = true; -- Logs warnings and can be accessed via F10 (Thanks
 vRPConfig.ServerName = "vRP" -- Controls the name that is displayed on warnings title etc.
 ---------------
 vRPConfig.LootBags = true; -- Enables loot bags and disables looting. 
+vRPConfig.DisplayNamelLootbag = true; -- Enables notification of who's lootbag you have opened
 -- Thanks to JamesUK#6793 for the many options provided here.
