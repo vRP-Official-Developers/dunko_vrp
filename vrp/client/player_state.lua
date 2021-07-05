@@ -12,7 +12,7 @@ end)
 
 Citizen.CreateThread(function()
   while true do
-    Citizen.Wait(30000)
+    Citizen.Wait(vRPConfig.PlayerSavingTime)
     if IsPlayerPlaying(PlayerId()) and state_ready then
       local x,y,z = table.unpack(GetEntityCoords(GetPlayerPed(-1),true))
       vRPserver.updatePos({x,y,z})
