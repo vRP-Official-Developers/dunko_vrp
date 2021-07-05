@@ -2,7 +2,7 @@
 
 Welcome to Dunko vRP.
 
-Current: V8.1.1
+Current: V8.2
 
 # ReWrite Notice 
 
