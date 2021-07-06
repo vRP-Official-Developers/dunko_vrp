@@ -1,4 +1,4 @@
-function MENU() {
+function Menu() {
 	var id,menuName, selected, menuLevel, goingBack;
 
 	this.opened = false;
@@ -19,36 +19,36 @@ function MENU() {
 
 	buildMainMenu = function() {
 		$("body").append(
-			$("<div>",{"id":"mainMenu","class":"mainMenu"}).css("display","none").append(
-				$("<h1>",{"id":"menuHeader","class":"menuHeader"})
+			$("<div>",{"id":"ogrp_mainMenu","class":"ogrp_mainMenu"}).css("display","none").append(
+				$("<h1>",{"id":"ogrp_menuHeader","class":"ogrp_menuHeader"})
 			).append(
-				$("<div>",{"id":"menuChoices","class":"menuChoices"})
+				$("<div>",{"id":"ogrp_menuChoices","class":"ogrp_menuChoices"})
 			).append(
-				$("<div>",{"id":"menuDescription","class":"menuDescription"}).append(
-					$("<div>",{"id":"menuDescriptionContent","class":"menuDescriptionContent"})
+				$("<div>",{"id":"ogrp_menuDescription","class":"ogrp_menuDescription"}).append(
+					$("<div>",{"id":"ogrp_menuDescriptionContent","class":"ogrp_menuDescriptionContent"})
 				)
 			)
 		);
 	};
 
 	getChoicesCount = function() {
-		return $("#menuChoices").find(".menuChoice").length;
+		return $("#ogrp_menuChoices").find(".ogrp_menuChoice").length;
 	};
 
 	getChoiceText = function() {
-		return $("#menuChoices").find(".MenuChoiceSelected")[0].innerHTML;
+		return $($("#ogrp_menuChoices").find(".ogrp_MenuChoiceSelected")[0]).text();
 	};
 
 	getChoiceDesc = function() {
-		var selectedChoiceEl = $("#menuChoices").find(".MenuChoiceSelected")[0];
+		var selectedChoiceEl = $("#ogrp_menuChoices").find(".ogrp_MenuChoiceSelected")[0];
 
 		return ($(selectedChoiceEl).attr("data-desc")) ? $(selectedChoiceEl).data("desc"):"";
 	};
 
 	scrollToMenuOption = function() {
-		if($("#menuChoices").find(".MenuChoiceSelected").length) {
-			var scrollto = $($("#menuChoices").find(".MenuChoiceSelected"));
-			var container = $("#menuChoices");
+		if($("#ogrp_menuChoices").find(".ogrp_MenuChoiceSelected").length) {
+			var scrollto = $($("#ogrp_menuChoices").find(".ogrp_MenuChoiceSelected"));
+			var container = $("#ogrp_menuChoices");
 
 			if(scrollto.offset().top < container.offset().top || scrollto.offset().top + scrollto.height() >= container.offset().top+container.height()) {
 				container.scrollTop(scrollto.offset().top - container.offset().top + container.scrollTop());
@@ -57,7 +57,7 @@ function MENU() {
 	};
 
 	setHeaderColor = function(headerColor) {
-		$("#menuHeader").css("backgroundColor",headerColor);
+		$("#ogrp_menuHeader").css("backgroundColor",headerColor);
 	};
 
 	this.open = function(data) {
@@ -66,8 +66,8 @@ function MENU() {
 		var css = (data.menudata.css) ? data.menudata.css:false;
 		var headerColor = (css.header_color) ? css.header_color:false;
 
-		$("#menuChoices").empty();
-		$("#menuHeader").html(menuName);
+		$("#ogrp_menuChoices").empty();
+		$("#ogrp_menuHeader").html(menuName);
 
 		setHeaderColor(headerColor);
 
@@ -81,11 +81,11 @@ function MENU() {
 			goingBack = false;
 		}
 
-		$("#mainMenu").show();
+		$("#ogrp_mainMenu").show();
 
 		$.each(choices,function(i,c) {
-			$("#menuChoices").append(
-				$("<div>",{"class":"menuChoice", "data-desc":c[1]}).html(getChoiceContents(c[0]))
+			$("#ogrp_menuChoices").append(
+				$("<div>",{"class":"ogrp_menuChoice", "data-desc":c[1]}).html(getChoiceContents(c[0]))
 			);
 		});
 
@@ -108,7 +108,7 @@ function MENU() {
 
 			if(menuLevel < 1) {
 				this.opened = false;
-				$("#mainMenu").hide();
+				$("#ogrp_mainMenu").hide();
 			}
 
 			if(this.onClose) {
@@ -119,7 +119,7 @@ function MENU() {
 
 	this.setSelected = function(i) {
 		selected = i;
-		$(".menuChoice").removeClass("MenuChoiceSelected");
+		$(".ogrp_menuChoice").removeClass("ogrp_MenuChoiceSelected");
 
 		if(selected < 0) {
 			selected = getChoicesCount()-1;
@@ -128,16 +128,16 @@ function MENU() {
 		}
 
 		if(selected >= 0 && (selected < getChoicesCount())) {
-			$("#menuChoices div.menuChoice:nth-child(" + (selected + 1) + ")").addClass("MenuChoiceSelected");
+			$("#ogrp_menuChoices div.ogrp_menuChoice:nth-child(" + (selected + 1) + ")").addClass("ogrp_MenuChoiceSelected");
 		}
 
 		scrollToMenuOption();
 
 		if(getChoiceDesc().length) {
-			$("#menuDescriptionContent").html(getChoiceDesc());
-			$("#menuDescription").show();
+			$("#ogrp_menuDescriptionContent").html(getChoiceDesc());
+			$("#ogrp_menuDescription").show();
 		} else {
-			$("#menuDescription").hide();
+			$("#ogrp_menuDescription").hide();
 		}
 	};
 
