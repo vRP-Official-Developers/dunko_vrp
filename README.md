@@ -16,7 +16,7 @@ Intent of Rewrite: Soon™
 
 # Documentation & FAQ
 
-Documentation for vRP is available here: https://jamesuk.gitbook.io/fivem-guides/dunko-vrp/docs
+Documentation for vRP is available here: https://jamesuk.gitbook.io/fivem-guides/dunko-vrp/docs<br>
 FAQ for Dunk vRP: https://vrpdocs.jamesuk.xyz/dunko-vrp/faq
 
 # Donate/Patreon
