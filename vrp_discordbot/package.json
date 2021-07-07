@@ -1,0 +1,16 @@
+{
+    "name": "JamesUKVRP",
+    "version": "1.0.0",
+    "description": "",
+    "main": "bot.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "author": "JamesUK-6793",
+    "license": "MIT",
+    "dependencies": {
+        "discord.js": "^11.6.4",
+        "ascii-table": "^0.0.9",
+        "dotenv": "^6.2.0"
+    }
+}
