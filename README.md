@@ -62,6 +62,11 @@ If you need help, head over to my Discord:  https://discord.gg/kAfBuJG
 
 # What's new
 
+# 8.2 
+
+- Proper version update.
+- Changed branches with master & additonal branches.
+
 # V8.1.1
  - Updated Resources Manifest to the Updated Version
 
