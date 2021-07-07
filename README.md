@@ -4,6 +4,10 @@ Welcome to Dunko vRP.
 
 Current: V8.2
 
+# Additonal Resources 
+
+They are now put into a seperate branch which you can change into the ones in the existing master branch are maintained resources.
+
 # ReWrite Notice 
 
 This repository and framework is scheduled to be rewritten soon.
