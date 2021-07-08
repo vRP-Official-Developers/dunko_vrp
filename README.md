@@ -1,12 +1,14 @@
+
+# DISCLAIMER
+
+The additonals to Dunko vRP have moved to the additonals branch! The main master branch now contains only the maintained resources.
+
 # Dunko vRP
 
 Welcome to Dunko vRP.
 
 Current: V8.2
 
-# Additonal Resources 
-
-They are now put into a seperate branch which you can change into the ones in the existing master branch are maintained resources.
 
 # ReWrite Notice 
 
