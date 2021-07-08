@@ -1,7 +1,7 @@
 
 # DISCLAIMER
 
-The additonals to Dunko vRP have moved to the [additonals](https://github.com/DunkoUK/dunko_vrp/tree/additonals) branch! The main master branch now contains only the maintained resources.
+The additonals to Dunko vRP have moved to the [additonals branch](https://github.com/DunkoUK/dunko_vrp/tree/additonals)! The main master branch now contains only the maintained resources.
 
 # Dunko vRP
 
