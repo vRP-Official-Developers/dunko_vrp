@@ -8,7 +8,9 @@ cfg.display_css = [[
   top: 125px;
   right: 5px;
   color: white;
-  background-color: rgba(0,0,0,0.75);
+  background-color: #161b33;
+  border-radius: 8px;
+  border-left: 5px solid #23B5D3;
   padding: 8px;
   max-width: 300px;
   font-family: 'Roboto', sans-serif;
