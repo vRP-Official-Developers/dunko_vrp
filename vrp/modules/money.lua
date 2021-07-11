@@ -53,6 +53,16 @@ function vRP.tryPayment(user_id,amount)
   end
 end
 
+function vRP.tryBankPayment(user_id,amount)
+  local bank = vRP.getBankMoney(user_id)
+  if amount >= 0 and bank >= amount then
+    vRP.setBankMoney(user_id,bank-amount)
+    return true
+  else
+    return false
+  end
+end
+
 -- give money
 function vRP.giveMoney(user_id,amount)
   local money = vRP.getMoney(user_id)
