@@ -112,6 +112,10 @@ cfg.Buttons = {
             tvRP.notify('Please enter a warning message!')
         end
     end, "player.kick"},
+    
+    ["Show Warnings"] = {function(self)
+    ExecuteCommand("showwarnings "..tostring(self))
+    end, "player.kick"},
 }
 
 --vRP:RemoveWarning
