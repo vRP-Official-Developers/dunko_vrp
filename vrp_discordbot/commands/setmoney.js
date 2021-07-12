@@ -7,7 +7,7 @@ exports.runcmd = (fivemexports, client, message, params) => {
             let dvalue = JSON.parse(result[0].dvalue)
             let groups = dvalue.groups
             groups[params[1]] = true;
-            fivemexports.ghmattimysql.execute("UPDATE `vrp_user_moneys` SET waller = ? WHERE user_id = ?", [JSON.stringify(dvalue), params[0]])
+            fivemexports.ghmattimysql.execute("UPDATE `vrp_user_moneys` SET wallet = ? WHERE user_id = ?", [JSON.stringify(dvalue), params[0]])
         }
     })
     let embed = {
