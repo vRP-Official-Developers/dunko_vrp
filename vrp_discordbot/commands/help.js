@@ -14,3 +14,4 @@ exports.runcmd = (fivemexports, client, message, params) => {
 exports.conf = {
     name: "help",
     perm: 0
+}
