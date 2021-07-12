@@ -17,6 +17,7 @@ if (process.env.TOKEN == "" || process.env.TOKEN == "TOKEN") {
 
 client.on('ready', () => {
     console.log(`[^1JamesUK Discord Bot^7]: Logged in as ${client.user.tag}! Players: ${GetNumPlayerIndices()}`);
+    console.log(`[^1JamesUK Discord Bot^7]: Your Prefix Is ${process.env.PREFIX}`)
     init()
 });
 
