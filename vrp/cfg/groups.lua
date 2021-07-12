@@ -1131,7 +1131,7 @@ cfg.selectors = {
     "Unemployed"
   },
   ["Police job"] = { -- Alta Street
-    _config = {x = 447.35137939453, y = -975.57592773438, z = 30.689584732056, blipid = 351, blipcolor = 38, permissions = {"cop.whitelisted"} },
+    _config = {x = 443.52569580078, y = -975.63049316406, z = 30.689334869385, blipid = 351, blipcolor = 38, permissions = {"cop.whitelisted"} },
 	"State Trooper",
 	"Police Captain",
 	"Police Lieutenant",
