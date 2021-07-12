@@ -28,7 +28,7 @@ If you need help, head over to my Discord:  https://discord.gg/kAfBuJG
 
 # Installation
 
-**Be aware when using ZapHosting their Dunko vRP is outdated**
+**Be aware when using ZapHosting their Dunko vRP is outdated and you will need to manually update your files using FTP.**
 
 1) Copy the folders inside MASTER to your FXServer/Resources folder. DO NOT COPY THE MASTER FOLDER ITSELF.
 
