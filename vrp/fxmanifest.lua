@@ -99,8 +99,6 @@ client_scripts{
   -- "hotkeys/hotkeys.lua"
 }
 
-
-
 -- client files
 files{
   "cfg/client.lua",
