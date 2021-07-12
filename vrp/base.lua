@@ -782,14 +782,7 @@ end)
 
 AddEventHandler("playerDropped",function(reason)
     local source = source
-    Debug.pbegin("playerDropped")
-    
-    -- remove player from connected clients
-    vRPclient.removePlayer(-1,{source})
-    
-    
     local user_id = vRP.getUserId(source)
-    
     if user_id ~= nil then
         TriggerEvent("vRP:playerLeave", user_id, source)
         
@@ -802,8 +795,11 @@ AddEventHandler("playerDropped",function(reason)
         vRP.user_tables[user_id] = nil
         vRP.user_tmp_tables[user_id] = nil
         vRP.user_sources[user_id] = nil
+        print('[vRP] Player Leaving Save:  Saved data for: ' .. GetPlayerName(source))
+    else 
+        print('[vRP] SEVERE ERROR: Failed to save data for: ' .. GetPlayerName(source) .. ' Rollback expected!')
     end
-    Debug.pend()
+    vRPclient.removePlayer(-1,{source})
 end)
 
 RegisterServerEvent("vRPcli:playerSpawned")

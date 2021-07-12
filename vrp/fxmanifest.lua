@@ -99,16 +99,13 @@ client_scripts{
   -- "hotkeys/hotkeys.lua"
 }
 
-
-
 -- client files
 files{
   "cfg/client.lua",
   "gui/index.html",
   "gui/design.css",
   "gui/main.js",
-  "gui/ogrp.main.js",
-  "gui/ogrp.menu.js",
+  "gui/Menu.js",
   "gui/ProgressBar.js",
   "gui/WPrompt.js",
   "gui/RequestManager.js",

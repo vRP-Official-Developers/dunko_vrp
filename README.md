@@ -1,8 +1,14 @@
+
+# DISCLAIMER
+
+The additonals to Dunko vRP have moved to the [additonals branch](https://github.com/DunkoUK/dunko_vrp/tree/additonals)! The main master branch now contains only the maintained resources.
+
 # Dunko vRP
 
 Welcome to Dunko vRP.
 
-Current: V8.1.1
+Current: V8.2
+
 
 # ReWrite Notice 
 
@@ -12,7 +18,7 @@ Intent of Rewrite: Soon™
 
 # Documentation & FAQ
 
-Documentation for vRP is available here: https://jamesuk.gitbook.io/fivem-guides/dunko-vrp/docs
+Documentation for vRP is available here: https://jamesuk.gitbook.io/fivem-guides/dunko-vrp/docs<br>
 FAQ for Dunk vRP: https://vrpdocs.jamesuk.xyz/dunko-vrp/faq
 
 # Donate/Patreon
@@ -57,6 +63,11 @@ If you need help, head over to my Discord:  https://discord.gg/kAfBuJG
 
 
 # What's new
+
+# 8.2 
+
+- Proper version update.
+- Changed branches with master & additonal branches.
 
 # V8.1.1
  - Updated Resources Manifest to the Updated Version
