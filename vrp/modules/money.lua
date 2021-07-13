@@ -37,7 +37,7 @@ function vRP.setMoney(user_id,value)
   -- update client display
   local source = vRP.getUserSource(user_id)
   if source ~= nil then
-    vRPclient.setDivContent(source,{"money",lang.money.display({value})})
+    vRPclient.setDivContent(source,{"money",lang.money.display({Comma(vRP.getMoney(user_id))})})
   end
 end
 
@@ -87,7 +87,7 @@ function vRP.setBankMoney(user_id,value)
   end
   local source = vRP.getUserSource(user_id)
   if source ~= nil then
-    vRPclient.setDivContent(source,{"bmoney",lang.money.bdisplay({value})})
+    vRPclient.setDivContent(source,{"bmoney",lang.money.bdisplay({Comma(vRP.getBankMoney(user_id))})})
   end
 end
 
@@ -176,8 +176,8 @@ AddEventHandler("vRP:playerSpawn",function(user_id, source, first_spawn)
   Wait(500)
   if first_spawn and vRPConfig.MoneyUiEnabled then
     -- add money display
-    vRPclient.setDiv(source,{"money",cfg.display_css,lang.money.display({vRP.getMoney(user_id)})})
-	vRPclient.setDiv(source,{"bmoney",cfg.display_css,lang.money.bdisplay({vRP.getBankMoney(user_id)})})
+    vRPclient.setDiv(source,{"money",cfg.display_css,lang.money.display({Comma(vRP.getMoney(user_id))})})
+    vRPclient.setDiv(source,{"bmoney",cfg.display_css,lang.money.bdisplay({Comma(vRP.getBankMoney(user_id))})})
   end
 end)
 
@@ -220,3 +220,14 @@ vRP.registerMenuBuilder("main", function(add, data)
     add(choices)
   end
 end)
+
+function Comma(amount)
+  local formatted = amount
+  while true do  
+    formatted, k = string.gsub(formatted, "^(-?%d+)(%d%d%d)", '%1,%2')
+    if (k==0) then
+      break
+    end
+  end
+  return formatted
+end
