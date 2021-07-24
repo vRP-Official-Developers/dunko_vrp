@@ -48,7 +48,7 @@ window.addEventListener("load", function() {
             ogrpMenu.open(data);
             ogrpMenu.id = data.menudata.id;
         } else if (data.act == "close_menu") { //CLOSE MENU
-            //current_menu.close();
+            ogrpMenu.close();
         }
         // PROGRESS BAR
         else if (data.act == "set_pbar") {
