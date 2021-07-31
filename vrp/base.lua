@@ -325,9 +325,6 @@ RegisterCommand("getmyid", function(source)
     TriggerClientEvent('chatMessage', source, "[Server]", {255, 255, 255}, " Perm ID: " .. vRP.getUserId({source}) , "alert")
 end)
 
-RegisterCommand("getmytempid", function(source)
-	TriggerClientEvent('chatMessage', source, "[Server]", {255, 255, 255}, " Your Temp-ID: " .. source, "alert")
-end)
 -- This can only be used server side and is for the vRP bot. 
 exports("vrpbot", function(method_name, params, cb)
     if cb then 
