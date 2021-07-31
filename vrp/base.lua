@@ -322,7 +322,7 @@ function vRP.ReLoadChar(source)
     end)
 end
 RegisterCommand("getmyid", function(source)
-    TriggerClientEvent('chatMessage', source, "[Server]", {255, 255, 255}, " Perm ID: " .. vRP.getUserId({source}) , "alert")
+    TriggerClientEvent('chatMessage', source, "[Server]", {255, 255, 255}, " Perm ID: " .. vRP.getUserId(source) , "alert")
 end)
 
 -- This can only be used server side and is for the vRP bot. 
