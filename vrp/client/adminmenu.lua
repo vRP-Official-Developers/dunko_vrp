@@ -270,7 +270,30 @@ Citizen.CreateThread(function()
         end
     end
 end)
-
+function SpawnVehicle(VehicleName)
+	local hash = GetHashKey(VehicleName)
+	RequestModel(hash)
+	local i = 0
+	while not HasModelLoaded(hash) and i < 50 do
+		Citizen.Wait(10)
+		i = i + 1
+	end
+    if i >= 50 then
+        return
+	end
+	local Ped = PlayerPedId()
+	local Vehicle = CreateVehicle(hash, GetEntityCoords(Ped), GetEntityHeading(Ped), true, 0)
+    i = 0
+	while not DoesEntityExist(Vehicle) and i < 50 do
+		Citizen.Wait(10)
+		i = i + 1
+	end
+	if i >= 50 then
+		return
+	end
+    SetPedIntoVehicle(Ped, Vehicle, -1)
+    SetModelAsNoLongerNeeded(hash)
+end
 local scaleform = RequestScaleformMovie("MP_BIG_MESSAGE_FREEMODE")
 Citizen.CreateThread(function()
     while true do
