@@ -160,6 +160,9 @@ cfg.MiscButtons = {
     ["Noclip"] = {function(self)
         tvRP.toggleNoclip({})
     end, "player.noclip", "Teleports you to a waypoint"},
+    ["Spawn BMX"] = {function(self)
+        SpawnVehicle({bmx})
+    end, "player.kick", "Spawns You A BMX"},
     ["Spawn Vehicle"] = {function(self)
         AddTextEntry('FMMC_MPM_NC', "Enter the car spawncode name")
         DisplayOnscreenKeyboard(1, "FMMC_MPM_NC", "", "", "", "", "", 30)
