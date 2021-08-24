@@ -49,3 +49,14 @@ RegisterCommand('unban', function(source, args)
     end
 end)
 
+
+
+
+RegisterCommand('givecar', function(source, args)
+    if source ~= 0 then return end; -- Stops anyone other than the console
+    if tonumber(args[1]) then
+        local userid = tonumber(args[1])
+        local car = tostring(args[2])
+        MySQL.execute("vRP/add_vehicle", {user_id = userid, vehicle = car, registration = "P"})
+    end
+end)
