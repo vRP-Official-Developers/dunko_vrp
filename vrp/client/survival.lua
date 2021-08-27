@@ -3,6 +3,7 @@ function tvRP.varyHealth(variation)
     local ped = GetPlayerPed(-1)
 
     local n = math.floor(GetEntityHealth(ped) + variation)
+    TriggerEvent('vRP:IsInComa', false)
     SetEntityHealth(ped, n)
 end
 
