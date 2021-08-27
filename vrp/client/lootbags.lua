@@ -6,7 +6,6 @@ local PlayerInComa = false;
 local model = GetHashKey('prop_cs_heist_bag_01')
 
 AddEventHandler('vRP:IsInComa', function(coma)
-    print(coma)
     PlayerInComa = coma;
     if coma then 
         LootBagCoords = false;
