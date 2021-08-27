@@ -2,23 +2,36 @@ local NearLootBag = false;
 local LootBagID = nil;
 local LootBagIDNew = nil;
 local LootBagCoords = nil;
+local PlayerInComa = false;
 local model = GetHashKey('prop_cs_heist_bag_01')
+
+AddEventHandler('vRP:IsInComa', function(coma)
+    print(coma)
+    PlayerInComa = coma;
+    if coma then 
+        LootBagCoords = false;
+        NearLootBag = false; 
+        LootBagID = nil;
+    end
+end)
 
 Citizen.CreateThread(function()
     while true do 
         Wait(250)
-        local coords = GetEntityCoords(PlayerPedId())
-        if DoesObjectOfTypeExistAtCoords(coords, 1.5, model, true) then
-            if not NearLootBag then
-                NearLootBag = true;
-                LootBagID = GetClosestObjectOfType(coords, 1.5, model, false, false, false)
-                LootBagIDNew = ObjToNet(LootBagID)
-                LootBagCoords = GetEntityCoords(LootBagID)
+        if not PlayerInComa then
+            local coords = GetEntityCoords(PlayerPedId())
+            if DoesObjectOfTypeExistAtCoords(coords, 1.5, model, true) then
+                if not NearLootBag then
+                    NearLootBag = true;
+                    LootBagID = GetClosestObjectOfType(coords, 1.5, model, false, false, false)
+                    LootBagIDNew = ObjToNet(LootBagID)
+                    LootBagCoords = GetEntityCoords(LootBagID)
+                end
+            else 
+                LootBagCoords = false;
+                NearLootBag = false; 
+                LootBagID = nil;
             end
-        else 
-            LootBagCoords = false;
-            NearLootBag = false; 
-            LootBagID = nil;
         end
     end
 end)

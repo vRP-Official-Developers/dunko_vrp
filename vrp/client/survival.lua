@@ -102,6 +102,7 @@ Citizen.CreateThread(function() -- coma thread
                         vRPserver.StoreWeaponsDead()
                     end
                     vRPserver.Coma()
+                    TriggerEvent('vRP:IsInComa', true)
                     vRPserver.updateHealth({cfg.coma_threshold}) -- force health update
                     SetEntityHealth(ped, cfg.coma_threshold)
                     SetEntityInvincible(ped, true)
@@ -123,6 +124,7 @@ Citizen.CreateThread(function() -- coma thread
 
                     if coma_left <= 0 then -- get out of coma by death
                         SetEntityHealth(ped, 0)
+                        TriggerEvent('vRP:IsInComa', false)
                     end
 
                     SetTimeout(5000, function() -- able to be in coma again after coma death after 5 seconds
