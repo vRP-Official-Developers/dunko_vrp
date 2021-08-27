@@ -79,14 +79,19 @@ if vRPConfig.LootBags then
         while true do 
             Wait(60000)
             for i,v in pairs(LootBagEntities) do 
-                if #v.Items == 0 then
+                local itemCount = 0;
+                for i,v in pairs(v.Items) do
+                    itemCount = itemCount + 1
+                end
+                if itemCount == 0 then
                     if DoesEntityExist(v[1]) then 
                         DeleteEntity(v[1])
+                        print('Deleted Lootbag')
                         LootBagEntities[i] = nil;
                     end
                 end
             end
-            print('All Lootbag garbage collected.')
+            --print('All Lootbag garbage collected.')
         end
     end)
 
@@ -151,16 +156,15 @@ if vRPConfig.LootBags then
                     if new_weight <= vRP.getInventoryMaxWeight(user_id) then
                         vRP.giveInventoryItem(user_id, idname, amount, true)
                         citem.amount = citem.amount - amount
-
                         if citem.amount <= 0 then
                             LootBagEntities[netid].Items[idname] = nil 
                         end
-
                         if cb_out then
                             cb_out(idname, amount)
                         end
                         refreshing = true;
-                        RefreshMenu()
+                        RefreshMenu(netid, source)
+                        vRP.closeMenu(player)
                     else
                         vRPclient.notify(source, {lang.inventory.full()})
                     end
@@ -186,7 +190,7 @@ if vRPConfig.LootBags then
             vRP.openMenu(player, submenu)
         end
         local submenu2 = build_itemlist_menu('LootBag', LootBagEntities[netid].Items, cb_take)
-        RefreshMenu = function()
+        RefreshMenu = function(netid, player)
             vRP.closeMenu(source)
             local items = 0;
             for k, v in pairs(LootBagEntities[netid].Items) do
@@ -206,6 +210,8 @@ if vRPConfig.LootBags then
                     LootBagEntities[netid][3] = false;
                     LootBagEntities[netid][5] = nil;
                 else 
+                    submenu2 = build_itemlist_menu('LootBag', LootBagEntities[netid].Items, cb_take)
+                    vRP.openMenu(player, submenu2)
                     refreshing = false    
                 end 
             end
