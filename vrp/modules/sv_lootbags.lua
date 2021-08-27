@@ -15,7 +15,7 @@ function tvRP.Coma()
     if vRPConfig.LootBags then
         Wait(3000) -- wait delay for death.
         local user_id = vRP.getUserId(source)
-        local model = GetHashKey('p_ld_heist_bag_s_1')
+        local model = GetHashKey('prop_cs_heist_bag_01')
         local name1 = GetPlayerName(source)
         local lootbag = CreateObjectNoOffset(model, GetEntityCoords(GetPlayerPed(source)) + 0.4, true, true, false)
         local lootbagnetid = NetworkGetNetworkIdFromEntity(lootbag)
