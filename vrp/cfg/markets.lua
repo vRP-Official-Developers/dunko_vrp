@@ -10,6 +10,7 @@ cfg.market_types = {
 
     -- list itemid => price
     -- Drinks
+    ["bag"] = 30,
     ["milk"] = 20,
     ["water"] = 20,
     ["coffee"] = 40,
@@ -40,7 +41,7 @@ cfg.market_types = {
   },
   ["plantation"] = {
     _config = {blipid=473, blipcolor=4, permissions={"drugseller.market"}},
-    ["seeds"] = 500,
+--    ["seeds"] = 500,
 	["benzoilmetilecgonina"] = 800,
 	["harness"] = 1000
   },
