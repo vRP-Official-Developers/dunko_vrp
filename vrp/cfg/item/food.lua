@@ -74,6 +74,7 @@ items["cocacola"] = {"Coca Cola","", gen("drink",0,-35),0.3}
 items["redbull"] = {"Red Bull","", gen("drink",0,-40),0.3}
 items["lemonade"] = {"Lemonade","", gen("drink",0,-45),0.3}
 items["vodka"] = {"Vodka","", gen("drink",15,-65),0.5}
+items["bag"] = {"Bag", "", nil, 0.01}
 
 --FOOD
 

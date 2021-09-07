@@ -1128,6 +1128,7 @@ cfg.selectors = {
 	"UPS",
 	"Fisher",
 	"Medical Transport",
+	"Drug Dealer",
     "Unemployed"
   },
   ["Police job"] = { -- Alta Street

@@ -1,4 +1,3 @@
-
 local cfg = {}
 
 -- define static item transformers
@@ -385,31 +384,31 @@ cfg.item_transformers = {
 
 -- define transformers randomly placed on the map
 cfg.hidden_transformers = {
-  ["weed field"] = {
-    def = {
-      name="Weed field", -- menu name
-      permissions = {"harvest.weed"}, -- you can add permissions
-      r=0,g=200,b=0, -- color
-      max_units=100000,
-      units_per_minute=100000,
-      x=0,y=0,z=0, -- pos
-      radius=5, height=1.5, -- area
-      recipes = {
-        ["Harvest"] = { -- action name
-          description="Harvest some drugs.", -- action description
-          in_money=0, -- money taken per unit
-          out_money=0, -- money earned per unit
-          reagents={}, -- items taken per unit
-          products={ -- items given per unit
-            ["seeds"] = 1
-          }
-        }
-      }
-    },
-    positions = {
-      {2208.0104980469,5577.6987304688,53.739212036133}
-    }
-  },
+  -- ["weed field"] = {
+  --   def = {
+  --     name="Weed field", -- menu name
+  --     permissions = {"harvest.weed"}, -- you can add permissions
+  --     r=0,g=200,b=0, -- color
+  --     max_units=100000,
+  --     units_per_minute=100000,
+  --     x=0,y=0,z=0, -- pos
+  --     radius=5, height=1.5, -- area
+  --     recipes = {
+  --       ["Harvest"] = { -- action name
+  --         description="Harvest some drugs.", -- action description
+  --         in_money=0, -- money taken per unit
+  --         out_money=0, -- money earned per unit
+  --         reagents={}, -- items taken per unit
+  --         products={ -- items given per unit
+  --           ["seeds"] = 1
+  --         }
+  --       }
+  --     }
+  --   },
+  --   positions = {
+  --     {2208.0104980469,5577.6987304688,53.739212036133}
+  --   }
+  -- },
   ["cocaine dealer"] = {
     def = {
       name="Cocaine Dealer", -- menu name

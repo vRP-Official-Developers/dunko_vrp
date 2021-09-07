@@ -6,7 +6,7 @@ local cfg = {}
 -- a good practice is to create your own item pack file instead of adding items here
 cfg.items = {
   ["benzoilmetilecgonina"] = {"Benzoilmetilecgonina", "Some Benzoic acid ester.", nil, 0.01}, -- no choices
-  ["seeds"] = {"Seeds", "Some Weed seeds.", nil, 0.01}, -- no choices
+  -- ["seeds"] = {"Seeds", "Some Weed seeds.", nil, 0.01}, -- no choices
   ["harness"] = {"Harness", "Some Harness Lysergsäurediethylamid.", nil, 0.01}, -- no choices
   ["AK47"] = {"AK47", "A Russian masterpeice.", nil, 0.01}, -- no choices
   ["M4A1"] = {"M4A1", "Helps give non-Americans freedom.", nil, 0.01}, -- no choices
@@ -17,7 +17,9 @@ cfg.items = {
   ["fake_id"] = {"Fake ID", "It just says Mcluvin.", nil, 0}, -- no choices
   ["police_report"] = {"Police Report", "Take it to the Bank Manager.", nil, 0},  -- no choices
   ["ems_report"] = {"EMS Report", "Take it to the Hospital.", nil, 0}, -- no choices
-  ["cargo"] = {"Cargo", "Boxes full of porn.", nil, 0} -- no choices
+  ["cargo"] = {"Cargo", "Boxes full of porn.", nil, 0}, -- no choices
+  ["unprocessed_weed"] = {"Unprocessed Weed", "Weed that needs to be bagged.", nil, 0.5}, -- no choices
+  ["bagged_weed"] = {"Bagged Weed", "Weed that is bagged.", nil, 1.5}, -- no choices
 }
 
 -- load more items function
