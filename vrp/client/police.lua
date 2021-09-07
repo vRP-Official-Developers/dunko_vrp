@@ -104,6 +104,8 @@ Citizen.CreateThread(function()
       DisableControlAction(0,143,true) -- disable melee
       DisableControlAction(0,75,true) -- disable exit vehicle
       DisableControlAction(27,75,true) -- disable exit vehicle
+      DisableControlAction(0, 38, true)
+
     end
   end
 end)
