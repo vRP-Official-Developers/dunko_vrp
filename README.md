@@ -1,4 +1,12 @@
 
+# ICELINE
+We are now partnered with Iceline Hosting, Use our affiliate link: [Click This](iceline.host/dunkovrp) - 60% off first month
+
+They have given us a 1-Click installer meaning all you have to do is configure it when you buy.
+
+
+
+
 # DISCLAIMER
 
 The additonals to Dunko vRP have moved to the [additonals branch](https://github.com/DunkoUK/dunko_vrp/tree/additonals)! The main master branch now contains only the maintained resources.
@@ -257,6 +265,3 @@ This will hopefully stop people getting the "Identification Error" whist the ser
 - Removed EssentialMode as it's no longer needed
 - Removed "names-client.lua" from CustomScripts __resource.lua
 - Removed vrp_court as it's no longer needed
-
-Farmer6969 is buk
-For management proof 
