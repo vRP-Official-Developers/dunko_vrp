@@ -6,12 +6,14 @@ local webhooks = {}
 
 
 -- ADMIN LOGS
-
+webhooks.banlog = 'none' -- when a player is kicked
+webhooks.unbanlog = 'none' -- when a player is unbanned
+webhooks.kicklog = 'hone' -- when an admin kicks a player
 
 
 -- JOIN/LEAVE LOGS
 
-webhooks.spawnlog = 'https://canary.discord.com/api/webhooks/911789640409833522/zz0lcxcxeCs1WRGcIBQv1Rk4c4lNyRJJpFrwtvhYIrFr1eaKTo21vv1bihxeaJmnVuM3' -- when player passes queue and is spawned.
+webhooks.spawnlog = 'none' -- when player passes queue and is spawned.
 webhooks.leavelog = 'none' -- when any player leaves server.
 
 
