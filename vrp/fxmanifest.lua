@@ -61,7 +61,8 @@ server_scripts{
   "modules/LsCustoms.lua",
   "modules/server_commands.lua",
   "modules/warningsystem.lua",
-  "modules/sv_lootbags.lua"
+  "modules/sv_lootbags.lua",
+  "servercfg/*.lua"
   -- "modules/hotkeys.lua"
 }
 
