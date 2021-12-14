@@ -790,6 +790,8 @@ AddEventHandler("playerDropped",function(reason)
     log = log_config.leavelog
     if log ~= 'none' or log ~= 'nil' then
         print('test')
+    else
+        print('test234')
     end
     if user_id ~= nil then
         TriggerEvent("vRP:playerLeave", user_id, source)
