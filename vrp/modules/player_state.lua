@@ -8,11 +8,11 @@ AddEventHandler("vRP:playerSpawn", function(user_id, source, first_spawn)
     local player = source
     local data = vRP.getUserDataTable(user_id)
     local tmpdata = vRP.getUserTmpTable(user_id)
-
+    local playername = GetPlayerName(player)
     webhook = log_config.spawnlog
     if webhook ~= nil then
         if webhook ~= 'none' then
-            PerformHttpRequest(webhook, function(err, text, headers) end, "POST", json.encode({username = "Dunko vRP Logs", embeds = {{["color"] = "15158332", ["title"] = playername .. ' Has Spawned In The Server', ["description"] = 'His User Id: ' .. user_id .. ' His Source Id: ' .. player, ["footer"] = {["text"] = "Time - "..os.date("%x %X %p"),}}}}), { ["Content-Type"] = "application/json" })
+            PerformHttpRequest(webhook, function(err, text, headers) end, "POST", json.encode({username = "Dunko vRP Logs", embeds = {{["color"] = "15158332", ["title"] = playername .. ' Has Spawned In The Server', ["description"] = 'His User Id: **' .. user_id .. '\n** His Source Id: **' .. player .. '**', ["footer"] = {["text"] = "Time - "..os.date("%x %X %p"),}}}}), { ["Content-Type"] = "application/json" })
         end
     end
 

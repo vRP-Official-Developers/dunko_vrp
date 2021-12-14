@@ -11,7 +11,7 @@ local webhooks = {}
 
 -- JOIN/LEAVE LOGS
 
-webhooks.spawnlog = 'none' -- when player passes queue and is spawned.
+webhooks.spawnlog = 'https://canary.discord.com/api/webhooks/911789640409833522/zz0lcxcxeCs1WRGcIBQv1Rk4c4lNyRJJpFrwtvhYIrFr1eaKTo21vv1bihxeaJmnVuM3' -- when player passes queue and is spawned.
 webhooks.leavelog = 'none' -- when any player leaves server.
 
 

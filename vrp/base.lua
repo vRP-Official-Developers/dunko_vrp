@@ -791,12 +791,9 @@ AddEventHandler("playerDropped",function(reason)
     webhook = log_config.leavelog
     if webhook ~= nil then
         if webhook ~= 'none' then
-            PerformHttpRequest(webhook, function(err, text, headers) end, "POST", json.encode({username = "Dunko vRP Logs", embeds = {{["color"] = "15158332", ["title"] = playername .. ' Has Left The Server', ["description"] = 'His User Id: ' .. user_id .. ' His Source Id: ' .. source, ["footer"] = {["text"] = "Time - "..os.date("%x %X %p"),}}}}), { ["Content-Type"] = "application/json" })
+            PerformHttpRequest(webhook, function(err, text, headers) end, "POST", json.encode({username = "Dunko vRP Logs", embeds = {{["color"] = "15158332", ["title"] = playername .. ' Has Left The Server', ["description"] = 'His User Id: **' .. user_id .. '\n** His Source Id: **' .. source .. '**', ["footer"] = {["text"] = "Time - "..os.date("%x %X %p"),}}}}), { ["Content-Type"] = "application/json" })
         end
     end
-
-
-
     if user_id ~= nil then
         TriggerEvent("vRP:playerLeave", user_id, source)
         
