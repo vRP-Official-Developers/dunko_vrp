@@ -6,7 +6,7 @@ local Lang = module("lib/Lang")
 Debug = module("lib/Debug")
 
 local config = module("cfg/base")
-local log_config = module("servercfg/cfg_webhooks.lua")
+local log_config = module("servercfg/cfg_webhooks")
 local version = module("version")
 
 print("^5[VRP]: ^7" .. 'Checking for vRP Updates..')
@@ -787,7 +787,10 @@ end)
 AddEventHandler("playerDropped",function(reason)
     local source = source
     local user_id = vRP.getUserId(source)
-    print(log_config.banlog)
+    log = log_config.leavelog
+    if log ~= 'none' or log ~= 'nil' then
+        print('test')
+    end
     if user_id ~= nil then
         TriggerEvent("vRP:playerLeave", user_id, source)
         
