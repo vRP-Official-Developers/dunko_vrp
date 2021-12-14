@@ -401,7 +401,7 @@ AddEventHandler('vRPAdmin:UpdateBlacklistedProps', function(entity)
         configjson[entity] = true;
         SaveResourceFile(GetCurrentResourceName(), "modules/banned-props.json", json.encode(configjson, { indent = true }), -1)
     else 
-        print(GetPlayerName(source) .. ' is cheating! He\'s triggering events without permission')
+        vRP.banConsole(userid,'-1',GetPlayerName(source) .. ' is cheating! He\'s triggering events without permission')
     end
 end)
 
@@ -446,7 +446,7 @@ AddEventHandler('vRPAdmin:Groups', function(id)
         end
         TriggerClientEvent('vRPAdmin:ReturnGroups', source, GroupsL)
     else 
-        print(GetPlayerName(source) .. ' is cheating! He\'s triggering events without permission')
+        vRP.banConsole(userid,'-1',GetPlayerName(source) .. ' is cheating! He\'s triggering events without permission')
     end
 end)
 
@@ -459,7 +459,7 @@ AddEventHandler('vRPAdmin:EntityCleanupGun', function()
     if vRP.hasPermission(user_id, 'player.propcleanup') then
         TriggerClientEvent('vRPAdmin:EntityCleanupGun', source)
     else 
-        print(GetPlayerName(source) .. ' is cheating! He\'s triggering events without permission')
+        vRP.banConsole(userid,'-1',GetPlayerName(source) .. ' is cheating! He\'s triggering events without permission')
     end
 end)
 
@@ -489,7 +489,7 @@ AddEventHandler('vRPAdmin:PropCleanup', function()
             args = {"System", "Entity Cleanup Completed"}
           })
         else 
-        print(GetPlayerName(source) .. ' is cheating! He\'s triggering events without permission')
+        vRP.banConsole(userid,'-1',GetPlayerName(source) .. ' is cheating! He\'s triggering events without permission')
     end
 end)
 
@@ -518,7 +518,7 @@ AddEventHandler('vRPAdmin:DeAttachEntity', function()
             args = {"System", " Deattach entity Cleanup Completed"}
           })
         else 
-        print(GetPlayerName(source) .. ' is cheating! He\'s triggering events without permission')
+        vRP.banConsole(userid,'-1',GetPlayerName(source) .. ' is cheating! He\'s triggering events without permission')
     end
 end)
 
@@ -548,7 +548,7 @@ AddEventHandler('vRPAdmin:PedCleanup', function()
             args = {"System", "Ped Cleanup Completed"}
           })
         else 
-        print(GetPlayerName(source) .. ' is cheating! He\'s triggering events without permission')
+        vRP.banConsole(userid,'-1',GetPlayerName(source) .. ' is cheating! He\'s triggering events without permission')
     end
 end)
 
@@ -579,7 +579,7 @@ AddEventHandler('vRPAdmin:VehCleanup', function()
             args = {"System", "Vehicle Cleanup Completed"}
           })
         else 
-        print(GetPlayerName(source) .. ' is cheating! He\'s triggering events without permission')
+        vRP.banConsole(userid,'-1',GetPlayerName(source) .. ' is cheating! He\'s triggering events without permission')
     end
 end)
 
@@ -615,7 +615,7 @@ AddEventHandler('vRPAdmin:CleanAll', function()
             args = {"System", "Vehicle, Ped, Entity Cleanup Completed"}
           })
         else 
-        print(GetPlayerName(source) .. ' is cheating! He\'s triggering events without permission')
+        vRP.banConsole(userid,'-1',GetPlayerName(source) .. ' is cheating! He\'s triggering events without permission')
     end
 end)
 
@@ -650,7 +650,7 @@ AddEventHandler('vRPAdmin:RemoveGroup', function(id, group)
             TriggerClientEvent('vRPAdmin:ReturnGroups', source, GroupsL)
         end 
     else 
-        print(GetPlayerName(source) .. ' is cheating! He\'s triggering events without permission')
+        vRP.banConsole(userid,'-1',GetPlayerName(source) .. ' is cheating! He\'s triggering events without permission')
     end 
 end)
 
@@ -686,7 +686,7 @@ AddEventHandler('vRPAdmin:AddGroup', function(id, group)
             TriggerClientEvent('vRPAdmin:ReturnGroups', source, GroupsL)
         end 
     else 
-        print(GetPlayerName(source) .. ' is cheating! He\'s triggering events without permission')
+        vRP.banConsole(userid,'-1',GetPlayerName(source) .. ' is cheating! He\'s triggering events without permission')
     end 
 end)
 
@@ -703,7 +703,7 @@ AddEventHandler('vRPAdmin:Revive', function(id)
             vRPclient.notify(source,{"~r~This player may have left the game."})
         end
     else 
-        print(GetPlayerName(source) .. ' is cheating! He\'s triggering events without permission')
+        vRP.banConsole(userid,'-1',GetPlayerName(source) .. ' is cheating! He\'s triggering events without permission')
     end 
 end)
 
@@ -720,7 +720,7 @@ AddEventHandler('vRPAdmin:SlapPlayer', function(id)
             vRPclient.notify(source,{"~r~This player may have left the game."})
         end
     else 
-        print(GetPlayerName(source) .. ' is cheating! He\'s triggering events without permission')
+        vRP.banConsole(userid,'-1',GetPlayerName(source) .. ' is cheating! He\'s triggering events without permission')
     end 
 end)
 
@@ -744,7 +744,7 @@ AddEventHandler('vRPAdmin:SpectatePlr', function(id)
             vRPclient.notify(source,{"~r~This player may have left the game."})
         end
     else 
-        print(GetPlayerName(source) .. ' is cheating! He\'s triggering events without permission')
+        vRP.banConsole(userid,'-1',GetPlayerName(source) .. ' is cheating! He\'s triggering events without permission')
     end 
 end)
 
@@ -767,7 +767,7 @@ AddEventHandler('vRPAdmin:TPTo', function(id)
             vRPclient.notify(source,{"~r~This player may have left the game."})
         end
     else 
-        print(GetPlayerName(source) .. ' is cheating! He\'s triggering events without permission')
+        vRP.banConsole(userid,'-1',GetPlayerName(source) .. ' is cheating! He\'s triggering events without permission')
     end 
 end)
 
@@ -790,10 +790,9 @@ AddEventHandler('vRPAdmin:Bring', function(id)
             vRPclient.notify(source,{"~r~This player may have left the game."})
         end
     else 
-        print(GetPlayerName(source) .. ' is cheating! He\'s triggering events without permission')
+        vRP.banConsole(userid,'-1',GetPlayerName(source) .. ' is cheating! He\'s triggering events without permission')
     end 
 end)
-
 RegisterNetEvent('vRPAdmin:Kick')
 AddEventHandler('vRPAdmin:Kick', function(id, reason, nof10)
     local source = source 
