@@ -11,8 +11,8 @@ local webhooks = {}
 
 -- JOIN/LEAVE LOGS
 
-
-webhooks.leavelog = 'none'
+webhooks.spawnlog = 'none' -- when player passes queue and is spawned.
+webhooks.leavelog = 'none' -- when any player leaves server.
 
 
 

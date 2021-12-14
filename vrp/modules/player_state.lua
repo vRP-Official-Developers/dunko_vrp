@@ -1,4 +1,5 @@
 local cfg = module("cfg/player_state")
+local log_config = module("servercfg/cfg_webhooks")
 local lang = vRP.lang
 
 -- client -> server events
@@ -7,6 +8,14 @@ AddEventHandler("vRP:playerSpawn", function(user_id, source, first_spawn)
     local player = source
     local data = vRP.getUserDataTable(user_id)
     local tmpdata = vRP.getUserTmpTable(user_id)
+
+    webhook = log_config.spawnlog
+    if webhook ~= nil then
+        if webhook ~= 'none' then
+            PerformHttpRequest(webhook, function(err, text, headers) end, "POST", json.encode({username = "Dunko vRP Logs", embeds = {{["color"] = "15158332", ["title"] = playername .. ' Has Spawned In The Server', ["description"] = 'His User Id: ' .. user_id .. ' His Source Id: ' .. player, ["footer"] = {["text"] = "Time - "..os.date("%x %X %p"),}}}}), { ["Content-Type"] = "application/json" })
+        end
+    end
+
 
     if first_spawn then -- first spawn
         -- cascade load customization then weapons
