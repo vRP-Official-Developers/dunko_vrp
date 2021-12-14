@@ -8,6 +8,7 @@ cfg.voice_proximity = 30.0 -- default voice proximity (outside)
 cfg.voice_proximity_vehicle = 5.0
 cfg.voice_proximity_inside = 9.0
 
+-- GUI Anchor Positioning
 cfg.gui = {
   anchor_minimap_width = 260,
   anchor_minimap_left = 60,
