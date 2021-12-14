@@ -13,8 +13,8 @@ webhooks.warnlog = 'none'
 
 -- JOIN/LEAVE LOGS
 
-webhooks.joinlog = 'asdassda'
-webhooks.leavelog = 'sadassadsa'
+webhooks.joinlog = 'none'
+webhooks.leavelog = 'none'
 
 
 
