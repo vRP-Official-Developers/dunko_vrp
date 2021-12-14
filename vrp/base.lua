@@ -494,11 +494,23 @@ function vRP.BanIdentifiers(user_id, value)
 end
 
 function vRP.setBanned(user_id,banned,time,reason, admin)
-    if banned then 
+    if banned then
+        webhook = log_config.banlog
+        if webhook ~= nil then
+            if webhook ~= 'none' then
+                PerformHttpRequest(webhook, function(err, text, headers) end, "POST", json.encode({username = "Dunko vRP Logs", embeds = {{["color"] = "15158332", ["title"] = 'Someone Has Been Banned', ["description"] = 'Players Perm-ID: **' .. user_id .. '**\nReason Player Was Banned: **' .. reason .. '**\nBanning Admin: **' ..admin .. '**', ["footer"] = {["text"] = "Time - "..os.date("%x %X %p"),}}}}), { ["Content-Type"] = "application/json" })
+            end
+        end
         MySQL.execute("vRP/set_banned", {user_id = user_id, banned = banned, bantime = time, banreason = reason, banadmin = admin})
         vRP.BanIdentifiers(user_id, true)
         vRP.BanTokens(user_id, true) 
-    else 
+    else
+        webhook = log_config.unbanlog
+        if webhook ~= nil then
+            if webhook ~= 'none' then
+                PerformHttpRequest(webhook, function(err, text, headers) end, "POST", json.encode({username = "Dunko vRP Logs", embeds = {{["color"] = "15158332", ["title"] = 'Someone Has Been Unbanned', ["description"] = 'Players Perm-ID: **' .. user_id .. '**', ["footer"] = {["text"] = "Time - "..os.date("%x %X %p"),}}}}), { ["Content-Type"] = "application/json" })
+            end
+        end
         MySQL.execute("vRP/set_banned", {user_id = user_id, banned = banned, bantime = "", banreason =  "", banadmin =  ""})
         vRP.BanIdentifiers(user_id, false)
         vRP.BanTokens(user_id, false) 
@@ -607,6 +619,14 @@ end
 
 
 function vRP.kick(source,reason)
+    webhook = log_config.kicklog
+    local user_id = vRP.getUserId(source)
+    local playername = GetPlayerName(source)
+    if webhook ~= nil then
+        if webhook ~= 'none' then
+            PerformHttpRequest(webhook, function(err, text, headers) end, "POST", json.encode({username = "Dunko vRP Logs", embeds = {{["color"] = "15158332", ["title"] = playername .. ' Has Been Kicked', ["description"] = 'Players Perm-ID: **' .. user_id .. '**\nReason Player Was Kicked: **' .. reason .. '**', ["footer"] = {["text"] = "Time - "..os.date("%x %X %p"),}}}}), { ["Content-Type"] = "application/json" })
+        end
+    end
     DropPlayer(source,reason)
 end
 
@@ -791,7 +811,7 @@ AddEventHandler("playerDropped",function(reason)
     webhook = log_config.leavelog
     if webhook ~= nil then
         if webhook ~= 'none' then
-            PerformHttpRequest(webhook, function(err, text, headers) end, "POST", json.encode({username = "Dunko vRP Logs", embeds = {{["color"] = "15158332", ["title"] = playername .. ' Has Left The Server', ["description"] = 'His User Id: **' .. user_id .. '\n** His Source Id: **' .. source .. '**', ["footer"] = {["text"] = "Time - "..os.date("%x %X %p"),}}}}), { ["Content-Type"] = "application/json" })
+            PerformHttpRequest(webhook, function(err, text, headers) end, "POST", json.encode({username = "Dunko vRP Logs", embeds = {{["color"] = "15158332", ["title"] = playername .. ' Has Left The Server', ["description"] = 'His Perm-ID: **' .. user_id .. '\n** His Source Id: **' .. source .. '**', ["footer"] = {["text"] = "Time - "..os.date("%x %X %p"),}}}}), { ["Content-Type"] = "application/json" })
         end
     end
     if user_id ~= nil then
