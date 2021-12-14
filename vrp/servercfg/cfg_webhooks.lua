@@ -7,13 +7,11 @@ local webhooks = {}
 
 -- ADMIN LOGS
 
-webhooks.banlog = 'none'
-webhooks.kicklog = 'none'
-webhooks.warnlog = 'none'
+
 
 -- JOIN/LEAVE LOGS
 
-webhooks.joinlog = 'none'
+
 webhooks.leavelog = 'none'
 
 
