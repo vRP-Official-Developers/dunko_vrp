@@ -15,7 +15,7 @@ The additonals to Dunko vRP have moved to the [additonals branch](https://github
 
 Welcome to Dunko vRP.
 
-Current: V8.2
+Current: V8.6
 
 
 # ReWrite Notice 
@@ -62,6 +62,11 @@ If you need help, head over to my Discord:  https://discord.gg/kAfBuJG
 
 
 # What's new
+
+# 8.2 
+
+- Anticheat Bans.
+- Simple Discord Logs.
 
 # 8.2 
 
