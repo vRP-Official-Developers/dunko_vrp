@@ -843,6 +843,7 @@ AddEventHandler('vRPAdmin:ServerShutdown', function()
         for i,v in pairs(GetPlayers()) do 
             DropPlayer(v, 'This server has shutdown please try rejoining in a few minutes.')
         end
+        os.exit()
     end
 end)
 
