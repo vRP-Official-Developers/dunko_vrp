@@ -1,12 +1,4 @@
 
-# ICELINE
-We are now partnered with Iceline Hosting, Use our affiliate link: [Click This](iceline.host/dunkovrp) - 60% off first month
-
-They have given us a 1-Click installer meaning all you have to do is configure it when you buy.
-
-
-
-
 # DISCLAIMER
 
 The additonals to Dunko vRP have moved to the [additonals branch](https://github.com/DunkoUK/dunko_vrp/tree/additonals)! The main master branch now contains only the maintained resources.
