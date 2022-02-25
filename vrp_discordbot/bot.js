@@ -1,12 +1,14 @@
 const Discord = require('discord.js');
-const client = new Discord.Client();
+const client = new Discord.Client({
+    partials: ['MESSAGE', 'CHANNEL', 'REACTION']
+    ws: { intents: ['GUILDS', 'GUILD_MEMBERS', 'GUILD_BANS', 'GUILD_EMOJIS', 'GUILD_INTEGRATIONS', 'GUILD_WEBHOOKS', 'GUILD_INVITES', 'GUILD_VOICE_STATES', 'GUILD_PRESENCES', 'GUILD_MESSAGES', 'GUILD_MESSAGE_REACTIONS', 'DIRECT_MESSAGES', 'DIRECT_MESSAGE_REACTIONS', 'DIRECT_MESSAGE_TYPING'] }
+});
 const path = require('path')
 const resourcePath = global.GetResourcePath ?
     global.GetResourcePath(global.GetCurrentResourceName()) : global.__dirname
 require('dotenv').config({ path: path.join(resourcePath, './.env') })
 const fs = require('fs');
 const settingsjson = require(resourcePath + '/settings.js')
-
 client.path = resourcePath
 client.ip = settingsjson.settings.ip
 
