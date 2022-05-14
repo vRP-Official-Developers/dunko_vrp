@@ -268,7 +268,7 @@ RageUI.CreateWhile(1.0, true, function()
                     if Undershirt.TextureIndex > (GetNumberOfPedTextureVariations(PlayerPedId(), 8, Undershirt.Index)-1) then 
                         Undershirt.TextureIndex = 0;
                     else 
-                        Undershirt.TextureIndex = Accessory.TextureIndex + 1
+                        Undershirt.TextureIndex = Undershirt.TextureIndex + 1
                     end
                 end
             end)
