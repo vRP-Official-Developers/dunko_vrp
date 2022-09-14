@@ -86,7 +86,7 @@ if (settingsjson.settings.StatusEnabled) {
                     },
                     {
                         "name": "All Time Users",
-                        "value": `${userids} users has joined since release`,
+                        "value": `${userids} users have joined since release`,
                         "inline": true
                     }
                 ],
