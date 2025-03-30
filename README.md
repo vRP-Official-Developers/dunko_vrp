@@ -44,7 +44,7 @@ If you need help, head over to my Discord:  https://discord.gg/kAfBuJG
 
 7) Go to server.cfg and enter your database details.
 
-8) Whilst in server.cfg go to line 118 and set your server name, make sure it�s inside the quotations.
+8) Whilst in server.cfg go to line 118 and set your server name, make sure it's inside the quotations.
 
 9) Whilst in server.cfg go to line 148 and enter your server key, you can get one from here.
 
