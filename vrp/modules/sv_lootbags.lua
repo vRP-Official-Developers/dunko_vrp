@@ -1,38 +1,28 @@
 local lang = vRP.lang
 local LootBagEntities = {}
--- YOU MUST HAVE ONESYNC ENABLED THIS IS NOT AN OPTION!
-
-
---[[
-    QUICK LOOTBAGS MADE BY JAMESUK MAY CONTAIN BUGS. JAMESUK DOES NOT GURANTEE THIS SCRIPT TO BE BUG FREE.
-    Also, awful code design as was quickly created will be revamped in the rewrite of Dunko vRP.
-]]
-
 
 
 function tvRP.Coma()
     local source = source
     if vRPConfig.LootBags then
-        Wait(3000) -- wait delay for death.
         local user_id = vRP.getUserId(source)
-        local model = GetHashKey('prop_cs_heist_bag_01')
-        local name1 = GetPlayerName(source)
-        local lootbag = CreateObjectNoOffset(model, GetEntityCoords(GetPlayerPed(source)) + 0.4, true, true, false)
-        local lootbagnetid = NetworkGetNetworkIdFromEntity(lootbag)
-        LootBagEntities[lootbagnetid] = {lootbag, lootbag, false, source}
-        LootBagEntities[lootbagnetid].Items = {}
-        LootBagEntities[lootbagnetid].name = name1 
         local ndata = vRP.getUserDataTable(user_id)
-        local stored_inventory = nil;
-        if ndata ~= nil then
-            if ndata.inventory ~= nil then
-                stored_inventory = ndata.inventory
-                vRP.clearInventory(user_id)
-                for k, v in pairs(stored_inventory) do
-                    LootBagEntities[lootbagnetid].Items[k] = {}
-                    LootBagEntities[lootbagnetid].Items[k].amount = v.amount
-                end
+        local model = GetHashKey('prop_cs_heist_bag_01')
+        if json.encode(ndata.inventory) ~= "[]" then 
+            local playerName = GetPlayerName(source)
+            local lootbag = CreateObjectNoOffset(model, GetEntityCoords(GetPlayerPed(source)), true, true, false)
+            local lootbagnetid = NetworkGetNetworkIdFromEntity(lootbag)
+            LootBagEntities[lootbagnetid] = {lootbag, lootbag, false, source}
+            LootBagEntities[lootbagnetid].Items = {}
+            LootBagEntities[lootbagnetid].name = playerName;
+            local stored_inventory = nil;
+            stored_inventory = ndata.inventory;
+            vRP.clearInventory(user_id)
+            for k, v in pairs(stored_inventory) do
+                LootBagEntities[lootbagnetid].Items[k] = {}
+                LootBagEntities[lootbagnetid].Items[k].amount = v.amount
             end
+            vRPclient.placeOnGround(-1, {lootbagnetid})
         end
     end
 end
@@ -74,30 +64,6 @@ if vRPConfig.LootBags then
         end
     end)
 
-    -- Garabge collector for empty lootbags.
-    Citizen.CreateThread(function()
-        while true do 
-            Wait(60000)
-            for i,v in pairs(LootBagEntities) do 
-                local itemCount = 0;
-                for i,v in pairs(v.Items) do
-                    itemCount = itemCount + 1
-                end
-                if itemCount == 0 then
-                    if DoesEntityExist(v[1]) then 
-                        DeleteEntity(v[1])
-                        print('Deleted Lootbag')
-                        LootBagEntities[i] = nil;
-                    end
-                end
-            end
-            --print('All Lootbag garbage collected.')
-        end
-    end)
-
-
-
-
 
     -- awful vrp inventory system below. This is awful can be improved if I ever decide to make an inventory..
     local function build_itemlist_menu(name, items, cb)
@@ -132,7 +98,6 @@ if vRPConfig.LootBags then
     end
 
     function OpenInv(source, netid, items)
-        -- open menu
         local refreshing = false;
         local user_id = vRP.getUserId(source)
         local menu = {
@@ -201,6 +166,8 @@ if vRPConfig.LootBags then
                 items = items + 1
             end
             if items == 0 then 
+                LootBagEntities[netid] = nil;
+                DeleteEntity(NetworkGetEntityFromNetworkId(netid))
                 vRP.closeMenu(source)
                 return 
             end
