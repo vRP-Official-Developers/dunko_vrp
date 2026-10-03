@@ -8,7 +8,7 @@ local webhooks = {}
 -- ADMIN LOGS
 webhooks.banlog = 'none' -- when a player is kicked
 webhooks.unbanlog = 'none' -- when a player is unbanned
-webhooks.kicklog = 'hone' -- when an admin kicks a player
+webhooks.kicklog = 'none' -- when an admin kicks a player
 
 
 -- JOIN/LEAVE LOGS

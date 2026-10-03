@@ -1,4 +1,14 @@
-exports.runcmd = (fivemexports, client, message, params) => {
+const { SlashCommandBuilder } = require("discord.js");
+
+exports.data = new SlashCommandBuilder()
+    .setName("status")
+    .setDescription("Show the server status.")
+
+exports.conf = {
+    perm: 0
+}
+
+exports.execute = async(fivemexports, client, interaction) => {
     let embed = {
         "title": "Status",
         "description": `\nPlayers: ${GetNumPlayerIndices()}\n\nBot Developed by the vRPDevTeam(JamesUK)\n\nThank you for using and playing this server!\n\nThe IP is: connect ${client.ip}`,
@@ -8,10 +18,5 @@ exports.runcmd = (fivemexports, client, message, params) => {
         },
         "timestamp": new Date()
     }
-    message.channel.send({ embed })
-}
-
-exports.conf = {
-    name: "status",
-    perm: 0
+    return interaction.editReply({ embeds: [embed] })
 }

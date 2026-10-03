@@ -67,7 +67,7 @@ function Menu() {
 		var headerColor = (css.header_color) ? css.header_color:false;
 
 		$("#ogrp_menuChoices").empty();
-		$("#ogrp_menuHeader").html(menuName);
+		$("#ogrp_menuHeader").empty().append(vrpSanitizeHtml(menuName));
 
 		setHeaderColor(headerColor);
 
@@ -93,11 +93,12 @@ function Menu() {
 	};
 
 	getChoiceContents = function(choice) {
+		var contents = $(vrpSanitizeHtml(choice).childNodes);
 		if(choice.substr(0,1) === "<") {
-			var bgColor = $(choice).data("bgcolor");
-			return $("<div>").html($(choice).css("background-color",bgColor));
+			var bgColor = contents.data("bgcolor");
+			return $("<div>").html(contents.css("background-color",bgColor));
 		} else {
-			return choice;
+			return contents;
 		}
 	};
 
@@ -134,7 +135,7 @@ function Menu() {
 		scrollToMenuOption();
 
 		if(getChoiceDesc().length) {
-			$("#ogrp_menuDescriptionContent").html(getChoiceDesc());
+			$("#ogrp_menuDescriptionContent").empty().append(vrpSanitizeHtml(getChoiceDesc()));
 			$("#ogrp_menuDescription").show();
 		} else {
 			$("#ogrp_menuDescription").hide();

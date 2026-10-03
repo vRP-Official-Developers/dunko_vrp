@@ -9,8 +9,8 @@
     "author": "JamesUK-6793",
     "license": "MIT",
     "dependencies": {
-        "discord.js": "^11.6.4",
+        "discord.js": "^14.27.0",
         "ascii-table": "^0.0.9",
-        "dotenv": "^6.2.0"
+        "dotenv": "^16.4.5"
     }
 }

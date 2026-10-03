@@ -30,7 +30,7 @@ WPrompt.prototype.open = function(title,text)
 {
   this.close(); 
 
-  this.div_title.innerHTML = title;
+  vrpSetHtml(this.div_title, title);
   this.div_area.value = text;
   this.opened = true;
   this.div.style.display = "flex";

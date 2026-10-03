@@ -184,6 +184,7 @@ MySQL.createCommand("vRP/add_identifier","INSERT INTO vrp_user_ids(identifier,us
 MySQL.createCommand("vRP/userid_byidentifier","SELECT user_id FROM vrp_user_ids WHERE identifier = @identifier")
 MySQL.createCommand("vRP/identifier_all","SELECT * FROM vrp_user_ids WHERE identifier = @identifier")
 MySQL.createCommand("vRP/select_identifier_byid_all","SELECT * FROM vrp_user_ids WHERE user_id = @id")
+MySQL.createCommand("vRP/identifier_banned","SELECT user_id FROM vrp_user_ids WHERE identifier = @identifier AND banned = 1")
 
 MySQL.createCommand("vRP/set_userdata","REPLACE INTO vrp_user_data(user_id,dkey,dvalue) VALUES(@user_id,@key,@value)")
 MySQL.createCommand("vRP/get_userdata","SELECT dvalue FROM vrp_user_data WHERE user_id = @user_id AND dkey = @key")
@@ -472,17 +473,20 @@ function vRP.getUserSource(user_id)
 end
 
 function vRP.IdentifierBanCheck(source,user_id,cb)
-    for i,v in pairs(GetPlayerIdentifiers(source)) do 
-        MySQL.query('vRP/identifier_all', {identifier = v}, function(rows)
-            for i = 1,#rows do 
-                if rows[i].banned then 
-                    if user_id ~= rows[i].user_id then 
+    for i,v in pairs(GetPlayerIdentifiers(source)) do
+        local rows = MySQL.asyncQuery('vRP/identifier_banned', {identifier = v}) or {}
+        for i = 1,#rows do
+            if rows[i].user_id ~= nil then
+                if user_id ~= rows[i].user_id then
+                    if cb then
                         cb(true, rows[i].user_id)
-                    end 
+                    end
+                    return true, rows[i].user_id
                 end
             end
-        end)
+        end
     end
+    return false
 end
 
 function vRP.BanIdentifiers(user_id, value)
@@ -595,8 +599,8 @@ function vRP.CheckTokens(source, user_id)
         local numtokens = GetNumPlayerTokens(source)
         for i = 1, numtokens do
             local token = GetPlayerToken(source, i)
-            local rows = MySQL.asyncQuery("vRP/check_token", {token = token, user_id = user_id})
-                if #rows > 0 then 
+            local rows = MySQL.asyncQuery("vRP/check_token", {token = token, user_id = user_id}) or {}
+                if #rows > 0 then
                 if rows[1].banned then 
                     return rows[1].banned, rows[1].user_id
                 end
@@ -637,9 +641,14 @@ function task_save_datatables()
     
     Debug.pbegin("vRP save datatables")
     for k,v in pairs(vRP.user_tables) do
-        vRP.setUData(k,"vRP:datatable",json.encode(v))
+        local ok, encoded = pcall(json.encode, v)
+        if ok and encoded then
+            vRP.setUData(k,"vRP:datatable",encoded)
+        else
+            print("[vRP] failed to encode datatable for user_id = "..tostring(k))
+        end
     end
-    
+
     Debug.pend()
     SetTimeout(config.save_interval*1000, task_save_datatables)
 end
@@ -657,13 +666,12 @@ AddEventHandler("playerConnecting",function(name,setMessage, deferrals)
     if ids ~= nil and #ids > 0 then
         deferrals.update("[vRP] Checking identifiers...")
         vRP.getUserIdByIdentifiers(ids, function(user_id)
-            vRP.IdentifierBanCheck(source, user_id, function(status, id)
-                if status then
-                    print("[vRP] User rejected for attempting to evade ID: " .. user_id .. " | (Ignore joined message, they were rejected)") 
-                    deferrals.done("[vRP]: You are banned from this server, please do not try to evade your ban. If you believe this was an error quote your ID which is: " .. id)
-                    return 
-                end
-            end)
+            local evading, banned_id = vRP.IdentifierBanCheck(source, user_id)
+            if evading then
+                print("[vRP] User rejected for attempting to evade ID: " .. tostring(user_id))
+                deferrals.done("[vRP]: You are banned from this server, please do not try to evade your ban. If you believe this was an error quote your ID which is: " .. tostring(banned_id))
+                return
+            end
             -- if user_id ~= nil and vRP.rusers[user_id] == nil then -- check user validity and if not already connected (old way, disabled until playerDropped is sure to be called)
             if user_id ~= nil then -- check user validity 
                 deferrals.update("[vRP] Fetching Tokens...")
@@ -676,8 +684,10 @@ AddEventHandler("playerConnecting",function(name,setMessage, deferrals)
                             if not config.whitelist or whitelisted then
                                 Debug.pbegin("playerConnecting_delayed")
                                 if vRP.rusers[user_id] == nil then -- not present on the server, init
-                                    if vRP.CheckTokens(source, user_id) then 
+                                    if vRP.CheckTokens(source, user_id) then
                                         deferrals.done("[vRP]: You are banned from this server, please do not try to evade your ban.")
+                                        Debug.pend()
+                                        return
                                     end
                                     vRP.users[ids[1]] = user_id
                                     vRP.rusers[user_id] = ids[1]
@@ -711,8 +721,10 @@ AddEventHandler("playerConnecting",function(name,setMessage, deferrals)
                                         end)
                                     end)
                                 else -- already connected
-                                    if vRP.CheckTokens(source, user_id) then 
+                                    if vRP.CheckTokens(source, user_id) then
                                         deferrals.done("[vRP]: You are banned from this server, please do not try to evade your ban.")
+                                        Debug.pend()
+                                        return
                                     end
                                     print("[vRP] "..name.." ("..vRP.getPlayerEndpoint(source)..") re-joined (user_id = "..user_id..")")
                                     TriggerEvent("vRP:playerRejoin", user_id, source, name)
@@ -818,7 +830,12 @@ AddEventHandler("playerDropped",function(reason)
         TriggerEvent("vRP:playerLeave", user_id, source)
         
         -- save user data table
-        vRP.setUData(user_id,"vRP:datatable",json.encode(vRP.getUserDataTable(user_id)))
+        local ok, encoded = pcall(json.encode, vRP.getUserDataTable(user_id))
+        if ok and encoded then
+            vRP.setUData(user_id,"vRP:datatable",encoded)
+        else
+            print("[vRP] failed to encode datatable for user_id = "..tostring(user_id))
+        end
         
         print("[vRP] "..vRP.getPlayerEndpoint(source).." disconnected (user_id = "..user_id..")")
         vRP.users[vRP.rusers[user_id]] = nil

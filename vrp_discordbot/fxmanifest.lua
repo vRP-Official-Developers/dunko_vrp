@@ -4,6 +4,7 @@ author 'JamesUK#6793'
 description 'This is a discord bot made by JamesUK#6793. Give credit where credit is due!'
 
 server_only 'yes'
+node_version '22'
 
 dependency 'yarn'
 dependency 'vrp'

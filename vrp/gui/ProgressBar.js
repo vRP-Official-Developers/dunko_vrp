@@ -37,7 +37,7 @@ ProgressBar.prototype.setValue = function(val)
 
 ProgressBar.prototype.setText = function(text)
 {
-  this.div_label.innerHTML = text;
+  vrpSetHtml(this.div_label, text);
 }
 
 ProgressBar.prototype.frame = function(time)

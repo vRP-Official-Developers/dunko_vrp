@@ -1,3 +1,55 @@
+var vrp_html_tags = ["b", "big", "blockquote", "br", "center", "code", "div", "em", "font", "h1", "h2", "h3", "h4", "h5", "h6", "hr", "i", "li", "ol", "p", "pre", "s", "small", "span", "strong", "sub", "sup", "table", "tbody", "td", "tfoot", "th", "thead", "tr", "u", "ul"];
+var vrp_html_drop = ["script", "style", "template", "noscript", "iframe", "object", "embed", "svg", "math", "textarea", "title", "select", "xmp", "noembed", "noframes"];
+var vrp_html_attrs = ["class", "style", "color", "align", "colspan", "rowspan"];
+
+function vrpCleanHtmlNode(parent) {
+    var nodes = Array.prototype.slice.call(parent.childNodes);
+    for (var i = 0; i < nodes.length; i++) {
+        var node = nodes[i];
+        if (node.nodeType == 1) {
+            var tag = node.localName;
+            if (node.namespaceURI != "http://www.w3.org/1999/xhtml" || vrp_html_drop.indexOf(tag) >= 0) {
+                parent.removeChild(node);
+            } else if (vrp_html_tags.indexOf(tag) < 0) {
+                vrpCleanHtmlNode(node);
+                while (node.firstChild)
+                    parent.insertBefore(node.firstChild, node);
+                parent.removeChild(node);
+            } else {
+                var attrs = Array.prototype.slice.call(node.attributes);
+                for (var j = 0; j < attrs.length; j++) {
+                    var name = attrs[j].name.toLowerCase();
+                    var value = attrs[j].value;
+                    var allowed = false;
+                    if (name == "style")
+                        allowed = !/\\|url|image/i.test(value);
+                    else if (name == "class")
+                        allowed = !/ogrp_/i.test(value);
+                    else
+                        allowed = vrp_html_attrs.indexOf(name) >= 0 || /^data-[a-z0-9_.-]+$/.test(name);
+                    if (!allowed)
+                        node.removeAttribute(attrs[j].name);
+                }
+                vrpCleanHtmlNode(node);
+            }
+        } else if (node.nodeType != 3) {
+            parent.removeChild(node);
+        }
+    }
+}
+
+function vrpSanitizeHtml(html) {
+    var tpl = document.createElement("template");
+    tpl.innerHTML = html;
+    vrpCleanHtmlNode(tpl.content);
+    return tpl.content;
+}
+
+function vrpSetHtml(el, html) {
+    el.textContent = "";
+    el.appendChild(vrpSanitizeHtml(html));
+}
+
 window.addEventListener("load", function() {
     errdiv = document.createElement("div");
 

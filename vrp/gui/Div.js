@@ -33,7 +33,7 @@ Div.prototype.setCss = function(css)
 
 Div.prototype.setContent = function(content)
 {
-  this.div.innerHTML = content;
+  vrpSetHtml(this.div, content);
 }
 
 Div.prototype.executeJS = function(js)

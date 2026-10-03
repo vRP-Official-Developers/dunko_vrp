@@ -19,12 +19,17 @@ local function tunnel_resolve(itable,key)
   local iname = mtable.name
   local ids = mtable.tunnel_ids
   local callbacks = mtable.tunnel_callbacks
+  local dests = mtable.tunnel_dests
   local identifier = mtable.identifier
 
   -- generate access function
   local fcall = function(dest,args,callback)
     if args == nil then
       args = {}
+    end
+
+    if type(callback) == "function" and Tunnel.bindCallback then
+      callback = Tunnel.bindCallback(callback)
     end
 
     -- get delay data
@@ -46,6 +51,7 @@ local function tunnel_resolve(itable,key)
         if type(callback) == "function" then -- ref callback if exists (become a request)
           local rid = ids:gen()
           callbacks[rid] = callback
+          dests[rid] = dest
           TriggerClientEvent(iname..":tunnel_req",dest,key,args,identifier,rid)
         else -- regular trigger
           TriggerClientEvent(iname..":tunnel_req",dest,key,args,"",-1)
@@ -56,6 +62,7 @@ local function tunnel_resolve(itable,key)
       if type(callback) == "function" then -- ref callback if exists (become a request)
         local rid = ids:gen()
         callbacks[rid] = callback
+        dests[rid] = dest
         TriggerClientEvent(iname..":tunnel_req",dest,key,args,identifier,rid)
       else -- regular trigger
         TriggerClientEvent(iname..":tunnel_req",dest,key,args,"",-1)
@@ -76,6 +83,15 @@ function Tunnel.bindInterface(name,interface)
   AddEventHandler(name..":tunnel_req",function(member,args,identifier,rid)
     local source = source
     local delayed = false
+
+    if type(args) ~= "table" then
+      args = {}
+    end
+
+    if type(rid) ~= "number" or type(identifier) ~= "string" then
+      rid = -1
+      identifier = ""
+    end
 
     if Debug.active then
       Debug.pbegin("tunnelreq#"..rid.."_"..name..":"..member.." "..json.encode(Debug.safeTableCopy(args)))
@@ -118,22 +134,30 @@ end
 function Tunnel.getInterface(name,identifier)
   local ids = Tools.newIDGenerator()
   local callbacks = {}
+  local dests = {}
 
   -- build interface
-  local r = setmetatable({},{ __index = tunnel_resolve, name = name, tunnel_ids = ids, tunnel_callbacks = callbacks, identifier = identifier })
+  local r = setmetatable({},{ __index = tunnel_resolve, name = name, tunnel_ids = ids, tunnel_callbacks = callbacks, tunnel_dests = dests, identifier = identifier })
 
   -- receive response
   RegisterServerEvent(name..":"..identifier..":tunnel_res")
   AddEventHandler(name..":"..identifier..":tunnel_res",function(rid,args)
+    local source = source
     if Debug.active then
       Debug.pbegin("tunnelres#"..rid.."_"..name.." "..json.encode(Debug.safeTableCopy(args)))
     end
 
     local callback = callbacks[rid]
-    if callback ~= nil then
+    local dest = tonumber(dests[rid])
+    if callback ~= nil and (dest == -1 or dest == tonumber(source)) then
       -- free request id
       ids:free(rid)
       callbacks[rid] = nil
+      dests[rid] = nil
+
+      if type(args) ~= "table" then
+        args = {}
+      end
 
       -- call
       callback(table.unpack(args))

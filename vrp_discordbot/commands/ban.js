@@ -1,22 +1,43 @@
-exports.runcmd = (fivemexports, client, message, params) => {
-    if (!params[0] || !params[1] || !parseInt(params[1])) {
-        return message.reply('Invalid args! Correct term is: ' + process.env.PREFIX + 'ban [permid] [time (hours)] [reason]')
-    }
-    const reason = params.slice(2).join(' ');
-    let newval = fivemexports.vrp.vrpbot('banConsole', [params[0], params[1], `${reason}\nBanning Discord Admin: ${message.author.username} (${message.author.id})\n Note this ban was carried out in Discord by the above staff member through the console banning function.`])
+const { SlashCommandBuilder } = require("discord.js");
+
+exports.data = new SlashCommandBuilder()
+    .setName("ban")
+    .setDescription("Ban a player from the server.")
+    .addIntegerOption(option => option
+        .setName("permid")
+        .setDescription("The player's PermID")
+        .setMinValue(1)
+        .setMaxValue(2147483647)
+        .setRequired(true))
+    .addIntegerOption(option => option
+        .setName("hours")
+        .setDescription("How many hours the ban lasts")
+        .setMinValue(1)
+        .setMaxValue(999999)
+        .setRequired(true))
+    .addStringOption(option => option
+        .setName("reason")
+        .setDescription("The reason for the ban")
+        .setMaxLength(1000)
+        .setRequired(false))
+
+exports.conf = {
+    perm: 2
+}
+
+exports.execute = async(fivemexports, client, interaction) => {
+    const permid = interaction.options.getInteger("permid", true)
+    const hours = interaction.options.getInteger("hours", true)
+    const reason = interaction.options.getString("reason") || ""
+    fivemexports.vrp.vrpbot('banConsole', [permid, hours, `${reason}\nBanning Discord Admin: ${interaction.user.username} (${interaction.user.id})\n Note this ban was carried out in Discord by the above staff member through the console banning function.`])
     let embed = {
         "title": "Banned User",
-        "description": `\nSuccess! Banned User with PermID: ${params[0]} With ${params[1]} hours and the reason: ${reason}`,
+        "description": `\nSuccess! Banned User with PermID: ${permid} With ${hours} hours and the reason: ${reason}`,
         "color": 5301186,
         "footer": {
             "text": "vRP • Made by JamesUK#6793"
         },
         "timestamp": new Date()
     }
-    message.channel.send({ embed })
-}
-
-exports.conf = {
-    name: "ban",
-    perm: 2
+    return interaction.editReply({ embeds: [embed] })
 }

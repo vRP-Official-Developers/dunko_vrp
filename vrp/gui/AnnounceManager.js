@@ -28,7 +28,7 @@ AnnounceManager.prototype.tick = function()
         var announce = _this.announces[0];
         _this.announces.splice(0,1);
         _this.div.style.backgroundImage = "url('"+announce.background+"')";
-        _this.div.innerHTML = announce.content;
+        vrpSetHtml(_this.div, announce.content);
 
         jdiv.fadeIn(800,function(){});
       }

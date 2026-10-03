@@ -1,17 +1,28 @@
-exports.runcmd = (fivemexports, client, message, params) => {
+const { SlashCommandBuilder } = require("discord.js");
+
+exports.data = new SlashCommandBuilder()
+    .setName("help")
+    .setDescription("List the bot's commands.")
+
+exports.conf = {
+    perm: 0
+}
+
+exports.execute = async(fivemexports, client, interaction) => {
+    const lines = client.commands
+        .map(command => command.data.toJSON())
+        .sort((a, b) => a.name.localeCompare(b.name))
+        .map(json => ["/" + json.name]
+            .concat((json.options || []).map(option => option.required ? `[${option.name}]` : `(${option.name})`))
+            .join(" "))
     let embed = {
         "title": "Discord Bot Commands",
-        "description": `.addcar [permid] [spawncode]\n.addgroup [permid] [group name]\n.ban [permid] [time (hours)] [reason]\n.hmc [spawncode]\n.d2p [@user]\n.delcar [permid] [spawncode]\n.groups [permid]\n.kick [permid] [reason]/n.p2d [permid]\n.removegroup [permid] [group]\n.removewarning [warning-id]\n.status\n.top5\n.unban [permid]\n.userinfo [permid]\n.warn [permid] [reason]\n.warnings [permid]`,
+        "description": lines.join("\n") + "\n\n[ ] = required, ( ) = optional",
         "color": 5301186,
         "footer": {
             "text": "vRP • Made by JamesUK#6793"
         },
         "timestamp": new Date()
     }
-    message.channel.send({ embed })
-}
-
-exports.conf = {
-    name: "help",
-    perm: 0
+    return interaction.editReply({ embeds: [embed] })
 }

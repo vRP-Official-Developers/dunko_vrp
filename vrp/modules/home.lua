@@ -2,6 +2,7 @@
 -- this module describe the home system (experimental, a lot can happen and not being handled)
 
 local lang = vRP.lang
+local htmlEntities = module("lib/htmlEntities")
 local cfg = module("cfg/homes")
 
 -- sql
@@ -311,7 +312,7 @@ local function build_entry_menu(user_id, home_name)
               vRP.prompt(player,lang.home.intercom.prompt_who(),"",function(player,who)
                 vRPclient.notify(player,{lang.home.intercom.asked()})
                 -- request owner to open the door
-                vRP.request(hplayer, lang.home.intercom.request({who}), 30, function(hplayer,ok)
+                vRP.request(hplayer, lang.home.intercom.request({htmlEntities.encode(tostring(who))}), 30, function(hplayer,ok)
                   if ok then
                     vRP.accessHome(user_id, home_name, number)
                   else

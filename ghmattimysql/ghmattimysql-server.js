@@ -2331,9 +2331,11 @@
         server_server.logger.defaultConfig.output === OutputDestination.FileAndConsole || server_server.logger.defaultConfig.output === OutputDestination.Console ? server_server.logger.defaultConfig.output = OutputDestination.File : (server_server.logger.defaultConfig.output = OutputDestination.FileAndConsole, trace = !0), server_server.logger.info("display debug: " + trace)
     }, !0), onNet("ghmattimysql:request-data", () => {
         const src = source;
+        if (!IsPlayerAceAllowed(String(src), "command.mysql")) return;
         emitNet("ghmattimysql:update-resource-data", src, server_server.profiler.profiles.resources), emitNet("ghmattimysql:update-time-data", src, server_server.profiler.profiles.executionTimes), emitNet("ghmattimysql:update-slow-queries", src, server_server.profiler.profiles.slowQueries)
     }), onNet("ghmattimysql:request-server-status", () => {
         const src = source;
+        if (!IsPlayerAceAllowed(String(src), "command.mysql")) return;
         server_server.execute("SHOW GLOBAL STATUS", data => { emitNet("ghmattimysql:update-status", src, data) }, null, "ghmattimysql").then(([result, cb]) => { cb(result) }).catch(() => !1), server_server.execute("SHOW GLOBAL VARIABLES", data => { emitNet("ghmattimysql:update-variables", src, data) }, null, "ghmattimysql").then(([result, cb]) => { cb(result) }).catch(() => !1)
     })
 }]);

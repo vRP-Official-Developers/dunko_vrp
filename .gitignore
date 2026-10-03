@@ -1,2 +1,4 @@
 
 .vscode/settings.json
+vrp_discordbot/.env
+vrp_discordbot/node_modules/

@@ -23,7 +23,7 @@ RequestManager.prototype.addRequest = function(id,text,time)
   request.id = id;
   request.time = time-1; //sub 1 second to prevent server timeout done before client timeout
   request.text = text;
-  request.div.innerHTML = this.buildText(text,time-1);
+  vrpSetHtml(request.div, this.buildText(text,time-1));
 
   this.requests.push(request);
   this.div.appendChild(request.div);
@@ -49,7 +49,7 @@ RequestManager.prototype.tick = function()
 
     //update request time
     request.time -= 1;
-    request.div.innerHTML = this.buildText(request.text,request.time);
+    vrpSetHtml(request.div, this.buildText(request.text,request.time));
 
     if(request.time <= 0){ //timeout, remove request
       this.div.removeChild(request.div);

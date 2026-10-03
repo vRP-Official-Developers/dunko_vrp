@@ -38,7 +38,7 @@ for gtype,weapons in pairs(gunshop_types) do
             local user_id = vRP.getUserId(player)
             local total = math.ceil(parseFloat(price_ammo)*parseFloat(amount))
             
-            if weapons[string.upper(weapon)] == nil then -- add body price if not already owned
+            if weapons[string.upper(weapon)] == nil or not vRP.hasWeapon(user_id, string.upper(weapon)) then
               total = total+price
             end
 			if amount > 250 then

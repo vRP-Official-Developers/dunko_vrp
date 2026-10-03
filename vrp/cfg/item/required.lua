@@ -117,7 +117,7 @@ local wammo_choices = function(args)
         ramount = parseInt(ramount)
 
         vRPclient.getWeapons(player, {}, function(uweapons)
-          if uweapons[args[2]] ~= nil then -- check if the weapon is equiped
+          if uweapons[args[2]] ~= nil and vRP.hasWeapon(user_id, args[2]) then
             if vRP.tryGetInventoryItem(user_id, fullidname, ramount, true) then -- give weapon ammo
               local weapons = {}
               weapons[args[2]] = {ammo = ramount}

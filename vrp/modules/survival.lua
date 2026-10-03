@@ -129,19 +129,29 @@ end
 
 -- tunnel api (expose some functions to clients)
 
+local function clampClientVariation(variation)
+    variation = tonumber(variation)
+    if variation == nil or variation ~= variation then
+        return nil
+    end
+    return math.max(0, math.min(variation, 2))
+end
+
 function tvRP.varyHunger(variation)
-    if vRPConfig.EnableFoodAndWater then 
+    if vRPConfig.EnableFoodAndWater then
         local user_id = vRP.getUserId(source)
-        if user_id ~= nil then
+        variation = clampClientVariation(variation)
+        if user_id ~= nil and variation ~= nil then
             vRP.varyHunger(user_id, variation)
         end
     end
 end
 
 function tvRP.varyThirst(variation)
-    if vRPConfig.EnableFoodAndWater then 
+    if vRPConfig.EnableFoodAndWater then
         local user_id = vRP.getUserId(source)
-        if user_id ~= nil then
+        variation = clampClientVariation(variation)
+        if user_id ~= nil and variation ~= nil then
             vRP.varyThirst(user_id, variation)
         end
     end

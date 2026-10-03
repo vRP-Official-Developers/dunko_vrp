@@ -375,6 +375,7 @@ local choice_seize_weapons = {function(player, choice)
         vRPclient.isHandcuffed(nplayer,{}, function(handcuffed)  -- check handcuffed
           if handcuffed then
             vRPclient.getWeapons(nplayer,{},function(weapons)
+              weapons = vRP.reconcileWeapons(nuser_id, weapons, true)
               for k,v in pairs(weapons) do -- display seized weapons
                 -- vRPclient.notify(player,{lang.police.menu.seize.seized({k,v.ammo})})
                 -- convert weapons to parametric weapon items
@@ -520,6 +521,7 @@ local isStoring = {}
 local choice_store_weapons = {function(player, choice)
     local user_id = vRP.getUserId(player)
 	vRPclient.getWeapons(player,{},function(weapons)
+        weapons = vRP.reconcileWeapons(user_id, weapons, true)
         if not isStoring[player] then
             isStoring[player] = true
             vRPclient.giveWeapons(player,{{},true}, function(removedwep)
@@ -633,6 +635,11 @@ end
 function tvRP.updateWantedLevel(level)
   local player = source
   local user_id = vRP.getUserId(player)
+  level = tonumber(level)
+  if level == nil or level ~= level then
+    return
+  end
+  level = math.max(0, math.min(math.floor(level), 5))
   if user_id ~= nil then
     local was_wanted = (vRP.getUserWantedLevel(user_id) > 0)
     wantedlvl_players[user_id] = level

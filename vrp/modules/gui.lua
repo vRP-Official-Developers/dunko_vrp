@@ -36,7 +36,7 @@ function vRP.openMenu(source,menudef)
   menudata.id = menu_ids:gen() 
 
   -- add client menu
-  client_menus[menudata.id] = {def = menudef, source = source}
+  client_menus[menudata.id] = {def = menudef, source = source, area = vRP.getAreaContext(source)}
   rclient_menus[source] = menudata.id
 
   -- openmenu
@@ -54,7 +54,7 @@ local prompts = {}
 
 -- prompt textual (and multiline) information from player
 function vRP.prompt(source,title,default_text,cb_result)
-  prompts[source] = cb_result
+  prompts[source] = {cb = cb_result, area = vRP.getAreaContext(source)}
 
   vRPclient.prompt(source,{title,default_text})
 end
@@ -157,12 +157,13 @@ end
 -- SERVER TUNNEL API
 
 function tvRP.closeMenu(id)
+  local source = source
   local menu = client_menus[id]
   if menu and menu.source == source then
 
     -- call callback
     if menu.def.onclose then
-      menu.def.onclose(source)
+      vRP.callInAreaContext(source, menu.area, menu.def.onclose, source)
     end
 
     menu_ids:free(id)
@@ -172,14 +173,18 @@ function tvRP.closeMenu(id)
 end
 
 function tvRP.validMenuChoice(id,choice,mod)
+  local source = source
   local menu = client_menus[id]
   if menu and menu.source == source then
+    if menu.area and not vRP.isInArea(source, menu.area) then
+      return
+    end
     -- call choice callback
     local ch = menu.def[choice]
-    if ch then
+    if type(ch) == "table" then
       local cb = ch[1]
       if cb then
-        cb(source,choice,mod)
+        vRP.callInAreaContext(source, menu.area, cb, source, choice, mod)
       end
     end
   end
@@ -187,14 +192,18 @@ end
 
 -- receive prompt result
 function tvRP.promptResult(text)
-  if text == nil then
+  if type(text) ~= "string" then
     text = ""
   end
 
+  local source = source
   local prompt = prompts[source]
   if prompt ~= nil then
     prompts[source] = nil
-    prompt(source,text)
+    if prompt.area and not vRP.isInArea(source, prompt.area) then
+      return
+    end
+    vRP.callInAreaContext(source, prompt.area, prompt.cb, source, text)
   end
 end
 
